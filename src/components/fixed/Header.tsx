@@ -1,10 +1,10 @@
 const Header = () => {
 
     return (
-        <header>
+        <header className='text-bg-dark p-2'>
             <div>
-                <h2>Débora Bento</h2>
-                <h4>Lash Designer</h4>
+                <h4>Débora Bento</h4>
+                <h6>Lash Designer</h6>
             </div>
         </header>
     )
