@@ -2,7 +2,10 @@ const Header = () => {
 
     return (
         <header>
-            <h2>Débora Lash Designer</h2>
+            <div>
+                <h2>Débora Bento</h2>
+                <h4>Lash Designer</h4>
+            </div>
         </header>
     )
 
