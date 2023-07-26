@@ -15,9 +15,9 @@ const ServiceTable = ({ services, setServices }: Props) => {
     }
 
     return (
-        <table className='table my-4 text-center'>
+        <table className='table table-striped my-4 text-center'>
             <thead>
-                <tr>
+                <tr className='table-secondary'>
                     <th>Serviço</th>
                     <th>Valor</th>
                     <th></th>
