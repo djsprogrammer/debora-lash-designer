@@ -10,7 +10,7 @@ const Services = () => {
     return (
         <div className='container'>
             <h4 className='mt-2 text-center'>Seus Serviços</h4>
-            <ServiceTable services={services} />
+            <ServiceTable services={services} setServices={setServices} />
             <AddServiceForm setServices={setServices} />
         </div>
     )
