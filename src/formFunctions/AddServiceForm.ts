@@ -6,3 +6,12 @@ export const validNumber = (value: string) => {
             return false
         }
 }
+
+type Input = React.RefObject<HTMLInputElement>
+
+export const defaultInputValue = (nameInput: Input, valueInput: Input) => {
+    if (nameInput.current && valueInput.current) {
+        nameInput.current.value = ''
+        valueInput.current.value = ''
+    }
+}

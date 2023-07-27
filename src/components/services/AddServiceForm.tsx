@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react'
 import { SetServices } from '../../types/services'
-import { validNumber } from '../../formFunctions/AddServiceForm'
+import { defaultInputValue, validNumber } from '../../formFunctions/AddServiceForm'
 
 interface Props {
     setServices: SetServices
@@ -18,10 +18,7 @@ const AddServiceForm = ({ setServices }: Props) => {
         e.preventDefault()
         if(validNumber(value)) {
             setServices(services => [...services, { name, value }])
-            if (nameInput.current && valueInput.current) {
-                nameInput.current.value = ''
-                valueInput.current.value = ''
-            }
+            defaultInputValue(nameInput, valueInput)
         } else {
             alert('Insira um número válido')
         }
