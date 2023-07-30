@@ -20,7 +20,7 @@ const AddServiceForm = ({ setServices }: Props) => {
             setServices(services => [...services, { name, value }])
             defaultInputValue(nameInput, valueInput)
         } else {
-            alert('Insira um número válido')
+            alert('Insira um número válido (utilize ponto para casas decimais)')
         }
     }
 
