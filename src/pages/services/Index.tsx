@@ -1,10 +1,10 @@
 import { useState } from 'react'
-import { Services as TServices } from '../types/services'
-import ServiceTable from '../components/services/ServiceTable'
-import AddServiceForm from '../components/services/AddServiceForm'
-import AnyServiceAdvice from '../components/services/AnyServiceAdvice'
+import { Services as TServices } from '../../types/services'
+import ServiceTable from './components/ServiceTable'
+import AddServiceForm from './components/AddServiceForm'
+import AnyServiceAdvice from './components/AnyServiceAdvice'
 
-const Services = () => {
+const Index = () => {
 
     const [services, setServices] = useState<TServices>([])
 
@@ -19,4 +19,4 @@ const Services = () => {
 
 }
 
-export default Services
+export default Index

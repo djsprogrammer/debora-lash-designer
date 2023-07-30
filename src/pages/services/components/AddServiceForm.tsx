@@ -1,12 +1,12 @@
 import { useState, useRef } from 'react'
-import { SetServices } from '../../types/services'
-import { defaultInputValue, validNumber } from '../../formFunctions/AddServiceForm'
+import { SetServices } from '../../../types/services'
+import { defaultInputValue, validNumber } from '../../../formFunctions/AddServiceForm'
 
 interface Props {
     setServices: SetServices
 }
 
-const AddServiceForm = ({ setServices }: Props) => {
+const Index = ({ setServices }: Props) => {
 
     const [name, setName] = useState('')
     const [value, setValue] = useState('')
@@ -34,4 +34,4 @@ const AddServiceForm = ({ setServices }: Props) => {
 
 }
 
-export default AddServiceForm
+export default Index

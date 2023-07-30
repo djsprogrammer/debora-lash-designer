@@ -1,11 +1,11 @@
-import { Service, Services, SetServices } from '../../types/services'
+import { Service, Services, SetServices } from '../../../types/services'
 
 interface Props {
     services: Services
     setServices: SetServices
 }
 
-const ServiceTable = ({ services, setServices }: Props) => {
+const Index = ({ services, setServices }: Props) => {
 
     const deleteService = (targetService: Service) => {
         const remainingServices = services.filter(service => {
@@ -41,4 +41,4 @@ const ServiceTable = ({ services, setServices }: Props) => {
 
 }
 
-export default ServiceTable
+export default Index

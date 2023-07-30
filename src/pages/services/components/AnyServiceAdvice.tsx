@@ -1,4 +1,4 @@
-const AnyServiceAdvice = () => {
+const Index = () => {
 
     return (
         <div>
@@ -8,4 +8,4 @@ const AnyServiceAdvice = () => {
 
 }
 
-export default AnyServiceAdvice
+export default Index
