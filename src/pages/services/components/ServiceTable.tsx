@@ -25,10 +25,13 @@ const Index = ({ services, setServices }: Props) => {
             </thead>
             <tbody>
                 {services.map(service => {
+
+                    const value = new Intl.NumberFormat('pt-BR', {style: 'currency', currency: 'BRL'}).format(Number(service.value))
+
                     return (
                         <tr key={service.name}>
                             <td>{service.name}</td>
-                            <td>{service.value}</td>
+                            <td>{value}</td>
                             <td>
                                 <button onClick={() => deleteService(service)} className='btn btn-sm btn-danger'>Excluir</button>
                             </td>
