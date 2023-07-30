@@ -30,7 +30,6 @@ const ServiceTable = ({ services, setServices }: Props) => {
                             <td>{service.name}</td>
                             <td>{service.value}</td>
                             <td>
-                                <button className='btn btn-sm btn-primary me-2'>Editar</button>
                                 <button onClick={() => deleteService(service)} className='btn btn-sm btn-danger'>Excluir</button>
                             </td>
                         </tr>
