@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Services as TServices } from '../../types/services'
-import ServiceTable from './components/ServiceTable'
+import ServiceTable from './components/serviceTable/Index'
 import AddServiceForm from './components/AddServiceForm'
 import AnyServiceAdvice from './components/AnyServiceAdvice'
 

@@ -1,4 +1,5 @@
-import { Service, Services, SetServices } from '../../../types/services'
+import ServiceRow from './ServiceRow'
+import { Service, Services, SetServices } from '../../../../types/services'
 
 interface Props {
     services: Services
@@ -24,20 +25,8 @@ const Index = ({ services, setServices }: Props) => {
                 </tr>
             </thead>
             <tbody>
-                {services.map(service => {
-
-                    const value = new Intl.NumberFormat('pt-BR', {style: 'currency', currency: 'BRL'}).format(Number(service.value))
-
-                    return (
-                        <tr key={service.name}>
-                            <td>{service.name}</td>
-                            <td>{value}</td>
-                            <td>
-                                <button onClick={() => deleteService(service)} className='btn btn-sm btn-danger'>Excluir</button>
-                            </td>
-                        </tr>
-                    )
-                })}
+                {services.map(service =>
+                    <ServiceRow service={service} deleteService={deleteService} />)}
             </tbody>
         </table>
     )
