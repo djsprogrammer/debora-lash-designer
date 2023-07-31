@@ -1,9 +1,13 @@
-import { useContext } from 'react'
+import { SetStateAction, useContext } from 'react'
 import ServiceRow from './ServiceRow'
 import { Service } from '../../../../types/services'
 import { ServicesContext } from '../../../../ServicesContext'
 
-const Index = () => {
+interface Props {
+    setInputsToEdit: React.Dispatch<SetStateAction<string[]>>
+}
+
+const Index = ({ setInputsToEdit }: Props) => {
 
     const [services, setServices] = useContext(ServicesContext)
 
@@ -25,7 +29,7 @@ const Index = () => {
             </thead>
             <tbody>
                 {services.map(service =>
-                    <ServiceRow service={service} deleteService={deleteService} />)}
+                    <ServiceRow service={service} deleteService={deleteService} setInputsToEdit={setInputsToEdit} />)}
             </tbody>
         </table>
     )

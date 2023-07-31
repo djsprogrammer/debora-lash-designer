@@ -1,8 +1,12 @@
-import { useContext, useState, useRef } from 'react'
+import { useEffect, useContext, useState, useRef } from 'react'
 import { defaultInputValue, validNumber } from '../../../formFunctions/AddServiceForm'
 import { ServicesContext } from '../../../ServicesContext'
 
-const Index = () => {
+interface Props {
+    inputsToEdit: string[]
+}
+
+const Index = ({ inputsToEdit }: Props) => {
 
     const [services, setServices] = useContext(ServicesContext)
 
@@ -11,6 +15,15 @@ const Index = () => {
 
     const nameInput = useRef<HTMLInputElement>(null)
     const valueInput = useRef<HTMLInputElement>(null)
+
+    useEffect(() => {
+        if (inputsToEdit[0]) {
+            if (nameInput.current && valueInput.current) {
+                nameInput.current.value = inputsToEdit[0]
+                valueInput.current.value = inputsToEdit[1]
+            }
+        }
+    }, [inputsToEdit])
 
     const addService = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
