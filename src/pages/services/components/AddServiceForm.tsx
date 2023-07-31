@@ -1,12 +1,13 @@
 import { useState, useRef } from 'react'
-import { SetServices } from '../../../types/services'
+import { Services, SetServices } from '../../../types/services'
 import { defaultInputValue, validNumber } from '../../../formFunctions/AddServiceForm'
 
 interface Props {
+    services: Services
     setServices: SetServices
 }
 
-const Index = ({ setServices }: Props) => {
+const Index = ({ services, setServices }: Props) => {
 
     const [name, setName] = useState('')
     const [value, setValue] = useState('')
@@ -16,11 +17,16 @@ const Index = ({ setServices }: Props) => {
 
     const addService = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        if(validNumber(value)) {
-            setServices(services => [...services, { name, value }])
-            defaultInputValue(nameInput, valueInput)
+        const alreadyExists = services.filter(service => service.name === name)
+        if (!alreadyExists[0]) {
+            if (validNumber(value)) {
+                setServices(services => [...services, { name, value }])
+                defaultInputValue(nameInput, valueInput)
+            } else {
+                alert('Insira um número válido (utilize ponto para casas decimais)')
+            }
         } else {
-            alert('Insira um número válido (utilize ponto para casas decimais)')
+            alert('Já existe um serviço com esse nome!')
         }
     }
 

@@ -13,7 +13,7 @@ const Index = () => {
             <h4 className='mt-2 text-center'>Seus Serviços</h4>
             {services[0] ? <ServiceTable services={services} setServices={setServices} /> :
                 <AnyServiceAdvice />}
-            <AddServiceForm setServices={setServices} />
+            <AddServiceForm services={services} setServices={setServices} />
         </div>
     )
 
