@@ -1,12 +1,16 @@
-import { useState } from 'react'
-import { Services as TServices } from '../../types/services'
+import { useContext, useEffect } from 'react'
 import ServiceTable from './components/serviceTable/Index'
 import AddServiceForm from './components/AddServiceForm'
 import AnyServiceAdvice from './components/AnyServiceAdvice'
+import { ServicesContext } from '../../ServicesContext'
 
 const Index = () => {
 
-    const [services, setServices] = useState<TServices>([])
+    const [services, setServices] = useContext(ServicesContext)
+
+    useEffect(() => {
+        console.log(services)
+    }, [services])
 
     return (
         <div className='container'>
