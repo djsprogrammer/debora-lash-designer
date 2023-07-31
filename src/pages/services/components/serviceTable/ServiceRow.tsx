@@ -14,6 +14,7 @@ const Index = ({ service, deleteService }: Props) => {
             <td>{service.name}</td>
             <td>{value}</td>
             <td>
+                <button className='btn btn-sm btn-primary me-1'>Editar</button>
                 <button onClick={() => deleteService(service)} className='btn btn-sm btn-danger'>Excluir</button>
             </td>
         </tr>
