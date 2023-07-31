@@ -1,13 +1,10 @@
-import { useState, useRef } from 'react'
-import { Services, SetServices } from '../../../types/services'
+import { useContext, useState, useRef } from 'react'
 import { defaultInputValue, validNumber } from '../../../formFunctions/AddServiceForm'
+import { ServicesContext } from '../../../ServicesContext'
 
-interface Props {
-    services: Services
-    setServices: SetServices
-}
+const Index = () => {
 
-const Index = ({ services, setServices }: Props) => {
+    const [services, setServices] = useContext(ServicesContext)
 
     const [name, setName] = useState('')
     const [value, setValue] = useState('')

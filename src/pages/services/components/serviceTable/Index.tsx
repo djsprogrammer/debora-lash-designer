@@ -1,12 +1,11 @@
+import { useContext } from 'react'
 import ServiceRow from './ServiceRow'
-import { Service, Services, SetServices } from '../../../../types/services'
+import { Service } from '../../../../types/services'
+import { ServicesContext } from '../../../../ServicesContext'
 
-interface Props {
-    services: Services
-    setServices: SetServices
-}
+const Index = () => {
 
-const Index = ({ services, setServices }: Props) => {
+    const [services, setServices] = useContext(ServicesContext)
 
     const deleteService = (targetService: Service) => {
         const remainingServices = services.filter(service => {
