@@ -15,12 +15,16 @@ const Index = ({ inputsToEdit }: Props) => {
 
     const nameInput = useRef<HTMLInputElement>(null)
     const valueInput = useRef<HTMLInputElement>(null)
+    const button = useRef<HTMLButtonElement>(null)
 
     useEffect(() => {
         if (inputsToEdit[0]) {
             if (nameInput.current && valueInput.current) {
                 nameInput.current.value = inputsToEdit[0]
                 valueInput.current.value = inputsToEdit[1]
+            }
+            if (button.current) {
+                button.current.innerText = 'Editar Serviço'
             }
         }
     }, [inputsToEdit])
@@ -44,7 +48,7 @@ const Index = ({ inputsToEdit }: Props) => {
         <form className='d-flex justify-content-center' onSubmit={e => addService(e)}>
             <input ref={nameInput} className='text-center' onChange={e => setName(e.target.value)} type='text' placeholder='Nome' required />
             <input ref={valueInput} className='mx-2 text-center' onChange={e => setValue(e.target.value)} type='text' placeholder='Valor' required />
-            <button className='btn btn-dark' type='submit'>Adicionar Serviço</button>
+            <button ref={button} className='btn btn-dark' type='submit'>Adicionar Serviço</button>
         </form>
     )
 
