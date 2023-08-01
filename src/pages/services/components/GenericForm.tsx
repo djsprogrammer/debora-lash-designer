@@ -44,6 +44,11 @@ const Index = ({ inputsToEdit }: Props) => {
 
     const editService = () => {
         console.log({ name, value })
+        setInputValue(nameInput, valueInput, '', '')
+        if (button.current) {
+            button.current.innerText = 'Adicionar Serviço'
+        }
+        setEditForm(false)
     }
 
     return (
