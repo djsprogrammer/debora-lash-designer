@@ -1,5 +1,5 @@
 import { useEffect, useContext, useState, useRef } from 'react'
-import { inputsValues, setInputValue, validNumber } from '../../../formFunctions/GenericForm'
+import { inputsValues, setButtonText, setInputValue, validNumber } from '../../../formFunctions/GenericForm'
 import { ServicesContext } from '../../../ServicesContext'
 
 interface Props {
@@ -22,15 +22,11 @@ const Index = ({ inputsToEdit }: Props) => {
     useEffect(() => {
         if (inputsToEdit[0]) {
             setInputValue(nameInput, valueInput, inputsToEdit[0], inputsToEdit[1])
-            if (button.current) {
-                button.current.innerText = EDIT_BUTTON_TEXT
-            }
+            setButtonText(button, EDIT_BUTTON_TEXT)
             setEditForm(true)
         } else {
             setInputValue(nameInput, valueInput, '', '')
-            if (button.current) {
-                button.current.innerText = ADD_BUTTON_TEXT
-            }
+            setButtonText(button, ADD_BUTTON_TEXT)
             setEditForm(false)
         }
     }, [inputsToEdit])
@@ -57,9 +53,7 @@ const Index = ({ inputsToEdit }: Props) => {
         })
         setServices([...remainingServices, { name, value }])
         setInputValue(nameInput, valueInput, '', '')
-        if (button.current) {
-            button.current.innerText = ADD_BUTTON_TEXT
-        }
+        setButtonText(button, ADD_BUTTON_TEXT)
         setEditForm(false)
     }
 

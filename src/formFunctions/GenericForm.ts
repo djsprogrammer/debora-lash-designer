@@ -25,3 +25,9 @@ export const inputsValues = (nameInput: Input, valueInput: Input) => {
     }
     return [name, value]
 }
+
+export const setButtonText = (button: React.RefObject<HTMLButtonElement>, text: string) => {
+    if (button.current) {
+        button.current.innerText = text
+    }
+}
