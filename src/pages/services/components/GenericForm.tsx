@@ -1,5 +1,5 @@
 import { useEffect, useContext, useState, useRef } from 'react'
-import { setInputValue, validNumber } from '../../../formFunctions/AddServiceForm'
+import { setInputValue, validNumber } from '../../../formFunctions/GenericForm'
 import { ServicesContext } from '../../../ServicesContext'
 
 interface Props {

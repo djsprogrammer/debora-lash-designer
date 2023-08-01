@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react'
 import ServiceTable from './components/serviceTable/Index'
-import AddServiceForm from './components/AddServiceForm'
+import AddServiceForm from './components/GenericForm'
 import AnyServiceAdvice from './components/AnyServiceAdvice'
 import { ServicesContext } from '../../ServicesContext'
 
