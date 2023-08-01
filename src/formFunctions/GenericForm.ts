@@ -15,3 +15,13 @@ export const setInputValue = (nameInput: Input, valueInput: Input, nameValue: st
         valueInput.current.value = valueValue
     }
 }
+
+export const inputsValues = (nameInput: Input, valueInput: Input) => {
+    let name = ''
+    let value = ''
+    if (nameInput.current && valueInput.current) {
+        name = nameInput.current.value
+        value = valueInput.current.value
+    }
+    return [name, value]
+}

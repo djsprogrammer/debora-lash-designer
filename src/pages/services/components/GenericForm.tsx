@@ -1,5 +1,5 @@
 import { useEffect, useContext, useState, useRef } from 'react'
-import { setInputValue, validNumber } from '../../../formFunctions/GenericForm'
+import { inputsValues, setInputValue, validNumber } from '../../../formFunctions/GenericForm'
 import { ServicesContext } from '../../../ServicesContext'
 
 interface Props {
@@ -43,7 +43,11 @@ const Index = ({ inputsToEdit }: Props) => {
     }
 
     const editService = () => {
-        console.log({ name, value })
+        const [name, value] = inputsValues(nameInput, valueInput)
+        const remainingServices = services.filter(service => {
+            return service.name !== name
+        })
+        setServices([...remainingServices, { name, value }])
         setInputValue(nameInput, valueInput, '', '')
         if (button.current) {
             button.current.innerText = 'Adicionar Serviço'
