@@ -9,9 +9,9 @@ export const validNumber = (value: string) => {
 
 type Input = React.RefObject<HTMLInputElement>
 
-export const defaultInputValue = (nameInput: Input, valueInput: Input) => {
+export const setInputValue = (nameInput: Input, valueInput: Input, nameValue: string, valueValue: string) => {
     if (nameInput.current && valueInput.current) {
-        nameInput.current.value = ''
-        valueInput.current.value = ''
+        nameInput.current.value = nameValue
+        valueInput.current.value = valueValue
     }
 }
