@@ -10,8 +10,6 @@ const Index = ({ inputsToEdit }: Props) => {
 
     const [services, setServices] = useContext(ServicesContext)
 
-    const [name, setName] = useState('')
-    const [value, setValue] = useState('')
     const [editForm, setEditForm] = useState(false)
 
     const nameInput = useRef<HTMLInputElement>(null)
@@ -29,6 +27,7 @@ const Index = ({ inputsToEdit }: Props) => {
     }, [inputsToEdit])
 
     const addService = () => {
+        const [name, value] = inputsValues(nameInput, valueInput)
         const alreadyExists = services.filter(service => service.name === name)
         if (!alreadyExists[0]) {
             if (validNumber(value)) {
@@ -60,8 +59,8 @@ const Index = ({ inputsToEdit }: Props) => {
             e.preventDefault()
             editForm ? editService() : addService() 
         }}>
-            <input ref={nameInput} className='text-center' onChange={e => setName(e.target.value)} type='text' placeholder='Nome' required />
-            <input ref={valueInput} className='mx-2 text-center' onChange={e => setValue(e.target.value)} type='text' placeholder='Valor' required />
+            <input ref={nameInput} className='text-center' type='text' placeholder='Nome' required />
+            <input ref={valueInput} className='mx-2 text-center' type='text' placeholder='Valor' required />
             <button ref={button} className='btn btn-dark' type='submit'>Adicionar Serviço</button>
         </form>
     )
