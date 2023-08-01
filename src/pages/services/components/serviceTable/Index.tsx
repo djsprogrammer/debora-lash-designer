@@ -16,6 +16,7 @@ const Index = ({ setInputsToEdit }: Props) => {
             return service.name !== targetService.name
         })
         setServices(remainingServices)
+        setInputsToEdit([])
     }
 
     return (

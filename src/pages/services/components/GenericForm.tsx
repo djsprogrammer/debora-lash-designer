@@ -6,6 +6,9 @@ interface Props {
     inputsToEdit: string[]
 }
 
+const ADD_BUTTON_TEXT = 'Adicionar Serviço'
+const EDIT_BUTTON_TEXT = 'Editar Serviço'
+
 const Index = ({ inputsToEdit }: Props) => {
 
     const [services, setServices] = useContext(ServicesContext)
@@ -20,9 +23,15 @@ const Index = ({ inputsToEdit }: Props) => {
         if (inputsToEdit[0]) {
             setInputValue(nameInput, valueInput, inputsToEdit[0], inputsToEdit[1])
             if (button.current) {
-                button.current.innerText = 'Editar Serviço'
+                button.current.innerText = EDIT_BUTTON_TEXT
             }
             setEditForm(true)
+        } else {
+            setInputValue(nameInput, valueInput, '', '')
+            if (button.current) {
+                button.current.innerText = ADD_BUTTON_TEXT
+            }
+            setEditForm(false)
         }
     }, [inputsToEdit])
 
@@ -49,7 +58,7 @@ const Index = ({ inputsToEdit }: Props) => {
         setServices([...remainingServices, { name, value }])
         setInputValue(nameInput, valueInput, '', '')
         if (button.current) {
-            button.current.innerText = 'Adicionar Serviço'
+            button.current.innerText = ADD_BUTTON_TEXT
         }
         setEditForm(false)
     }
@@ -61,7 +70,7 @@ const Index = ({ inputsToEdit }: Props) => {
         }}>
             <input ref={nameInput} className='text-center' type='text' placeholder='Nome' required />
             <input ref={valueInput} className='mx-2 text-center' type='text' placeholder='Valor' required />
-            <button ref={button} className='btn btn-dark' type='submit'>Adicionar Serviço</button>
+            <button ref={button} className='btn btn-dark' type='submit'>{ADD_BUTTON_TEXT}</button>
         </form>
     )
 
