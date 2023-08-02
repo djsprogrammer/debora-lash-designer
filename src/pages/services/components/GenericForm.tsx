@@ -9,6 +9,8 @@ interface Props {
 
 const ADD_BUTTON_TEXT = 'Adicionar Serviço'
 const EDIT_BUTTON_TEXT = 'Editar Serviço'
+const LOAD_BUTTON_TEXT = 'Carregando...'
+const POST_URL = 'http://localhost:8080/create-service'
 
 const Index = ({ inputsToEdit, setInputsToEdit }: Props) => {
 
@@ -33,18 +35,28 @@ const Index = ({ inputsToEdit, setInputsToEdit }: Props) => {
     }, [inputsToEdit])
 
     const addService = () => {
+        setButtonText(button, LOAD_BUTTON_TEXT)
         const [name, value] = inputsValues(nameInput, valueInput)
-        const alreadyExists = services.filter(service => service.name === name)
-        if (!alreadyExists[0]) {
-            if (validNumber(value)) {
-                setServices(services => [...services, { name, value }])
-                setInputsToEdit([])
-            } else {
-                alert('Insira um número válido (utilize ponto para casas decimais)')
-            }
-        } else {
-            alert('Já existe um serviço com esse nome!')
+        const options = {
+            method: 'post',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name, value })
         }
+        fetch(POST_URL, options)
+            .then(() => {
+                const alreadyExists = services.filter(service => service.name === name)
+                if (!alreadyExists[0]) {
+                    if (validNumber(value)) {
+                        setServices(services => [...services, { name, value }])
+                        setInputsToEdit([])
+                    } else {
+                        alert('Insira um número válido (utilize ponto para casas decimais)')
+                    }
+                } else {
+                    alert('Já existe um serviço com esse nome!')
+                }
+                setButtonText(button, ADD_BUTTON_TEXT)
+            })
     }
 
     const editService = () => {
