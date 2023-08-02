@@ -1,5 +1,5 @@
-import { SetStateAction } from "react"
-import { Service } from "../../../../types/services"
+import { SetStateAction } from 'react'
+import { Service } from '../../../../types/services'
 
 interface Props {
     service: Service
@@ -16,8 +16,8 @@ const Index = ({ service, deleteService, setInputsToEdit }: Props) => {
             <td>{service.name}</td>
             <td>{value}</td>
             <td>
-                <button onClick={() => setInputsToEdit([service.name, service.value])} className='btn btn-sm btn-primary me-1'>Editar</button>
-                <button onClick={() => deleteService(service)} className='btn btn-sm btn-danger'>Excluir</button>
+                {/* <button onClick={() => setInputsToEdit([service.name, service.value])} className='btn btn-sm btn-primary me-1'>Editar</button>
+                <button onClick={() => deleteService(service)} className='btn btn-sm btn-danger'>Excluir</button> */}
             </td>
         </tr>
     )
