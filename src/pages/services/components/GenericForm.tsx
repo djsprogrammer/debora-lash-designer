@@ -64,7 +64,7 @@ const Index = ({ inputsToEdit }: Props) => {
         }}>
             <input ref={nameInput} className='text-center' type='text' placeholder='Nome' required />
             <input ref={valueInput} className='mx-2 text-center' type='text' placeholder='Valor' required />
-            <button ref={button} className='btn btn-dark' type='submit'>{ADD_BUTTON_TEXT}</button>
+            <button ref={button} className='btn add-btn' type='submit'>{ADD_BUTTON_TEXT}</button>
         </form>
     )
 
