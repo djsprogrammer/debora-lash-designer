@@ -37,26 +37,28 @@ const Index = ({ inputsToEdit, setInputsToEdit }: Props) => {
     const addService = () => {
         setButtonText(button, LOAD_BUTTON_TEXT)
         const [name, value] = inputsValues(nameInput, valueInput)
+        const alreadyExists = services.filter(service => service.name === name)
         const options = {
             method: 'post',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ name, value })
         }
-        fetch(POST_URL, options)
-            .then(() => {
-                const alreadyExists = services.filter(service => service.name === name)
-                if (!alreadyExists[0]) {
-                    if (validNumber(value)) {
+        if (!alreadyExists[0]) {
+            if (validNumber(value)) {
+                fetch(POST_URL, options)
+                    .then(() => {
                         setServices(services => [...services, { name, value }])
+                        setButtonText(button, ADD_BUTTON_TEXT)
                         setInputsToEdit([])
-                    } else {
-                        alert('Insira um número válido (utilize ponto para casas decimais)')
-                    }
-                } else {
-                    alert('Já existe um serviço com esse nome!')
-                }
+                    })
+            } else {
+                alert('Insira um número válido (utilize ponto para casas decimais)')
                 setButtonText(button, ADD_BUTTON_TEXT)
-            })
+            }
+        } else {
+            alert('Já existe um serviço com esse nome!')
+            setButtonText(button, ADD_BUTTON_TEXT)
+        }
     }
 
     const editService = () => {
