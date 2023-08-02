@@ -1,15 +1,16 @@
-import { useEffect, useContext, useState, useRef } from 'react'
+import { useEffect, useContext, useState, useRef, SetStateAction } from 'react'
 import { inputsValues, setButtonText, setInputValue, validNumber } from '../../../formFunctions/GenericForm'
 import { ServicesContext } from '../../../ServicesContext'
 
 interface Props {
     inputsToEdit: string[]
+    setInputsToEdit: React.Dispatch<SetStateAction<string[]>>
 }
 
 const ADD_BUTTON_TEXT = 'Adicionar Serviço'
 const EDIT_BUTTON_TEXT = 'Editar Serviço'
 
-const Index = ({ inputsToEdit }: Props) => {
+const Index = ({ inputsToEdit, setInputsToEdit }: Props) => {
 
     const [services, setServices] = useContext(ServicesContext)
 
@@ -37,7 +38,7 @@ const Index = ({ inputsToEdit }: Props) => {
         if (!alreadyExists[0]) {
             if (validNumber(value)) {
                 setServices(services => [...services, { name, value }])
-                setInputValue(nameInput, valueInput, '', '')
+                setInputsToEdit([])
             } else {
                 alert('Insira um número válido (utilize ponto para casas decimais)')
             }
@@ -52,9 +53,7 @@ const Index = ({ inputsToEdit }: Props) => {
             return service.name !== name
         })
         setServices([...remainingServices, { name, value }])
-        setInputValue(nameInput, valueInput, '', '')
-        setButtonText(button, ADD_BUTTON_TEXT)
-        setEditForm(false)
+        setInputsToEdit([])
     }
 
     return (

@@ -14,7 +14,7 @@ const Index = () => {
         <div className='container'>
             <h4 className='mt-2 text-center'>Seus Serviços</h4>
             {services[0] ? <ServiceTable setInputsToEdit={setInputsToEdit} /> : <AnyServiceAdvice />}
-            <AddServiceForm inputsToEdit={inputsToEdit} />
+            <AddServiceForm inputsToEdit={inputsToEdit} setInputsToEdit={setInputsToEdit}/>
         </div>
     )
 
