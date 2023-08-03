@@ -44,17 +44,19 @@ const Index = ({ inputsToEdit, setInputsToEdit }: Props) => {
             body: JSON.stringify({ name, value })
         }
         if (!alreadyExists[0]) {
-            if (validNumber(value)) {
-                fetch(POST_URL, options)
-                    .then(() => {
-                        setServices(services => [...services, { name, value }])
-                        setButtonText(button, ADD_BUTTON_TEXT)
-                        setInputsToEdit([])
-                    })
-            } else {
-                alert('Insira um número válido (utilize ponto para casas decimais)')
-                setButtonText(button, ADD_BUTTON_TEXT)
-            }
+            setTimeout(() => {
+                if (validNumber(value)) {
+                    fetch(POST_URL, options)
+                        .then(() => {
+                            setServices(services => [...services, { name, value }])
+                            setButtonText(button, ADD_BUTTON_TEXT)
+                            setInputsToEdit([])
+                        })
+                } else {
+                    alert('Insira um número válido (utilize ponto para casas decimais)')
+                    setButtonText(button, ADD_BUTTON_TEXT)
+                }
+            }, 500)
         } else {
             alert('Já existe um serviço com esse nome!')
             setButtonText(button, ADD_BUTTON_TEXT)
@@ -62,18 +64,34 @@ const Index = ({ inputsToEdit, setInputsToEdit }: Props) => {
     }
 
     const editService = () => {
+        setButtonText(button, LOAD_BUTTON_TEXT)
         const [name, value] = inputsValues(nameInput, valueInput)
-        const remainingServices = services.filter(service => {
-            return service.name !== name
-        })
-        setServices([...remainingServices, { name, value }])
-        setInputsToEdit([])
+        const options = {
+            method: 'put',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name, value })
+        }
+        setTimeout(() => {
+            if (validNumber(value)) {
+                fetch('http://localhost:8080/edit-service', options)
+                    .then(() => {
+                        const remainingServices = services.filter(service => {
+                            return service.name !== name
+                        })
+                        setServices([...remainingServices, { name, value }])
+                        setInputsToEdit([])
+                    })
+            } else {
+                alert('Insira um número válido (utilize ponto para casas decimais)')
+                setButtonText(button, EDIT_BUTTON_TEXT)
+            }
+        }, 500)
     }
 
     return (
         <form className='d-flex justify-content-center' onSubmit={e => {
             e.preventDefault()
-            editForm ? editService() : addService() 
+            editForm ? editService() : addService()
         }}>
             <input ref={nameInput} className='text-center' type='text' placeholder='Nome' required />
             <input ref={valueInput} className='mx-2 text-center' type='text' placeholder='Valor' required />
