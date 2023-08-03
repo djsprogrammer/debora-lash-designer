@@ -3,6 +3,8 @@ import ServiceRow from './ServiceRow'
 import { Service } from '../../../../types/services'
 import { ServicesContext } from '../../../../ServicesContext'
 
+const DELETE_URL = 'http://localhost:8080/delete-service'
+
 interface Props {
     setInputsToEdit: React.Dispatch<SetStateAction<string[]>>
 }
@@ -12,11 +14,19 @@ const Index = ({ setInputsToEdit }: Props) => {
     const [services, setServices] = useContext(ServicesContext)
 
     const deleteService = (targetService: Service) => {
-        const remainingServices = services.filter(service => {
-            return service.name !== targetService.name
-        })
-        setServices(remainingServices)
-        setInputsToEdit([])
+        const options = {
+            method: 'delete',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(targetService)
+        }
+        fetch(DELETE_URL, options)
+            .then(() => {
+                const remainingServices = services.filter(service => {
+                    return service.name !== targetService.name
+                })
+                setServices(remainingServices)
+                setInputsToEdit([])
+            })
     }
 
     return (
