@@ -93,9 +93,9 @@ const Index = ({ inputsToEdit, setInputsToEdit }: Props) => {
             e.preventDefault()
             editForm ? editService() : addService()
         }}>
-            <input ref={nameInput} className='text-center' type='text' placeholder='Nome' required />
-            <input ref={valueInput} className='mx-2 text-center' type='text' placeholder='Valor' required />
-            <button ref={button} className='btn add-btn' type='submit'>{ADD_BUTTON_TEXT}</button>
+            <input ref={nameInput} className='text-center rounded-pill border border-secondary' type='text' placeholder='Nome' required />
+            <input ref={valueInput} className='mx-2 text-center rounded-pill border border-secondary' type='text' placeholder='Valor' required />
+            <button ref={button} className='btn btn-dark rounded-pill' type='submit'>{ADD_BUTTON_TEXT}</button>
         </form>
     )
 
