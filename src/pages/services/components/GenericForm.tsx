@@ -47,10 +47,12 @@ const Index = ({ inputsToEdit, setInputsToEdit }: Props) => {
             setTimeout(() => {
                 if (validNumber(value)) {
                     fetch(POST_URL, options)
-                        .then(() => {
-                            setServices(services => [...services, { name, value }])
-                            setButtonText(button, ADD_BUTTON_TEXT)
-                            setInputsToEdit([])
+                        .then(res => {
+                            if (res.status === 201) {
+                                setServices(services => [...services, { name, value }])
+                                setButtonText(button, ADD_BUTTON_TEXT)
+                                setInputsToEdit([])
+                            }
                         })
                 } else {
                     alert('Insira um número válido (utilize ponto para casas decimais)')
@@ -74,12 +76,14 @@ const Index = ({ inputsToEdit, setInputsToEdit }: Props) => {
         setTimeout(() => {
             if (validNumber(value)) {
                 fetch('http://localhost:8080/edit-service', options)
-                    .then(() => {
-                        const remainingServices = services.filter(service => {
-                            return service.name !== name
-                        })
-                        setServices([...remainingServices, { name, value }])
-                        setInputsToEdit([])
+                    .then(res => {
+                        if (res.status === 204) {
+                            const remainingServices = services.filter(service => {
+                                return service.name !== name
+                            })
+                            setServices([...remainingServices, { name, value }])
+                            setInputsToEdit([])
+                        }
                     })
             } else {
                 alert('Insira um número válido (utilize ponto para casas decimais)')

@@ -20,12 +20,14 @@ const Index = ({ setInputsToEdit }: Props) => {
             body: JSON.stringify(targetService)
         }
         fetch(DELETE_URL, options)
-            .then(() => {
-                const remainingServices = services.filter(service => {
-                    return service.name !== targetService.name
-                })
-                setServices(remainingServices)
-                setInputsToEdit([])
+            .then(res => {
+                if (res.status === 204) {
+                    const remainingServices = services.filter(service => {
+                        return service.name !== targetService.name
+                    })
+                    setServices(remainingServices)
+                    setInputsToEdit([])
+                }
             })
     }
 
