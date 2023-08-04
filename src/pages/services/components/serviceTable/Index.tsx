@@ -42,7 +42,7 @@ const Index = ({ setInputsToEdit }: Props) => {
     }
 
     return (
-        <table className='table my-4 text-center'>
+        <table className='table text-center'>
             <thead>
                 <tr>
                     <th>Serviço</th>

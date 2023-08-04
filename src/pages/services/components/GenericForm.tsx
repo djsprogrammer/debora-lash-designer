@@ -117,7 +117,7 @@ const Index = ({ inputsToEdit, setInputsToEdit }: Props) => {
     }
 
     return (
-        <form className='d-flex justify-content-center' onSubmit={e => {
+        <form className='my-4 d-flex justify-content-center' onSubmit={e => {
             e.preventDefault()
             editForm ? editService() : addService()
         }}>
