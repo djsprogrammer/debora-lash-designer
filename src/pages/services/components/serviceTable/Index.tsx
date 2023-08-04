@@ -35,6 +35,9 @@ const Index = ({ setInputsToEdit }: Props) => {
                         setInputsToEdit([])
                         break;
                 }
+            }).catch(() => {
+                alert('Erro ao conectar com o servidor')
+                setInputsToEdit([])
             })
     }
 

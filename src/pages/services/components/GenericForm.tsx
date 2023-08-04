@@ -61,6 +61,10 @@ const Index = ({ inputsToEdit, setInputsToEdit }: Props) => {
                                     setInputsToEdit([])
                                     break;
                             }
+                        }).catch(() => {
+                            alert('Erro ao conectar com o servidor')
+                            setButtonText(button, ADD_BUTTON_TEXT)
+                            setInputsToEdit([])
                         })
                 } else {
                     alert('Insira um número válido (utilize ponto para casas decimais)')
@@ -100,6 +104,10 @@ const Index = ({ inputsToEdit, setInputsToEdit }: Props) => {
                                 setInputsToEdit([])
                                 break;
                         }
+                    }).catch(() => {
+                        alert('Erro ao conectar com o servidor')
+                        setButtonText(button, ADD_BUTTON_TEXT)
+                        setInputsToEdit([])
                     })
             } else {
                 alert('Insira um número válido (utilize ponto para casas decimais)')
