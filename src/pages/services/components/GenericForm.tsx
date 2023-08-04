@@ -48,10 +48,18 @@ const Index = ({ inputsToEdit, setInputsToEdit }: Props) => {
                 if (validNumber(value)) {
                     fetch(POST_URL, options)
                         .then(res => {
-                            if (res.status === 201) {
-                                setServices(services => [...services, { name, value }])
-                                setButtonText(button, ADD_BUTTON_TEXT)
-                                setInputsToEdit([])
+                            switch (res.status) {
+                                case 201:
+                                    setServices(services => [...services, { name, value }])
+                                    setButtonText(button, ADD_BUTTON_TEXT)
+                                    setInputsToEdit([])
+                                    break;
+
+                                case 503:
+                                    alert('Erro ao consultar banco de dados')
+                                    setButtonText(button, ADD_BUTTON_TEXT)
+                                    setInputsToEdit([])
+                                    break;
                             }
                         })
                 } else {
@@ -77,12 +85,20 @@ const Index = ({ inputsToEdit, setInputsToEdit }: Props) => {
             if (validNumber(value)) {
                 fetch('http://localhost:8080/edit-service', options)
                     .then(res => {
-                        if (res.status === 204) {
-                            const remainingServices = services.filter(service => {
-                                return service.name !== name
-                            })
-                            setServices([...remainingServices, { name, value }])
-                            setInputsToEdit([])
+                        switch (res.status) {
+                            case 204:
+                                const remainingServices = services.filter(service => {
+                                    return service.name !== name
+                                })
+                                setServices([...remainingServices, { name, value }])
+                                setInputsToEdit([])
+                                break;
+
+                            case 503:
+                                alert('Erro ao consultar banco de dados')
+                                setButtonText(button, ADD_BUTTON_TEXT)
+                                setInputsToEdit([])
+                                break;
                         }
                     })
             } else {

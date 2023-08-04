@@ -21,12 +21,19 @@ const Index = ({ setInputsToEdit }: Props) => {
         }
         fetch(DELETE_URL, options)
             .then(res => {
-                if (res.status === 204) {
-                    const remainingServices = services.filter(service => {
-                        return service.name !== targetService.name
-                    })
-                    setServices(remainingServices)
-                    setInputsToEdit([])
+                switch (res.status) {
+                    case 204:
+                        const remainingServices = services.filter(service => {
+                            return service.name !== targetService.name
+                        })
+                        setServices(remainingServices)
+                        setInputsToEdit([])
+                        break;
+                
+                    case 503:
+                        alert('Erro ao consultar banco de dados')
+                        setInputsToEdit([])
+                        break;
                 }
             })
     }
