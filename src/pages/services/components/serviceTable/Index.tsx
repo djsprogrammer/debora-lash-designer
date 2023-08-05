@@ -1,4 +1,4 @@
-import { SetStateAction, useContext } from 'react'
+import { useContext } from 'react'
 import ServiceRow from './ServiceRow'
 import { Service } from '../../../../types/services'
 import { ServicesContext } from '../../../../ServicesContext'
@@ -6,11 +6,7 @@ import { changeFormState } from '../../../../formFunctions/GenericForm'
 
 const DELETE_URL = 'http://localhost:8080/delete-service'
 
-interface Props {
-    setInputsToEdit: React.Dispatch<SetStateAction<string[]>>
-}
-
-const Index = ({ setInputsToEdit }: Props) => {
+const Index = () => {
 
     const [services, setServices] = useContext(ServicesContext)
 
@@ -52,7 +48,7 @@ const Index = ({ setInputsToEdit }: Props) => {
             </thead>
             <tbody>
                 {services.map(service =>
-                    <ServiceRow service={service} deleteService={deleteService} setInputsToEdit={setInputsToEdit} />)}
+                    <ServiceRow service={service} deleteService={deleteService} />)}
             </tbody>
         </table>
     )
