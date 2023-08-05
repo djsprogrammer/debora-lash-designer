@@ -42,12 +42,14 @@ export const setButtonText = (button: React.RefObject<HTMLButtonElement>, text: 
     }
 }
 
-export const changeFormState = (buttonText: string) => {
+export const changeFormState = (buttonText: string = '') => {
     if (nameInput.current && valueInput.current) {
         nameInput.current.value = ''
         valueInput.current.value = ''
     }
-    if (button.current) {
-        button.current.innerText = buttonText
+    if (buttonText) {
+        if (button.current) {
+            button.current.innerText = buttonText
+        }
     }
 }

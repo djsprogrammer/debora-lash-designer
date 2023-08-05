@@ -2,6 +2,7 @@ import { SetStateAction, useContext } from 'react'
 import ServiceRow from './ServiceRow'
 import { Service } from '../../../../types/services'
 import { ServicesContext } from '../../../../ServicesContext'
+import { changeFormState } from '../../../../formFunctions/GenericForm'
 
 const DELETE_URL = 'http://localhost:8080/delete-service'
 
@@ -14,12 +15,14 @@ const Index = ({ setInputsToEdit }: Props) => {
     const [services, setServices] = useContext(ServicesContext)
 
     const deleteService = (targetService: Service) => {
+        changeFormState()
         const options = {
             method: 'delete',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(targetService)
         }
-        fetch(DELETE_URL, options)
+        setTimeout(() => {
+            fetch(DELETE_URL, options)
             .then(res => {
                 switch (res.status) {
                     case 204:
@@ -27,18 +30,15 @@ const Index = ({ setInputsToEdit }: Props) => {
                             return service.name !== targetService.name
                         })
                         setServices(remainingServices)
-                        setInputsToEdit([])
-                        break;
-                
+                        break
                     case 503:
                         alert('Erro ao consultar banco de dados')
-                        setInputsToEdit([])
-                        break;
+                        break
                 }
             }).catch(() => {
                 alert('Erro ao conectar com o servidor')
-                setInputsToEdit([])
             })
+        }, 500)
     }
 
     return (
