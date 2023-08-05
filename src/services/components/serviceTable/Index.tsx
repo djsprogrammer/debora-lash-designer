@@ -1,8 +1,8 @@
 import { useContext } from 'react'
 import ServiceRow from './ServiceRow'
-import { Service } from '../../../../types/services'
-import { ServicesContext } from '../../../../ServicesContext'
-import { changeFormState } from '../../../../formFunctions/GenericForm'
+import { Service } from '../../../types/services'
+import { ServicesContext } from '../../../ServicesContext'
+import { changeFormState } from '../../../formFunctions/GenericForm'
 
 const DELETE_URL = 'http://localhost:8080/delete-service'
 

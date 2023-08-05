@@ -2,7 +2,7 @@ import { useContext } from 'react'
 import ServiceTable from './components/serviceTable/Index'
 import GenericForm from './components/GenericForm'
 import AnyServiceAdvice from './components/AnyServiceAdvice'
-import { ServicesContext } from '../../ServicesContext'
+import { ServicesContext } from '../ServicesContext'
 
 const Index = () => {
 

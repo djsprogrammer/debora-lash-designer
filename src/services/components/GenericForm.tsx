@@ -1,6 +1,6 @@
 import { useEffect, useContext, useRef } from 'react'
-import { inputsValues, setButtonText, validNumber, changeFormState, saveReferenciesOnMemory } from '../../../formFunctions/GenericForm'
-import { ServicesContext } from '../../../ServicesContext'
+import { inputsValues, setButtonText, validNumber, changeFormState, saveReferenciesOnMemory } from '../../formFunctions/GenericForm'
+import { ServicesContext } from '../../ServicesContext'
 
 const ADD_BUTTON_TEXT = 'Adicionar Serviço'
 const LOAD_BUTTON_TEXT = 'Carregando...'
