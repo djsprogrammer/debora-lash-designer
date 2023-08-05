@@ -1,5 +1,5 @@
 import { useEffect, useContext, useState, useRef, SetStateAction } from 'react'
-import { inputsValues, setButtonText, setInputValue, validNumber, changeFormState } from '../../../formFunctions/GenericForm'
+import { inputsValues, setButtonText, setInputValue, validNumber, changeFormState, saveReferenciesOnMemory } from '../../../formFunctions/GenericForm'
 import { ServicesContext } from '../../../ServicesContext'
 
 interface Props {
@@ -36,6 +36,10 @@ const Index = ({ inputsToEdit, setInputsToEdit }: Props) => {
         }
     }, [inputsToEdit])
 
+    useEffect(() => {
+        saveReferenciesOnMemory(nameInput, valueInput, button)
+    })
+
     const addService = () => {
         setButtonText(button, LOAD_BUTTON_TEXT)
         const [name, value] = inputsValues(nameInput, valueInput)
@@ -53,17 +57,17 @@ const Index = ({ inputsToEdit, setInputsToEdit }: Props) => {
                             switch (res.status) {
                                 case 201:
                                     setServices(services => [...services, { name, value }])
-                                    changeFormState(nameInput, valueInput, button, ADD_BUTTON_TEXT)
+                                    changeFormState(ADD_BUTTON_TEXT)
                                     break
 
                                 case 503:
                                     alert(DB_ERROR_TEXT)
-                                    changeFormState(nameInput, valueInput, button, ADD_BUTTON_TEXT)
+                                    changeFormState(ADD_BUTTON_TEXT)
                                     break
                             }
                         }).catch(() => {
                             alert(SERVER_ERROR_TEXT)
-                            changeFormState(nameInput, valueInput, button, ADD_BUTTON_TEXT)
+                            changeFormState(ADD_BUTTON_TEXT)
                         })
                 } else {
                     alert('Insira um número válido (utilize ponto para casas decimais)')

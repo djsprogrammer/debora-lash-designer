@@ -1,3 +1,13 @@
+let nameInput: Input
+let valueInput: Input
+let button: React.RefObject<HTMLButtonElement>
+
+export const saveReferenciesOnMemory = (targetNameInput: Input, targetValueInput: Input, targetButton: React.RefObject<HTMLButtonElement>) => {
+    nameInput = targetNameInput
+    valueInput = targetValueInput
+    button = targetButton
+}
+
 export const validNumber = (value: string) => {
     const regex = /^[0-9.]+$/
         if (regex.test(value)) {
@@ -32,7 +42,12 @@ export const setButtonText = (button: React.RefObject<HTMLButtonElement>, text: 
     }
 }
 
-export const changeFormState = (nameInput: Input, valueInput: Input, button: React.RefObject<HTMLButtonElement>, buttonText: string) => {
-    setInputValue(nameInput, valueInput, '', '')
-    setButtonText(button, buttonText)
+export const changeFormState = (buttonText: string) => {
+    if (nameInput.current && valueInput.current) {
+        nameInput.current.value = ''
+        valueInput.current.value = ''
+    }
+    if (button.current) {
+        button.current.innerText = buttonText
+    }
 }
