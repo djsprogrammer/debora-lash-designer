@@ -1,5 +1,5 @@
 import { useEffect, useContext, useState, useRef, SetStateAction } from 'react'
-import { inputsValues, setButtonText, setInputValue, validNumber } from '../../../formFunctions/GenericForm'
+import { inputsValues, setButtonText, setInputValue, validNumber, changeFormState } from '../../../formFunctions/GenericForm'
 import { ServicesContext } from '../../../ServicesContext'
 
 interface Props {
@@ -11,6 +11,8 @@ const ADD_BUTTON_TEXT = 'Adicionar Serviço'
 const EDIT_BUTTON_TEXT = 'Editar Serviço'
 const LOAD_BUTTON_TEXT = 'Carregando...'
 const POST_URL = 'http://localhost:8080/create-service'
+const DB_ERROR_TEXT = 'Erro ao consultar banco de dados'
+const SERVER_ERROR_TEXT = 'Erro ao conectar com o servidor'
 
 const Index = ({ inputsToEdit, setInputsToEdit }: Props) => {
 
@@ -51,20 +53,17 @@ const Index = ({ inputsToEdit, setInputsToEdit }: Props) => {
                             switch (res.status) {
                                 case 201:
                                     setServices(services => [...services, { name, value }])
-                                    setButtonText(button, ADD_BUTTON_TEXT)
-                                    setInputsToEdit([])
-                                    break;
+                                    changeFormState(nameInput, valueInput, button, ADD_BUTTON_TEXT)
+                                    break
 
                                 case 503:
-                                    alert('Erro ao consultar banco de dados')
-                                    setButtonText(button, ADD_BUTTON_TEXT)
-                                    setInputsToEdit([])
-                                    break;
+                                    alert(DB_ERROR_TEXT)
+                                    changeFormState(nameInput, valueInput, button, ADD_BUTTON_TEXT)
+                                    break
                             }
                         }).catch(() => {
-                            alert('Erro ao conectar com o servidor')
-                            setButtonText(button, ADD_BUTTON_TEXT)
-                            setInputsToEdit([])
+                            alert(SERVER_ERROR_TEXT)
+                            changeFormState(nameInput, valueInput, button, ADD_BUTTON_TEXT)
                         })
                 } else {
                     alert('Insira um número válido (utilize ponto para casas decimais)')

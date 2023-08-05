@@ -31,3 +31,8 @@ export const setButtonText = (button: React.RefObject<HTMLButtonElement>, text: 
         button.current.innerText = text
     }
 }
+
+export const changeFormState = (nameInput: Input, valueInput: Input, button: React.RefObject<HTMLButtonElement>, buttonText: string) => {
+    setInputValue(nameInput, valueInput, '', '')
+    setButtonText(button, buttonText)
+}
