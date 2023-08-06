@@ -19,14 +19,7 @@ export const validNumber = (value: string) => {
 
 type Input = React.RefObject<HTMLInputElement>
 
-export const setInputValue = (nameInput: Input, valueInput: Input, nameValue: string, valueValue: string) => {
-    if (nameInput.current && valueInput.current) {
-        nameInput.current.value = nameValue
-        valueInput.current.value = valueValue
-    }
-}
-
-export const inputsValues = (nameInput: Input, valueInput: Input) => {
+export const inputsValues = () => {
     let name = ''
     let value = ''
     if (nameInput.current && valueInput.current) {
@@ -36,7 +29,7 @@ export const inputsValues = (nameInput: Input, valueInput: Input) => {
     return [name, value]
 }
 
-export const setButtonText = (button: React.RefObject<HTMLButtonElement>, text: string) => {
+export const setButtonText = (text: string) => {
     if (button.current) {
         button.current.innerText = text
     }

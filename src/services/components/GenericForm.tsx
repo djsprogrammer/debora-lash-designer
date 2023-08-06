@@ -21,16 +21,16 @@ const Index = () => {
     })
 
     const addService = () => {
-        setButtonText(button, LOAD_BUTTON_TEXT)
-        const [name, value] = inputsValues(nameInput, valueInput)
+        setButtonText(LOAD_BUTTON_TEXT)
+        const [name, value] = inputsValues()
         const alreadyExists = services.filter(service => service.name === name)
         const options = {
             method: 'post',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ name, value })
         }
-        if (!alreadyExists[0]) {
-            setTimeout(() => {
+        setTimeout(() => {
+            if (!alreadyExists[0]) {
                 if (validNumber(value)) {
                     fetch(POST_URL, options)
                         .then(res => {
@@ -51,13 +51,13 @@ const Index = () => {
                         })
                 } else {
                     alert('Insira um número válido (utilize ponto para casas decimais)')
-                    setButtonText(button, ADD_BUTTON_TEXT)
+                    setButtonText(ADD_BUTTON_TEXT)
                 }
-            }, 500)
-        } else {
-            alert('Já existe um serviço com esse nome!')
-            setButtonText(button, ADD_BUTTON_TEXT)
-        }
+            } else {
+                alert('Já existe um serviço com esse nome!')
+                setButtonText(ADD_BUTTON_TEXT)
+            }
+        }, 500)
     }
 
     return (
