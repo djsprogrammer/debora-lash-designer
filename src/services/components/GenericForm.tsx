@@ -24,19 +24,22 @@ const Index = () => {
         setButtonText(LOAD_BUTTON_TEXT)
         const [name, value] = inputsValues()
         const alreadyExists = services.filter(service => service.name === name)
-        const options = {
-            method: 'post',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ name, value })
-        }
         setTimeout(() => {
             if (!alreadyExists[0]) {
                 if (validNumber(value)) {
+                    const service = {
+                        name, value: Number(value)
+                    }
+                    const options = {
+                        method: 'post',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(service)
+                    }
                     fetch(POST_URL, options)
                         .then(res => {
                             switch (res.status) {
                                 case 201:
-                                    setServices(services => [...services, { name, value }])
+                                    setServices(services => [...services, service])
                                     changeFormState(ADD_BUTTON_TEXT)
                                     break
 
