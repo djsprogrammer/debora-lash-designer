@@ -9,6 +9,7 @@ import ServicesProvider from './ServicesContext'
 const Index = () => {
 
     const [services, setServices] = useState<TServices>([])
+    const [loadingDatabaseText, setLoadingDatabaseText] = useState('Carregando banco de dados...')
     const [databaseLoaded, setDatabaseLoaded] = useState(false)
 
     const getDataFromServer = (res: Response) => {
@@ -25,7 +26,14 @@ const Index = () => {
         setTimeout(() => {
             fetch('http://localhost:8080/all-services')
             .then(res => {
-                if (res.status === 200) getDataFromServer(res)
+                switch (res.status) {
+                    case 200:
+                        getDataFromServer(res)
+                        break
+                    case 503:
+                        setLoadingDatabaseText('Erro ao consultar banco de dados')
+                        break
+                }
             })
         }, 2000)
     })
@@ -34,7 +42,7 @@ const Index = () => {
         <div>
             <Header />
             <ServicesProvider servicesState={[services, setServices]}>
-                {databaseLoaded ? <Services /> : <h4 className='text-center my-4'>Carregando banco de dados...</h4>}
+                {databaseLoaded ? <Services /> : <h4 className='text-center my-4'>{loadingDatabaseText}</h4>}
             </ServicesProvider>
         </div>
     )
