@@ -22,9 +22,7 @@ const Index = () => {
     }
 
     useEffect(() => {
-        // setTimeout apenas em desenvolvimento
-        setTimeout(() => {
-            fetch('http://localhost:8080/all-services')
+        fetch('http://localhost:8080/all-services')
             .then(res => {
                 switch (res.status) {
                     case 200:
@@ -35,7 +33,6 @@ const Index = () => {
                         break
                 }
             }).catch(() => setLoadingDatabaseText('Erro ao conectar com o servidor'))
-        }, 2000)
     })
 
     return (
