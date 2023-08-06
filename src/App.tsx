@@ -9,25 +9,32 @@ import ServicesProvider from './ServicesContext'
 const Index = () => {
 
     const [services, setServices] = useState<TServices>([])
+    const [databaseLoaded, setDatabaseLoaded] = useState(false)
 
     const getDataFromServer = (res: Response) => {
         res.json().then((services: TServices) => {
             if (services[0]) setServices(services)
+            setTimeout(() => {
+                setDatabaseLoaded(true)
+            }, 500)
         })
     }
 
     useEffect(() => {
-        fetch('http://localhost:8080/all-services')
+        // setTimeout apenas em desenvolvimento
+        setTimeout(() => {
+            fetch('http://localhost:8080/all-services')
             .then(res => {
                 if (res.status === 200) getDataFromServer(res)
             })
+        }, 2000)
     })
 
     return (
         <div>
             <Header />
             <ServicesProvider servicesState={[services, setServices]}>
-                <Services />
+                {databaseLoaded ? <Services /> : <h4 className='text-center my-4'>Carregando banco de dados...</h4>}
             </ServicesProvider>
         </div>
     )
