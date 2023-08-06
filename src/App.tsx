@@ -6,6 +6,8 @@ import Header from './fixedComponents/Header'
 import Services from './services/Index'
 import ServicesProvider from './ServicesContext'
 
+export const SERVER_URL = 'http://localhost:8080'
+
 const Index = () => {
 
     const [services, setServices] = useState<TServices>([])
@@ -22,7 +24,7 @@ const Index = () => {
     }
 
     useEffect(() => {
-        fetch('http://localhost:8080/all-services')
+        fetch(`${SERVER_URL}/all-services`)
             .then(res => {
                 switch (res.status) {
                     case 200:

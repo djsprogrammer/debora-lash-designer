@@ -1,12 +1,11 @@
 import { useEffect, useContext, useRef } from 'react'
 import { inputsValues, setButtonText, validNumber, changeFormState, saveReferenciesOnMemory } from '../../formFunctions/GenericForm'
 import { ServicesContext } from '../../ServicesContext'
+import { SERVER_URL } from '../../App'
+import { SERVER_ERROR_TEXT, DB_ERROR_TEXT } from '../Index'
 
 const ADD_BUTTON_TEXT = 'Adicionar Serviço'
 const LOAD_BUTTON_TEXT = 'Carregando...'
-const POST_URL = 'http://localhost:8080/create-service'
-const DB_ERROR_TEXT = 'Erro ao consultar banco de dados'
-const SERVER_ERROR_TEXT = 'Erro ao conectar com o servidor'
 
 const Index = () => {
 
@@ -35,7 +34,7 @@ const Index = () => {
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(service)
                     }
-                    fetch(POST_URL, options)
+                    fetch(`${SERVER_URL}/create-service`, options)
                         .then(res => {
                             switch (res.status) {
                                 case 201:
