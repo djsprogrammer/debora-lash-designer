@@ -34,7 +34,7 @@ const Index = () => {
                         setLoadingDatabaseText('Erro ao consultar banco de dados')
                         break
                 }
-            })
+            }).catch(() => setLoadingDatabaseText('Erro ao conectar com o servidor'))
         }, 2000)
     })
 
