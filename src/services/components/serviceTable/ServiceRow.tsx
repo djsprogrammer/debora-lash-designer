@@ -9,12 +9,15 @@ const Index = ({ service, deleteService }: Props) => {
 
     const value = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(Number(service.value))
 
+    const commonStyle = 'btn btn-sm rounded-pill'
+
     return (
         <tr key={service.name}>
             <td>{service.name}</td>
             <td>{value}</td>
             <td>
-                <button onClick={() => deleteService(service)} className='btn btn-sm btn-dark rounded-pill'>Excluir</button>
+                <button className={`${commonStyle} btn-outline-dark me-2`}>Editar</button>
+                <button onClick={() => deleteService(service)} className={`${commonStyle} btn-dark`}>Excluir</button>
             </td>
         </tr>
     )
