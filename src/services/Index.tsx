@@ -12,12 +12,13 @@ const Index = () => {
     const [services] = useContext(ServicesContext)
     const [searchKey, setSearchKey] = useState('')
     const [editForm, setEditForm] = useState(false)
+    const [blockedActions, setBlockedActions] = useState(false)
 
     return (
         <div className='container'>
             <h4 className='my-4 text-center'>Seus Serviços</h4>
             {services[0] ? <ServiceTable setSearchKey={setSearchKey} setEditForm={setEditForm} /> : <AnyServiceAdvice />}
-            <GenericForm searchKey={searchKey} editForm={editForm} setEditForm={setEditForm} />
+            <GenericForm searchKey={searchKey} editForm={editForm} setEditForm={setEditForm} blockedActions={blockedActions} setBlockedActions={setBlockedActions} />
         </div>
     )
 

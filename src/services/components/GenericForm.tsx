@@ -11,9 +11,11 @@ interface Props {
     searchKey: string
     editForm: boolean
     setEditForm: React.Dispatch<React.SetStateAction<boolean>>
+    blockedActions: boolean
+    setBlockedActions: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const Index = ({ searchKey, editForm, setEditForm }: Props) => {
+const Index = ({ searchKey, editForm, setEditForm, blockedActions, setBlockedActions }: Props) => {
 
     const [services, setServices] = useContext(ServicesContext)
 
@@ -26,10 +28,11 @@ const Index = ({ searchKey, editForm, setEditForm }: Props) => {
     }, [])
 
     const addService = () => {
-        setButtonText(LOAD_BUTTON_TEXT)
-        const [name, value] = inputsValues()
-        const alreadyExists = services.filter(service => service.name === name)
-        setTimeout(() => {
+        if (!blockedActions) {
+            setBlockedActions(true)
+            setButtonText(LOAD_BUTTON_TEXT)
+            const [name, value] = inputsValues()
+            const alreadyExists = services.filter(service => service.name === name)
             if (!alreadyExists[0]) {
                 if (validNumber(value)) {
                     const service = {
@@ -47,25 +50,30 @@ const Index = ({ searchKey, editForm, setEditForm }: Props) => {
                                     setServices(services => [...services, service])
                                     changeFormState('', '', ADD_BUTTON_TEXT)
                                     break
-
                                 case 503:
                                     alert(DB_ERROR_TEXT)
                                     changeFormState('', '', ADD_BUTTON_TEXT)
                                     break
                             }
+                            setBlockedActions(false)
                         }).catch(() => {
                             alert(SERVER_ERROR_TEXT)
                             changeFormState('', '', ADD_BUTTON_TEXT)
+                            setBlockedActions(false)
                         })
                 } else {
                     alert('Insira um número válido (utilize ponto para casas decimais)')
                     setButtonText(ADD_BUTTON_TEXT)
+                    setBlockedActions(false)
                 }
             } else {
                 alert('Já existe um serviço com esse nome!')
                 setButtonText(ADD_BUTTON_TEXT)
+                setBlockedActions(false)
             }
-        }, 500)
+        } else {
+            alert('Já existe um processo em andamento')
+        }
     }
 
     const editService = () => {
