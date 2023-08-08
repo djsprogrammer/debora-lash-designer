@@ -6,12 +6,14 @@ import { changeFormState } from '../../../formFunctions/GenericForm'
 import { SERVER_URL } from '../../../App'
 import { DB_ERROR_TEXT, SERVER_ERROR_TEXT } from '../../Index'
 
+export type TdRef = React.RefObject<HTMLTableDataCellElement>
+
 const Index = () => {
 
     const [services, setServices] = useContext(ServicesContext)
 
     const deleteService = (targetService: Service) => {
-        changeFormState()
+        changeFormState('', '')
         const options = {
             method: 'delete',
             headers: { 'Content-Type': 'application/json' },
@@ -37,6 +39,14 @@ const Index = () => {
         }, 500)
     }
 
+    const setEditValuesInTheForm = (tdName: TdRef, tdValue: TdRef) => {
+        if (tdName.current && tdValue.current) {
+            const name = tdName.current.outerText
+            const value = tdValue.current.outerText
+            changeFormState(name, value, 'Editar Serviço')
+        }
+    }
+
     return (
         <table className='table text-center'>
             <thead>
@@ -48,7 +58,7 @@ const Index = () => {
             </thead>
             <tbody>
                 {services.map(service =>
-                    <ServiceRow service={service} deleteService={deleteService} />)}
+                    <ServiceRow service={service} deleteService={deleteService} setEditValuesInTheForm={setEditValuesInTheForm} />)}
             </tbody>
         </table>
     )

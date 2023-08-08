@@ -35,10 +35,10 @@ export const setButtonText = (text: string) => {
     }
 }
 
-export const changeFormState = (buttonText: string = '') => {
+export const changeFormState = (name: string, value: string, buttonText: string = '') => {
     if (nameInput.current && valueInput.current) {
-        nameInput.current.value = ''
-        valueInput.current.value = ''
+        nameInput.current.value = name
+        valueInput.current.value = value
     }
     if (buttonText) {
         if (button.current) {

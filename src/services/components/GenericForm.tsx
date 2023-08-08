@@ -39,17 +39,17 @@ const Index = () => {
                             switch (res.status) {
                                 case 201:
                                     setServices(services => [...services, service])
-                                    changeFormState(ADD_BUTTON_TEXT)
+                                    changeFormState('', '', ADD_BUTTON_TEXT)
                                     break
 
                                 case 503:
                                     alert(DB_ERROR_TEXT)
-                                    changeFormState(ADD_BUTTON_TEXT)
+                                    changeFormState('', '', ADD_BUTTON_TEXT)
                                     break
                             }
                         }).catch(() => {
                             alert(SERVER_ERROR_TEXT)
-                            changeFormState(ADD_BUTTON_TEXT)
+                            changeFormState('', '', ADD_BUTTON_TEXT)
                         })
                 } else {
                     alert('Insira um número válido (utilize ponto para casas decimais)')
