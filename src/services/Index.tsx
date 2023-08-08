@@ -6,6 +6,7 @@ import { ServicesContext } from '../ServicesContext'
 
 export const DB_ERROR_TEXT = 'Erro ao consultar banco de dados'
 export const SERVER_ERROR_TEXT = 'Erro ao conectar com o servidor'
+export const BLOCKED_ACTIONS_TEXT = 'Já existe um processo em andamento'
 
 const Index = () => {
 
@@ -17,7 +18,7 @@ const Index = () => {
     return (
         <div className='container'>
             <h4 className='my-4 text-center'>Seus Serviços</h4>
-            {services[0] ? <ServiceTable setSearchKey={setSearchKey} setEditForm={setEditForm} /> : <AnyServiceAdvice />}
+            {services[0] ? <ServiceTable setSearchKey={setSearchKey} setEditForm={setEditForm} blockedActions={blockedActions} setBlockedActions={setBlockedActions} /> : <AnyServiceAdvice />}
             <GenericForm searchKey={searchKey} editForm={editForm} setEditForm={setEditForm} blockedActions={blockedActions} setBlockedActions={setBlockedActions} />
         </div>
     )

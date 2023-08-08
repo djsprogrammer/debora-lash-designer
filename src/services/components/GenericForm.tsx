@@ -2,7 +2,7 @@ import { useEffect, useContext, useRef } from 'react'
 import { inputsValues, setButtonText, validNumber, changeFormState, saveReferenciesOnMemory } from '../../formFunctions/GenericForm'
 import { ServicesContext } from '../../ServicesContext'
 import { SERVER_URL } from '../../App'
-import { SERVER_ERROR_TEXT, DB_ERROR_TEXT } from '../Index'
+import { SERVER_ERROR_TEXT, DB_ERROR_TEXT, BLOCKED_ACTIONS_TEXT } from '../Index'
 
 const ADD_BUTTON_TEXT = 'Adicionar Serviço'
 const LOAD_BUTTON_TEXT = 'Carregando...'
@@ -72,7 +72,7 @@ const Index = ({ searchKey, editForm, setEditForm, blockedActions, setBlockedAct
                 setBlockedActions(false)
             }
         } else {
-            alert('Já existe um processo em andamento')
+            alert(BLOCKED_ACTIONS_TEXT)
         }
     }
 
@@ -106,13 +106,16 @@ const Index = ({ searchKey, editForm, setEditForm, blockedActions, setBlockedAct
                             changeFormState('', '', ADD_BUTTON_TEXT)
                             break
                     }
+                    setBlockedActions(false)
                 }).catch(() => {
                     alert(SERVER_ERROR_TEXT)
                     changeFormState('', '', ADD_BUTTON_TEXT)
+                    setBlockedActions(false)
                 })
         } else {
             alert('Insira um número válido (utilize ponto para casas decimais)')
             changeFormState('', '', ADD_BUTTON_TEXT)
+            setBlockedActions(false)
         }
     }
 
