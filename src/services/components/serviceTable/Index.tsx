@@ -6,9 +6,12 @@ import { changeFormState } from '../../../formFunctions/GenericForm'
 import { SERVER_URL } from '../../../App'
 import { DB_ERROR_TEXT, SERVER_ERROR_TEXT } from '../../Index'
 
-export type TdRef = React.RefObject<HTMLTableDataCellElement>
+interface Props {
+    setSearchKey: React.Dispatch<React.SetStateAction<string>>
+    setEditForm: React.Dispatch<React.SetStateAction<boolean>>
+}
 
-const Index = () => {
+const Index = ({ setSearchKey, setEditForm }: Props) => {
 
     const [services, setServices] = useContext(ServicesContext)
 
@@ -39,12 +42,10 @@ const Index = () => {
         }, 500)
     }
 
-    const setEditValuesInTheForm = (tdName: TdRef, tdValue: TdRef) => {
-        if (tdName.current && tdValue.current) {
-            const name = tdName.current.outerText
-            const value = tdValue.current.outerText
-            changeFormState(name, value, 'Editar Serviço')
-        }
+    const setEditValuesInTheForm = (name: string, value: number) => {
+        changeFormState(name, value.toString(), 'Editar Serviço')
+        setSearchKey(name)
+        setEditForm(true)
     }
 
     return (

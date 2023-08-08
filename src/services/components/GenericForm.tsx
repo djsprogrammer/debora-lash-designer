@@ -7,7 +7,13 @@ import { SERVER_ERROR_TEXT, DB_ERROR_TEXT } from '../Index'
 const ADD_BUTTON_TEXT = 'Adicionar Serviço'
 const LOAD_BUTTON_TEXT = 'Carregando...'
 
-const Index = () => {
+interface Props {
+    searchKey: string
+    editForm: boolean
+    setEditForm: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+const Index = ({ searchKey, editForm, setEditForm }: Props) => {
 
     const [services, setServices] = useContext(ServicesContext)
 
@@ -17,7 +23,7 @@ const Index = () => {
 
     useEffect(() => {
         saveReferenciesOnMemory(nameInput, valueInput, button)
-    })
+    }, [])
 
     const addService = () => {
         setButtonText(LOAD_BUTTON_TEXT)
@@ -62,10 +68,50 @@ const Index = () => {
         }, 500)
     }
 
+    const editService = () => {
+        setEditForm(false)
+        setButtonText(LOAD_BUTTON_TEXT)
+        const [name, value] = inputsValues()
+        if (validNumber(value)) {
+            const service = {
+                searchKey,
+                name,
+                value: Number(value)
+            }
+            const options = {
+                method: 'put',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(service)       
+            }
+            fetch(`${SERVER_URL}/edit-service`, options)
+                .then(res => {
+                    const otherServices = services.filter(service => {
+                        return service.name !== searchKey
+                    })
+                    switch (res.status) {
+                        case 204:
+                            setServices([...otherServices, { name, value: Number(value) }])
+                            changeFormState('', '', ADD_BUTTON_TEXT)
+                            break
+                        case 503:
+                            alert(DB_ERROR_TEXT)
+                            changeFormState('', '', ADD_BUTTON_TEXT)
+                            break
+                    }
+                }).catch(() => {
+                    alert(SERVER_ERROR_TEXT)
+                    changeFormState('', '', ADD_BUTTON_TEXT)
+                })
+        } else {
+            alert('Insira um número válido (utilize ponto para casas decimais)')
+            changeFormState('', '', ADD_BUTTON_TEXT)
+        }
+    }
+
     return (
         <form className='my-4 d-flex justify-content-center' onSubmit={e => {
             e.preventDefault()
-            addService()
+            editForm ? editService() : addService()
         }}>
             <input ref={nameInput} className='text-center rounded-pill border border-secondary' type='text' placeholder='Nome' required />
             <input ref={valueInput} className='mx-2 text-center rounded-pill border border-secondary' type='text' placeholder='Valor' required />

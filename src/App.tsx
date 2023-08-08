@@ -35,7 +35,7 @@ const Index = () => {
                         break
                 }
             }).catch(() => setLoadingDatabaseText('Erro ao conectar com o servidor'))
-    })
+    }, [])
 
     return (
         <div>
