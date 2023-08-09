@@ -47,7 +47,8 @@ const Index = ({ searchKey, editForm, setEditForm, blockedActions, setBlockedAct
                         .then(res => {
                             switch (res.status) {
                                 case 201:
-                                    setServices(services => [...services, service])
+                                    const newServices = [...services, service]
+                                    setServices(newServices.sort((a, b) => a.value - b.value))
                                     changeFormState('', '', ADD_BUTTON_TEXT)
                                     break
                                 case 503:
@@ -98,7 +99,8 @@ const Index = ({ searchKey, editForm, setEditForm, blockedActions, setBlockedAct
                     })
                     switch (res.status) {
                         case 204:
-                            setServices([...otherServices, { name, value: Number(value) }])
+                            const newServices = [...otherServices, { name, value: Number(value) }]
+                            setServices(newServices.sort((a, b) => a.value - b.value))
                             changeFormState('', '', ADD_BUTTON_TEXT)
                             break
                         case 503:

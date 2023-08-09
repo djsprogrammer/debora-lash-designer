@@ -16,7 +16,7 @@ const Index = () => {
 
     const getDataFromServer = (res: Response) => {
         res.json().then((services: TServices) => {
-            if (services[0]) setServices(services)
+            if (services[0]) setServices(services.sort((a, b) => a.value - b.value))
             setTimeout(() => {
                 setDatabaseLoaded(true)
             }, 500)

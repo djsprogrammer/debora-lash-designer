@@ -27,28 +27,26 @@ const Index = ({ setSearchKey, setEditForm, blockedActions, setBlockedActions }:
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(targetService)
             }
-            setTimeout(() => {
-                fetch(`${SERVER_URL}/delete-service`, options)
-                .then(res => {
-                    switch (res.status) {
-                        case 204:
-                            const remainingServices = services.filter(service => {
-                                return service.name !== targetService.name
-                            })
-                            setServices(remainingServices)
-                            break
-                        case 503:
-                            alert(DB_ERROR_TEXT)
-                            if (button.current) button.current.innerText = 'Excluir'
-                            break
-                    }
-                    setBlockedActions(false)
-                }).catch(() => {
-                    alert(SERVER_ERROR_TEXT)
-                    setBlockedActions(false)
-                    if (button.current) button.current.innerText = 'Excluir'
-                })
-            }, 5000)
+            fetch(`${SERVER_URL}/delete-service`, options)
+            .then(res => {
+                switch (res.status) {
+                    case 204:
+                        const remainingServices = services.filter(service => {
+                            return service.name !== targetService.name
+                        })
+                        setServices(remainingServices.sort((a, b) => a.value - b.value))
+                        break
+                    case 503:
+                        alert(DB_ERROR_TEXT)
+                        if (button.current) button.current.innerText = 'Excluir'
+                        break
+                }
+                setBlockedActions(false)
+            }).catch(() => {
+                alert(SERVER_ERROR_TEXT)
+                setBlockedActions(false)
+                if (button.current) button.current.innerText = 'Excluir'
+            })
         } else {
             alert(BLOCKED_ACTIONS_TEXT)
         }
