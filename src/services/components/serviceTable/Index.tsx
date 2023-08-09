@@ -17,8 +17,9 @@ const Index = ({ setSearchKey, setEditForm, blockedActions, setBlockedActions }:
 
     const [services, setServices] = useContext(ServicesContext)
 
-    const deleteService = (targetService: Service) => {
+    const deleteService = (targetService: Service, button: React.RefObject<HTMLButtonElement>) => {
         if (!blockedActions) {
+            if (button.current) button.current.innerText = '...'
             setBlockedActions(true)
             changeFormState('', '')
             const options = {
@@ -38,12 +39,14 @@ const Index = ({ setSearchKey, setEditForm, blockedActions, setBlockedActions }:
                             break
                         case 503:
                             alert(DB_ERROR_TEXT)
+                            if (button.current) button.current.innerText = 'Excluir'
                             break
                     }
                     setBlockedActions(false)
                 }).catch(() => {
                     alert(SERVER_ERROR_TEXT)
                     setBlockedActions(false)
+                    if (button.current) button.current.innerText = 'Excluir'
                 })
             }, 5000)
         } else {
