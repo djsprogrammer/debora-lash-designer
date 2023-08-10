@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useContext, useState, useEffect } from 'react'
 import ServiceTable from './components/serviceTable/Index'
 import GenericForm from './components/GenericForm'
 import AnyServiceAdvice from './components/AnyServiceAdvice'
@@ -8,7 +8,15 @@ export const DB_ERROR_TEXT = 'Erro ao consultar banco de dados'
 export const SERVER_ERROR_TEXT = 'Erro ao conectar com o servidor'
 export const BLOCKED_ACTIONS_TEXT = 'Já existe um processo em andamento'
 
-const Index = () => {
+interface Props {
+    setCurrentPage: React.Dispatch<React.SetStateAction<number>>
+}
+
+const Index = ({ setCurrentPage }: Props) => {
+
+    useEffect(() => {
+        setCurrentPage(2)
+    }, [setCurrentPage])
 
     const [services] = useContext(ServicesContext)
     const [searchKey, setSearchKey] = useState('')

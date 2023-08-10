@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css'
 import { Services as TServices } from './types/services'
 import Header from './fixedComponents/Header'
+import Navegation from './fixedComponents/Navegation'
 import Scheduling from './pages/scheduling/Index'
 import Services from './pages/services/Index'
 import ServicesProvider from './ServicesContext'
@@ -15,6 +16,7 @@ const Index = () => {
     const [services, setServices] = useState<TServices>([])
     const [loadingDatabaseText, setLoadingDatabaseText] = useState('Carregando...')
     const [databaseLoaded, setDatabaseLoaded] = useState(false)
+    const [currentPage, setCurrentPage] = useState(0)
 
     const getDataFromServer = (res: Response) => {
         res.json().then((services: TServices) => {
@@ -56,18 +58,19 @@ const Index = () => {
 
     const HandlePages = () => {
         return databaseLoaded 
-        ? <Scheduling /> // Atual página padrão
+        ? <Scheduling setCurrentPage={setCurrentPage} /> // Atual página padrão
         : <h4 className='text-center my-4'>{loadingDatabaseText}</h4>
     }
 
     return (
         <div>
-            <Header />
             <ServicesProvider servicesState={[services, setServices]}>
                 <Router>
+                    <Header />
+                    <Navegation currentPage={currentPage} />
                     <Routes>
                         <Route path='/' element={<HandlePages />} />
-                        <Route path='/services' element={<Services />} />
+                        <Route path='/services' element={<Services setCurrentPage={setCurrentPage} />} />
                     </Routes>
                 </Router>
             </ServicesProvider>

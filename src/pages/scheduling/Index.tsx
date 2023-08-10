@@ -1,11 +1,18 @@
-import { Link } from 'react-router-dom'
+import { useEffect } from 'react'
 
-const Index = () => {
+interface Props {
+	setCurrentPage: React.Dispatch<React.SetStateAction<number>>
+}
+
+const Index = ({ setCurrentPage }: Props) => {
+
+	useEffect(() => {
+		setCurrentPage(1)
+	}, [setCurrentPage])
 
 	return (
 		<div>
 			<h1>Hello World</h1>
-			<Link to='/services'>Services</Link>
 		</div>
 	)
 	
