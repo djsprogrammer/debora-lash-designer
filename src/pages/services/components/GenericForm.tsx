@@ -1,7 +1,7 @@
 import { useEffect, useContext, useRef } from 'react'
-import { inputsValues, setButtonText, validNumber, changeFormState, saveReferenciesOnMemory } from '../../formFunctions/GenericForm'
-import { ServicesContext } from '../../ServicesContext'
-import { SERVER_URL } from '../../App'
+import { inputsValues, setButtonText, validNumber, changeFormState, saveReferenciesOnMemory } from '../../../formFunctions/GenericForm'
+import { ServicesContext } from '../../../ServicesContext'
+import { SERVER_URL } from '../../../App'
 import { SERVER_ERROR_TEXT, DB_ERROR_TEXT, BLOCKED_ACTIONS_TEXT } from '../Index'
 
 const ADD_BUTTON_TEXT = 'Adicionar Serviço'

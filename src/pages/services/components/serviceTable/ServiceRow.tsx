@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import { Service } from '../../../types/services'
+import { Service } from '../../../../types/services'
 
 interface Props {
     service: Service

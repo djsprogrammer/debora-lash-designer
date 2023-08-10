@@ -1,9 +1,9 @@
 import { useContext } from 'react'
 import ServiceRow from './ServiceRow'
-import { Service } from '../../../types/services'
-import { ServicesContext } from '../../../ServicesContext'
-import { changeFormState } from '../../../formFunctions/GenericForm'
-import { SERVER_URL } from '../../../App'
+import { Service } from '../../../../types/services'
+import { ServicesContext } from '../../../../ServicesContext'
+import { changeFormState } from '../../../../formFunctions/GenericForm'
+import { SERVER_URL } from '../../../../App'
 import { DB_ERROR_TEXT, SERVER_ERROR_TEXT, BLOCKED_ACTIONS_TEXT } from '../../Index'
 
 interface Props {

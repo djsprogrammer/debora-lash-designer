@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css'
 import { Services as TServices } from './types/services'
 import Header from './fixedComponents/Header'
-import Services from './services/Index'
+import Scheduling from './pages/scheduling/Index'
+import Services from './pages/services/Index'
 import ServicesProvider from './ServicesContext'
 
 export const SERVER_URL = 'http://localhost:8080'
@@ -52,11 +54,22 @@ const Index = () => {
         searchDataFromServer()
     }, [])
 
+    const HandlePages = () => {
+        return databaseLoaded 
+        ? <Scheduling /> // Atual página padrão
+        : <h4 className='text-center my-4'>{loadingDatabaseText}</h4>
+    }
+
     return (
         <div>
             <Header />
             <ServicesProvider servicesState={[services, setServices]}>
-                {databaseLoaded ? <Services /> : <h4 className='text-center my-4'>{loadingDatabaseText}</h4>}
+                <Router>
+                    <Routes>
+                        <Route path='/' element={<HandlePages />} />
+                        <Route path='/services' element={<Services />} />
+                    </Routes>
+                </Router>
             </ServicesProvider>
         </div>
     )
