@@ -11,7 +11,7 @@ export const SERVER_URL = 'http://localhost:8080'
 const Index = () => {
 
     const [services, setServices] = useState<TServices>([])
-    const [loadingDatabaseText, setLoadingDatabaseText] = useState('Carregando banco de dados...')
+    const [loadingDatabaseText, setLoadingDatabaseText] = useState('Carregando...')
     const [databaseLoaded, setDatabaseLoaded] = useState(false)
 
     const getDataFromServer = (res: Response) => {
@@ -24,17 +24,32 @@ const Index = () => {
     }
 
     useEffect(() => {
-        fetch(`${SERVER_URL}/all-services`)
+        const searchDataFromServer = () => {
+            fetch(`${SERVER_URL}/all-services`)
             .then(res => {
                 switch (res.status) {
                     case 200:
                         getDataFromServer(res)
                         break
                     case 503:
-                        setLoadingDatabaseText('Erro ao consultar banco de dados')
+                        setLoadingDatabaseText('')
+                        setTimeout(() => {
+                            alert('Erro ao consultar banco de dados')    
+                            setLoadingDatabaseText('Carregando...')
+                            searchDataFromServer()
+                        }, 10)
                         break
                 }
-            }).catch(() => setLoadingDatabaseText('Erro ao conectar com o servidor'))
+            }).catch(() => {
+                setLoadingDatabaseText('')
+                setTimeout(() => {
+                    alert('Erro ao conectar com o servidor')
+                    setLoadingDatabaseText('Carregando...')
+                    searchDataFromServer()
+                }, 10)
+            })
+        }
+        searchDataFromServer()
     }, [])
 
     return (
