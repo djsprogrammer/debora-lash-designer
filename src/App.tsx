@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css'
-import { Services as TServices } from './types/services'
+import { Services as TServices, Service } from './types/services'
 import Header from './fixedComponents/Header'
 import Navegation from './fixedComponents/Navegation'
 import Scheduling from './pages/scheduling/Index'
@@ -11,12 +11,19 @@ import ServicesProvider from './ServicesContext'
 
 export const SERVER_URL = 'http://localhost:8080'
 
+interface ServiceScheduling {
+    service: Service
+    date: string
+    client: string
+}
+
 const Index = () => {
 
     const [services, setServices] = useState<TServices>([])
     const [loadingDatabaseText, setLoadingDatabaseText] = useState('Carregando...')
     const [databaseLoaded, setDatabaseLoaded] = useState(false)
     const [currentPage, setCurrentPage] = useState(0)
+    const [servicesScheduling, setServicesScheduling] = useState<ServiceScheduling[]>([])
 
     const getDataFromServer = (res: Response) => {
         res.json().then((services: TServices) => {
@@ -58,7 +65,7 @@ const Index = () => {
 
     const HandlePages = () => {
         return databaseLoaded 
-        ? <Scheduling setCurrentPage={setCurrentPage} /> // Atual página padrão
+        ? <Scheduling setCurrentPage={setCurrentPage} schedulingState={[servicesScheduling, setServicesScheduling]} /> // Atual página padrão
         : <h4 className='text-center my-4'>{loadingDatabaseText}</h4>
     }
 
