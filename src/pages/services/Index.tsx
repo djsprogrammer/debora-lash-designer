@@ -1,7 +1,7 @@
 import { useContext, useState, useEffect } from 'react'
 import ServiceTable from './components/serviceTable/Index'
 import GenericForm from './components/GenericForm'
-import AnyServiceAdvice from './components/AnyServiceAdvice'
+import AnyServiceAdvice from '../components/AnyAdvice'
 import { ServicesContext } from '../../ServicesContext'
 
 export const DB_ERROR_TEXT = 'Erro ao consultar banco de dados'
@@ -26,7 +26,7 @@ const Index = ({ setCurrentPage }: Props) => {
     return (
         <div className='container'>
             <h4 className='my-4 text-center'>Seus Serviços</h4>
-            {services[0] ? <ServiceTable setSearchKey={setSearchKey} setEditForm={setEditForm} blockedActions={blockedActions} setBlockedActions={setBlockedActions} /> : <AnyServiceAdvice />}
+            {services[0] ? <ServiceTable setSearchKey={setSearchKey} setEditForm={setEditForm} blockedActions={blockedActions} setBlockedActions={setBlockedActions} /> : <AnyServiceAdvice page='serviço' />}
             <GenericForm searchKey={searchKey} editForm={editForm} setEditForm={setEditForm} blockedActions={blockedActions} setBlockedActions={setBlockedActions} />
         </div>
     )

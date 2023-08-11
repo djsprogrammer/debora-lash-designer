@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import SchedulingTable from './components/SchedulingTable'
+import AnySchedulingAdvice from '../components/AnyAdvice'
 import AddSchedulingForm from './components/AddSchedulingForm'
 import { ServiceScheduling } from '../../types/services'
 
@@ -18,7 +19,9 @@ const Index = ({ setCurrentPage, schedulingState }: Props) => {
 
 	return (
 		<div className='container'>
-			<SchedulingTable servicesScheduling={servicesScheduling} />
+			{servicesScheduling[0] 
+			? <SchedulingTable servicesScheduling={servicesScheduling} />
+			: <AnySchedulingAdvice page='agendamento' />}
 			<AddSchedulingForm setServicesScheduling={setServicesScheduling} />
 		</div>
 	)

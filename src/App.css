@@ -15,3 +15,7 @@ header {
 .logo {
     font-family: 'Satisfy';
 }
+
+select {
+    appearance: none;
+}
