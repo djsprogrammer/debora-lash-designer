@@ -1,12 +1,6 @@
 import { useContext, useRef } from 'react'
 import { ServicesContext } from '../../../ServicesContext'
-import { Service } from '../../../types/services'
-
-interface ServiceScheduling {
-	service: Service
-	date: string
-	client: string
-}
+import { ServiceScheduling } from '../../../types/services'
 
 interface Props {
 	setServicesScheduling: React.Dispatch<React.SetStateAction<ServiceScheduling[]>>

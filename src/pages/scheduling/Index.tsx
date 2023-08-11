@@ -1,13 +1,7 @@
 import { useEffect } from 'react'
 import SchedulingTable from './components/SchedulingTable'
 import AddSchedulingForm from './components/AddSchedulingForm'
-import { Service } from '../../types/services'
-
-interface ServiceScheduling {
-	service: Service
-	date: string
-	client: string
-}
+import { ServiceScheduling } from '../../types/services'
 
 interface Props {
 	setCurrentPage: React.Dispatch<React.SetStateAction<number>>

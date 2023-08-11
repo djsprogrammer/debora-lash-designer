@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css'
-import { Services as TServices, Service } from './types/services'
+import { Services as TServices, ServiceScheduling } from './types/services'
 import Header from './fixedComponents/Header'
 import Navegation from './fixedComponents/Navegation'
 import Scheduling from './pages/scheduling/Index'
@@ -10,12 +10,6 @@ import Services from './pages/services/Index'
 import ServicesProvider from './ServicesContext'
 
 export const SERVER_URL = 'http://localhost:8080'
-
-interface ServiceScheduling {
-    service: Service
-    date: string
-    client: string
-}
 
 const Index = () => {
 

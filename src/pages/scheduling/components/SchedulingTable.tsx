@@ -1,10 +1,4 @@
-import { Service } from '../../../types/services'
-
-interface ServiceScheduling {
-    service: Service
-    date: string
-    client: string
-}
+import { ServiceScheduling } from '../../../types/services'
 
 interface Props {
     servicesScheduling: ServiceScheduling[]
