@@ -11,7 +11,7 @@ const Index = ({ service, deleteService, setEditValuesInTheForm }: Props) => {
 
     const deleteButton = useRef<HTMLButtonElement>(null)
 
-    const value = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(Number(service.value))
+    const value = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(Number(service.value)).replace('R$', '')
 
     const buttonStyle = 'btn btn-sm rounded-pill'
 

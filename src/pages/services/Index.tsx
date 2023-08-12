@@ -25,7 +25,6 @@ const Index = ({ setCurrentPage }: Props) => {
 
     return (
         <div className='container'>
-            <h4 className='my-4 text-center'>Seus Serviços</h4>
             {services[0] ? <ServiceTable setSearchKey={setSearchKey} setEditForm={setEditForm} blockedActions={blockedActions} setBlockedActions={setBlockedActions} /> : <AnyServiceAdvice page='serviço' />}
             <GenericForm searchKey={searchKey} editForm={editForm} setEditForm={setEditForm} blockedActions={blockedActions} setBlockedActions={setBlockedActions} />
         </div>

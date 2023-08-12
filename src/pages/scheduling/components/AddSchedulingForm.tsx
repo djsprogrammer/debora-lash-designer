@@ -43,11 +43,11 @@ const Index = ({ setServicesScheduling }: Props) => {
 					printScheduling()
 				}}>
 			<div style={width} className='input-group'>
-				<label className='input-group-text'>Escolha uma data: </label>
+				<label className='input-group-text'>Escolha uma data </label>
 				<input className='pe-1 form-control text-center' ref={date} type='date' required />
 			</div>
 			<div className='input-group my-3'>
-				<label className='input-group-text' htmlFor='services'>Escolha um serviço: </label>
+				<label className='input-group-text' htmlFor='services'>Escolha um serviço </label>
 				<select className='form-select text-center' ref={options} required>
 					{services.map(service => (
 						<option value={JSON.stringify(service)}>{service.name}</option>

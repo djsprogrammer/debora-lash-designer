@@ -30,9 +30,9 @@ const Index = ({ currentPage }: Props) => {
 	const linkStyle = 'link-dark link-underline-opacity-50'
 
 	return (
-		<nav className='d-flex justify-content-center p-2'>
-			<Link ref={link1} className={`${linkStyle} me-2`} to='/'><h5>Agendamento</h5></Link>
-			<Link ref={link2} className={linkStyle} to='/services'><h5>Seus Serviços</h5></Link>
+		<nav className='d-flex justify-content-center p-3'>
+			<Link ref={link1} className={`${linkStyle} me-4`} to='/'><h5>Agendamentos</h5></Link>
+			<Link ref={link2} className={linkStyle} to='/services'><h5>Serviços</h5></Link>
 		</nav>
 	)
 	

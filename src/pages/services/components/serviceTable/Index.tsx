@@ -64,7 +64,7 @@ const Index = ({ setSearchKey, setEditForm, blockedActions, setBlockedActions }:
     }
 
     return (
-        <table className='table text-center'>
+        <table className='table text-center mt-4 mb-5'>
             <thead>
                 <tr>
                     <th>Serviço</th>
