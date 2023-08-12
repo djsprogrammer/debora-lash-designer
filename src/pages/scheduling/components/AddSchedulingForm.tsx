@@ -29,25 +29,33 @@ const Index = ({ setServicesScheduling }: Props) => {
 		}
 	}
 
+	const width = {
+		maxWidth: '80%'
+	}
+
+	const formWidth = {
+		maxWidth: '400px'
+	}
+
 	return (
-		<form className='d-flex flex-column align-items-center' onSubmit={e => {
+		<form style={formWidth} className='d-flex flex-column' onSubmit={e => {
 					e.preventDefault()
 					printScheduling()
 				}}>
-			<div>
-				<label className='me-2'>Escolha uma data: </label>
-				<input className='rounded-pill p-1 text-center border border-secondary' ref={date} type='date' required />
+			<div style={width} className='input-group'>
+				<label className='input-group-text'>Escolha uma data: </label>
+				<input className='pe-1 form-control text-center' ref={date} type='date' required />
 			</div>
-			<div className='my-3'>
-				<label className='me-2' htmlFor='services'>Escolha um serviço: </label>
-				<select className='rounded-pill p-1 text-center border border-secondary' ref={options} required>
+			<div className='input-group my-3'>
+				<label className='input-group-text' htmlFor='services'>Escolha um serviço: </label>
+				<select className='form-select text-center' ref={options} required>
 					{services.map(service => (
 						<option value={JSON.stringify(service)}>{service.name}</option>
 					))}
 				</select>
 			</div>
-			<input ref={clientElement} className='text-center rounded-pill border border-secondary p-1 mb-3' type='text' placeholder='Digite o nome do cliente' required />
-			<button className='btn btn-dark rounded-pill' type='submit'>Agendar</button>
+			<input ref={clientElement} className='form-control text-center p-1 mb-3' type='text' placeholder='Digite o nome do cliente' required />
+			<button className='align-self-center btn btn-dark rounded-pill' type='submit'>Agendar</button>
 		</form>
 	)
 }
