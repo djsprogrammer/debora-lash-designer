@@ -2,6 +2,7 @@ import { useEffect, useContext, useRef } from 'react'
 import { inputsValues, setButtonText, validNumber, changeFormState, saveReferenciesOnMemory } from '../../../formFunctions/GenericForm'
 import { ServicesContext } from '../../../ServicesContext'
 import { SERVER_URL } from '../../../App'
+import { formButtonStyle } from '../../../commonStyles'
 import { SERVER_ERROR_TEXT, DB_ERROR_TEXT, BLOCKED_ACTIONS_TEXT } from '../Index'
 
 const ADD_BUTTON_TEXT = 'Adicionar Serviço'
@@ -142,7 +143,7 @@ const Index = ({ searchKey, editForm, setEditForm, blockedActions, setBlockedAct
                 <label className='input-group-text' htmlFor='services'>Valor</label>
                 <input ref={valueInput} className='form-control text-center' type='text' required />
             </div>
-            <button ref={button} className='btn btn-sm btn-dark' type='submit'>{ADD_BUTTON_TEXT}</button>
+            <button ref={button} className={formButtonStyle} type='submit'>{ADD_BUTTON_TEXT}</button>
         </form>
     )
 
