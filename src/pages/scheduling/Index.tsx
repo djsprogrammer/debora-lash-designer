@@ -22,7 +22,7 @@ const Index = ({ setCurrentPage, schedulingState }: Props) => {
 			{servicesScheduling[0] 
 			? <SchedulingTable servicesScheduling={servicesScheduling} />
 			: <AnySchedulingAdvice page='agendamento' />}
-			<AddSchedulingForm setServicesScheduling={setServicesScheduling} />
+			<AddSchedulingForm servicesScheduling={servicesScheduling} setServicesScheduling={setServicesScheduling} />
 		</div>
 	)
 

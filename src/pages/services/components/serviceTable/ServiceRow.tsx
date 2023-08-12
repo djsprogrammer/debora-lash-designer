@@ -13,15 +13,15 @@ const Index = ({ service, deleteService, setEditValuesInTheForm }: Props) => {
 
     const value = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(Number(service.value)).replace('R$', '')
 
-    const buttonStyle = 'btn btn-sm rounded-pill'
+    const buttonStyle = 'btn btn-sm'
 
     return (
         <tr key={service.name}>
             <td>{service.name}</td>
             <td>{value}</td>
             <td>
-                <button onClick={() => setEditValuesInTheForm(service.name, service.value)} className={`${buttonStyle} btn-outline-dark me-2`}>Editar</button>
-                <button ref={deleteButton} onClick={() => deleteService(service, deleteButton)} className={`${buttonStyle} btn-dark`}>Excluir</button>
+                <button onClick={() => setEditValuesInTheForm(service.name, service.value)} className={`${buttonStyle} btn-dark me-2`}>Editar</button>
+                <button ref={deleteButton} onClick={() => deleteService(service, deleteButton)} className={`${buttonStyle} btn-danger`}>Excluir</button>
             </td>
         </tr>
     )

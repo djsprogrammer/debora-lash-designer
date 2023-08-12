@@ -121,14 +121,28 @@ const Index = ({ searchKey, editForm, setEditForm, blockedActions, setBlockedAct
         }
     }
 
+    const width = {
+        maxWidth: '50%'
+    }
+
+    const formWidth = {
+        maxWidth: '300px'
+    }
+
     return (
-        <form className='my-4 d-flex justify-content-center' onSubmit={e => {
+        <form style={formWidth} className='my-4 d-flex flex-column' onSubmit={e => {
             e.preventDefault()
             editForm ? editService() : addService()
         }}>
-            <input ref={nameInput} className='text-center rounded-pill border border-secondary' type='text' placeholder='Nome' required />
-            <input ref={valueInput} className='mx-2 text-center rounded-pill border border-secondary' type='text' placeholder='Valor' required />
-            <button ref={button} className='btn btn-dark rounded-pill' type='submit'>{ADD_BUTTON_TEXT}</button>
+            <div className='input-group'>
+                <label className='input-group-text' htmlFor='services'>Nome</label>
+                <input ref={nameInput} className='form-control text-center' type='text' required />
+            </div>
+            <div style={width} className='input-group my-3'>
+                <label className='input-group-text' htmlFor='services'>Valor</label>
+                <input ref={valueInput} className='form-control text-center' type='text' required />
+            </div>
+            <button ref={button} className='btn btn-sm btn-dark' type='submit'>{ADD_BUTTON_TEXT}</button>
         </form>
     )
 

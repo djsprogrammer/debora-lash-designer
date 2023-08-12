@@ -3,10 +3,11 @@ import { ServicesContext } from '../../../ServicesContext'
 import { ServiceScheduling } from '../../../types/services'
 
 interface Props {
+	servicesScheduling: ServiceScheduling[]
 	setServicesScheduling: React.Dispatch<React.SetStateAction<ServiceScheduling[]>>
 }
 
-const Index = ({ setServicesScheduling }: Props) => {
+const Index = ({ servicesScheduling, setServicesScheduling }: Props) => {
 
 	const [services] = useContext(ServicesContext)
 
@@ -16,8 +17,7 @@ const Index = ({ setServicesScheduling }: Props) => {
 
 	const printScheduling = () => {
 		if (date.current && options.current && clientElement.current) {
-			let formattedDate = date.current.value // new Date(date.current.value)
-			// formattedDate.setDate(formattedDate.getDate() + 1)
+			let formattedDate = date.current.value
 			const option = JSON.parse(options.current.value)
 			const client = clientElement.current.value
 			const serviceScheduling = {
@@ -25,7 +25,8 @@ const Index = ({ setServicesScheduling }: Props) => {
 				date: formattedDate,
 				client
 			}
-			setServicesScheduling(prev => [...prev, serviceScheduling])
+			const newSchedulings = [...servicesScheduling, serviceScheduling].sort((a, b) => a.date.localeCompare(b.date))
+			setServicesScheduling(newSchedulings)
 		}
 	}
 
@@ -43,11 +44,11 @@ const Index = ({ setServicesScheduling }: Props) => {
 					printScheduling()
 				}}>
 			<div style={width} className='input-group'>
-				<label className='input-group-text'>Escolha uma data </label>
+				<label className='input-group-text'>Escolha uma data</label>
 				<input className='pe-1 form-control text-center' ref={date} type='date' required />
 			</div>
 			<div className='input-group my-3'>
-				<label className='input-group-text' htmlFor='services'>Escolha um serviço </label>
+				<label className='input-group-text' htmlFor='services'>Escolha um serviço</label>
 				<select className='form-select text-center' ref={options} required>
 					{services.map(service => (
 						<option value={JSON.stringify(service)}>{service.name}</option>
@@ -55,7 +56,7 @@ const Index = ({ setServicesScheduling }: Props) => {
 				</select>
 			</div>
 			<input ref={clientElement} className='form-control text-center p-1 mb-3' type='text' placeholder='Digite o nome do cliente' required />
-			<button className='align-self-center btn btn-dark rounded-pill' type='submit'>Agendar</button>
+			<button className='btn btn-sm btn-dark' type='submit'>Agendar</button>
 		</form>
 	)
 }
