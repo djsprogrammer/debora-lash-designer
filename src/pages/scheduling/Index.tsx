@@ -3,6 +3,7 @@ import SchedulingTable from './components/SchedulingTable'
 import AnySchedulingAdvice from '../components/AnyAdvice'
 import AddSchedulingForm from './components/AddSchedulingForm'
 import { ServiceScheduling } from '../../types/services'
+import { container } from '../../commonStyles'
 
 interface Props {
 	setCurrentPage: React.Dispatch<React.SetStateAction<number>>
@@ -18,7 +19,7 @@ const Index = ({ setCurrentPage, schedulingState }: Props) => {
 	}, [setCurrentPage])
 
 	return (
-		<div className='container'>
+		<div className={container}>
 			{servicesScheduling[0] 
 			? <SchedulingTable servicesScheduling={servicesScheduling} />
 			: <AnySchedulingAdvice page='agendamento' />}

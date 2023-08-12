@@ -3,6 +3,7 @@ import ServiceTable from './components/serviceTable/Index'
 import GenericForm from './components/GenericForm'
 import AnyServiceAdvice from '../components/AnyAdvice'
 import { ServicesContext } from '../../ServicesContext'
+import { container } from '../../commonStyles'
 
 export const DB_ERROR_TEXT = 'Erro ao consultar banco de dados'
 export const SERVER_ERROR_TEXT = 'Erro ao conectar com o servidor'
@@ -24,7 +25,7 @@ const Index = ({ setCurrentPage }: Props) => {
     const [blockedActions, setBlockedActions] = useState(false)
 
     return (
-        <div className='container'>
+        <div className={container}>
             {services[0] ? <ServiceTable setSearchKey={setSearchKey} setEditForm={setEditForm} blockedActions={blockedActions} setBlockedActions={setBlockedActions} /> : <AnyServiceAdvice page='serviço' />}
             <GenericForm searchKey={searchKey} editForm={editForm} setEditForm={setEditForm} blockedActions={blockedActions} setBlockedActions={setBlockedActions} />
         </div>

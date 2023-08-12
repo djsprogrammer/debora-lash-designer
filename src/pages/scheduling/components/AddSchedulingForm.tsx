@@ -32,10 +32,6 @@ const Index = ({ servicesScheduling, setServicesScheduling }: Props) => {
 		}
 	}
 
-	const width = {
-		maxWidth: '80%'
-	}
-
 	const formWidth = {
 		maxWidth: '400px'
 	}
@@ -45,7 +41,7 @@ const Index = ({ servicesScheduling, setServicesScheduling }: Props) => {
 					e.preventDefault()
 					addScheduling()
 				}}>
-			<div style={width} className='input-group'>
+			<div className='input-group'>
 				<label className='input-group-text'>Escolha uma data</label>
 				<input className='pe-1 form-control text-center' ref={date} type='date' required />
 			</div>
