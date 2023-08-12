@@ -122,10 +122,6 @@ const Index = ({ searchKey, editForm, setEditForm, blockedActions, setBlockedAct
         }
     }
 
-    const width = {
-        maxWidth: '50%'
-    }
-
     const formWidth = {
         maxWidth: '300px'
     }
@@ -139,7 +135,7 @@ const Index = ({ searchKey, editForm, setEditForm, blockedActions, setBlockedAct
                 <label className='input-group-text' htmlFor='services'>Nome</label>
                 <input ref={nameInput} className='form-control text-center' type='text' required />
             </div>
-            <div style={width} className='input-group my-3'>
+            <div className='input-group my-3'>
                 <label className='input-group-text' htmlFor='services'>Valor</label>
                 <input ref={valueInput} className='form-control text-center' type='text' required />
             </div>
