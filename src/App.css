@@ -16,6 +16,12 @@ header {
     font-family: 'Satisfy';
 }
 
+.table-container {
+    display: block;
+    max-height: 350px;
+    overflow: auto;
+}
+
 select {
     appearance: none;
 }

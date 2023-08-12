@@ -1,6 +1,7 @@
 import { useContext } from 'react'
 import ServiceRow from './ServiceRow'
 import { Service } from '../../../../types/services'
+import { tableStyle } from '../../../../commonStyles'
 import { ServicesContext } from '../../../../ServicesContext'
 import { changeFormState } from '../../../../formFunctions/GenericForm'
 import { SERVER_URL } from '../../../../App'
@@ -64,19 +65,21 @@ const Index = ({ setSearchKey, setEditForm, blockedActions, setBlockedActions }:
     }
 
     return (
-        <table className='table text-center mt-4 mb-5'>
-            <thead>
-                <tr>
-                    <th>Serviço</th>
-                    <th>Valor</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                {services.map(service =>
-                    <ServiceRow service={service} deleteService={deleteService} setEditValuesInTheForm={setEditValuesInTheForm} />)}
-            </tbody>
-        </table>
+        <div className='table-container'>
+            <table className={tableStyle}>
+                <thead>
+                    <tr>
+                        <th>Serviço</th>
+                        <th>Valor</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {services.map(service =>
+                        <ServiceRow service={service} deleteService={deleteService} setEditValuesInTheForm={setEditValuesInTheForm} />)}
+                </tbody>
+            </table>
+        </div>
     )
 
 }

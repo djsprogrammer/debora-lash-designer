@@ -131,7 +131,7 @@ const Index = ({ searchKey, editForm, setEditForm, blockedActions, setBlockedAct
     }
 
     return (
-        <form style={formWidth} className='my-4 d-flex flex-column' onSubmit={e => {
+        <form style={formWidth} className='d-flex flex-column' onSubmit={e => {
             e.preventDefault()
             editForm ? editService() : addService()
         }}>
