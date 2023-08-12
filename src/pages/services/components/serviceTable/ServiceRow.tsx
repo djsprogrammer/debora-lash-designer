@@ -20,8 +20,8 @@ const Index = ({ service, deleteService, setEditValuesInTheForm }: Props) => {
             <td>{service.name}</td>
             <td>{value}</td>
             <td>
-                <button onClick={() => setEditValuesInTheForm(service.name, service.value)} className={`${buttonStyle} btn-dark me-2`}>Editar</button>
-                <button ref={deleteButton} onClick={() => deleteService(service, deleteButton)} className={`${buttonStyle} btn-danger`}>Excluir</button>
+                <button onClick={() => setEditValuesInTheForm(service.name, service.value)} className={`${buttonStyle} btn-outline-dark me-2`}>Editar</button>
+                <button ref={deleteButton} onClick={() => deleteService(service, deleteButton)} className={`${buttonStyle} btn-outline-danger`}>Excluir</button>
             </td>
         </tr>
     )

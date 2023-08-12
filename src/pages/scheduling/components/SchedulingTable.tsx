@@ -11,7 +11,7 @@ const Index = ({ servicesScheduling }: Props) => {
     return (
         <div className='table-container'>
             <table className={tableStyle}>
-                <thead>
+                <thead className='table-dark'>
                     <tr>
                         <th>Cliente</th>
                         <th>Serviço</th>

@@ -67,7 +67,7 @@ const Index = ({ setSearchKey, setEditForm, blockedActions, setBlockedActions }:
     return (
         <div className='table-container'>
             <table className={tableStyle}>
-                <thead>
+                <thead className='table-dark'>
                     <tr>
                         <th>Serviço</th>
                         <th>Valor</th>
