@@ -1,4 +1,5 @@
 import { ServiceScheduling } from '../../../types/services'
+import { parseISO, format } from 'date-fns'
 
 interface Props {
     servicesScheduling: ServiceScheduling[]
@@ -11,7 +12,7 @@ const Index = ({ servicesScheduling }: Props) => {
             <thead>
                 <tr>
                     <th>Cliente</th>
-                    <th>Serviço / Valor</th>
+                    <th>Serviço</th>
                     <th>Data</th>
                 </tr>
             </thead>
@@ -19,12 +20,13 @@ const Index = ({ servicesScheduling }: Props) => {
                 {servicesScheduling.map(scheduling => {
 
                     const value = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(Number(scheduling.service.value)).replace('R$', '')
+                    const date = format(parseISO(scheduling.date), 'dd/MM')
 
                     return (
                         <tr>
                             <td>{scheduling.client}</td>
-                            <td>{scheduling.service.name} / {value}</td>
-                            <td>{scheduling.date}</td>
+                            <td>{scheduling.service.name} -{value}</td>
+                            <td>{date}</td>
                         </tr>
                     )
                 })}
