@@ -1,3 +1,4 @@
+import MonthForm from './MonthForm'
 import SchedulingRow from './SchedulingRow'
 import { ServiceScheduling } from '../../../../types/services'
 import { tableStyle } from '../../../../commonStyles'
@@ -27,20 +28,23 @@ const Index = ({ servicesScheduling, setServicesScheduling }: Props) => {
     }
 
     return (
-        <div className='table-container'>
-            <table className={tableStyle}>
-                <thead className='table-dark'>
-                    <tr>
-                        <th>Cliente</th>
-                        <th>Serviço</th>
-                        <th>Data</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {servicesScheduling.map(scheduling => <SchedulingRow scheduling={scheduling} getScheduling={getScheduling} />)}
-                </tbody>
-            </table>
+        <div className='w-100'>
+            <MonthForm />
+            <div className='table-container mb-4'>
+                <table className={tableStyle}>
+                    <thead className='table-dark'>
+                        <tr>
+                            <th>Cliente</th>
+                            <th>Serviço</th>
+                            <th>Data</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {servicesScheduling.map(scheduling => <SchedulingRow scheduling={scheduling} getScheduling={getScheduling} />)}
+                    </tbody>
+                </table>
+            </div>
         </div>
     )
 
