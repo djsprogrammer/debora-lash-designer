@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import MonthForm from './MonthForm'
 import SchedulingRow from './SchedulingRow'
 import { ServiceScheduling } from '../../../../types/services'
@@ -9,6 +10,8 @@ interface Props {
 }
 
 const Index = ({ servicesScheduling, setServicesScheduling }: Props) => {
+
+    const [currentMonth, setCurrentMonth] = useState(new Date().getMonth())
 
     const getScheduling = (scheduling: ServiceScheduling) => {
 
@@ -27,9 +30,13 @@ const Index = ({ servicesScheduling, setServicesScheduling }: Props) => {
 
     }
 
+    useEffect(() => {
+        console.log(currentMonth)
+    }, [currentMonth])
+
     return (
         <div className='w-100'>
-            <MonthForm />
+            <MonthForm setCurrentMonth={setCurrentMonth} />
             <div className='table-container mb-4'>
                 <table className={tableStyle}>
                     <thead className='table-dark'>

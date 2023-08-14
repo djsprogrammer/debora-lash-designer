@@ -1,4 +1,8 @@
-const Index = () => {
+interface Props {
+	setCurrentMonth: React.Dispatch<React.SetStateAction<number>>
+}
+
+const Index = ({ setCurrentMonth }: Props) => {
 
 	const months = [
 		{ value: 0, label: 'Janeiro' },
@@ -20,7 +24,7 @@ const Index = () => {
 	return (
 		<div style={{width: '300px'}} className='input-group my-3'>
 			<label className='input-group-text'>Escolha o mês</label>
-			<select className='form-select text-center' required>
+			<select onChange={e => setCurrentMonth(Number(e.target.value))} className='form-select text-center'>
 				{months.map(month => {
 					return (
 						<option value={month.value} selected={currentMonth === month.value}>{month.label}</option>
