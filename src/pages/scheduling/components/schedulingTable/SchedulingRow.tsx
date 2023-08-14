@@ -25,7 +25,7 @@ const Index = ({ scheduling, getScheduling }: Props) => {
                 button.classList.add('btn-success')
                 button.classList.remove('btn-outline-success')
 
-                button.innerText = 'Confirmado'
+                button.innerText = 'Desconfirmar'
 
             } else {
 
