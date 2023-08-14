@@ -18,10 +18,15 @@ const Index = ({ setCurrentPage, schedulingState }: Props) => {
 		setCurrentPage(1)
 	}, [setCurrentPage])
 
+	// Inspeções de desenvolvimento
+	useEffect(() => {
+		console.log(servicesScheduling)
+	}, [servicesScheduling])
+
 	return (
 		<div className={container}>
 			{servicesScheduling[0] 
-			? <SchedulingTable servicesScheduling={servicesScheduling} />
+			? <SchedulingTable servicesScheduling={servicesScheduling} setServicesScheduling={setServicesScheduling} />
 			: <AnySchedulingAdvice page='agendamento' />}
 			<AddSchedulingForm servicesScheduling={servicesScheduling} setServicesScheduling={setServicesScheduling} />
 		</div>
