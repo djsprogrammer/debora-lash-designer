@@ -7,6 +7,7 @@ export interface ServiceScheduling {
 	service: Service
 	date: string
 	client: string
+    confirmed: boolean
 }
 
 export type Services = Service[]

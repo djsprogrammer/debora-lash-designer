@@ -21,10 +21,11 @@ const Index = ({ servicesScheduling, setServicesScheduling }: Props) => {
 			let formattedDate = date.current.value
 			const option = JSON.parse(options.current.value)
 			const client = clientElement.current.value
-			const serviceScheduling = {
+			const serviceScheduling: ServiceScheduling = {
 				service: option,
 				date: formattedDate,
-				client
+				client,
+				confirmed: false
 			}
 			const newSchedulings = [...servicesScheduling, serviceScheduling]
 				.sort((a, b) => a.date.localeCompare(b.date)) // Organizando por datas
