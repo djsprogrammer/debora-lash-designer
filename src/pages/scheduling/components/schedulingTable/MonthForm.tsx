@@ -1,21 +1,31 @@
 const Index = () => {
 
+	const months = [
+		{ value: 0, label: 'Janeiro' },
+		{ value: 1, label: 'Fevereiro' },
+		{ value: 2, label: 'Março' },
+		{ value: 3, label: 'Abril' },
+		{ value: 4, label: 'Maio' },
+		{ value: 5, label: 'Junho' },
+		{ value: 6, label: 'Julho' },
+		{ value: 7, label: 'Agosto' },
+		{ value: 8, label: 'Setembro' },
+		{ value: 9, label: 'Outubro' },
+		{ value: 10, label: 'Novembro' },
+		{ value: 11, label: 'Dezembro' }
+	]
+
+	const currentMonth = new Date().getMonth()
+
 	return (
 		<div style={{width: '300px'}} className='input-group my-3'>
 			<label className='input-group-text'>Escolha o mês</label>
 			<select className='form-select text-center' required>
-				<option value='january'>Janeiro</option>
-				<option value='february'>Fevereiro</option>
-				<option value='march'>Março</option>
-				<option value='april'>Abril</option>
-				<option value='may'>Maio</option>
-				<option value='june'>Junho</option>
-				<option value='july'>Julho</option>
-				<option value='august'>Agosto</option>
-				<option value='september'>Setembro</option>
-				<option value='october'>Outubro</option>
-				<option value='november'>Novembro</option>
-				<option value='december'>Dezembro</option>
+				{months.map(month => {
+					return (
+						<option value={month.value} selected={currentMonth === month.value}>{month.label}</option>
+					)
+				})}
 			</select>
 		</div>
 	)
