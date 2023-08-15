@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import SchedulingTable from './components/schedulingTable/Index'
+import SchedulingTable from './components/schedulingTable/SchedulingTable'
 import AnySchedulingAdvice from '../components/AnyAdvice'
 import AddSchedulingForm from './components/AddSchedulingForm'
 import { ServiceScheduling, schedulingsSimulation } from '../../types/services'
