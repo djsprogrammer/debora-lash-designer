@@ -15,7 +15,7 @@ const Index = ({ setCurrentPage }: Props) => {
 	const [servicesScheduling, setServicesScheduling] = useState<ServiceScheduling[]>([])
 
 	useEffect(() => {
-		setServicesScheduling(schedulings)
+		setServicesScheduling([...schedulings].reverse())
 	}, [])
 
 	useEffect(() => {
