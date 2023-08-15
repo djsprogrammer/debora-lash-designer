@@ -1,5 +1,3 @@
-import { useState, useEffect } from 'react'
-import MonthForm from './MonthForm'
 import SchedulingRow from './SchedulingRow'
 import { ServiceScheduling } from '../../../../types/services'
 import { tableStyle } from '../../../../commonStyles'
@@ -11,12 +9,10 @@ interface Props {
 
 const Index = ({ servicesScheduling, setServicesScheduling }: Props) => {
 
-    const [currentMonth, setCurrentMonth] = useState(new Date().getMonth())
-
     const getScheduling = (scheduling: ServiceScheduling) => {
 
         // Invertendo o estado do agendamento alvo ao clicar no botão
-        let targetScheduling = servicesScheduling.filter(current => current.client === scheduling.client)[0]
+        let targetScheduling: ServiceScheduling = servicesScheduling.filter(current => current.client === scheduling.client)[0]
         targetScheduling.confirmed = !targetScheduling.confirmed
 
         // Agendamentos não selecionados
@@ -30,13 +26,8 @@ const Index = ({ servicesScheduling, setServicesScheduling }: Props) => {
 
     }
 
-    useEffect(() => {
-        console.log(currentMonth)
-    }, [currentMonth])
-
     return (
         <div className='w-100'>
-            <MonthForm setCurrentMonth={setCurrentMonth} />
             <div className='table-container mb-4'>
                 <table className={tableStyle}>
                     <thead className='table-dark'>

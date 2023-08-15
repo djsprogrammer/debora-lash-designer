@@ -24,7 +24,6 @@ const Index = ({ servicesScheduling, setServicesScheduling }: Props) => {
 			const serviceScheduling: ServiceScheduling = {
 				service: option,
 				date: formattedDate,
-				currentMonth: new Date().getMonth(),
 				client,
 				confirmed: false
 			}
