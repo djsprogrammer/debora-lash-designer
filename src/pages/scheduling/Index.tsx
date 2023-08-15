@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import SchedulingTable from './components/schedulingTable/Index'
 import AnySchedulingAdvice from '../components/AnyAdvice'
 import AddSchedulingForm from './components/AddSchedulingForm'
@@ -7,12 +7,11 @@ import { container } from '../../commonStyles'
 
 interface Props {
 	setCurrentPage: React.Dispatch<React.SetStateAction<number>>
-	schedulingState: [ServiceScheduling[], React.Dispatch<React.SetStateAction<ServiceScheduling[]>>]
 }
 
-const Index = ({ setCurrentPage, schedulingState }: Props) => {
+const Index = ({ setCurrentPage }: Props) => {
 
-	const [servicesScheduling, setServicesScheduling] = schedulingState
+	const [servicesScheduling, setServicesScheduling] = useState<ServiceScheduling[]>([])
 
 	useEffect(() => {
 		setCurrentPage(1)
