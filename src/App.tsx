@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css'
-import { Services as TServices, ServiceScheduling } from './types/services'
+import { Services as TServices, ServiceScheduling, schedulingsSimulation } from './types/services'
 import Header from './fixedComponents/Header'
 import Navegation from './fixedComponents/Navegation'
 import Scheduling from './pages/scheduling/Index'
@@ -55,6 +55,10 @@ const Index = () => {
             })
         }
         searchDataFromServer()
+    }, [])
+
+    useEffect(() => {
+        setServicesScheduling(schedulingsSimulation)
     }, [])
 
     const HandlePages = () => {

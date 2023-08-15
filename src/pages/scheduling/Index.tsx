@@ -3,7 +3,6 @@ import SchedulingTable from './components/schedulingTable/Index'
 import AnySchedulingAdvice from '../components/AnyAdvice'
 import AddSchedulingForm from './components/AddSchedulingForm'
 import { ServiceScheduling } from '../../types/services'
-import { schedulingsSimulation } from '../../types/services'
 import { container } from '../../commonStyles'
 
 interface Props {
@@ -18,15 +17,6 @@ const Index = ({ setCurrentPage, schedulingState }: Props) => {
 	useEffect(() => {
 		setCurrentPage(1)
 	}, [setCurrentPage])
-
-	// Inspeções de desenvolvimento
-	useEffect(() => {
-		console.log(servicesScheduling)
-	}, [servicesScheduling])
-
-	useEffect(() => {
-		setServicesScheduling(schedulingsSimulation)
-	}, [])
 
 	return (
 		<div className={container}>
