@@ -10,13 +10,14 @@ const LOAD_BUTTON_TEXT = 'Carregando...'
 
 interface Props {
     searchKey: string
-    editForm: boolean
-    setEditForm: React.Dispatch<React.SetStateAction<boolean>>
-    blockedActions: boolean
-    setBlockedActions: React.Dispatch<React.SetStateAction<boolean>>
+    editFormState: [boolean, React.Dispatch<React.SetStateAction<boolean>>]
+    blockedActionsState: [boolean, React.Dispatch<React.SetStateAction<boolean>>]
 }
 
-const GenericForm = ({ searchKey, editForm, setEditForm, blockedActions, setBlockedActions }: Props) => {
+const GenericForm = ({ searchKey, editFormState, blockedActionsState }: Props) => {
+
+    const [editForm, setEditForm] = editFormState
+    const [blockedActions, setBlockedActions] = blockedActionsState
 
     const [services, setServices] = useContext(ServicesContext)
 

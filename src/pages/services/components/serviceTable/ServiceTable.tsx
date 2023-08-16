@@ -10,11 +10,12 @@ import { DB_ERROR_TEXT, SERVER_ERROR_TEXT, BLOCKED_ACTIONS_TEXT } from '../../Se
 interface Props {
     setSearchKey: React.Dispatch<React.SetStateAction<string>>
     setEditForm: React.Dispatch<React.SetStateAction<boolean>>
-    blockedActions: boolean
-    setBlockedActions: React.Dispatch<React.SetStateAction<boolean>>
+    blockedActionsState: [boolean, React.Dispatch<React.SetStateAction<boolean>>]
 }
 
-const ServiceTable = ({ setSearchKey, setEditForm, blockedActions, setBlockedActions }: Props) => {
+const ServiceTable = ({ setSearchKey, setEditForm, blockedActionsState }: Props) => {
+
+    const [blockedActions, setBlockedActions] = blockedActionsState
 
     const [services, setServices] = useContext(ServicesContext)
 

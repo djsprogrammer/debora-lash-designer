@@ -26,8 +26,10 @@ const Services = ({ setCurrentPage }: Props) => {
 
     return (
         <div className={container}>
-            {services[0] ? <ServiceTable setSearchKey={setSearchKey} setEditForm={setEditForm} blockedActions={blockedActions} setBlockedActions={setBlockedActions} /> : <AnyServiceAdvice page='serviço' />}
-            <GenericForm searchKey={searchKey} editForm={editForm} setEditForm={setEditForm} blockedActions={blockedActions} setBlockedActions={setBlockedActions} />
+            {services[0] 
+            ? <ServiceTable setSearchKey={setSearchKey} setEditForm={setEditForm} blockedActionsState={[blockedActions, setBlockedActions]} /> 
+            : <AnyServiceAdvice page='serviço' />}
+            <GenericForm searchKey={searchKey} editFormState={[editForm, setEditForm]} blockedActionsState={[blockedActions, setBlockedActions]} />
         </div>
     )
 
