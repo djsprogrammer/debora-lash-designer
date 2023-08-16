@@ -5,13 +5,14 @@ import { ServiceScheduling } from '../../../types/services'
 import { formButtonStyle } from '../../../commonStyles'
 
 interface Props {
-	servicesScheduling: ServiceScheduling[]
-	setServicesScheduling: React.Dispatch<React.SetStateAction<ServiceScheduling[]>>
+	schedulingsState: [ServiceScheduling[], React.Dispatch<React.SetStateAction<ServiceScheduling[]>>]
 }
 
-const AddSchedulingForm = ({ servicesScheduling, setServicesScheduling }: Props) => {
+const AddSchedulingForm = ({ schedulingsState }: Props) => {
 
 	const [services] = useContext(ServicesContext)
+
+	const [servicesScheduling, setServicesScheduling] = schedulingsState
 
 	const date = useRef<HTMLInputElement>(null)
 	const options = useRef<HTMLSelectElement>(null)

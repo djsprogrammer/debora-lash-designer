@@ -3,11 +3,12 @@ import { ServiceScheduling } from '../../../../types/services'
 import { tableStyle } from '../../../../commonStyles'
 
 interface Props {
-    servicesScheduling: ServiceScheduling[]
-    setServicesScheduling: React.Dispatch<React.SetStateAction<ServiceScheduling[]>>
+    schedulingsState: [ServiceScheduling[], React.Dispatch<React.SetStateAction<ServiceScheduling[]>>]
 }
 
-const SchedulingTable = ({ servicesScheduling, setServicesScheduling }: Props) => {
+const SchedulingTable = ({ schedulingsState }: Props) => {
+
+    const [servicesScheduling, setServicesScheduling] = schedulingsState
 
     const getScheduling = (scheduling: ServiceScheduling) => {
 

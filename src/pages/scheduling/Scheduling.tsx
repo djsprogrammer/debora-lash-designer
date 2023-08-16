@@ -25,9 +25,9 @@ const Scheduling = ({ setCurrentPage }: Props) => {
 	return (
 		<div className={container}>
 			{servicesScheduling[0]
-				? <SchedulingTable servicesScheduling={servicesScheduling} setServicesScheduling={setServicesScheduling} />
+				? <SchedulingTable schedulingsState={[servicesScheduling, setServicesScheduling]} />
 				: <AnySchedulingAdvice page='agendamento' />}
-			<AddSchedulingForm servicesScheduling={servicesScheduling} setServicesScheduling={setServicesScheduling} />
+			<AddSchedulingForm schedulingsState={[servicesScheduling, setServicesScheduling]} />
 		</div>
 	)
 
