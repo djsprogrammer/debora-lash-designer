@@ -11,7 +11,7 @@ const SchedulingTable = ({ servicesScheduling, setServicesScheduling }: Props) =
 
     const getScheduling = (scheduling: ServiceScheduling) => {
 
-        // Invertendo o estado do agendamento alvo ao clicar no botão
+        // Invertendo o estado de confirmação do agendamento alvo ao clicar no botão
         let targetScheduling: ServiceScheduling = servicesScheduling.filter(current => current.id === scheduling.id)[0]
         targetScheduling.confirmed = !targetScheduling.confirmed
 
