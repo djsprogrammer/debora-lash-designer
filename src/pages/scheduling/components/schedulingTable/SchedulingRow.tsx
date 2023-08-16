@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from 'react'
+import { useRef, useState, useEffect, memo } from 'react'
 import { parseISO, format } from 'date-fns'
 import { ServiceScheduling } from '../../../../types/services'
 
@@ -57,4 +57,4 @@ const SchedulingRow = ({ scheduling, getScheduling }: Props) => {
     )
 }
 
-export default SchedulingRow
+export default memo(SchedulingRow)

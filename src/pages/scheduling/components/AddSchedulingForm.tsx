@@ -19,9 +19,11 @@ const AddSchedulingForm = ({ servicesScheduling, setServicesScheduling }: Props)
 
 	const addScheduling = () => {
 		if (date.current && options.current && clientElement.current) {
+			
 			let formattedDate = date.current.value
 			const option = JSON.parse(options.current.value)
 			const client = clientElement.current.value
+
 			const serviceScheduling: ServiceScheduling = {
 				id: v4(),
 				service: option,
@@ -29,9 +31,13 @@ const AddSchedulingForm = ({ servicesScheduling, setServicesScheduling }: Props)
 				client,
 				confirmed: false
 			}
+
+			// Organizando novos agendamentos por datas
 			const newSchedulings = [...servicesScheduling, serviceScheduling]
-				.sort((a, b) => a.date.localeCompare(b.date)) // Organizando por datas
+				.sort((a, b) => a.date.localeCompare(b.date)).reverse()
+
 			setServicesScheduling(newSchedulings)
+
 		}
 	}
 
