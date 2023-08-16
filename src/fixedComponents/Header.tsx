@@ -1,4 +1,4 @@
-const Index = () => {
+const Header = () => {
 
     return (
         <header className='text-bg-dark py-1 px-2'>
@@ -8,4 +8,4 @@ const Index = () => {
 
 }
 
-export default Index
+export default Header

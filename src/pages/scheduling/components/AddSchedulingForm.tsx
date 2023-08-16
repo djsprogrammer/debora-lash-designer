@@ -8,7 +8,7 @@ interface Props {
 	setServicesScheduling: React.Dispatch<React.SetStateAction<ServiceScheduling[]>>
 }
 
-const Index = ({ servicesScheduling, setServicesScheduling }: Props) => {
+const AddSchedulingForm = ({ servicesScheduling, setServicesScheduling }: Props) => {
 
 	const [services] = useContext(ServicesContext)
 
@@ -56,4 +56,4 @@ const Index = ({ servicesScheduling, setServicesScheduling }: Props) => {
 	)
 }
 
-export default Index
+export default AddSchedulingForm

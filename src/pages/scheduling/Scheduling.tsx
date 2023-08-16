@@ -10,7 +10,7 @@ interface Props {
 	setCurrentPage: React.Dispatch<React.SetStateAction<number>>
 }
 
-const Index = ({ setCurrentPage }: Props) => {
+const Scheduling = ({ setCurrentPage }: Props) => {
 
 	const [servicesScheduling, setServicesScheduling] = useState<ServiceScheduling[]>([])
 
@@ -33,4 +33,4 @@ const Index = ({ setCurrentPage }: Props) => {
 
 }
 
-export default Index
+export default Scheduling

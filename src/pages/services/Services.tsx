@@ -13,7 +13,7 @@ interface Props {
     setCurrentPage: React.Dispatch<React.SetStateAction<number>>
 }
 
-const Index = ({ setCurrentPage }: Props) => {
+const Services = ({ setCurrentPage }: Props) => {
 
     useEffect(() => {
         setCurrentPage(2)
@@ -33,4 +33,4 @@ const Index = ({ setCurrentPage }: Props) => {
 
 }
 
-export default Index
+export default Services

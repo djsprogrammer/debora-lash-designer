@@ -14,7 +14,7 @@ interface Props {
     setBlockedActions: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const Index = ({ setSearchKey, setEditForm, blockedActions, setBlockedActions }: Props) => {
+const ServiceTable = ({ setSearchKey, setEditForm, blockedActions, setBlockedActions }: Props) => {
 
     const [services, setServices] = useContext(ServicesContext)
 
@@ -84,4 +84,4 @@ const Index = ({ setSearchKey, setEditForm, blockedActions, setBlockedActions }:
 
 }
 
-export default Index
+export default ServiceTable

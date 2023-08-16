@@ -7,7 +7,7 @@ interface Props {
     setServicesScheduling: React.Dispatch<React.SetStateAction<ServiceScheduling[]>>
 }
 
-const Index = ({ servicesScheduling, setServicesScheduling }: Props) => {
+const SchedulingTable = ({ servicesScheduling, setServicesScheduling }: Props) => {
 
     const getScheduling = (scheduling: ServiceScheduling) => {
 
@@ -46,4 +46,4 @@ const Index = ({ servicesScheduling, setServicesScheduling }: Props) => {
 
 }
 
-export default Index
+export default SchedulingTable

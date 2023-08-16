@@ -16,7 +16,7 @@ interface Props {
     setBlockedActions: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const Index = ({ searchKey, editForm, setEditForm, blockedActions, setBlockedActions }: Props) => {
+const GenericForm = ({ searchKey, editForm, setEditForm, blockedActions, setBlockedActions }: Props) => {
 
     const [services, setServices] = useContext(ServicesContext)
 
@@ -141,4 +141,4 @@ const Index = ({ searchKey, editForm, setEditForm, blockedActions, setBlockedAct
 
 }
 
-export default Index
+export default GenericForm

@@ -11,7 +11,7 @@ import ServicesProvider from './ServicesContext'
 
 export const SERVER_URL = 'http://localhost:8080'
 
-const Index = () => {
+const App = () => {
 
     const [services, setServices] = useState<TServices>([])
     const [loadingDatabaseText, setLoadingDatabaseText] = useState('Carregando...')
@@ -79,4 +79,4 @@ const Index = () => {
 
 }
 
-export default Index
+export default App

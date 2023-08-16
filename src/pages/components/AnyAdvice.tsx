@@ -2,7 +2,7 @@ interface Props {
     page: string
 }
 
-const Index = ({ page }: Props) => {
+const AnyAdvice = ({ page }: Props) => {
 
     return (
         <div>
@@ -12,4 +12,4 @@ const Index = ({ page }: Props) => {
 
 }
 
-export default Index
+export default AnyAdvice

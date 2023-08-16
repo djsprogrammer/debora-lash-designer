@@ -7,7 +7,7 @@ interface Props {
     setEditValuesInTheForm: (tdName: string, value: number) => void
 }
 
-const Index = ({ service, deleteService, setEditValuesInTheForm }: Props) => {
+const ServiceRow = ({ service, deleteService, setEditValuesInTheForm }: Props) => {
 
     const deleteButton = useRef<HTMLButtonElement>(null)
 
@@ -28,4 +28,4 @@ const Index = ({ service, deleteService, setEditValuesInTheForm }: Props) => {
 
 }
 
-export default Index
+export default ServiceRow

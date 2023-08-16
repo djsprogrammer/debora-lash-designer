@@ -5,7 +5,7 @@ interface Props {
 	currentPage: number
 }
 
-const Index = ({ currentPage }: Props) => {
+const Navegation = ({ currentPage }: Props) => {
 
 	const link1 = useRef<HTMLAnchorElement>(null)
 	const link2 = useRef<HTMLAnchorElement>(null)
@@ -38,4 +38,4 @@ const Index = ({ currentPage }: Props) => {
 	
 }
 
-export default Index
+export default Navegation

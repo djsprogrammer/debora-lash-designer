@@ -7,7 +7,7 @@ interface Props {
     getScheduling: (scheduling: ServiceScheduling) => void
 }
 
-const Index = ({ scheduling, getScheduling }: Props) => {
+const SchedulingRow = ({ scheduling, getScheduling }: Props) => {
 
     const confirmButton = useRef<HTMLButtonElement>(null)
 
@@ -57,4 +57,4 @@ const Index = ({ scheduling, getScheduling }: Props) => {
     )
 }
 
-export default Index
+export default SchedulingRow
