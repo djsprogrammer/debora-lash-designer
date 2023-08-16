@@ -1,7 +1,7 @@
 import { useContext, useRef } from 'react'
 import { ServicesContext } from '../../../ServicesContext'
 import { ServiceScheduling } from '../../../types/services'
-import { formButtonStyle, formWidth } from '../../../commonStyles'
+import { formButtonStyle } from '../../../commonStyles'
 
 interface Props {
 	servicesScheduling: ServiceScheduling[]
@@ -34,7 +34,7 @@ const Index = ({ servicesScheduling, setServicesScheduling }: Props) => {
 	}
 
 	return (
-		<form style={formWidth} className='d-flex flex-column' onSubmit={e => {
+		<form className='d-flex flex-column' onSubmit={e => {
 			e.preventDefault()
 			addScheduling()
 		}}>

@@ -2,7 +2,7 @@ import { useEffect, useContext, useRef } from 'react'
 import { inputsValues, setButtonText, validNumber, changeFormState, saveReferenciesOnMemory } from '../../../formFunctions/GenericForm'
 import { ServicesContext } from '../../../ServicesContext'
 import { SERVER_URL } from '../../../App'
-import { formButtonStyle, formWidth } from '../../../commonStyles'
+import { formButtonStyle } from '../../../commonStyles'
 import { SERVER_ERROR_TEXT, DB_ERROR_TEXT, BLOCKED_ACTIONS_TEXT } from '../Services'
 
 const ADD_BUTTON_TEXT = 'Adicionar Serviço'
@@ -123,7 +123,7 @@ const Index = ({ searchKey, editForm, setEditForm, blockedActions, setBlockedAct
     }
 
     return (
-        <form style={formWidth} className='d-flex flex-column' onSubmit={e => {
+        <form className='d-flex flex-column' onSubmit={e => {
             e.preventDefault()
             editForm ? editService() : addService()
         }}>
