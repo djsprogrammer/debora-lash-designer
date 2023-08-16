@@ -4,6 +4,7 @@ export interface Service {
 }
 
 export interface ServiceScheduling {
+    id: string
 	service: Service
 	date: string
 	client: string

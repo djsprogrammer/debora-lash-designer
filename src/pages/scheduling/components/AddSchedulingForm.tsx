@@ -1,4 +1,5 @@
 import { useContext, useRef } from 'react'
+import { v4 } from 'uuid'
 import { ServicesContext } from '../../../ServicesContext'
 import { ServiceScheduling } from '../../../types/services'
 import { formButtonStyle } from '../../../commonStyles'
@@ -22,6 +23,7 @@ const AddSchedulingForm = ({ servicesScheduling, setServicesScheduling }: Props)
 			const option = JSON.parse(options.current.value)
 			const client = clientElement.current.value
 			const serviceScheduling: ServiceScheduling = {
+				id: v4(),
 				service: option,
 				date: formattedDate,
 				client,
@@ -46,7 +48,7 @@ const AddSchedulingForm = ({ servicesScheduling, setServicesScheduling }: Props)
 				<label className='input-group-text'>Escolha um serviço</label>
 				<select className='form-select text-center' ref={options} required>
 					{services.map(service => (
-						<option value={JSON.stringify(service)}>{service.name}</option>
+						<option key={service.name} value={JSON.stringify(service)}>{service.name}</option>
 					))}
 				</select>
 			</div>

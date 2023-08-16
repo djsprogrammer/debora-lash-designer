@@ -1,5 +1,8 @@
+import { v4 } from 'uuid'
+
 const schedulings = [
     {
+        id: v4(),
         service: {
             name: 'Volume Brasileiro',
             value: 100
@@ -9,6 +12,7 @@ const schedulings = [
         confirmed: false
     },
     {
+        id: v4(),
         service: {
             name: 'Volume Brasileiro',
             value: 100
@@ -18,6 +22,7 @@ const schedulings = [
         confirmed: false
     },
     {
+        id: v4(),
         service: {
             name: 'Volume Brasileiro',
             value: 100
@@ -27,6 +32,7 @@ const schedulings = [
         confirmed: false
     },
     {
+        id: v4(),
         service: {
             name: 'Volume Brasileiro',
             value: 100
@@ -36,6 +42,7 @@ const schedulings = [
         confirmed: false
     },
     {
+        id: v4(),
         service: {
             name: 'Volume Brasileiro',
             value: 100
@@ -45,6 +52,7 @@ const schedulings = [
         confirmed: false
     },
     {
+        id: v4(),
         service: {
             name: 'Volume Brasileiro',
             value: 100
@@ -54,6 +62,7 @@ const schedulings = [
         confirmed: false
     },
     {
+        id: v4(),
         service: {
             name: 'Volume Brasileiro',
             value: 100
@@ -63,6 +72,7 @@ const schedulings = [
         confirmed: false
     },
     {
+        id: v4(),
         service: {
             name: 'Volume Brasileiro',
             value: 100
@@ -72,6 +82,7 @@ const schedulings = [
         confirmed: false
     },
     {
+        id: v4(),
         service: {
             name: 'Volume Brasileiro',
             value: 100
@@ -81,6 +92,7 @@ const schedulings = [
         confirmed: false
     },
     {
+        id: v4(),
         service: {
             name: 'Volume Brasileiro',
             value: 100
