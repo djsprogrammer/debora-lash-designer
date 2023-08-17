@@ -1,5 +1,5 @@
 import { useEffect, useContext, useRef } from 'react'
-import { inputsValues, setButtonText, validNumber, changeFormState, saveReferenciesOnMemory, setNewService } from '../../../formFunctions/GenericForm'
+import { inputsValues, setButtonText, validNumber, changeFormState, saveReferenciesOnMemory, setNewService, showError } from '../../../formFunctions/GenericForm'
 import { ServicesContext } from '../../../ServicesContext'
 import { SERVER_URL } from '../../../App'
 import { formButtonStyle } from '../../../commonStyles'
@@ -7,6 +7,8 @@ import { SERVER_ERROR_TEXT, DB_ERROR_TEXT, BLOCKED_ACTIONS_TEXT } from '../Servi
 
 const ADD_BUTTON_TEXT = 'Adicionar Serviço'
 const LOAD_BUTTON_TEXT = 'Carregando...'
+const INVALID_NUMBER_TEXT = 'Insira um número válido (utilize ponto para casas decimais)'
+const ALREADY_EXISTS_TEXT = 'Já existe um serviço com esse nome!'
 
 interface Props {
     searchKey: string
@@ -59,19 +61,13 @@ const GenericForm = ({ searchKey, editFormState, blockedActionsState }: Props) =
                             }
                             setBlockedActions(false)
                         }).catch(() => {
-                            alert(SERVER_ERROR_TEXT)
-                            changeFormState('', '', ADD_BUTTON_TEXT)
-                            setBlockedActions(false)
+                            showError(SERVER_ERROR_TEXT, ADD_BUTTON_TEXT, setBlockedActions)
                         })
                 } else {
-                    alert('Insira um número válido (utilize ponto para casas decimais)')
-                    setButtonText(ADD_BUTTON_TEXT)
-                    setBlockedActions(false)
+                    showError(INVALID_NUMBER_TEXT, ADD_BUTTON_TEXT, setBlockedActions)
                 }
             } else {
-                alert('Já existe um serviço com esse nome!')
-                setButtonText(ADD_BUTTON_TEXT)
-                setBlockedActions(false)
+                showError(ALREADY_EXISTS_TEXT, ADD_BUTTON_TEXT, setBlockedActions)
             }
         } else {
             alert(BLOCKED_ACTIONS_TEXT)

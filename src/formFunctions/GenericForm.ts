@@ -1,3 +1,4 @@
+import React from "react"
 import { Service, SetServices } from "../types/services"
 
 let nameInput: Input
@@ -52,4 +53,10 @@ export const changeFormState = (name: string, value: string, buttonText: string 
 export const setNewService = (setServices: SetServices, services: Service[], buttonText: string) => {
     setServices(services.sort((a, b) => a.value - b.value))
     changeFormState('', '', buttonText)
+}
+
+export const showError = (alertMessage: string, buttonText: string, setBlockedActions: React.Dispatch<React.SetStateAction<boolean>>) => {
+    alert(alertMessage)
+    setButtonText(buttonText)
+    setBlockedActions(false)
 }
