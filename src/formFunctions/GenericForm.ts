@@ -1,3 +1,5 @@
+import { Service, SetServices } from "../types/services"
+
 let nameInput: Input
 let valueInput: Input
 let button: React.RefObject<HTMLButtonElement>
@@ -45,4 +47,9 @@ export const changeFormState = (name: string, value: string, buttonText: string 
             button.current.innerText = buttonText
         }
     }
+}
+
+export const setNewService = (setServices: SetServices, services: Service[], buttonText: string) => {
+    setServices(services.sort((a, b) => a.value - b.value))
+    changeFormState('', '', buttonText)
 }

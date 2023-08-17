@@ -1,5 +1,5 @@
 import { useEffect, useContext, useRef } from 'react'
-import { inputsValues, setButtonText, validNumber, changeFormState, saveReferenciesOnMemory } from '../../../formFunctions/GenericForm'
+import { inputsValues, setButtonText, validNumber, changeFormState, saveReferenciesOnMemory, setNewService } from '../../../formFunctions/GenericForm'
 import { ServicesContext } from '../../../ServicesContext'
 import { SERVER_URL } from '../../../App'
 import { formButtonStyle } from '../../../commonStyles'
@@ -50,8 +50,7 @@ const GenericForm = ({ searchKey, editFormState, blockedActionsState }: Props) =
                             switch (res.status) {
                                 case 201:
                                     const newServices = [...services, service]
-                                    setServices(newServices.sort((a, b) => a.value - b.value))
-                                    changeFormState('', '', ADD_BUTTON_TEXT)
+                                    setNewService(setServices, newServices, ADD_BUTTON_TEXT)
                                     break
                                 case 503:
                                     alert(DB_ERROR_TEXT)
@@ -102,8 +101,7 @@ const GenericForm = ({ searchKey, editFormState, blockedActionsState }: Props) =
                     switch (res.status) {
                         case 204:
                             const newServices = [...otherServices, { name, value: Number(value) }]
-                            setServices(newServices.sort((a, b) => a.value - b.value))
-                            changeFormState('', '', ADD_BUTTON_TEXT)
+                            setNewService(setServices, newServices, ADD_BUTTON_TEXT)
                             break
                         case 503:
                             alert(DB_ERROR_TEXT)
