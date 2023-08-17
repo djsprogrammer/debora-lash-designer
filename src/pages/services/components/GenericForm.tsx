@@ -1,6 +1,6 @@
 import { useEffect, useContext, useRef } from 'react'
 import { inputsValues, setButtonText, validNumber, changeFormState, 
-saveReferenciesOnMemory, setNewService, showError, showEditError } from '../../../formFunctions/GenericForm'
+saveReferenciesOnMemory, setNewService, showError, showEditError, responseHandler } from '../../../formFunctions/GenericForm'
 import { ServicesContext } from '../../../ServicesContext'
 import { SERVER_URL } from '../../../App'
 import { formButtonStyle } from '../../../commonStyles'
@@ -50,17 +50,9 @@ const GenericForm = ({ searchKey, editFormState, blockedActionsState }: Props) =
                     }
                     fetch(`${SERVER_URL}/create-service`, options)
                         .then(res => {
-                            switch (res.status) {
-                                case 201:
-                                    const newServices = [...services, service]
-                                    setNewService(setServices, newServices, ADD_BUTTON_TEXT)
-                                    break
-                                case 503:
-                                    alert(DB_ERROR_TEXT)
-                                    changeFormState('', '', ADD_BUTTON_TEXT)
-                                    break
-                            }
-                            setBlockedActions(false)
+                            const newServices = [...services, service]
+                            responseHandler(res, setServices, newServices, 
+                                DB_ERROR_TEXT, ADD_BUTTON_TEXT, setBlockedActions)
                         }).catch(() => {
                             showError(SERVER_ERROR_TEXT, ADD_BUTTON_TEXT, setBlockedActions)
                         })

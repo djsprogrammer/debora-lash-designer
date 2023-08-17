@@ -66,3 +66,16 @@ export const showEditError = (alertMessage: string, buttonText: string, setBlock
     changeFormState('', '', buttonText)
     setBlockedActions(false)
 }
+
+export const responseHandler = (res: Response, setServices: SetServices, newServices: Service[], errorText: string, buttonText: string, setBlockedActions: React.Dispatch<React.SetStateAction<boolean>>) => {
+    switch (res.status) {
+        case 201:
+            setNewService(setServices, newServices, buttonText)
+            break
+        case 503:
+            alert(errorText)
+            changeFormState('', '', buttonText)
+            break
+    }
+    setBlockedActions(false)
+}
