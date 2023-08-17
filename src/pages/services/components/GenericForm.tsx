@@ -1,5 +1,6 @@
 import { useEffect, useContext, useRef } from 'react'
-import { inputsValues, setButtonText, validNumber, changeFormState, saveReferenciesOnMemory, setNewService, showError } from '../../../formFunctions/GenericForm'
+import { inputsValues, setButtonText, validNumber, changeFormState, 
+saveReferenciesOnMemory, setNewService, showError, showEditError } from '../../../formFunctions/GenericForm'
 import { ServicesContext } from '../../../ServicesContext'
 import { SERVER_URL } from '../../../App'
 import { formButtonStyle } from '../../../commonStyles'
@@ -106,14 +107,10 @@ const GenericForm = ({ searchKey, editFormState, blockedActionsState }: Props) =
                     }
                     setBlockedActions(false)
                 }).catch(() => {
-                    alert(SERVER_ERROR_TEXT)
-                    changeFormState('', '', ADD_BUTTON_TEXT)
-                    setBlockedActions(false)
+                    showEditError(SERVER_ERROR_TEXT, ADD_BUTTON_TEXT, setBlockedActions)
                 })
         } else {
-            alert('Insira um número válido (utilize ponto para casas decimais)')
-            changeFormState('', '', ADD_BUTTON_TEXT)
-            setBlockedActions(false)
+            showEditError(INVALID_NUMBER_TEXT, ADD_BUTTON_TEXT, setBlockedActions)
         }
     }
 

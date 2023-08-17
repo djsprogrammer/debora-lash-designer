@@ -60,3 +60,9 @@ export const showError = (alertMessage: string, buttonText: string, setBlockedAc
     setButtonText(buttonText)
     setBlockedActions(false)
 }
+
+export const showEditError = (alertMessage: string, buttonText: string, setBlockedActions: React.Dispatch<React.SetStateAction<boolean>>) => {
+    alert(alertMessage)
+    changeFormState('', '', buttonText)
+    setBlockedActions(false)
+}
