@@ -55,15 +55,9 @@ export const setNewService = (setServices: SetServices, services: Service[], but
     changeFormState('', '', buttonText)
 }
 
-export const showError = (alertMessage: string, buttonText: string, setBlockedActions: React.Dispatch<React.SetStateAction<boolean>>) => {
+export const showError = (alertMessage: string, setBlockedActions: React.Dispatch<React.SetStateAction<boolean>>) => {
     alert(alertMessage)
-    setButtonText(buttonText)
-    setBlockedActions(false)
-}
-
-export const showEditError = (alertMessage: string, buttonText: string, setBlockedActions: React.Dispatch<React.SetStateAction<boolean>>) => {
-    alert(alertMessage)
-    changeFormState('', '', buttonText)
+    changeFormState('', '', 'Adicionar Serviço')
     setBlockedActions(false)
 }
 

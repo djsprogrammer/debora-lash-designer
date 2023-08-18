@@ -1,7 +1,7 @@
 import { useEffect, useContext, useRef } from 'react'
 import { 
     getServiceInfo, setButtonText, validNumber, saveReferenciesOnMemory, 
-    showError, showEditError, responseHandler, fetchOptions 
+    showError, responseHandler, fetchOptions 
 } from '../../../formFunctions/GenericForm'
 import { ServicesContext } from '../../../ServicesContext'
 import { SERVER_URL } from '../../../App'
@@ -52,13 +52,13 @@ const GenericForm = ({ searchKey, editFormState, blockedActionsState }: Props) =
                             responseHandler(res, 201, setServices, newServices, 
                                 DB_ERROR_TEXT, ADD_BUTTON_TEXT, setBlockedActions)
                         }).catch(() => {
-                            showError(SERVER_ERROR_TEXT, ADD_BUTTON_TEXT, setBlockedActions)
+                            showError(SERVER_ERROR_TEXT, setBlockedActions)
                         })
                 } else {
-                    showError(INVALID_NUMBER_TEXT, ADD_BUTTON_TEXT, setBlockedActions)
+                    showError(INVALID_NUMBER_TEXT, setBlockedActions)
                 }
             } else {
-                showError(ALREADY_EXISTS_TEXT, ADD_BUTTON_TEXT, setBlockedActions)
+                showError(ALREADY_EXISTS_TEXT, setBlockedActions)
             }
         } else {
             alert(BLOCKED_ACTIONS_TEXT)
@@ -87,13 +87,13 @@ const GenericForm = ({ searchKey, editFormState, blockedActionsState }: Props) =
                         responseHandler(res, 204, setServices, newServices, 
                             DB_ERROR_TEXT, ADD_BUTTON_TEXT, setBlockedActions)
                     }).catch(() => {
-                        showEditError(SERVER_ERROR_TEXT, ADD_BUTTON_TEXT, setBlockedActions)
+                        showError(SERVER_ERROR_TEXT, setBlockedActions)
                     })
             } else {
-                showEditError(INVALID_NUMBER_TEXT, ADD_BUTTON_TEXT, setBlockedActions)
+                showError(INVALID_NUMBER_TEXT, setBlockedActions)
             }
         } else {
-            showEditError(ALREADY_EXISTS_TEXT, ADD_BUTTON_TEXT, setBlockedActions)
+            showError(ALREADY_EXISTS_TEXT, setBlockedActions)
         }
     }
 
