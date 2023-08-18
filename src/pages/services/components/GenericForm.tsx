@@ -1,6 +1,6 @@
 import { useEffect, useContext, useRef } from 'react'
 import { 
-    inputsValues, setButtonText, validNumber, saveReferenciesOnMemory, 
+    getServiceInfo, setButtonText, validNumber, saveReferenciesOnMemory, 
     showError, showEditError, responseHandler, fetchOptions 
 } from '../../../formFunctions/GenericForm'
 import { ServicesContext } from '../../../ServicesContext'
@@ -38,9 +38,9 @@ const GenericForm = ({ searchKey, editFormState, blockedActionsState }: Props) =
         if (!blockedActions) {
             setBlockedActions(true)
             setButtonText(LOAD_BUTTON_TEXT)
-            const [name, value] = inputsValues()
-            const alreadyExists = services.filter(service => service.name === name)
-            if (!alreadyExists[0]) {
+            const [name, value] = getServiceInfo()
+            const alreadyExists = services.filter(service => service.name === name)[0]
+            if (!alreadyExists) {
                 if (validNumber(value)) {
                     const service = {
                         name, value: Number(value)
@@ -68,9 +68,9 @@ const GenericForm = ({ searchKey, editFormState, blockedActionsState }: Props) =
     const editService = () => {
         setEditForm(false)
         setButtonText(LOAD_BUTTON_TEXT)
-        const [name, value] = inputsValues()
-        const alreadyExists = services.filter(service => service.name === name)
-        if (!alreadyExists[0]) {
+        const [name, value] = getServiceInfo()
+        const alreadyExists = services.filter(service => service.name === name)[0]
+        if (!alreadyExists) {
             if (validNumber(value)) {
                 const service = {
                     searchKey,

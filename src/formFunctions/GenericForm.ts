@@ -22,7 +22,7 @@ export const validNumber = (value: string) => {
 
 type Input = React.RefObject<HTMLInputElement>
 
-export const inputsValues = () => {
+export const getServiceInfo = () => {
     let name = ''
     let value = ''
     if (nameInput.current && valueInput.current) {
