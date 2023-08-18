@@ -1,7 +1,7 @@
 import { useEffect, useContext, useRef } from 'react'
 import { 
     inputsValues, setButtonText, validNumber, saveReferenciesOnMemory, 
-    showError, showEditError, responseHandler 
+    showError, showEditError, responseHandler, fetchOptions 
 } from '../../../formFunctions/GenericForm'
 import { ServicesContext } from '../../../ServicesContext'
 import { SERVER_URL } from '../../../App'
@@ -45,11 +45,7 @@ const GenericForm = ({ searchKey, editFormState, blockedActionsState }: Props) =
                     const service = {
                         name, value: Number(value)
                     }
-                    const options = {
-                        method: 'post',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(service)
-                    }
+                    const options = fetchOptions('post', service)
                     fetch(`${SERVER_URL}/create-service`, options)
                         .then(res => {
                             const newServices = [...services, service]
@@ -79,11 +75,7 @@ const GenericForm = ({ searchKey, editFormState, blockedActionsState }: Props) =
                 name,
                 value: Number(value)
             }
-            const options = {
-                method: 'put',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(service)       
-            }
+            const options = fetchOptions('put', service)
             fetch(`${SERVER_URL}/edit-service`, options)
                 .then(res => {
                     const otherServices = services.filter(service => {

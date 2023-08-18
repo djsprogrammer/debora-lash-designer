@@ -81,3 +81,11 @@ export const responseHandler = (res: Response, successCase: number, setServices:
     }
     setBlockedActions(false)
 }
+
+export const fetchOptions = (targetMethod: string, service: Service) => {
+    return {
+        method: targetMethod,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(service)
+    }
+}
