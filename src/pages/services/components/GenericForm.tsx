@@ -49,8 +49,10 @@ const GenericForm = ({ searchKey, editFormState, blockedActionsState }: Props) =
                     fetch(`${SERVER_URL}/create-service`, options)
                         .then(res => {
                             const newServices = [...services, service]
-                            responseHandler(res, 201, setServices, newServices, 
-                                DB_ERROR_TEXT, ADD_BUTTON_TEXT, setBlockedActions)
+                            responseHandler(
+                                res, 201, setServices, newServices, 
+                                DB_ERROR_TEXT, ADD_BUTTON_TEXT, setBlockedActions
+                            )
                         }).catch(() => {
                             showError(SERVER_ERROR_TEXT, setBlockedActions)
                         })
@@ -84,8 +86,10 @@ const GenericForm = ({ searchKey, editFormState, blockedActionsState }: Props) =
                             return service.name !== searchKey
                         })
                         const newServices = [...otherServices, { name, value: Number(value) }]
-                        responseHandler(res, 204, setServices, newServices, 
-                            DB_ERROR_TEXT, ADD_BUTTON_TEXT, setBlockedActions)
+                        responseHandler(
+                            res, 204, setServices, newServices, 
+                            DB_ERROR_TEXT, ADD_BUTTON_TEXT, setBlockedActions
+                        )
                     }).catch(() => {
                         showError(SERVER_ERROR_TEXT, setBlockedActions)
                     })
