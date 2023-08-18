@@ -19,6 +19,7 @@ const AddSchedulingForm = ({ schedulingsState }: Props) => {
 	const clientElement = useRef<HTMLInputElement>(null)
 
 	const addScheduling = () => {
+
 		if (date.current && options.current && clientElement.current) {
 			
 			let formattedDate = date.current.value
@@ -39,7 +40,11 @@ const AddSchedulingForm = ({ schedulingsState }: Props) => {
 
 			setServicesScheduling(newSchedulings)
 
+			date.current.value = ''
+			clientElement.current.value = ''
+
 		}
+		
 	}
 
 	return (
