@@ -67,9 +67,11 @@ export const showEditError = (alertMessage: string, buttonText: string, setBlock
     setBlockedActions(false)
 }
 
-export const responseHandler = (res: Response, setServices: SetServices, newServices: Service[], errorText: string, buttonText: string, setBlockedActions: React.Dispatch<React.SetStateAction<boolean>>) => {
+export const responseHandler = (res: Response, successCase: number, setServices: SetServices, 
+    newServices: Service[], errorText: string, buttonText: string, 
+    setBlockedActions: React.Dispatch<React.SetStateAction<boolean>>) => {
     switch (res.status) {
-        case 201:
+        case successCase:
             setNewService(setServices, newServices, buttonText)
             break
         case 503:

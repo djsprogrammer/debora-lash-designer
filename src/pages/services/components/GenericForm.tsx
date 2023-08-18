@@ -1,6 +1,8 @@
 import { useEffect, useContext, useRef } from 'react'
-import { inputsValues, setButtonText, validNumber, changeFormState, 
-saveReferenciesOnMemory, setNewService, showError, showEditError, responseHandler } from '../../../formFunctions/GenericForm'
+import { 
+    inputsValues, setButtonText, validNumber, saveReferenciesOnMemory, 
+    showError, showEditError, responseHandler 
+} from '../../../formFunctions/GenericForm'
 import { ServicesContext } from '../../../ServicesContext'
 import { SERVER_URL } from '../../../App'
 import { formButtonStyle } from '../../../commonStyles'
@@ -51,7 +53,7 @@ const GenericForm = ({ searchKey, editFormState, blockedActionsState }: Props) =
                     fetch(`${SERVER_URL}/create-service`, options)
                         .then(res => {
                             const newServices = [...services, service]
-                            responseHandler(res, setServices, newServices, 
+                            responseHandler(res, 201, setServices, newServices, 
                                 DB_ERROR_TEXT, ADD_BUTTON_TEXT, setBlockedActions)
                         }).catch(() => {
                             showError(SERVER_ERROR_TEXT, ADD_BUTTON_TEXT, setBlockedActions)
@@ -87,17 +89,9 @@ const GenericForm = ({ searchKey, editFormState, blockedActionsState }: Props) =
                     const otherServices = services.filter(service => {
                         return service.name !== searchKey
                     })
-                    switch (res.status) {
-                        case 204:
-                            const newServices = [...otherServices, { name, value: Number(value) }]
-                            setNewService(setServices, newServices, ADD_BUTTON_TEXT)
-                            break
-                        case 503:
-                            alert(DB_ERROR_TEXT)
-                            changeFormState('', '', ADD_BUTTON_TEXT)
-                            break
-                    }
-                    setBlockedActions(false)
+                    const newServices = [...otherServices, { name, value: Number(value) }]
+                    responseHandler(res, 204, setServices, newServices, 
+                        DB_ERROR_TEXT, ADD_BUTTON_TEXT, setBlockedActions)
                 }).catch(() => {
                     showEditError(SERVER_ERROR_TEXT, ADD_BUTTON_TEXT, setBlockedActions)
                 })
