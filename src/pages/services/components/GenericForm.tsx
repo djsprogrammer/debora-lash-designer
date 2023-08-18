@@ -69,26 +69,31 @@ const GenericForm = ({ searchKey, editFormState, blockedActionsState }: Props) =
         setEditForm(false)
         setButtonText(LOAD_BUTTON_TEXT)
         const [name, value] = inputsValues()
-        if (validNumber(value)) {
-            const service = {
-                searchKey,
-                name,
-                value: Number(value)
-            }
-            const options = fetchOptions('put', service)
-            fetch(`${SERVER_URL}/edit-service`, options)
-                .then(res => {
-                    const otherServices = services.filter(service => {
-                        return service.name !== searchKey
+        const alreadyExists = services.filter(service => service.name === name)
+        if (!alreadyExists[0]) {
+            if (validNumber(value)) {
+                const service = {
+                    searchKey,
+                    name,
+                    value: Number(value)
+                }
+                const options = fetchOptions('put', service)
+                fetch(`${SERVER_URL}/edit-service`, options)
+                    .then(res => {
+                        const otherServices = services.filter(service => {
+                            return service.name !== searchKey
+                        })
+                        const newServices = [...otherServices, { name, value: Number(value) }]
+                        responseHandler(res, 204, setServices, newServices, 
+                            DB_ERROR_TEXT, ADD_BUTTON_TEXT, setBlockedActions)
+                    }).catch(() => {
+                        showEditError(SERVER_ERROR_TEXT, ADD_BUTTON_TEXT, setBlockedActions)
                     })
-                    const newServices = [...otherServices, { name, value: Number(value) }]
-                    responseHandler(res, 204, setServices, newServices, 
-                        DB_ERROR_TEXT, ADD_BUTTON_TEXT, setBlockedActions)
-                }).catch(() => {
-                    showEditError(SERVER_ERROR_TEXT, ADD_BUTTON_TEXT, setBlockedActions)
-                })
+            } else {
+                showEditError(INVALID_NUMBER_TEXT, ADD_BUTTON_TEXT, setBlockedActions)
+            }
         } else {
-            showEditError(INVALID_NUMBER_TEXT, ADD_BUTTON_TEXT, setBlockedActions)
+            showEditError(ALREADY_EXISTS_TEXT, ADD_BUTTON_TEXT, setBlockedActions)
         }
     }
 
