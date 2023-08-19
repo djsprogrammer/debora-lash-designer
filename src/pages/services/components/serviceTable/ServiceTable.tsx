@@ -8,12 +8,11 @@ import { SERVER_URL } from '../../../../App'
 import { DB_ERROR_TEXT, SERVER_ERROR_TEXT, BLOCKED_ACTIONS_TEXT } from '../../Services'
 
 interface Props {
-    setSearchKey: React.Dispatch<React.SetStateAction<string>>
     setEditForm: React.Dispatch<React.SetStateAction<boolean>>
     blockedActionsState: [boolean, React.Dispatch<React.SetStateAction<boolean>>]
 }
 
-const ServiceTable = ({ setSearchKey, setEditForm, blockedActionsState }: Props) => {
+const ServiceTable = ({ setEditForm, blockedActionsState }: Props) => {
 
     const [blockedActions, setBlockedActions] = blockedActionsState
 
@@ -58,7 +57,6 @@ const ServiceTable = ({ setSearchKey, setEditForm, blockedActionsState }: Props)
         if (!blockedActions) {
             setBlockedActions(true)
             changeFormState(name, value.toString(), 'Editar Serviço')
-            setSearchKey(name)
             setEditForm(true)
         } else {
             alert(BLOCKED_ACTIONS_TEXT)

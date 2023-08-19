@@ -14,18 +14,18 @@ const INVALID_NUMBER_TEXT = 'Insira um número válido (utilize ponto para casas
 const ALREADY_EXISTS_TEXT = 'Já existe um serviço com esse nome!'
 
 interface Props {
-    searchKey: string
     editFormState: [boolean, React.Dispatch<React.SetStateAction<boolean>>]
     blockedActionsState: [boolean, React.Dispatch<React.SetStateAction<boolean>>]
 }
 
-const GenericForm = ({ searchKey, editFormState, blockedActionsState }: Props) => {
+const GenericForm = ({ editFormState, blockedActionsState }: Props) => {
 
     const [editForm, setEditForm] = editFormState
     const [blockedActions, setBlockedActions] = blockedActionsState
 
     const [services, setServices] = useContext(ServicesContext)
 
+    const nameGroup = useRef<HTMLDivElement>(null)
     const nameInput = useRef<HTMLInputElement>(null)
     const valueInput = useRef<HTMLInputElement>(null)
     const button = useRef<HTMLButtonElement>(null)
@@ -33,6 +33,17 @@ const GenericForm = ({ searchKey, editFormState, blockedActionsState }: Props) =
     useEffect(() => {
         saveReferenciesOnMemory(nameInput, valueInput, button)
     }, [])
+
+    // Deixando o nome indisponível para modificar
+    useEffect(() => {
+        if (nameGroup.current) {
+            if (editForm) {
+                nameGroup.current.style.display = 'none'
+            } else {
+                nameGroup.current.style.display = 'flex'
+            }
+        }
+    }, [editForm])
 
     const addService = () => {
         if (!blockedActions) {
@@ -68,36 +79,29 @@ const GenericForm = ({ searchKey, editFormState, blockedActionsState }: Props) =
     }
 
     const editService = () => {
-        setEditForm(false)
         setButtonText(LOAD_BUTTON_TEXT)
         const [name, value] = getServiceInfo()
-        const alreadyExists = services.filter(service => service.name === name)[0]
-        if (!alreadyExists) {
-            if (validNumber(value)) {
-                const service = {
-                    searchKey,
-                    name,
-                    value: Number(value)
-                }
-                const options = fetchOptions('put', service)
-                fetch(`${SERVER_URL}/edit-service`, options)
-                    .then(res => {
-                        const otherServices = services.filter(service => {
-                            return service.name !== searchKey
-                        })
-                        const newServices = [...otherServices, { name, value: Number(value) }]
-                        responseHandler(
-                            res, 204, setServices, newServices, 
-                            DB_ERROR_TEXT, ADD_BUTTON_TEXT, setBlockedActions
-                        )
-                    }).catch(() => {
-                        showError(SERVER_ERROR_TEXT, setBlockedActions)
+        if (validNumber(value)) {
+            const service = { name, value: Number(value) }
+            const options = fetchOptions('put', service)
+            fetch(`${SERVER_URL}/edit-service`, options)
+                .then(res => {
+                    const otherServices = services.filter(service => {
+                        return service.name !== name
                     })
-            } else {
-                showError(INVALID_NUMBER_TEXT, setBlockedActions)
-            }
+                    const newServices = [...otherServices, { name, value: Number(value) }]
+                    responseHandler(
+                        res, 204, setServices, newServices, 
+                        DB_ERROR_TEXT, ADD_BUTTON_TEXT, setBlockedActions
+                    )
+                    setEditForm(false)
+                }).catch(() => {
+                    showError(SERVER_ERROR_TEXT, setBlockedActions)
+                    setEditForm(false)
+                })
         } else {
-            showError(ALREADY_EXISTS_TEXT, setBlockedActions)
+            showError(INVALID_NUMBER_TEXT, setBlockedActions)
+            setEditForm(false)
         }
     }
 
@@ -106,7 +110,7 @@ const GenericForm = ({ searchKey, editFormState, blockedActionsState }: Props) =
             e.preventDefault()
             editForm ? editService() : addService()
         }}>
-            <div className='input-group'>
+            <div ref={nameGroup} className='input-group'>
                 <label className='input-group-text' htmlFor='services'>Nome</label>
                 <input ref={nameInput} className='form-control text-center' type='text' required />
             </div>

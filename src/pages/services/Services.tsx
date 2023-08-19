@@ -20,16 +20,15 @@ const Services = ({ setCurrentPage }: Props) => {
     }, [setCurrentPage])
 
     const [services] = useContext(ServicesContext)
-    const [searchKey, setSearchKey] = useState('')
     const [editForm, setEditForm] = useState(false)
     const [blockedActions, setBlockedActions] = useState(false)
 
     return (
         <div className={container}>
             {services[0] 
-            ? <ServiceTable setSearchKey={setSearchKey} setEditForm={setEditForm} blockedActionsState={[blockedActions, setBlockedActions]} /> 
+            ? <ServiceTable setEditForm={setEditForm} blockedActionsState={[blockedActions, setBlockedActions]} /> 
             : <AnyServiceAdvice page='serviço' />}
-            <GenericForm searchKey={searchKey} editFormState={[editForm, setEditForm]} blockedActionsState={[blockedActions, setBlockedActions]} />
+            <GenericForm editFormState={[editForm, setEditForm]} blockedActionsState={[blockedActions, setBlockedActions]} />
         </div>
     )
 
