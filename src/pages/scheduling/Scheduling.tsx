@@ -2,12 +2,9 @@ import { useState, useEffect } from 'react'
 import SchedulingTable from './components/schedulingTable/SchedulingTable'
 import AnySchedulingAdvice from '../components/AnyAdvice'
 import AddSchedulingForm from './components/AddSchedulingForm'
-import { ServiceScheduling } from '../../types/services'
+import { ServiceScheduling } from '../../types/schedulings'
+import { Props } from '../../types/pages'
 import { container } from '../../commonStyles'
-
-interface Props {
-	setCurrentPage: React.Dispatch<React.SetStateAction<number>>
-}
 
 const Scheduling = ({ setCurrentPage }: Props) => {
 
@@ -19,10 +16,16 @@ const Scheduling = ({ setCurrentPage }: Props) => {
 
 	return (
 		<div className={container}>
-			{servicesScheduling[0]
-				? <SchedulingTable schedulingsState={[servicesScheduling, setServicesScheduling]} />
-				: <AnySchedulingAdvice page='agendamento' />}
-			<AddSchedulingForm schedulingsState={[servicesScheduling, setServicesScheduling]} />
+			{
+				servicesScheduling[0]
+					? <SchedulingTable 
+						schedulingsState={[servicesScheduling, setServicesScheduling]} 
+						/>
+					: <AnySchedulingAdvice page='agendamento' />
+			}
+			<AddSchedulingForm 
+				schedulingsState={[servicesScheduling, setServicesScheduling]} 
+			/>
 		</div>
 	)
 

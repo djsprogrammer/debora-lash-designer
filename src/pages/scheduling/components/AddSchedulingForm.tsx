@@ -1,7 +1,7 @@
 import { useContext, useRef } from 'react'
 import { v4 } from 'uuid'
 import { ServicesContext } from '../../../ServicesContext'
-import { ServiceScheduling } from '../../../types/services'
+import { ServiceScheduling } from '../../../types/schedulings'
 import { formButtonStyle } from '../../../commonStyles'
 
 interface Props {

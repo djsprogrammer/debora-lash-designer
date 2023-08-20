@@ -1,10 +1,7 @@
 import SchedulingRow from './SchedulingRow'
-import { ServiceScheduling } from '../../../../types/services'
+import { ServiceScheduling } from '../../../../types/schedulings'
+import { Props } from '../../../../types/schedulings'
 import { tableStyle } from '../../../../commonStyles'
-
-interface Props {
-    schedulingsState: [ServiceScheduling[], React.Dispatch<React.SetStateAction<ServiceScheduling[]>>]
-}
 
 const SchedulingTable = ({ schedulingsState }: Props) => {
 

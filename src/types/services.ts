@@ -3,14 +3,6 @@ export interface Service {
     value: number
 }
 
-export interface ServiceScheduling {
-    id: string
-	service: Service
-	date: string
-	client: string
-    confirmed: boolean
-}
-
 export type Services = Service[]
 
 export type SetServices = React.Dispatch<React.SetStateAction<Services>>
