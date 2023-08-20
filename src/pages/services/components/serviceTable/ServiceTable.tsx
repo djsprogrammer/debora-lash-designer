@@ -56,7 +56,7 @@ const ServiceTable = ({ setEditForm, blockedActionsState }: Props) => {
     const setEditValuesInTheForm = (name: string, value: number) => {
         if (!blockedActions) {
             setBlockedActions(true)
-            changeFormState(name, value.toString(), 'Editar Serviço')
+            changeFormState(name, value.toString(), 'Editar')
             setEditForm(true)
         } else {
             alert(BLOCKED_ACTIONS_TEXT)
