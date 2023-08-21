@@ -36,7 +36,15 @@ const SchedulingTable = ({ schedulingsState }: Props) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {servicesScheduling.map(scheduling => <SchedulingRow key={scheduling.id} scheduling={scheduling} getScheduling={getScheduling} />)}
+                    {servicesScheduling.map(scheduling => {
+                        return (
+                            <SchedulingRow 
+                                key={scheduling.id} 
+                                scheduling={scheduling} 
+                                getScheduling={getScheduling} 
+                            />
+                        )
+                    })}
                 </tbody>
             </table>
         </div>
