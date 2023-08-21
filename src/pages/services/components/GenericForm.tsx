@@ -9,7 +9,7 @@ import { formButtonStyle } from '../../../commonStyles'
 import { SERVER_ERROR_TEXT, DB_ERROR_TEXT, BLOCKED_ACTIONS_TEXT } from '../Services'
 
 const ADD_BUTTON_TEXT = 'Adicionar Serviço'
-const LOAD_BUTTON_TEXT = 'Carregando...'
+const LOAD_BUTTON_TEXT = '...'
 const INVALID_NUMBER_TEXT = 'Insira um número válido (utilize ponto para casas decimais)'
 const ALREADY_EXISTS_TEXT = 'Já existe um serviço com esse nome!'
 
