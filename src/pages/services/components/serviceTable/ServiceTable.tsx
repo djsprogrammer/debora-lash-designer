@@ -20,40 +20,50 @@ const ServiceTable = ({ setEditForm, blockedActionsState }: Props) => {
     const [services, setServices] = useContext(ServicesContext)
 
     const [deleteServiceForm, setDeleteServiceForm] = useState(false)
+    const [targetService, setTargetService] = useState<Service>({} as Service)
 
-    const deleteService = (targetService: Service, button: React.RefObject<HTMLButtonElement>) => {
+    const showDeleteServiceForm = () => {
         if (!blockedActions) {
-            if (button.current) button.current.innerText = '...'
             setBlockedActions(true)
-            changeFormState('', '')
-            const options = {
-                method: 'delete',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(targetService)
-            }
-            fetch(`${SERVER_URL}/delete-service`, options)
-            .then(res => {
-                switch (res.status) {
-                    case 204:
-                        const remainingServices = services.filter(service => {
-                            return service.name !== targetService.name
-                        })
-                        setServices(remainingServices.sort((a, b) => a.value - b.value))
-                        break
-                    case 503:
-                        alert(DB_ERROR_TEXT)
-                        if (button.current) button.current.innerText = 'Excluir'
-                        break
-                }
-                setBlockedActions(false)
-            }).catch(() => {
-                alert(SERVER_ERROR_TEXT)
-                setBlockedActions(false)
-                if (button.current) button.current.innerText = 'Excluir'
-            })
+            setDeleteServiceForm(true)
         } else {
             alert(BLOCKED_ACTIONS_TEXT)
         }
+    }
+    
+    const deleteService = (button: React.RefObject<HTMLButtonElement>) => {
+        if (button.current) button.current.innerText = '...'
+        changeFormState('', '')
+        const options = {
+            method: 'delete',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(targetService)
+        }
+        fetch(`${SERVER_URL}/delete-service`, options)
+        .then(res => {
+            switch (res.status) {
+                case 204:
+                    const remainingServices = services.filter(service => {
+                        return service.name !== targetService.name
+                    })
+                    setServices(remainingServices.sort((a, b) => a.value - b.value))
+                    setDeleteServiceForm(false)
+                    break
+                case 503:
+                    setDeleteServiceForm(false)
+                    setTimeout(() => {
+                        alert(DB_ERROR_TEXT)
+                    }, 100)
+                    break
+            }
+            setBlockedActions(false)
+        }).catch(() => {
+            setDeleteServiceForm(false)
+            setTimeout(() => {
+                alert(SERVER_ERROR_TEXT)
+            }, 100)
+            setBlockedActions(false)
+        })
     }
 
     const setEditValuesInTheForm = (name: string, value: number) => {
@@ -79,16 +89,19 @@ const ServiceTable = ({ setEditForm, blockedActionsState }: Props) => {
                 <tbody>
                     {services.map(service =>
                         <ServiceRow 
-                            service={service} 
-                            setDeleteServiceForm={setDeleteServiceForm} 
-                            deleteService={deleteService} 
+                            service={service}
+                            setTargetService={setTargetService}
+                            showDeleteServiceForm={showDeleteServiceForm}
                             setEditValuesInTheForm={setEditValuesInTheForm} 
                         />)}
                 </tbody>
             </table>
             {
                 deleteServiceForm
-                ? <DeleteServiceForm setDeleteServiceForm={setDeleteServiceForm} />
+                ? <DeleteServiceForm 
+                    setDeleteServiceForm={setDeleteServiceForm} 
+                    deleteService={deleteService}
+                    />
                 : null
             }
         </div>
