@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react'
-import SchedulingTable from './components/schedulingTable/SchedulingTable'
-import AnySchedulingAdvice from '../components/AnyAdvice'
-import AddSchedulingForm from './components/AddSchedulingForm'
-import { ServiceScheduling } from '../../types/schedulings'
-import { Props } from '../../types/pages'
-import { container } from '../../commonStyles'
+import SchedulingTable from '../components/schedulings/SchedulingTable'
+import AnySchedulingAdvice from '../components/pages/AnyAdvice'
+import AddSchedulingForm from '../components/schedulings/AddSchedulingForm'
+import { ServiceScheduling } from '../types/schedulings'
+import { Props } from '../types/pages'
+import { container } from '../commonStyles'
 
 const Scheduling = ({ setCurrentPage }: Props) => {
 

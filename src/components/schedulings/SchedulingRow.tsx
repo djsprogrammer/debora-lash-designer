@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect, memo } from 'react'
 import { parseISO, format } from 'date-fns'
-import { ServiceScheduling } from '../../../../types/schedulings'
+import { ServiceScheduling } from '../../types/schedulings'
 
 interface Props {
     scheduling: ServiceScheduling

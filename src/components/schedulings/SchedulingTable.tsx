@@ -1,7 +1,7 @@
 import SchedulingRow from './SchedulingRow'
-import { ServiceScheduling } from '../../../../types/schedulings'
-import { Props } from '../../../../types/schedulings'
-import { tableStyle } from '../../../../commonStyles'
+import { ServiceScheduling } from '../../types/schedulings'
+import { Props } from '../../types/schedulings'
+import { tableStyle } from '../../commonStyles'
 
 const SchedulingTable = ({ schedulingsState }: Props) => {
 

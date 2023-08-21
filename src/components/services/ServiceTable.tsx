@@ -1,12 +1,12 @@
 import { useContext, useState } from 'react'
 import ServiceRow from './ServiceRow'
 import DeleteServiceForm from './DeleteServiceForm'
-import { Service, Button } from '../../../../types/services'
-import { tableStyle } from '../../../../commonStyles'
-import { ServicesContext } from '../../../../ServicesContext'
-import { changeFormState } from '../../../../formFunctions/GenericForm'
-import { SERVER_URL } from '../../../../App'
-import { DB_ERROR_TEXT, SERVER_ERROR_TEXT, BLOCKED_ACTIONS_TEXT } from '../../Services'
+import { Service, Button } from '../../types/services'
+import { tableStyle } from '../../commonStyles'
+import { ServicesContext } from '../../ServicesContext'
+import { changeFormState } from '../../formFunctions/GenericForm'
+import { SERVER_URL } from '../../App'
+import { DB_ERROR_TEXT, SERVER_ERROR_TEXT, BLOCKED_ACTIONS_TEXT } from '../../pages/Services'
 
 interface Props {
     setEditForm: React.Dispatch<React.SetStateAction<boolean>>
