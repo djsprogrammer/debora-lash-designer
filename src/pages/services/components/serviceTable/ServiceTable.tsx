@@ -1,5 +1,6 @@
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import ServiceRow from './ServiceRow'
+import DeleteServiceForm from './DeleteServiceForm'
 import { Service } from '../../../../types/services'
 import { tableStyle } from '../../../../commonStyles'
 import { ServicesContext } from '../../../../ServicesContext'
@@ -18,9 +19,12 @@ const ServiceTable = ({ setEditForm, blockedActionsState }: Props) => {
 
     const [services, setServices] = useContext(ServicesContext)
 
+    const [deleteServiceForm, setDeleteServiceForm] = useState(false)
+
     const deleteService = (targetService: Service, button: React.RefObject<HTMLButtonElement>) => {
         if (!blockedActions) {
-            if (button.current) button.current.innerText = '...'
+            setDeleteServiceForm(true)
+            /*if (button.current) button.current.innerText = '...'
             setBlockedActions(true)
             changeFormState('', '')
             const options = {
@@ -47,7 +51,7 @@ const ServiceTable = ({ setEditForm, blockedActionsState }: Props) => {
                 alert(SERVER_ERROR_TEXT)
                 setBlockedActions(false)
                 if (button.current) button.current.innerText = 'Excluir'
-            })
+            })*/
         } else {
             alert(BLOCKED_ACTIONS_TEXT)
         }
@@ -78,6 +82,11 @@ const ServiceTable = ({ setEditForm, blockedActionsState }: Props) => {
                         <ServiceRow service={service} deleteService={deleteService} setEditValuesInTheForm={setEditValuesInTheForm} />)}
                 </tbody>
             </table>
+            {
+                deleteServiceForm
+                ? <DeleteServiceForm />
+                : null
+            }
         </div>
     )
 
