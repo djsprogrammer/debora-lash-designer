@@ -17,15 +17,15 @@ const AddSchedulingForm = ({ schedulingsState }: Props) => {
 	const date = useRef<HTMLInputElement>(null)
 	const options = useRef<HTMLSelectElement>(null)
 	const clientElement = useRef<HTMLInputElement>(null)
+	const addButton = useRef<HTMLButtonElement>(null)
 
 	const addScheduling = () => {
-
-		if (date.current && options.current && clientElement.current) {
-			
+		if (addButton.current) addButton.current.innerText = '...'
+		setTimeout(() => {
+			if (date.current && options.current && clientElement.current) {
 			let formattedDate = date.current.value
 			const option = JSON.parse(options.current.value)
 			const client = clientElement.current.value
-
 			const serviceScheduling: ServiceScheduling = {
 				id: v4(),
 				service: option,
@@ -33,18 +33,15 @@ const AddSchedulingForm = ({ schedulingsState }: Props) => {
 				client,
 				confirmed: false
 			}
-
 			// Organizando novos agendamentos por datas
 			const newSchedulings = [...servicesScheduling, serviceScheduling]
 				.sort((a, b) => a.date.localeCompare(b.date)).reverse()
-
 			setServicesScheduling(newSchedulings)
-
 			date.current.value = ''
 			clientElement.current.value = ''
-
-		}
-		
+			if (addButton.current) addButton.current.innerText = 'Agendar'
+			}
+		}, 2000)
 	}
 
 	return (
@@ -65,7 +62,7 @@ const AddSchedulingForm = ({ schedulingsState }: Props) => {
 				</select>
 			</div>
 			<input ref={clientElement} className='form-control text-center p-1 mb-3' type='text' placeholder='Digite o nome do cliente' required />
-			<button className={formButtonStyle} type='submit'>Agendar</button>
+			<button ref={addButton} className={formButtonStyle} type='submit'>Agendar</button>
 		</form>
 	)
 }
