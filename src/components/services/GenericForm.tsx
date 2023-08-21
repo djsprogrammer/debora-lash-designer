@@ -3,10 +3,10 @@ import {
     getServiceInfo, setButtonText, validNumber, saveReferenciesOnMemory, 
     showError, responseHandler, fetchOptions 
 } from '../../formFunctions/GenericForm'
-import { ServicesContext } from '../../ServicesContext'
-import { SERVER_URL } from '../../App'
-import { formButtonStyle } from '../../commonStyles'
-import { SERVER_ERROR_TEXT, DB_ERROR_TEXT, BLOCKED_ACTIONS_TEXT } from '../../pages/Services'
+import { ServicesContext } from 'ServicesContext'
+import { SERVER_URL } from 'App'
+import { formButtonStyle } from 'commonStyles'
+import { SERVER_ERROR_TEXT, DB_ERROR_TEXT, BLOCKED_ACTIONS_TEXT } from 'pages/Services'
 
 const ADD_BUTTON_TEXT = 'Adicionar Serviço'
 const LOAD_BUTTON_TEXT = '...'

@@ -1,8 +1,8 @@
 import { useContext, useRef } from 'react'
 import { v4 } from 'uuid'
-import { ServicesContext } from '../../ServicesContext'
-import { ServiceScheduling } from '../../types/schedulings'
-import { formButtonStyle } from '../../commonStyles'
+import { ServicesContext } from 'ServicesContext'
+import { ServiceScheduling } from 'types/schedulings'
+import { formButtonStyle } from 'commonStyles'
 
 interface Props {
 	schedulingsState: [ServiceScheduling[], React.Dispatch<React.SetStateAction<ServiceScheduling[]>>]
