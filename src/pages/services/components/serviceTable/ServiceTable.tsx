@@ -23,8 +23,7 @@ const ServiceTable = ({ setEditForm, blockedActionsState }: Props) => {
 
     const deleteService = (targetService: Service, button: React.RefObject<HTMLButtonElement>) => {
         if (!blockedActions) {
-            setDeleteServiceForm(true)
-            /*if (button.current) button.current.innerText = '...'
+            if (button.current) button.current.innerText = '...'
             setBlockedActions(true)
             changeFormState('', '')
             const options = {
@@ -51,7 +50,7 @@ const ServiceTable = ({ setEditForm, blockedActionsState }: Props) => {
                 alert(SERVER_ERROR_TEXT)
                 setBlockedActions(false)
                 if (button.current) button.current.innerText = 'Excluir'
-            })*/
+            })
         } else {
             alert(BLOCKED_ACTIONS_TEXT)
         }
@@ -79,12 +78,17 @@ const ServiceTable = ({ setEditForm, blockedActionsState }: Props) => {
                 </thead>
                 <tbody>
                     {services.map(service =>
-                        <ServiceRow service={service} deleteService={deleteService} setEditValuesInTheForm={setEditValuesInTheForm} />)}
+                        <ServiceRow 
+                            service={service} 
+                            setDeleteServiceForm={setDeleteServiceForm} 
+                            deleteService={deleteService} 
+                            setEditValuesInTheForm={setEditValuesInTheForm} 
+                        />)}
                 </tbody>
             </table>
             {
                 deleteServiceForm
-                ? <DeleteServiceForm />
+                ? <DeleteServiceForm setDeleteServiceForm={setDeleteServiceForm} />
                 : null
             }
         </div>
