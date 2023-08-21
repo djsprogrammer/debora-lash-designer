@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react'
 import ServiceRow from './ServiceRow'
 import DeleteServiceForm from './DeleteServiceForm'
-import { Service } from '../../../../types/services'
+import { Service, Button } from '../../../../types/services'
 import { tableStyle } from '../../../../commonStyles'
 import { ServicesContext } from '../../../../ServicesContext'
 import { changeFormState } from '../../../../formFunctions/GenericForm'
@@ -31,7 +31,7 @@ const ServiceTable = ({ setEditForm, blockedActionsState }: Props) => {
         }
     }
     
-    const deleteService = (button: React.RefObject<HTMLButtonElement>) => {
+    const deleteService = (button: Button) => {
         if (button.current) button.current.innerText = '...'
         changeFormState('', '')
         const options = {

@@ -13,3 +13,5 @@ export const DEFAULT_USER = {
     name: '',
     value: 0
 }
+
+export type Button = React.RefObject<HTMLButtonElement>

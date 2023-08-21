@@ -1,8 +1,9 @@
 import { useRef } from 'react'
+import { Button } from '../../../../types/services'
 
 interface Props {
 	setDeleteServiceForm: React.Dispatch<React.SetStateAction<boolean>>
-	deleteService: (button: React.RefObject<HTMLButtonElement>) => void
+	deleteService: (button: Button) => void
 }
 
 const DeleteServiceForm = ({ deleteService, setDeleteServiceForm }: Props) => {
