@@ -35,20 +35,28 @@ const AddSchedulingForm = ({ schedulingsState }: Props) => {
 				date: formattedDate,
 				client,
 			}
-			const payload = fetchOptions('post', serviceScheduling)
-			fetch(`${SERVER_URL}/create-scheduling`, payload)
-				.then(res => {
-					// Organizando novos agendamentos por datas
-					const newSchedulings = [...servicesScheduling, serviceScheduling]
-						.sort((a, b) => a.date.localeCompare(b.date)).reverse()
-					responseHandler(res, setServicesScheduling, newSchedulings)
-					resetForm(date, clientElement, addButton)
-
-				})
-				.catch(() => {
-					alert(SERVER_ERROR_TEXT)
-					resetForm(date, clientElement, addButton)					
-				})
+			// Não permitindo criar dois agendamentos para a mesma pessoa no mesmo dia
+			const alreadyExists = servicesScheduling.filter(scheduling => {
+				return scheduling.client === serviceScheduling.client && scheduling.date === serviceScheduling.date
+			})[0]
+			if (alreadyExists) {
+				alert('Já existe um agendamento para essa pessoa nessa data')
+				resetForm(date, clientElement, addButton)
+			} else {
+				const payload = fetchOptions('post', serviceScheduling)
+				fetch(`${SERVER_URL}/create-scheduling`, payload)
+					.then(res => {
+						// Organizando novos agendamentos por datas
+						const newSchedulings = [...servicesScheduling, serviceScheduling]
+							.sort((a, b) => a.date.localeCompare(b.date)).reverse()
+						responseHandler(res, setServicesScheduling, newSchedulings)
+						resetForm(date, clientElement, addButton)
+					})
+					.catch(() => {
+						alert(SERVER_ERROR_TEXT)
+						resetForm(date, clientElement, addButton)			
+					})
+			}
 		}
 	}
 
