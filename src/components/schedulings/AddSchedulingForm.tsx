@@ -4,6 +4,7 @@ import { ServicesContext } from 'ServicesContext'
 import { ServiceScheduling } from 'types/schedulings'
 import { formButtonStyle } from 'commonStyles'
 import { SERVER_URL } from 'App'
+import { SERVER_ERROR_TEXT } from 'errorAdvices'
 import { fetchOptions } from 'formFunctions/GenericForm'
 import { responseHandler, resetForm } from 'formFunctions/AddSchedulingForm'
 
@@ -44,6 +45,10 @@ const AddSchedulingForm = ({ schedulingsState }: Props) => {
 					responseHandler(res, setServicesScheduling, newSchedulings)
 					resetForm(date, clientElement, addButton)
 
+				})
+				.catch(() => {
+					alert(SERVER_ERROR_TEXT)
+					resetForm(date, clientElement, addButton)					
 				})
 		}
 	}
