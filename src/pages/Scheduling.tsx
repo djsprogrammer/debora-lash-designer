@@ -14,7 +14,10 @@ const Scheduling = ({ setCurrentPage }: Props) => {
 	useEffect(() => {
 		fetch(`${SERVER_URL}/all-schedulings`)
 			.then(res => res.json())
-			.then(schedulings => setServicesScheduling(schedulings))
+			.then((schedulings: ServiceScheduling[]) => {
+				const orderSchedulings = schedulings.sort((a, b) => a.date.localeCompare(b.date)).reverse()
+				setServicesScheduling(orderSchedulings)
+			})
 	}, [])
 
 	useEffect(() => {
