@@ -62,11 +62,11 @@ const AddSchedulingForm = ({ schedulingsState }: Props) => {
 		}}>
 			<div className='input-group'>
 				<label className='input-group-text'>Escolha uma data</label>
-				<input className='pe-1 form-control text-center' ref={date} type='date' required />
+				<input ref={date} className='pe-1 form-control text-center' type='date' required />
 			</div>
 			<div className='input-group my-3'>
 				<label className='input-group-text'>Escolha um serviço</label>
-				<select className='form-select text-center' ref={options} required>
+				<select ref={options} className='form-select text-center' required>
 					{services.map(service => (
 						<option key={service.name} value={JSON.stringify(service)}>{service.name}</option>
 					))}
