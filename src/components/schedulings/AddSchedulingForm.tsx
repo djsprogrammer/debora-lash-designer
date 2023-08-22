@@ -34,7 +34,6 @@ const AddSchedulingForm = ({ schedulingsState }: Props) => {
 				service: option,
 				date: formattedDate,
 				client,
-				confirmed: false
 			}
 			const payload = fetchOptions('post', serviceScheduling)
 			fetch(`${SERVER_URL}/create-scheduling`, payload)
