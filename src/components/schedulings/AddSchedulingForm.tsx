@@ -3,6 +3,9 @@ import { v4 } from 'uuid'
 import { ServicesContext } from 'ServicesContext'
 import { ServiceScheduling } from 'types/schedulings'
 import { formButtonStyle } from 'commonStyles'
+import { SERVER_URL } from 'App'
+import { fetchOptions } from 'formFunctions/GenericForm'
+import { responseHandler, resetForm } from 'formFunctions/AddSchedulingForm'
 
 interface Props {
 	schedulingsState: [ServiceScheduling[], React.Dispatch<React.SetStateAction<ServiceScheduling[]>>]
@@ -20,28 +23,29 @@ const AddSchedulingForm = ({ schedulingsState }: Props) => {
 	const addButton = useRef<HTMLButtonElement>(null)
 
 	const addScheduling = () => {
-		if (addButton.current) addButton.current.innerText = '...'
-		setTimeout(() => {
-			if (date.current && options.current && clientElement.current) {
+		if (date.current && clientElement.current && options.current) {
+			if (addButton.current) addButton.current.innerText = '...'
 			let formattedDate = date.current.value
 			const option = JSON.parse(options.current.value)
 			const client = clientElement.current.value
 			const serviceScheduling: ServiceScheduling = {
-				id: v4(),
+				frontId: v4(),
 				service: option,
 				date: formattedDate,
 				client,
 				confirmed: false
 			}
-			// Organizando novos agendamentos por datas
-			const newSchedulings = [...servicesScheduling, serviceScheduling]
-				.sort((a, b) => a.date.localeCompare(b.date)).reverse()
-			setServicesScheduling(newSchedulings)
-			date.current.value = ''
-			clientElement.current.value = ''
-			if (addButton.current) addButton.current.innerText = 'Agendar'
-			}
-		}, 2000)
+			const payload = fetchOptions('post', serviceScheduling)
+			fetch(`${SERVER_URL}/create-scheduling`, payload)
+				.then(res => {
+					// Organizando novos agendamentos por datas
+					const newSchedulings = [...servicesScheduling, serviceScheduling]
+						.sort((a, b) => a.date.localeCompare(b.date)).reverse()
+					responseHandler(res, setServicesScheduling, newSchedulings)
+					resetForm(date, clientElement, addButton)
+
+				})
+		}
 	}
 
 	return (

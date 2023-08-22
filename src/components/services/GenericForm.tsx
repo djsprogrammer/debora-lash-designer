@@ -6,7 +6,7 @@ import {
 import { ServicesContext } from 'ServicesContext'
 import { SERVER_URL } from 'App'
 import { formButtonStyle } from 'commonStyles'
-import { SERVER_ERROR_TEXT, DB_ERROR_TEXT, BLOCKED_ACTIONS_TEXT } from 'pages/Services'
+import { SERVER_ERROR_TEXT, DB_ERROR_TEXT, BLOCKED_ACTIONS_TEXT } from 'errorAdvices'
 
 const ADD_BUTTON_TEXT = 'Adicionar Serviço'
 const LOAD_BUTTON_TEXT = '...'

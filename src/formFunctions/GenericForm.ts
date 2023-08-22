@@ -1,5 +1,6 @@
 import React from "react"
 import { Service, SetServices } from "../types/services"
+import { ServiceScheduling } from "types/schedulings"
 
 let nameInput: Input
 let valueInput: Input
@@ -76,7 +77,7 @@ export const responseHandler = (res: Response, successCase: number, setServices:
     setBlockedActions(false)
 }
 
-export const fetchOptions = (targetMethod: string, service: Service) => {
+export const fetchOptions = (targetMethod: string, service: Service | ServiceScheduling) => {
     return {
         method: targetMethod,
         headers: { 'Content-Type': 'application/json' },

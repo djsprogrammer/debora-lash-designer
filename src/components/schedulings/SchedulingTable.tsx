@@ -10,11 +10,11 @@ const SchedulingTable = ({ schedulingsState }: Props) => {
     const getScheduling = (scheduling: ServiceScheduling) => {
 
         // Invertendo o estado de confirmação do agendamento alvo ao clicar no botão
-        let targetScheduling: ServiceScheduling = servicesScheduling.filter(current => current.id === scheduling.id)[0]
+        let targetScheduling: ServiceScheduling = servicesScheduling.filter(current => current.frontId === scheduling.frontId)[0]
         targetScheduling.confirmed = !targetScheduling.confirmed
 
         // Agendamentos não selecionados
-        const otherSchedulings = servicesScheduling.filter(current => current.id !== scheduling.id)
+        const otherSchedulings = servicesScheduling.filter(current => current.frontId !== scheduling.frontId)
 
         // Organizando novos agendamentos por datas
         const newSchedulings = [...otherSchedulings, targetScheduling]
@@ -39,7 +39,7 @@ const SchedulingTable = ({ schedulingsState }: Props) => {
                     {servicesScheduling.map(scheduling => {
                         return (
                             <SchedulingRow 
-                                key={scheduling.id} 
+                                key={scheduling.frontId} 
                                 scheduling={scheduling} 
                                 getScheduling={getScheduling} 
                             />

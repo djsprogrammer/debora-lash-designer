@@ -6,7 +6,7 @@ import { tableStyle } from 'commonStyles'
 import { ServicesContext } from 'ServicesContext'
 import { changeFormState } from 'formFunctions/GenericForm'
 import { SERVER_URL } from 'App'
-import { DB_ERROR_TEXT, SERVER_ERROR_TEXT, BLOCKED_ACTIONS_TEXT } from 'pages/Services'
+import { DB_ERROR_TEXT, SERVER_ERROR_TEXT, BLOCKED_ACTIONS_TEXT } from 'errorAdvices'
 
 interface Props {
     setEditForm: React.Dispatch<React.SetStateAction<boolean>>

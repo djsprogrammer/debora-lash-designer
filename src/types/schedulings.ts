@@ -1,7 +1,7 @@
 import { Service } from './services'
 
 export interface ServiceScheduling {
-    id: string
+    frontId: string
 	service: Service
 	date: string
 	client: string
