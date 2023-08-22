@@ -5,10 +5,17 @@ import AddSchedulingForm from 'components/schedulings/AddSchedulingForm'
 import { ServiceScheduling } from 'types/schedulings'
 import { Props } from 'types/pages'
 import { container } from 'commonStyles'
+import { SERVER_URL } from 'App'
 
 const Scheduling = ({ setCurrentPage }: Props) => {
 
 	const [servicesScheduling, setServicesScheduling] = useState<ServiceScheduling[]>([])
+
+	useEffect(() => {
+		fetch(`${SERVER_URL}/all-schedulings`)
+			.then(res => res.json())
+			.then(schedulings => setServicesScheduling(schedulings))
+	}, [])
 
 	useEffect(() => {
 		setCurrentPage(1)
