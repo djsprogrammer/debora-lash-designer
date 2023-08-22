@@ -1,12 +1,11 @@
 import { useContext, useRef } from 'react'
-import { v4 } from 'uuid'
 import { ServicesContext } from 'ServicesContext'
 import { ServiceScheduling } from 'types/schedulings'
 import { formButtonStyle } from 'commonStyles'
 import { SERVER_URL } from 'App'
 import { SERVER_ERROR_TEXT } from 'errorAdvices'
 import { fetchOptions } from 'formFunctions/GenericForm'
-import { responseHandler, resetForm } from 'formFunctions/AddSchedulingForm'
+import { createSchedulingToSend, responseHandler, resetForm } from 'formFunctions/AddSchedulingForm'
 
 interface Props {
 	schedulingsState: [ServiceScheduling[], React.Dispatch<React.SetStateAction<ServiceScheduling[]>>]
@@ -24,17 +23,9 @@ const AddSchedulingForm = ({ schedulingsState }: Props) => {
 	const addButton = useRef<HTMLButtonElement>(null)
 
 	const addScheduling = () => {
-		if (date.current && clientElement.current && options.current) {
-			if (addButton.current) addButton.current.innerText = '...'
-			let formattedDate = date.current.value
-			const option = JSON.parse(options.current.value)
-			const client = clientElement.current.value
-			const serviceScheduling: ServiceScheduling = {
-				frontId: v4(),
-				service: option,
-				date: formattedDate,
-				client,
-			}
+		if (addButton.current) addButton.current.innerText = '...'
+		const serviceScheduling = createSchedulingToSend(options, date, clientElement)
+		if (serviceScheduling) {
 			// Não permitindo criar dois agendamentos para a mesma pessoa no mesmo dia
 			const alreadyExists = servicesScheduling.filter(scheduling => {
 				return scheduling.client === serviceScheduling.client && scheduling.date === serviceScheduling.date
