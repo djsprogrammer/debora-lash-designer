@@ -1,11 +1,11 @@
-import { useContext, useRef } from 'react'
+import { useContext, useRef, useEffect } from 'react'
 import { ServicesContext } from 'ServicesContext'
 import { ServiceScheduling } from 'types/schedulings'
 import { formButtonStyle } from 'commonStyles'
 import { SERVER_URL } from 'App'
 import { SERVER_ERROR_TEXT } from 'errorAdvices'
 import { fetchOptions } from 'formFunctions/GenericForm'
-import { createSchedulingToSend, responseHandler, resetForm } from 'formFunctions/AddSchedulingForm'
+import { saveRefsInMemory, createSchedulingToSend, responseHandler, resetForm } from 'formFunctions/AddSchedulingForm'
 
 interface Props {
 	schedulingsState: [ServiceScheduling[], React.Dispatch<React.SetStateAction<ServiceScheduling[]>>]
@@ -19,12 +19,16 @@ const AddSchedulingForm = ({ schedulingsState }: Props) => {
 
 	const date = useRef<HTMLInputElement>(null)
 	const options = useRef<HTMLSelectElement>(null)
-	const clientElement = useRef<HTMLInputElement>(null)
+	const client = useRef<HTMLInputElement>(null)
 	const addButton = useRef<HTMLButtonElement>(null)
+
+	useEffect(() => {
+		saveRefsInMemory(options, date, client, addButton)
+	}, [])
 
 	const addScheduling = () => {
 		if (addButton.current) addButton.current.innerText = '...'
-		const serviceScheduling = createSchedulingToSend(options, date, clientElement)
+		const serviceScheduling = createSchedulingToSend()
 		if (serviceScheduling) {
 			// Não permitindo criar dois agendamentos para a mesma pessoa no mesmo dia
 			const alreadyExists = servicesScheduling.filter(scheduling => {
@@ -32,7 +36,7 @@ const AddSchedulingForm = ({ schedulingsState }: Props) => {
 			})[0]
 			if (alreadyExists) {
 				alert('Já existe um agendamento para essa pessoa nessa data')
-				resetForm(date, clientElement, addButton)
+				resetForm()
 			} else {
 				const payload = fetchOptions('post', serviceScheduling)
 				fetch(`${SERVER_URL}/create-scheduling`, payload)
@@ -41,11 +45,11 @@ const AddSchedulingForm = ({ schedulingsState }: Props) => {
 						const newSchedulings = [...servicesScheduling, serviceScheduling]
 							.sort((a, b) => a.date.localeCompare(b.date)).reverse()
 						responseHandler(res, setServicesScheduling, newSchedulings)
-						resetForm(date, clientElement, addButton)
+						resetForm()
 					})
 					.catch(() => {
 						alert(SERVER_ERROR_TEXT)
-						resetForm(date, clientElement, addButton)			
+						resetForm()			
 					})
 			}
 		}
@@ -68,7 +72,7 @@ const AddSchedulingForm = ({ schedulingsState }: Props) => {
 					))}
 				</select>
 			</div>
-			<input ref={clientElement} className='form-control text-center p-1 mb-3' type='text' placeholder='Digite o nome do cliente' required />
+			<input ref={client} className='form-control text-center p-1 mb-3' type='text' placeholder='Digite o nome do cliente' required />
 			<button ref={addButton} className={formButtonStyle} type='submit'>Agendar</button>
 		</form>
 	)
