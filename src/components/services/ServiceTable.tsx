@@ -7,7 +7,7 @@ import { tableStyle } from 'commonStyles'
 import { ServicesContext } from 'ServicesContext'
 import { changeFormState } from 'formFunctions/GenericForm'
 import { SERVER_URL } from 'App'
-import { DB_ERROR_TEXT, SERVER_ERROR_TEXT, BLOCKED_ACTIONS_TEXT } from 'errorAdvices'
+import { DB_ERROR_TEXT, SERVER_ERROR_TEXT } from 'errorAdvices'
 
 interface Props {
     setEditForm: React.Dispatch<React.SetStateAction<boolean>>
@@ -28,8 +28,6 @@ const ServiceTable = ({ setEditForm, blockedActionsState }: Props) => {
         if (!blockedActions) {
             setBlockedActions(true)
             setDeleteServiceForm(true)
-        } else {
-            alert(BLOCKED_ACTIONS_TEXT)
         }
     }
     
@@ -80,8 +78,6 @@ const ServiceTable = ({ setEditForm, blockedActionsState }: Props) => {
             setBlockedActions(true)
             changeFormState(name, value.toString(), 'Editar')
             setEditForm(true)
-        } else {
-            alert(BLOCKED_ACTIONS_TEXT)
         }
     }
 

@@ -6,7 +6,7 @@ import {
 import { ServicesContext } from 'ServicesContext'
 import { SERVER_URL } from 'App'
 import { formButtonStyle } from 'commonStyles'
-import { SERVER_ERROR_TEXT, DB_ERROR_TEXT, BLOCKED_ACTIONS_TEXT } from 'errorAdvices'
+import { SERVER_ERROR_TEXT, DB_ERROR_TEXT } from 'errorAdvices'
 import { BooleanState } from 'types/common'
 
 const ADD_BUTTON_TEXT = 'Adicionar Serviço'
@@ -58,7 +58,8 @@ const GenericForm = ({ editFormState, blockedActionsState }: Props) => {
                         name, value: Number(value)
                     }
                     const options = fetchOptions('post', service)
-                    fetch(`${SERVER_URL}/create-service`, options)
+                    setTimeout(() => {
+                        fetch(`${SERVER_URL}/create-service`, options)
                         .then(res => {
                             const newServices = [...services, service]
                             responseHandler(
@@ -68,14 +69,13 @@ const GenericForm = ({ editFormState, blockedActionsState }: Props) => {
                         }).catch(() => {
                             showError(SERVER_ERROR_TEXT, setBlockedActions)
                         })
+                    }, 5000)
                 } else {
                     showError(INVALID_NUMBER_TEXT, setBlockedActions)
                 }
             } else {
                 showError(ALREADY_EXISTS_TEXT, setBlockedActions)
             }
-        } else {
-            alert(BLOCKED_ACTIONS_TEXT)
         }
     }
 
