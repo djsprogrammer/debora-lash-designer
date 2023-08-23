@@ -9,8 +9,9 @@ const Navegation = ({ currentPage }: Props) => {
 
 	const link1 = useRef<HTMLAnchorElement>(null)
 	const link2 = useRef<HTMLAnchorElement>(null)
+	const link3 = useRef<HTMLAnchorElement>(null)
 
-	const links = [link1, link2]
+	const links = [link1, link2, link3]
 
 	useEffect(() => {
 		if (currentPage !== 0) {
@@ -31,8 +32,9 @@ const Navegation = ({ currentPage }: Props) => {
 
 	return (
 		<nav className='d-flex justify-content-center p-3'>
-			<Link ref={link1} className={`${linkStyle} me-4`} to='/'><h5>Agendamentos</h5></Link>
-			<Link ref={link2} className={linkStyle} to='/services'><h5>Serviços</h5></Link>
+			<Link ref={link1} className={linkStyle} to='/'><h5>Agendamentos</h5></Link>
+			<Link ref={link2} className={`${linkStyle} mx-4`} to='/services'><h5>Serviços</h5></Link>
+			<Link ref={link3} className={linkStyle} to='/expenses'><h5>Despesas</h5></Link>
 		</nav>
 	)
 	

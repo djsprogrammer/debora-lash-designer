@@ -7,6 +7,7 @@ import Header from './components/fixed/Header'
 import Navegation from './components/fixed/Navegation'
 import Scheduling from './pages/Scheduling'
 import Services from './pages/Services'
+import Expenses from './pages/Expenses'
 import ServicesProvider from './ServicesContext'
 
 export const SERVER_URL = 'http://localhost:8080'
@@ -71,6 +72,7 @@ const App = () => {
                     <Routes>
                         <Route path='/' element={<HandlePages />} />
                         <Route path='/services' element={<Services setCurrentPage={setCurrentPage} />} />
+                        <Route path='/expenses' element={<Expenses setCurrentPage={setCurrentPage} />} />
                     </Routes>
                 </Router>
             </ServicesProvider>
