@@ -4,7 +4,7 @@ import { Props, ServiceScheduling } from 'types/schedulings'
 import { tableStyle } from 'commonStyles'
 import DeleteSchedulingForm from 'components/schedulings/DeleteSchedulingForm'
 import { SERVER_URL } from 'App'
-import { DB_ERROR_TEXT } from 'errorAdvices'
+import { DB_ERROR_TEXT, SERVER_ERROR_TEXT } from 'errorAdvices'
 import { ButtonRef } from 'types/common'
 
 const SchedulingTable = ({ schedulingsState }: Props) => {
@@ -40,6 +40,12 @@ const SchedulingTable = ({ schedulingsState }: Props) => {
                 }
                 setDeleteSchedulingForm(false)
                 setPossibleToCancel(true)
+            }).catch(() => {
+                setDeleteSchedulingForm(false)
+                setPossibleToCancel(true)
+                setTimeout(() => {
+                    alert(SERVER_ERROR_TEXT)
+                }, 100)
             })
     }
 
