@@ -1,13 +1,18 @@
 import { useContext, useRef, useEffect } from 'react'
 import { ServicesContext } from 'ServicesContext'
 import { Props } from 'types/schedulings'
+import { BooleanSet } from 'types/common'
 import { formButtonStyle } from 'commonStyles'
 import { SERVER_URL } from 'App'
 import { SERVER_ERROR_TEXT } from 'errorAdvices'
 import { fetchOptions } from 'formFunctions/GenericForm'
 import { saveRefsInMemory, createSchedulingToSend, responseHandler, resetForm } from 'formFunctions/AddSchedulingForm'
 
-const AddSchedulingForm = ({ schedulingsState }: Props) => {
+interface AddSchedulingFormProps extends Props {
+	setBlockedActions: BooleanSet
+}
+
+const AddSchedulingForm = ({ schedulingsState, setBlockedActions }: AddSchedulingFormProps) => {
 
 	const [services] = useContext(ServicesContext)
 
@@ -23,6 +28,7 @@ const AddSchedulingForm = ({ schedulingsState }: Props) => {
 	}, [])
 
 	const addScheduling = () => {
+		setBlockedActions(true)
 		if (addButton.current) addButton.current.innerText = '...'
 		const serviceScheduling = createSchedulingToSend()
 		if (serviceScheduling) {
@@ -33,20 +39,25 @@ const AddSchedulingForm = ({ schedulingsState }: Props) => {
 			if (alreadyExists) {
 				alert('Já existe um agendamento para essa pessoa nessa data')
 				resetForm()
+				setBlockedActions(false)
 			} else {
-				const payload = fetchOptions('post', serviceScheduling)
-				fetch(`${SERVER_URL}/create-scheduling`, payload)
-					.then(res => {
-						// Organizando novos agendamentos por datas
-						const newSchedulings = [...servicesScheduling, serviceScheduling]
-							.sort((a, b) => a.date.localeCompare(b.date)).reverse()
-						responseHandler(res, setServicesScheduling, newSchedulings)
-						resetForm()
-					})
-					.catch(() => {
-						alert(SERVER_ERROR_TEXT)
-						resetForm()			
-					})
+				setTimeout(() => {
+					const payload = fetchOptions('post', serviceScheduling)
+					fetch(`${SERVER_URL}/create-scheduling`, payload)
+						.then(res => {
+							// Organizando novos agendamentos por datas
+							const newSchedulings = [...servicesScheduling, serviceScheduling]
+								.sort((a, b) => a.date.localeCompare(b.date)).reverse()
+							responseHandler(res, setServicesScheduling, newSchedulings)
+							resetForm()
+							setBlockedActions(false)
+						})
+						.catch(() => {
+							alert(SERVER_ERROR_TEXT)
+							resetForm()
+							setBlockedActions(false)		
+						})
+				}, 5000)
 			}
 		}
 	}

@@ -6,9 +6,10 @@ interface Props {
     scheduling: ServiceScheduling
     setDeleteSchedulingForm: React.Dispatch<React.SetStateAction<boolean>>
     setTargetScheduling: SetScheduling
+    blockedActions: boolean
 }
 
-const SchedulingRow = ({ scheduling, setDeleteSchedulingForm, setTargetScheduling }: Props) => {
+const SchedulingRow = ({ scheduling, setDeleteSchedulingForm, setTargetScheduling, blockedActions }: Props) => {
 
     const buttonRef = useRef<HTMLButtonElement>(null)
 
@@ -22,8 +23,10 @@ const SchedulingRow = ({ scheduling, setDeleteSchedulingForm, setTargetSchedulin
             <td>{date}</td>
             <td>
                 <button ref={buttonRef} onClick={() => {
-                    setDeleteSchedulingForm(true)
-                    setTargetScheduling(scheduling)
+                    if (!blockedActions) {
+                        setDeleteSchedulingForm(true)
+                        setTargetScheduling(scheduling)
+                    }
                 }} className='btn btn-sm btn-outline-danger'>
                     Excluir
                 </button>
