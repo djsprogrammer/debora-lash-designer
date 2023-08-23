@@ -1,7 +1,8 @@
 import { useContext, useState } from 'react'
 import ServiceRow from './ServiceRow'
 import DeleteServiceForm from './DeleteServiceForm'
-import { Service, Button } from 'types/services'
+import { Service } from 'types/services'
+import { BooleanState, ButtonRef } from 'types/common'
 import { tableStyle } from 'commonStyles'
 import { ServicesContext } from 'ServicesContext'
 import { changeFormState } from 'formFunctions/GenericForm'
@@ -10,7 +11,7 @@ import { DB_ERROR_TEXT, SERVER_ERROR_TEXT, BLOCKED_ACTIONS_TEXT } from 'errorAdv
 
 interface Props {
     setEditForm: React.Dispatch<React.SetStateAction<boolean>>
-    blockedActionsState: [boolean, React.Dispatch<React.SetStateAction<boolean>>]
+    blockedActionsState: BooleanState
 }
 
 const ServiceTable = ({ setEditForm, blockedActionsState }: Props) => {
@@ -32,8 +33,8 @@ const ServiceTable = ({ setEditForm, blockedActionsState }: Props) => {
         }
     }
     
-    const deleteService = (button: Button) => {
-        if (button.current) button.current.innerText = '...'
+    const deleteService = (buttonRef: ButtonRef) => {
+        if (buttonRef.current) buttonRef.current.innerText = '...'
         setPossibleToCancel(false)
         changeFormState('', '')
         const options = {

@@ -1,9 +1,9 @@
 import { useRef } from 'react'
-import { Button } from 'types/services'
+import { ButtonRef } from 'types/common'
 
 interface Props {
 	setDeleteSchedulingForm: React.Dispatch<React.SetStateAction<boolean>>
-	deleteScheduling: (button: Button) => void
+	deleteScheduling: (buttonRef: ButtonRef) => void
 	possibleToCancel: boolean
 }
 

@@ -7,6 +7,13 @@ export interface ServiceScheduling {
 	client: string
 }
 
+export type ServiceSchedulings = ServiceScheduling[]
+
+export type SetScheduling = React.Dispatch<React.SetStateAction<ServiceScheduling>>
+export type SetSchedulings = React.Dispatch<React.SetStateAction<ServiceScheduling[]>>
+
+export type SchedulingsState = [ServiceSchedulings, SetSchedulings]
+
 export interface Props {
-    schedulingsState: [ServiceScheduling[], React.Dispatch<React.SetStateAction<ServiceScheduling[]>>]
+    schedulingsState: SchedulingsState
 }

@@ -7,6 +7,7 @@ import { ServicesContext } from 'ServicesContext'
 import { SERVER_URL } from 'App'
 import { formButtonStyle } from 'commonStyles'
 import { SERVER_ERROR_TEXT, DB_ERROR_TEXT, BLOCKED_ACTIONS_TEXT } from 'errorAdvices'
+import { BooleanState } from 'types/common'
 
 const ADD_BUTTON_TEXT = 'Adicionar Serviço'
 const LOAD_BUTTON_TEXT = '...'
@@ -14,8 +15,8 @@ const INVALID_NUMBER_TEXT = 'Insira um número válido (utilize ponto para casas
 const ALREADY_EXISTS_TEXT = 'Já existe um serviço com esse nome!'
 
 interface Props {
-    editFormState: [boolean, React.Dispatch<React.SetStateAction<boolean>>]
-    blockedActionsState: [boolean, React.Dispatch<React.SetStateAction<boolean>>]
+    editFormState: BooleanState
+    blockedActionsState: BooleanState
 }
 
 const GenericForm = ({ editFormState, blockedActionsState }: Props) => {

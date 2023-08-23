@@ -5,6 +5,8 @@ export interface Service {
 
 export type Services = Service[]
 
+export type SetService = React.Dispatch<React.SetStateAction<Service>>
+
 export type SetServices = React.Dispatch<React.SetStateAction<Services>>
 
 export type ServicesState = [Services, SetServices]
@@ -13,5 +15,3 @@ export const DEFAULT_USER = {
     name: '',
     value: 0
 }
-
-export type Button = React.RefObject<HTMLButtonElement>

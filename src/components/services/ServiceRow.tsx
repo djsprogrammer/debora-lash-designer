@@ -1,9 +1,9 @@
 import { useRef } from 'react'
-import { Service } from 'types/services'
+import { Service, SetService } from 'types/services'
 
 interface Props {
     service: Service
-    setTargetService: React.Dispatch<React.SetStateAction<Service>>
+    setTargetService: SetService
     showDeleteServiceForm: () => void
     setEditValuesInTheForm: (tdName: string, value: number) => void
 }

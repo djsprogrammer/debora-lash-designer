@@ -1,8 +1,8 @@
 import { useRef } from 'react'
-import { Button } from 'types/services'
+import { ButtonRef } from 'types/common'
 
 interface Props {
-	deleteService: (button: Button) => void
+	deleteService: (buttonRef: ButtonRef) => void
 	possibleToCancel: boolean
 	cancelDelete: () => void
 }

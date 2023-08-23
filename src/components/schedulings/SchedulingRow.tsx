@@ -1,11 +1,11 @@
 import { useRef, memo } from 'react'
 import { parseISO, format } from 'date-fns'
-import { ServiceScheduling } from 'types/schedulings'
+import { ServiceScheduling, SetScheduling } from 'types/schedulings'
 
 interface Props {
     scheduling: ServiceScheduling
     setDeleteSchedulingForm: React.Dispatch<React.SetStateAction<boolean>>
-    setTargetScheduling: React.Dispatch<React.SetStateAction<ServiceScheduling>>
+    setTargetScheduling: SetScheduling
 }
 
 const SchedulingRow = ({ scheduling, setDeleteSchedulingForm, setTargetScheduling }: Props) => {

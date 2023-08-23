@@ -1,15 +1,11 @@
 import { useContext, useRef, useEffect } from 'react'
 import { ServicesContext } from 'ServicesContext'
-import { ServiceScheduling } from 'types/schedulings'
+import { Props } from 'types/schedulings'
 import { formButtonStyle } from 'commonStyles'
 import { SERVER_URL } from 'App'
 import { SERVER_ERROR_TEXT } from 'errorAdvices'
 import { fetchOptions } from 'formFunctions/GenericForm'
 import { saveRefsInMemory, createSchedulingToSend, responseHandler, resetForm } from 'formFunctions/AddSchedulingForm'
-
-interface Props {
-	schedulingsState: [ServiceScheduling[], React.Dispatch<React.SetStateAction<ServiceScheduling[]>>]
-}
 
 const AddSchedulingForm = ({ schedulingsState }: Props) => {
 
