@@ -4,9 +4,10 @@ import { Button } from 'types/services'
 interface Props {
 	setDeleteSchedulingForm: React.Dispatch<React.SetStateAction<boolean>>
 	deleteScheduling: (button: Button) => void
+	possibleToCancel: boolean
 }
 
-const DeleteSchedulingForm = ({ deleteScheduling, setDeleteSchedulingForm }: Props) => {
+const DeleteSchedulingForm = ({ deleteScheduling, setDeleteSchedulingForm, possibleToCancel }: Props) => {
 
 	const deleteButton = useRef<HTMLButtonElement>(null)
 
@@ -16,7 +17,9 @@ const DeleteSchedulingForm = ({ deleteScheduling, setDeleteSchedulingForm }: Pro
 				<p>Tem certeza que deseja excluir este agendamento?</p>
 				<div className='text-center'>
 					<button ref={deleteButton} onClick={() => deleteScheduling(deleteButton)} className='btn btn-sm btn-outline-dark me-2'>Excluir</button>
-					<button onClick={() => setDeleteSchedulingForm(false)} className='btn btn-sm btn-outline-danger'>Cancelar</button>
+					<button onClick={() => {
+						if(possibleToCancel) setDeleteSchedulingForm(false)
+					}} className='btn btn-sm btn-outline-danger'>Cancelar</button>
 				</div>
 			</div>
 		</div>

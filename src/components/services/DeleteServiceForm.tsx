@@ -2,11 +2,12 @@ import { useRef } from 'react'
 import { Button } from 'types/services'
 
 interface Props {
-	setDeleteServiceForm: React.Dispatch<React.SetStateAction<boolean>>
 	deleteService: (button: Button) => void
+	possibleToCancel: boolean
+	cancelDelete: () => void
 }
 
-const DeleteServiceForm = ({ deleteService, setDeleteServiceForm }: Props) => {
+const DeleteServiceForm = ({ deleteService, possibleToCancel, cancelDelete }: Props) => {
 
 	const deleteButton = useRef<HTMLButtonElement>(null)
 
@@ -16,7 +17,9 @@ const DeleteServiceForm = ({ deleteService, setDeleteServiceForm }: Props) => {
 				<p>Tem certeza que deseja excluir este serviço?</p>
 				<div className='text-center'>
 					<button ref={deleteButton} onClick={() => deleteService(deleteButton)} className='btn btn-sm btn-outline-dark me-2'>Excluir</button>
-					<button onClick={() => setDeleteServiceForm(false)} className='btn btn-sm btn-outline-danger'>Cancelar</button>
+					<button onClick={() => {
+						if(possibleToCancel) cancelDelete()
+					}} className='btn btn-sm btn-outline-danger'>Cancelar</button>
 				</div>
 			</div>
 		</div>

@@ -12,9 +12,11 @@ const SchedulingTable = ({ schedulingsState }: Props) => {
 
     const [deleteSchedulingForm, setDeleteSchedulingForm] = useState(false)
     const [targetScheduling, setTargetScheduling] = useState<ServiceScheduling>({} as ServiceScheduling)
+    const [possibleToCancel, setPossibleToCancel] = useState(true)
 
     const deleteScheduling = (button: React.RefObject<HTMLButtonElement>) => {
         if (button.current) button.current.innerText = '...'
+        setPossibleToCancel(false)
         const options = {
             method: 'delete',
             headers: { 'Content-Type': 'application/json' },
@@ -28,15 +30,15 @@ const SchedulingTable = ({ schedulingsState }: Props) => {
                             return scheduling.frontId !== targetScheduling.frontId
                         }).sort((a, b) => a.date.localeCompare(b.date)).reverse()
                         setServicesScheduling(remainingSchedulings)
-                        setDeleteSchedulingForm(false)
                         break
-                    case 503:
-                        setDeleteSchedulingForm(false)
+                    case 503:                        
                         setTimeout(() => {
                             alert(DB_ERROR_TEXT)
                         }, 100)
                         break
                 }
+                setDeleteSchedulingForm(false)
+                setPossibleToCancel(true)
             })
     }
 
@@ -69,6 +71,7 @@ const SchedulingTable = ({ schedulingsState }: Props) => {
                 ? <DeleteSchedulingForm 
                         setDeleteSchedulingForm={setDeleteSchedulingForm} 
                         deleteScheduling={deleteScheduling}
+                        possibleToCancel={possibleToCancel}
                     />
                 : null
             }

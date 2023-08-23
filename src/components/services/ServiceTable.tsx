@@ -21,6 +21,7 @@ const ServiceTable = ({ setEditForm, blockedActionsState }: Props) => {
 
     const [deleteServiceForm, setDeleteServiceForm] = useState(false)
     const [targetService, setTargetService] = useState<Service>({} as Service)
+    const [possibleToCancel, setPossibleToCancel] = useState(true)
 
     const showDeleteServiceForm = () => {
         if (!blockedActions) {
@@ -33,6 +34,7 @@ const ServiceTable = ({ setEditForm, blockedActionsState }: Props) => {
     
     const deleteService = (button: Button) => {
         if (button.current) button.current.innerText = '...'
+        setPossibleToCancel(false)
         changeFormState('', '')
         const options = {
             method: 'delete',
@@ -40,30 +42,36 @@ const ServiceTable = ({ setEditForm, blockedActionsState }: Props) => {
             body: JSON.stringify(targetService)
         }
         fetch(`${SERVER_URL}/delete-service`, options)
-        .then(res => {
-            switch (res.status) {
-                case 204:
-                    const remainingServices = services.filter(service => {
-                        return service.name !== targetService.name
-                    })
-                    setServices(remainingServices.sort((a, b) => a.value - b.value))
-                    setDeleteServiceForm(false)
-                    break
-                case 503:
-                    setDeleteServiceForm(false)
-                    setTimeout(() => {
-                        alert(DB_ERROR_TEXT)
-                    }, 100)
-                    break
-            }
-            setBlockedActions(false)
-        }).catch(() => {
-            setDeleteServiceForm(false)
-            setTimeout(() => {
-                alert(SERVER_ERROR_TEXT)
-            }, 100)
-            setBlockedActions(false)
-        })
+            .then(res => {
+                switch (res.status) {
+                    case 204:
+                        const remainingServices = services.filter(service => {
+                            return service.name !== targetService.name
+                        })
+                        setServices(remainingServices.sort((a, b) => a.value - b.value))
+                        break
+                    case 503:
+                        setTimeout(() => {
+                            alert(DB_ERROR_TEXT)
+                        }, 100)
+                        break
+                }
+                setDeleteServiceForm(false)
+                setPossibleToCancel(true)
+                setBlockedActions(false)
+            }).catch(() => {
+                setDeleteServiceForm(false)
+                setPossibleToCancel(true)
+                setBlockedActions(false)
+                setTimeout(() => {
+                    alert(SERVER_ERROR_TEXT)
+                }, 100)
+            })        
+    }
+
+    const cancelDelete = () => {
+        setBlockedActions(false)
+        setDeleteServiceForm(false)
     }
 
     const setEditValuesInTheForm = (name: string, value: number) => {
@@ -99,8 +107,9 @@ const ServiceTable = ({ setEditForm, blockedActionsState }: Props) => {
             {
                 deleteServiceForm
                 ? <DeleteServiceForm 
-                    setDeleteServiceForm={setDeleteServiceForm} 
                     deleteService={deleteService}
+                    possibleToCancel={possibleToCancel}
+                    cancelDelete={cancelDelete}
                     />
                 : null
             }
