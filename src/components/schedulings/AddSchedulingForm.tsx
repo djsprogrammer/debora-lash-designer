@@ -41,23 +41,21 @@ const AddSchedulingForm = ({ schedulingsState, setBlockedActions }: AddSchedulin
 				resetForm()
 				setBlockedActions(false)
 			} else {
-				setTimeout(() => {
-					const payload = fetchOptions('post', serviceScheduling)
-					fetch(`${SERVER_URL}/create-scheduling`, payload)
-						.then(res => {
-							// Organizando novos agendamentos por datas
-							const newSchedulings = [...servicesScheduling, serviceScheduling]
-								.sort((a, b) => a.date.localeCompare(b.date)).reverse()
-							responseHandler(res, setServicesScheduling, newSchedulings)
-							resetForm()
-							setBlockedActions(false)
-						})
-						.catch(() => {
-							alert(SERVER_ERROR_TEXT)
-							resetForm()
-							setBlockedActions(false)		
-						})
-				}, 5000)
+				const payload = fetchOptions('post', serviceScheduling)
+				fetch(`${SERVER_URL}/create-scheduling`, payload)
+					.then(res => {
+						// Organizando novos agendamentos por datas
+						const newSchedulings = [...servicesScheduling, serviceScheduling]
+							.sort((a, b) => a.date.localeCompare(b.date)).reverse()
+						responseHandler(res, setServicesScheduling, newSchedulings)
+						resetForm()
+						setBlockedActions(false)
+					})
+					.catch(() => {
+						alert(SERVER_ERROR_TEXT)
+						resetForm()
+						setBlockedActions(false)		
+					})
 			}
 		}
 	}
