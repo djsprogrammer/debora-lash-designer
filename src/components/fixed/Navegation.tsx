@@ -14,15 +14,13 @@ const Navegation = ({ currentPage }: Props) => {
 	const links = [link1, link2, link3]
 
 	useEffect(() => {
-		if (currentPage !== 0) {
-			const selectedLink = links.filter((link, index) => index === currentPage - 1)[0].current
-			const unselectedLinks = links.filter((link, index) => index !== currentPage - 1)
-			if (selectedLink) {
-				selectedLink.classList.add('link-underline-opacity-100')
-				for (const link of unselectedLinks) {
-					if (link.current) {
-						link.current.classList.remove('link-underline-opacity-100')
-					}
+		const selectedLink = links.filter((link, index) => index === currentPage)[0].current
+		const unselectedLinks = links.filter((link, index) => index !== currentPage)
+		if (selectedLink) {
+			selectedLink.classList.add('link-underline-opacity-100')
+			for (const link of unselectedLinks) {
+				if (link.current) {
+					link.current.classList.remove('link-underline-opacity-100')
 				}
 			}
 		}

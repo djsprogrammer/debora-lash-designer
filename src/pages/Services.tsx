@@ -9,7 +9,7 @@ import { Props } from 'types/pages'
 const Services = ({ setCurrentPage }: Props) => {
 
     useEffect(() => {
-        setCurrentPage(2)
+        setCurrentPage(1)
     }, [setCurrentPage])
 
     const [services] = useContext(ServicesContext)

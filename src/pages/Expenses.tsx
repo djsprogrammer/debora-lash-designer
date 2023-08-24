@@ -4,7 +4,7 @@ import { Props } from 'types/pages'
 const Expenses = ({ setCurrentPage }: Props) => {
 
 	useEffect(() => {
-		setCurrentPage(3)
+		setCurrentPage(2)
 	}, [setCurrentPage])
 
 	return (

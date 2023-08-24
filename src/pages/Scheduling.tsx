@@ -22,7 +22,7 @@ const Scheduling = ({ setCurrentPage }: Props) => {
 	}, [])
 
 	useEffect(() => {
-		setCurrentPage(1)
+		setCurrentPage(0)
 	}, [setCurrentPage])
 
 	return (
