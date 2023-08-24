@@ -25,16 +25,17 @@ const ServiceRow = ({ editForm, service, setTargetService, showDeleteServiceForm
     const editButtonRef = useRef<HTMLButtonElement>(null)
     const deleteButton = useRef<HTMLButtonElement>(null)
 
+    const name = service.name
     const value = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(Number(service.value)).replace('R$', '')
 
     const buttonStyle = 'btn btn-sm'
 
     return (
-        <tr key={service.name}>
-            <td>{service.name}</td>
+        <tr key={name}>
+            <td>{name}</td>
             <td>{value}</td>
             <td>
-                <button ref={editButtonRef} onClick={() => setEditValuesInTheForm(service.name, service.value, editButtonRef)} className={`${buttonStyle} btn-outline-dark me-2`}>Editar Valor</button>
+                <button ref={editButtonRef} onClick={() => setEditValuesInTheForm(name, service.value, editButtonRef)} className={`${buttonStyle} btn-outline-dark me-2`}>Editar Valor</button>
                 <button ref={deleteButton} onClick={() => {
                     setTargetService(service)
                     showDeleteServiceForm()
