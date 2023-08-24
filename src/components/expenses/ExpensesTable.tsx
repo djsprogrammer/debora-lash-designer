@@ -1,13 +1,14 @@
-import { parseISO, format } from 'date-fns'
 import { tableStyle } from 'commonStyles'
 import { Expenses } from 'types/expenses'
+import ExpenseRow from './ExpenseRow'
 
 interface Props {
     expenses: Expenses
 }
 
 const ExpensesTable = ({ expenses }: Props) => {
-	return (
+
+    return (
         <div className='table-container mb-4'>
             <table className={tableStyle}>
                 <thead className='table-dark'>
@@ -18,23 +19,12 @@ const ExpensesTable = ({ expenses }: Props) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {expenses.map(expense => {
-
-                        const value = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(Number(expense.value)).replace('R$', '')
-                        const date = format(parseISO(expense.date), 'dd/MM')
-
-                        return (
-                            <tr key={expense.name}>
-                                <td>{expense.name}</td>
-                                <td>{value}</td>
-                                <td>{date}</td>
-                            </tr>
-                        )
-                    })}
+                    {expenses.map(expense => <ExpenseRow expense={expense} />)}
                 </tbody>
             </table>
         </div>
     )
+    
 }
 
 export default ExpensesTable

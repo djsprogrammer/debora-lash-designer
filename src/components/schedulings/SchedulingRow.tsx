@@ -1,6 +1,6 @@
 import { useRef, memo } from 'react'
-import { parseISO, format } from 'date-fns'
 import { ServiceScheduling, SetScheduling } from 'types/schedulings'
+import { valueAndDateFormat } from 'formFunctions/common'
 
 interface Props {
     scheduling: ServiceScheduling
@@ -13,9 +13,8 @@ const SchedulingRow = ({ scheduling, setDeleteSchedulingForm, setTargetSchedulin
 
     const buttonRef = useRef<HTMLButtonElement>(null)
 
-    const value = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(Number(scheduling.service.value)).replace('R$', '')
-    const date = format(parseISO(scheduling.date), 'dd/MM')
-
+    const [value, date] = valueAndDateFormat(scheduling.service.value, scheduling.date)
+    
     return (
         <tr>
             <td>{scheduling.client}</td>
