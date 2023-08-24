@@ -1,5 +1,7 @@
 import { useEffect } from 'react'
 import { Props } from 'types/pages'
+import { container } from 'commonStyles'
+import AddExpenseForm from 'components/expenses/AddExpenseForm'
 
 const Expenses = ({ setCurrentPage }: Props) => {
 
@@ -8,7 +10,9 @@ const Expenses = ({ setCurrentPage }: Props) => {
 	}, [setCurrentPage])
 
 	return (
-		<h1>Página de despesas</h1>
+		<div className={container}>
+			<AddExpenseForm />
+		</div>
 	)
 }
 
