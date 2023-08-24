@@ -1,8 +1,9 @@
 import { useEffect, useContext, useRef } from 'react'
 import { 
     getServiceInfo, setButtonText, validNumber, saveReferenciesOnMemory, 
-    showError, responseHandler, fetchOptions 
+    showError, responseHandler 
 } from '../../formFunctions/GenericForm'
+import { fetchOptions } from 'formFunctions/common'
 import { ServicesContext } from 'ServicesContext'
 import { SERVER_URL } from 'App'
 import { formButtonStyle } from 'commonStyles'

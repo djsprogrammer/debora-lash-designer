@@ -1,14 +1,61 @@
-import { useRef } from 'react'
+import { useRef, useEffect } from 'react'
+import { saveRefsInMemory, setButtonText, getExpenseInfo, resetForm } from 'formFunctions/AddExpenseForm'
+import { validNumber, fetchOptions } from 'formFunctions/common'
 import { formButtonStyle } from 'commonStyles'
+import { ExpensesState } from 'types/expenses'
+import { SERVER_URL } from 'App'
 
-const AddExpenseForm = () => {
+interface Props {
+	expensesState: ExpensesState
+}
+
+const AddExpenseForm = ({ expensesState }: Props) => {
+
+	const [expenses, setExpenses] = expensesState
 
 	const dateRef = useRef<HTMLInputElement>(null)
 	const nameRef = useRef<HTMLInputElement>(null)
 	const valueRef = useRef<HTMLInputElement>(null)
+	const buttonRef = useRef<HTMLButtonElement>(null)
+
+	useEffect(() => {
+		saveRefsInMemory(dateRef, nameRef, valueRef, buttonRef)
+	}, [])
+
+	const addExpense = () => {
+		setButtonText('...')
+		const [date, name, value] = getExpenseInfo()
+		if (validNumber(value)) {
+			setTimeout(() => {
+				const expense = { date, name, value: Number(value) }
+				const options = fetchOptions('post', expense)
+				fetch(`${SERVER_URL}/create-expense`, options)
+					.then(res => {
+						switch (res.status) {
+							case 201:
+								// Organizando novos agendamentos por datas
+								const newExpenses = [...expenses, expense]
+									.sort((a, b) => a.date.localeCompare(b.date)).reverse()
+								setExpenses(newExpenses)
+								break
+							case 503: 
+								alert('Erro ao consultar banco de dados')
+								break
+						}
+						resetForm()
+					})
+			}, 3000)
+		} else {
+			alert('Insira um número válido (utilize ponto para casas decimais)')
+			resetForm()
+		}
+	}
 
 	return (
-		<form className='d-flex flex-column'>
+		<form className='d-flex flex-column' onSubmit={e => {
+			e.preventDefault()
+			addExpense()
+		}}>
 			<div className='input-group'>
 				<label className='input-group-text'>Escolha uma data</label>
 				<input ref={dateRef} className='pe-1 form-control text-center' type='date' required />
@@ -21,7 +68,7 @@ const AddExpenseForm = () => {
                 <label className='input-group-text' htmlFor='services'>Valor</label>
                 <input ref={valueRef} className='form-control text-center' type='text' required />
             </div>
-			<button className={formButtonStyle} type='submit'>Registrar Despesa</button>
+			<button ref={buttonRef} className={formButtonStyle} type='submit'>Registrar Despesa</button>
 		</form>
 	)
 

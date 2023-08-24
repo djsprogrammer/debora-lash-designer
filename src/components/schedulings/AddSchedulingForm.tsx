@@ -5,7 +5,7 @@ import { BooleanSet } from 'types/common'
 import { formButtonStyle } from 'commonStyles'
 import { SERVER_URL } from 'App'
 import { SERVER_ERROR_TEXT } from 'errorAdvices'
-import { fetchOptions } from 'formFunctions/GenericForm'
+import { fetchOptions } from 'formFunctions/common'
 import { saveRefsInMemory, createSchedulingToSend, responseHandler, resetForm } from 'formFunctions/AddSchedulingForm'
 
 interface AddSchedulingFormProps extends Props {
