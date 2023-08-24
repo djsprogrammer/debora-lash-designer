@@ -10,12 +10,13 @@ import { SERVER_URL } from 'App'
 import { DB_ERROR_TEXT, SERVER_ERROR_TEXT } from 'errorAdvices'
 
 interface Props {
-    setEditForm: React.Dispatch<React.SetStateAction<boolean>>
+    editFormState: BooleanState
     blockedActionsState: BooleanState
 }
 
-const ServiceTable = ({ setEditForm, blockedActionsState }: Props) => {
+const ServiceTable = ({ editFormState, blockedActionsState }: Props) => {
 
+    const [editForm, setEditForm] = editFormState
     const [blockedActions, setBlockedActions] = blockedActionsState
 
     const [services, setServices] = useContext(ServicesContext)
@@ -73,8 +74,12 @@ const ServiceTable = ({ setEditForm, blockedActionsState }: Props) => {
         setDeleteServiceForm(false)
     }
 
-    const setEditValuesInTheForm = (name: string, value: number) => {
+    const setEditValuesInTheForm = (name: string, value: number, editButtonRef: ButtonRef) => {
         if (!blockedActions) {
+            if(editButtonRef.current) {
+                editButtonRef.current.classList.remove('btn-outline-dark')
+                editButtonRef.current.classList.add('btn-dark')
+            }
             setBlockedActions(true)
             changeFormState(name, value.toString(), 'Editar')
             setEditForm(true)
@@ -93,7 +98,8 @@ const ServiceTable = ({ setEditForm, blockedActionsState }: Props) => {
                 </thead>
                 <tbody>
                     {services.map(service =>
-                        <ServiceRow 
+                        <ServiceRow
+                            editForm={editForm}
                             service={service}
                             setTargetService={setTargetService}
                             showDeleteServiceForm={showDeleteServiceForm}

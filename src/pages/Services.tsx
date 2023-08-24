@@ -19,7 +19,7 @@ const Services = ({ setCurrentPage }: Props) => {
     return (
         <div className={container}>
             {services[0] 
-            ? <ServiceTable setEditForm={setEditForm} blockedActionsState={[blockedActions, setBlockedActions]} /> 
+            ? <ServiceTable editFormState={[editForm, setEditForm]} blockedActionsState={[blockedActions, setBlockedActions]} /> 
             : <AnyServiceAdvice page='serviço' />}
             <GenericForm editFormState={[editForm, setEditForm]} blockedActionsState={[blockedActions, setBlockedActions]} />
         </div>

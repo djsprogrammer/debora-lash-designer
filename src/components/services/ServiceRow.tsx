@@ -1,15 +1,28 @@
-import { useRef } from 'react'
+import { useEffect, useRef } from 'react'
+import { ButtonRef } from 'types/common'
 import { Service, SetService } from 'types/services'
 
 interface Props {
+    editForm: boolean
     service: Service
     setTargetService: SetService
     showDeleteServiceForm: () => void
-    setEditValuesInTheForm: (tdName: string, value: number) => void
+    setEditValuesInTheForm: (tdName: string, value: number, editButtonRef: ButtonRef) => void
 }
 
-const ServiceRow = ({ service, setTargetService, showDeleteServiceForm, setEditValuesInTheForm }: Props) => {
+const ServiceRow = ({ editForm, service, setTargetService, showDeleteServiceForm, setEditValuesInTheForm }: Props) => {
 
+    useEffect(() => {
+        if (!editForm) {
+            if (editButtonRef.current) {
+                // Voltando o estilo de todos os botôes ao padrão depois de realizada a edição
+                editButtonRef.current.classList.remove('btn-dark')
+                editButtonRef.current.classList.add('btn-outline-dark')
+            }
+        }
+    }, [editForm])
+
+    const editButtonRef = useRef<HTMLButtonElement>(null)
     const deleteButton = useRef<HTMLButtonElement>(null)
 
     const value = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(Number(service.value)).replace('R$', '')
@@ -21,7 +34,7 @@ const ServiceRow = ({ service, setTargetService, showDeleteServiceForm, setEditV
             <td>{service.name}</td>
             <td>{value}</td>
             <td>
-                <button onClick={() => setEditValuesInTheForm(service.name, service.value)} className={`${buttonStyle} btn-outline-dark me-2`}>Editar Valor</button>
+                <button ref={editButtonRef} onClick={() => setEditValuesInTheForm(service.name, service.value, editButtonRef)} className={`${buttonStyle} btn-outline-dark me-2`}>Editar Valor</button>
                 <button ref={deleteButton} onClick={() => {
                     setTargetService(service)
                     showDeleteServiceForm()
