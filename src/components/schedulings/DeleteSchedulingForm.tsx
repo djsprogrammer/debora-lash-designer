@@ -17,7 +17,7 @@ const DeleteSchedulingForm = ({ deleteScheduling, setDeleteSchedulingForm, possi
 			<div className='card p-5'>
 				<p>Tem certeza que deseja excluir este agendamento?</p>
 				<div className='text-center'>
-					<button ref={deleteButton} onClick={() => deleteScheduling(deleteButton)} className='btn btn-sm btn-outline-dark me-2'>Excluir</button>
+					<button ref={deleteButton} onClick={() => deleteScheduling(deleteButton)} className='btn btn-sm btn-dark me-2'>Excluir</button>
 					<button onClick={() => {
 						if(possibleToCancel) setDeleteSchedulingForm(false)
 					}} className={deleteButtonStyle}>Cancelar</button>

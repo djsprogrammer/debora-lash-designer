@@ -17,7 +17,7 @@ const DeleteExpenseForm = ({ deleteExpense, setDeleteExpenseForm, possibleToCanc
 			<div className='card p-5'>
 				<p>Tem certeza que deseja excluir esta despesa?</p>
 				<div className='text-center'>
-					<button ref={deleteButton} onClick={() => deleteExpense(deleteButton)} className='btn btn-sm btn-outline-dark me-2'>Excluir</button>
+					<button ref={deleteButton} onClick={() => deleteExpense(deleteButton)} className='btn btn-sm btn-dark me-2'>Excluir</button>
 					<button onClick={() => {
 						if(possibleToCancel) setDeleteExpenseForm(false)
 					}} className={deleteButtonStyle}>Cancelar</button>

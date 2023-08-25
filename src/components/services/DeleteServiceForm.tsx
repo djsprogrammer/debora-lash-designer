@@ -17,7 +17,7 @@ const DeleteServiceForm = ({ deleteService, possibleToCancel, cancelDelete }: Pr
 			<div className='card p-5'>
 				<p>Tem certeza que deseja excluir este serviço?</p>
 				<div className='text-center'>
-					<button ref={deleteButton} onClick={() => deleteService(deleteButton)} className='btn btn-sm btn-outline-dark me-2'>Excluir</button>
+					<button ref={deleteButton} onClick={() => deleteService(deleteButton)} className='btn btn-sm btn-dark me-2'>Excluir</button>
 					<button onClick={() => {
 						if(possibleToCancel) cancelDelete()
 					}} className={deleteButtonStyle}>Cancelar</button>

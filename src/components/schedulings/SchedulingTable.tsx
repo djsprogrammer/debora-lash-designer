@@ -56,7 +56,7 @@ const SchedulingTable = ({ schedulingsState, blockedActions }: SchedulingTablePr
     return (
         <div className='table-container mb-4'>
             <table className={tableStyle}>
-                <thead className='table-dark'>
+                <thead>
                     <tr>
                         <th>Cliente</th>
                         <th>Serviço</th>
