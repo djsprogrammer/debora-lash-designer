@@ -1,12 +1,14 @@
 import { valueAndDateFormat } from 'formFunctions/common'
-import { Expense } from 'types/expenses'
+import { Expense, SetExpense } from 'types/expenses'
 import { deleteButtonStyle } from 'commonStyles'
 
 interface Props {
     expense: Expense
+    setTargetExpense: SetExpense
+    setDeleteExpenseForm: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const ExpenseRow = ({ expense }: Props) => {
+const ExpenseRow = ({ expense, setTargetExpense, setDeleteExpenseForm }: Props) => {
 
     const [value, date] = valueAndDateFormat(expense.value, expense.date)
 
@@ -15,7 +17,12 @@ const ExpenseRow = ({ expense }: Props) => {
             <td>{expense.name}</td>
             <td>{value}</td>
             <td>{date}</td>
-            <td><button className={deleteButtonStyle}>Excluir</button></td>
+            <td>
+                <button onClick={() => {
+                    setDeleteExpenseForm(true)
+                    setTargetExpense(expense)
+                }} className={deleteButtonStyle}>Excluir</button>
+            </td>
         </tr>
     )
 

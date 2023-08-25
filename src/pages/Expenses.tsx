@@ -17,7 +17,7 @@ const Expenses = ({ setCurrentPage }: Props) => {
 	return (
 		<div className={container}>
 			{expenses[0] 
-	            ? <ExpensesTable expenses={expenses} /> 
+	            ? <ExpensesTable expensesState={[expenses, setExpenses]} />
 	            : <AnyExpensesAdvice page='despesa' />}
 			<AddExpenseForm expensesState={[expenses, setExpenses]} />
 		</div>

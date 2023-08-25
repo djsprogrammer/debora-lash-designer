@@ -1,4 +1,5 @@
 import { useRef, useEffect } from 'react'
+import { v4 } from 'uuid'
 import { saveRefsInMemory, setButtonText, getExpenseInfo, resetForm } from 'formFunctions/AddExpenseForm'
 import { validNumber, fetchOptions } from 'formFunctions/common'
 import { formButtonStyle } from 'commonStyles'
@@ -27,7 +28,7 @@ const AddExpenseForm = ({ expensesState }: Props) => {
 		setButtonText('...')
 		const [date, name, value] = getExpenseInfo()
 		if (validNumber(value)) {
-			const expense = { date, name, value: Number(value) }
+			const expense = { _id: v4(), date, name, value: Number(value) }
 			const options = fetchOptions('post', expense)
 			fetch(`${SERVER_URL}/create-expense`, options)
 				.then(res => {

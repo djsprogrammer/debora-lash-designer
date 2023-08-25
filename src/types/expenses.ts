@@ -1,4 +1,5 @@
 export interface Expense {
+	_id: string
 	date: string
 	name: string
 	value: number
