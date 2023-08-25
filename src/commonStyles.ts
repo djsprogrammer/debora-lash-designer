@@ -1,4 +1,5 @@
 export const container = 'container d-flex flex-column align-items-center'
 export const tableStyle = 'table text-center'
+export const deleteFormStyle = 'position-absolute vw-100 vh-100 top-0 start-0 d-flex justify-content-center align-items-center delete-form'
 export const formButtonStyle = 'btn btn-sm btn-dark'
 export const deleteButtonStyle = 'btn btn-sm btn-outline-danger'

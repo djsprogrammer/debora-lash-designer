@@ -1,4 +1,4 @@
-import { deleteButtonStyle } from 'commonStyles'
+import { deleteFormStyle, deleteButtonStyle } from 'commonStyles'
 import { useRef } from 'react'
 import { BooleanSet, ButtonRef } from 'types/common'
 
@@ -13,7 +13,7 @@ const DeleteExpenseForm = ({ deleteExpense, setDeleteExpenseForm, possibleToCanc
 	const deleteButton = useRef<HTMLButtonElement>(null)
 
 	return (
-		<div style={{ zIndex: 1 }} className='position-absolute vw-100 vh-100 top-0 start-0 d-flex justify-content-center align-items-center'>
+		<div style={{ zIndex: 1 }} className={deleteFormStyle}>
 			<div className='card p-5'>
 				<p>Tem certeza que deseja excluir esta despesa?</p>
 				<div className='text-center'>
