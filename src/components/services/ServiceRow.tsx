@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { ButtonRef } from 'types/common'
 import { Service, SetService } from 'types/services'
+import { deleteButtonStyle } from 'commonStyles'
 
 interface Props {
     editForm: boolean
@@ -39,7 +40,7 @@ const ServiceRow = ({ editForm, service, setTargetService, showDeleteServiceForm
                 <button ref={deleteButton} onClick={() => {
                     setTargetService(service)
                     showDeleteServiceForm()
-                }} className={`${buttonStyle} btn-outline-danger`}>Excluir</button>
+                }} className={deleteButtonStyle}>Excluir</button>
             </td>
         </tr>
     )

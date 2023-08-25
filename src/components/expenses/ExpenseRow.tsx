@@ -1,5 +1,6 @@
 import { valueAndDateFormat } from 'formFunctions/common'
 import { Expense } from 'types/expenses'
+import { deleteButtonStyle } from 'commonStyles'
 
 interface Props {
     expense: Expense
@@ -14,6 +15,7 @@ const ExpenseRow = ({ expense }: Props) => {
             <td>{expense.name}</td>
             <td>{value}</td>
             <td>{date}</td>
+            <td><button className={deleteButtonStyle}>Excluir</button></td>
         </tr>
     )
 

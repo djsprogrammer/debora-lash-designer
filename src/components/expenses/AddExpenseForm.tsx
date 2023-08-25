@@ -4,6 +4,7 @@ import { validNumber, fetchOptions } from 'formFunctions/common'
 import { formButtonStyle } from 'commonStyles'
 import { ExpensesState } from 'types/expenses'
 import { SERVER_URL } from 'App'
+import { DB_ERROR_TEXT, INVALID_NUMBER_TEXT } from 'errorAdvices'
 
 interface Props {
 	expensesState: ExpensesState
@@ -26,27 +27,25 @@ const AddExpenseForm = ({ expensesState }: Props) => {
 		setButtonText('...')
 		const [date, name, value] = getExpenseInfo()
 		if (validNumber(value)) {
-			setTimeout(() => {
-				const expense = { date, name, value: Number(value) }
-				const options = fetchOptions('post', expense)
-				fetch(`${SERVER_URL}/create-expense`, options)
-					.then(res => {
-						switch (res.status) {
-							case 201:
-								// Organizando novos agendamentos por datas
-								const newExpenses = [...expenses, expense]
-									.sort((a, b) => a.date.localeCompare(b.date)).reverse()
-								setExpenses(newExpenses)
-								break
-							case 503: 
-								alert('Erro ao consultar banco de dados')
-								break
-						}
-						resetForm()
-					})
-			}, 3000)
+			const expense = { date, name, value: Number(value) }
+			const options = fetchOptions('post', expense)
+			fetch(`${SERVER_URL}/create-expense`, options)
+				.then(res => {
+					switch (res.status) {
+						case 201:
+							// Organizando novos agendamentos por datas
+							const newExpenses = [...expenses, expense]
+								.sort((a, b) => a.date.localeCompare(b.date)).reverse()
+							setExpenses(newExpenses)
+							break
+						case 503: 
+							alert(DB_ERROR_TEXT)
+							break
+					}
+					resetForm()
+				})
 		} else {
-			alert('Insira um número válido (utilize ponto para casas decimais)')
+			alert(INVALID_NUMBER_TEXT)
 			resetForm()
 		}
 	}

@@ -1,6 +1,7 @@
 import { useRef, memo } from 'react'
 import { ServiceScheduling, SetScheduling } from 'types/schedulings'
 import { valueAndDateFormat } from 'formFunctions/common'
+import { deleteButtonStyle } from 'commonStyles'
 
 interface Props {
     scheduling: ServiceScheduling
@@ -26,7 +27,7 @@ const SchedulingRow = ({ scheduling, setDeleteSchedulingForm, setTargetSchedulin
                         setDeleteSchedulingForm(true)
                         setTargetScheduling(scheduling)
                     }
-                }} className='btn btn-sm btn-outline-danger'>
+                }} className={deleteButtonStyle}>
                     Excluir
                 </button>
             </td>

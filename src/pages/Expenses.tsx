@@ -11,10 +11,6 @@ const Expenses = ({ setCurrentPage }: Props) => {
 	const [expenses, setExpenses] = useState<TExpenses>([])
 
 	useEffect(() => {
-		console.log(expenses)
-	}, [expenses])
-
-	useEffect(() => {
 		setCurrentPage(2)
 	}, [setCurrentPage])
 
