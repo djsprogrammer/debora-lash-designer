@@ -1,3 +1,4 @@
+import { deleteButtonStyle } from 'commonStyles'
 import { useRef } from 'react'
 import { ButtonRef } from 'types/common'
 
@@ -19,7 +20,7 @@ const DeleteSchedulingForm = ({ deleteScheduling, setDeleteSchedulingForm, possi
 					<button ref={deleteButton} onClick={() => deleteScheduling(deleteButton)} className='btn btn-sm btn-outline-dark me-2'>Excluir</button>
 					<button onClick={() => {
 						if(possibleToCancel) setDeleteSchedulingForm(false)
-					}} className='btn btn-sm btn-outline-danger'>Cancelar</button>
+					}} className={deleteButtonStyle}>Cancelar</button>
 				</div>
 			</div>
 		</div>

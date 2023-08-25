@@ -1,8 +1,9 @@
+import { deleteButtonStyle } from 'commonStyles'
 import { useRef } from 'react'
-import { ButtonRef } from 'types/common'
+import { BooleanSet, ButtonRef } from 'types/common'
 
 interface Props {
-	setDeleteExpenseForm: React.Dispatch<React.SetStateAction<boolean>>
+	setDeleteExpenseForm: BooleanSet
 	deleteExpense: (buttonRef: ButtonRef) => void
 	possibleToCancel: boolean
 }
@@ -19,7 +20,7 @@ const DeleteExpenseForm = ({ deleteExpense, setDeleteExpenseForm, possibleToCanc
 					<button ref={deleteButton} onClick={() => deleteExpense(deleteButton)} className='btn btn-sm btn-outline-dark me-2'>Excluir</button>
 					<button onClick={() => {
 						if(possibleToCancel) setDeleteExpenseForm(false)
-					}} className='btn btn-sm btn-outline-danger'>Cancelar</button>
+					}} className={deleteButtonStyle}>Cancelar</button>
 				</div>
 			</div>
 		</div>
