@@ -32,7 +32,7 @@ const SchedulingTable = ({ schedulingsState, blockedActions }: SchedulingTablePr
                 switch (res.status) {
                     case 204:
                         const remainingSchedulings = servicesScheduling.filter(scheduling => {
-                            return scheduling.frontId !== targetScheduling.frontId
+                            return scheduling._id !== targetScheduling._id
                         }).sort((a, b) => a.date.localeCompare(b.date)).reverse()
                         setServicesScheduling(remainingSchedulings)
                         break
@@ -68,7 +68,7 @@ const SchedulingTable = ({ schedulingsState, blockedActions }: SchedulingTablePr
                     {servicesScheduling.map(scheduling => {
                         return (
                             <SchedulingRow 
-                                key={scheduling.frontId}
+                                key={scheduling._id}
                                 scheduling={scheduling}
                                 setDeleteSchedulingForm={setDeleteSchedulingForm}
                                 setTargetScheduling={setTargetScheduling}

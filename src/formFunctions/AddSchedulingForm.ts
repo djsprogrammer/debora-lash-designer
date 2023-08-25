@@ -21,7 +21,7 @@ export const saveRefsInMemory = (options: Options, date: Date, client: Client, a
 export const createSchedulingToSend = () => {
 	if (dateRef.current && clientRef.current && optionsRef.current) {
 		const serviceScheduling: ServiceScheduling = {
-			frontId: v4(),
+			_id: v4(),
 			service: JSON.parse(optionsRef.current.value),
 			date: dateRef.current.value,
 			client: clientRef.current.value
