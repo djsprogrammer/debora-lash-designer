@@ -28,23 +28,31 @@ const AddExpenseForm = ({ expensesState }: Props) => {
 		setButtonText('...')
 		const [date, name, value] = getExpenseInfo()
 		if (validNumber(value)) {
-			const expense = { _id: v4(), date, name, value: Number(value) }
-			const options = fetchOptions('post', expense)
-			fetch(`${SERVER_URL}/create-expense`, options)
-				.then(res => {
-					switch (res.status) {
-						case 201:
-							// Organizando novos agendamentos por datas
-							const newExpenses = [...expenses, expense]
-								.sort((a, b) => a.date.localeCompare(b.date)).reverse()
-							setExpenses(newExpenses)
-							break
-						case 503: 
-							alert(DB_ERROR_TEXT)
-							break
-					}
-					resetForm()
-				})
+			const newExpense = { _id: v4(), date, name, value: Number(value) }
+			const alreadyExists = expenses.filter(expense => {
+				return expense.name === newExpense.name && expense.date === newExpense.date
+			})[0]
+			if (alreadyExists) {
+				alert('Já existe uma despesa igual a essa')
+				resetForm()
+			} else {
+				const options = fetchOptions('post', newExpense)
+				fetch(`${SERVER_URL}/create-expense`, options)
+					.then(res => {
+						switch (res.status) {
+							case 201:
+								// Organizando novos agendamentos por datas
+								const newExpenses = [...expenses, newExpense]
+									.sort((a, b) => a.date.localeCompare(b.date)).reverse()
+								setExpenses(newExpenses)
+								break
+							case 503: 
+								alert(DB_ERROR_TEXT)
+								break
+						}
+						resetForm()
+					})
+			}
 		} else {
 			alert(INVALID_NUMBER_TEXT)
 			resetForm()
