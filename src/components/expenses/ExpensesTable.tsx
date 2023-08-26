@@ -3,7 +3,7 @@ import { tableStyle } from 'commonStyles'
 import { Expense, ExpensesState } from 'types/expenses'
 import ExpenseRow from './ExpenseRow'
 import { ButtonRef } from 'types/common'
-import DeleteExpenseForm from 'components/expenses/DeleteExpenseForm'
+import DeleteForm from 'components/pages/DeleteForm'
 import { fetchOptions } from 'formFunctions/common'
 import { DB_ERROR_TEXT, SERVER_ERROR_TEXT } from 'errorAdvices'
 import { SERVER_URL } from 'App'
@@ -71,9 +71,9 @@ const ExpensesTable = ({ expensesState }: Props) => {
             </table>
             {
                 deleteExpenseForm
-                ? <DeleteExpenseForm 
-                        setDeleteExpenseForm={setDeleteExpenseForm} 
-                        deleteExpense={deleteExpense}
+                ? <DeleteForm 
+                        setDeleteForm={setDeleteExpenseForm} 
+                        deleteTarget={deleteExpense}
                         possibleToCancel={possibleToCancel}
                     />
                 : null
