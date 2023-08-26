@@ -1,6 +1,6 @@
-import { useContext, useState } from 'react'
+import { useEffect, useContext, useState } from 'react'
 import ServiceRow from './ServiceRow'
-import DeleteServiceForm from './DeleteServiceForm'
+import DeleteForm from 'components/pages/DeleteForm'
 import { Service } from 'types/services'
 import { BooleanState, ButtonRef } from 'types/common'
 import { tableStyle } from 'commonStyles'
@@ -25,9 +25,13 @@ const ServiceTable = ({ editFormState, blockedActionsState }: Props) => {
     const [targetService, setTargetService] = useState<Service>({} as Service)
     const [possibleToCancel, setPossibleToCancel] = useState(true)
 
+    useEffect(() => {
+        if (!deleteServiceForm) setBlockedActions(false)
+    }, [deleteServiceForm])
+
     const showDeleteServiceForm = () => {
         if (!blockedActions) {
-            setBlockedActions(true)
+            setBlockedActions(true) 
             setDeleteServiceForm(true)
         }
     }
@@ -69,11 +73,6 @@ const ServiceTable = ({ editFormState, blockedActionsState }: Props) => {
             })        
     }
 
-    const cancelDelete = () => {
-        setBlockedActions(false)
-        setDeleteServiceForm(false)
-    }
-
     const setEditValuesInTheForm = (name: string, value: number) => {
         if (!blockedActions) {
             setBlockedActions(true)
@@ -105,10 +104,10 @@ const ServiceTable = ({ editFormState, blockedActionsState }: Props) => {
             </table>
             {
                 deleteServiceForm
-                ? <DeleteServiceForm 
-                    deleteService={deleteService}
+                ? <DeleteForm 
+                    deleteTarget={deleteService}
                     possibleToCancel={possibleToCancel}
-                    cancelDelete={cancelDelete}
+                    setDeleteForm={setDeleteServiceForm}
                     />
                 : null
             }
