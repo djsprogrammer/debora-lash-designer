@@ -28,7 +28,7 @@ const ServiceRow = ({ editForm, service, setTargetService, showDeleteServiceForm
             <td>{name}</td>
             <td>{value}</td>
             <td>
-                <Pencil size={20} className='button me-2' onClick={() => {
+                <Pencil size={20} className='button me-3' onClick={() => {
                     setToEdit('table-secondary')
                     setEditValuesInTheForm(name, service.value)
                 }} />
