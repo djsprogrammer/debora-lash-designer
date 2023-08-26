@@ -27,7 +27,7 @@ const ServiceTable = ({ editFormState, blockedActionsState }: Props) => {
 
     useEffect(() => {
         if (!deleteServiceForm) setBlockedActions(false)
-    }, [deleteServiceForm])
+    }, [deleteServiceForm, setBlockedActions])
 
     const showDeleteServiceForm = () => {
         if (!blockedActions) {
