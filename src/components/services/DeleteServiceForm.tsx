@@ -1,4 +1,4 @@
-import { confirmButtonStyle, deleteFormStyle, deleteButtonStyle } from 'commonStyles'
+import { confirmButtonStyle, deleteFormStyle, deleteFormCardStyle, deleteButtonStyle } from 'commonStyles'
 import { useRef } from 'react'
 import { ButtonRef } from 'types/common'
 
@@ -14,7 +14,7 @@ const DeleteServiceForm = ({ deleteService, possibleToCancel, cancelDelete }: Pr
 
 	return (
 		<div style={{ zIndex: 1 }} className={deleteFormStyle}>
-			<div className='card p-5'>
+			<div className={deleteFormCardStyle}>
 				<p>Tem certeza que deseja excluir este serviço?</p>
 				<div className='text-center'>
 					<button ref={deleteButton} onClick={() => deleteService(deleteButton)} className={confirmButtonStyle}>Excluir</button>

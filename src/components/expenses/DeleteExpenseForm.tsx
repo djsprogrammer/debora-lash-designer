@@ -1,4 +1,4 @@
-import { confirmButtonStyle, deleteFormStyle, deleteButtonStyle } from 'commonStyles'
+import { confirmButtonStyle, deleteFormStyle, deleteFormCardStyle, deleteButtonStyle } from 'commonStyles'
 import { useRef } from 'react'
 import { BooleanSet, ButtonRef } from 'types/common'
 
@@ -14,7 +14,7 @@ const DeleteExpenseForm = ({ deleteExpense, setDeleteExpenseForm, possibleToCanc
 
 	return (
 		<div style={{ zIndex: 1 }} className={deleteFormStyle}>
-			<div className='card p-5'>
+			<div className={deleteFormCardStyle}>
 				<p>Tem certeza que deseja excluir esta despesa?</p>
 				<div className='text-center'>
 					<button ref={deleteButton} onClick={() => deleteExpense(deleteButton)} className={confirmButtonStyle}>Excluir</button>
