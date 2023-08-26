@@ -74,12 +74,8 @@ const ServiceTable = ({ editFormState, blockedActionsState }: Props) => {
         setDeleteServiceForm(false)
     }
 
-    const setEditValuesInTheForm = (name: string, value: number, editButtonRef: ButtonRef) => {
+    const setEditValuesInTheForm = (name: string, value: number) => {
         if (!blockedActions) {
-            if(editButtonRef.current) {
-                editButtonRef.current.classList.remove('btn-outline-dark')
-                editButtonRef.current.classList.add('btn-dark')
-            }
             setBlockedActions(true)
             changeFormState(name, value.toString(), 'Editar')
             setEditForm(true)

@@ -34,3 +34,7 @@ form {
 select {
     appearance: none;
 }
+
+.button {
+    cursor: pointer;
+}

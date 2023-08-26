@@ -1,7 +1,7 @@
-import { useRef, memo } from 'react'
+import { memo } from 'react'
+import { Trash } from 'lucide-react'
 import { ServiceScheduling, SetScheduling } from 'types/schedulings'
 import { valueAndDateFormat } from 'formFunctions/common'
-import { deleteButtonStyle } from 'commonStyles'
 
 interface Props {
     scheduling: ServiceScheduling
@@ -12,8 +12,6 @@ interface Props {
 
 const SchedulingRow = ({ scheduling, setDeleteSchedulingForm, setTargetScheduling, blockedActions }: Props) => {
 
-    const buttonRef = useRef<HTMLButtonElement>(null)
-
     const [value, date] = valueAndDateFormat(scheduling.service.value, scheduling.date)
     
     return (
@@ -22,14 +20,12 @@ const SchedulingRow = ({ scheduling, setDeleteSchedulingForm, setTargetSchedulin
             <td>{scheduling.service.name} -{value}</td>
             <td>{date}</td>
             <td>
-                <button ref={buttonRef} onClick={() => {
+                <Trash size={20} className='button' onClick={() => {
                     if (!blockedActions) {
                         setDeleteSchedulingForm(true)
                         setTargetScheduling(scheduling)
                     }
-                }} className={deleteButtonStyle}>
-                    Excluir
-                </button>
+                }} />
             </td>
         </tr>
     )

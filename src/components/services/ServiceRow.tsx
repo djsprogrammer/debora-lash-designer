@@ -1,46 +1,41 @@
-import { useEffect, useRef } from 'react'
-import { ButtonRef } from 'types/common'
+import { useState, useEffect } from 'react'
+import { Pencil, Trash } from 'lucide-react'
 import { Service, SetService } from 'types/services'
-import { deleteButtonStyle } from 'commonStyles'
 
 interface Props {
     editForm: boolean
     service: Service
     setTargetService: SetService
     showDeleteServiceForm: () => void
-    setEditValuesInTheForm: (tdName: string, value: number, editButtonRef: ButtonRef) => void
+    setEditValuesInTheForm: (tdName: string, value: number) => void
 }
 
 const ServiceRow = ({ editForm, service, setTargetService, showDeleteServiceForm, setEditValuesInTheForm }: Props) => {
 
+    const [toEdit, setToEdit] = useState('')
+
     useEffect(() => {
         if (!editForm) {
-            if (editButtonRef.current) {
-                // Voltando o estilo de todos os botôes ao padrão depois de realizada a edição
-                editButtonRef.current.classList.remove('btn-dark')
-                editButtonRef.current.classList.add('btn-outline-dark')
-            }
+            setToEdit('')
         }
     }, [editForm])
-
-    const editButtonRef = useRef<HTMLButtonElement>(null)
-    const deleteButton = useRef<HTMLButtonElement>(null)
 
     const name = service.name
     const value = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(Number(service.value)).replace('R$', '')
 
-    const buttonStyle = 'btn btn-sm'
-
     return (
-        <tr key={name}>
+        <tr key={name} className={toEdit}>
             <td>{name}</td>
             <td>{value}</td>
             <td>
-                <button ref={editButtonRef} onClick={() => setEditValuesInTheForm(name, service.value, editButtonRef)} className={`${buttonStyle} btn-outline-dark me-2`}>Editar Valor</button>
-                <button ref={deleteButton} onClick={() => {
+                <Pencil size={20} className='button me-2' onClick={() => {
+                    setToEdit('table-secondary')
+                    setEditValuesInTheForm(name, service.value)
+                }} />
+                <Trash size={20} className='button' onClick={() => {
                     setTargetService(service)
                     showDeleteServiceForm()
-                }} className={deleteButtonStyle}>Excluir</button>
+                }} />
             </td>
         </tr>
     )
