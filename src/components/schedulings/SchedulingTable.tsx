@@ -2,7 +2,7 @@ import { useState } from 'react'
 import SchedulingRow from './SchedulingRow'
 import { Props, ServiceScheduling } from 'types/schedulings'
 import { tableStyle } from 'commonStyles'
-import DeleteSchedulingForm from 'components/schedulings/DeleteSchedulingForm'
+import DeleteForm from 'components/pages/DeleteForm'
 import { SERVER_URL } from 'App'
 import { DB_ERROR_TEXT, SERVER_ERROR_TEXT } from 'errorAdvices'
 import { ButtonRef } from 'types/common'
@@ -80,9 +80,9 @@ const SchedulingTable = ({ schedulingsState, blockedActions }: SchedulingTablePr
             </table>
             {
                 deleteSchedulingForm
-                ? <DeleteSchedulingForm 
-                        setDeleteSchedulingForm={setDeleteSchedulingForm} 
-                        deleteScheduling={deleteScheduling}
+                ? <DeleteForm 
+                        setDeleteForm={setDeleteSchedulingForm} 
+                        deleteTarget={deleteScheduling}
                         possibleToCancel={possibleToCancel}
                     />
                 : null
