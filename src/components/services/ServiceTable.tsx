@@ -75,7 +75,7 @@ const ServiceTable = ({ editFormState, blockedActionsState }: Props) => {
 
     const setEditValuesInTheForm = (name: string, value: number, row: React.RefObject<HTMLTableRowElement>) => {
         if (!blockedActions) {
-            if (row.current) row.current.classList.add('table-secondary')
+            if (row.current) row.current.classList.add('table-light')
             setBlockedActions(true)
             changeFormState(name, value.toString(), 'Editar')
             setEditForm(true)
@@ -85,7 +85,7 @@ const ServiceTable = ({ editFormState, blockedActionsState }: Props) => {
     return (
         <div className='table-container'>
             <table className={tableStyle}>
-                <thead>
+                <thead className='table-dark'>
                     <tr>
                         <th>Serviço</th>
                         <th>Valor</th>

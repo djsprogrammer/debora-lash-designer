@@ -16,7 +16,7 @@ const ServiceRow = ({ editForm, service, setTargetService, showDeleteServiceForm
 
     useEffect(() => {
         if (!editForm) {
-            if (serviceRowRef.current) serviceRowRef.current.classList.remove('table-secondary')
+            if (serviceRowRef.current) serviceRowRef.current.classList.remove('table-light')
         }
     }, [editForm])
 
@@ -28,7 +28,7 @@ const ServiceRow = ({ editForm, service, setTargetService, showDeleteServiceForm
             <td>{name}</td>
             <td>{value}</td>
             <td>
-                <Pencil size={20} className='button me-3' onClick={() => {
+                <Pencil size={18} className='button me-3' onClick={() => {
                     setEditValuesInTheForm(name, service.value, serviceRowRef)
                 }} />
                 <Trash size={20} className='button' onClick={() => {
