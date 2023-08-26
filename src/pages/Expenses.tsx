@@ -10,6 +10,7 @@ import { SERVER_URL } from 'App'
 const Expenses = ({ setCurrentPage }: Props) => {
 
 	const [expenses, setExpenses] = useState<TExpenses>([])
+	const [formButton, setFormButton] = useState(true)
 
 	useEffect(() => {
 		fetch(`${SERVER_URL}/all-expenses`)
@@ -26,10 +27,19 @@ const Expenses = ({ setCurrentPage }: Props) => {
 
 	return (
 		<div className={container}>
-			{expenses[0] 
-	            ? <ExpensesTable expensesState={[expenses, setExpenses]} />
-	            : <AnyExpensesAdvice page='despesa' />}
-			<AddExpenseForm expensesState={[expenses, setExpenses]} />
+			{
+				expenses[0] 
+	            	? <ExpensesTable expensesState={[expenses, setExpenses]} />
+	            	: <AnyExpensesAdvice page='despesa' />
+	        }
+	        {
+	        	formButton
+	        		? <button onClick={() => setFormButton(false)} className='btn btn-sm btn-outline-dark align-self-start'>Adicionar</button>
+	        		: <AddExpenseForm 
+	        				setFormButton={setFormButton}
+	        				expensesState={[expenses, setExpenses]}
+	        			/> 
+	        }
 		</div>
 	)
 }
