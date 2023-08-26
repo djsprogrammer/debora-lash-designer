@@ -1,4 +1,4 @@
-import { confirmButtonStyle, deleteFormStyle, deleteFormCardStyle, deleteButtonStyle } from 'commonStyles'
+import { confirmButtonStyle, deleteButtonStyle } from 'commonStyles'
 import { useRef } from 'react'
 import { ButtonRef } from 'types/common'
 
@@ -13,9 +13,9 @@ const DeleteSchedulingForm = ({ deleteTarget, setDeleteForm, possibleToCancel }:
 	const deleteButtonRef = useRef<HTMLButtonElement>(null)
 
 	return (
-		<div style={{ zIndex: 1 }} className={deleteFormStyle}>
-			<div className={deleteFormCardStyle}>
-				<p className='card-header text-bg-dark'>Tem certeza que deseja excluir?</p>
+		<div style={{ zIndex: 1 }} className='position-absolute vw-100 vh-100 top-0 start-0 d-flex justify-content-center align-items-center delete-form'>
+			<div className='card'>
+				<p className='card-header'>Tem certeza que deseja excluir?</p>
 				<div className='card-body text-center'>
 					<button ref={deleteButtonRef} onClick={() => deleteTarget(deleteButtonRef)} className={confirmButtonStyle}>Excluir</button>
 					<button onClick={() => {
