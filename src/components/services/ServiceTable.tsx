@@ -73,8 +73,9 @@ const ServiceTable = ({ editFormState, blockedActionsState }: Props) => {
             })        
     }
 
-    const setEditValuesInTheForm = (name: string, value: number) => {
+    const setEditValuesInTheForm = (name: string, value: number, row: React.RefObject<HTMLTableRowElement>) => {
         if (!blockedActions) {
+            if (row.current) row.current.classList.add('table-secondary')
             setBlockedActions(true)
             changeFormState(name, value.toString(), 'Editar')
             setEditForm(true)
