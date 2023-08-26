@@ -15,8 +15,8 @@ const DeleteExpenseForm = ({ deleteExpense, setDeleteExpenseForm, possibleToCanc
 	return (
 		<div style={{ zIndex: 1 }} className={deleteFormStyle}>
 			<div className={deleteFormCardStyle}>
-				<p>Tem certeza que deseja excluir esta despesa?</p>
-				<div className='text-center'>
+				<p className='card-header text-bg-dark'>Tem certeza que deseja excluir esta despesa?</p>
+				<div className='card-body text-center'>
 					<button ref={deleteButton} onClick={() => deleteExpense(deleteButton)} className={confirmButtonStyle}>Excluir</button>
 					<button onClick={() => {
 						if(possibleToCancel) setDeleteExpenseForm(false)
