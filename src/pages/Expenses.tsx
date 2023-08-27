@@ -5,12 +5,13 @@ import { container } from 'commonStyles'
 import ExpensesTable from 'components/expenses/ExpensesTable'
 import AddExpenseForm from 'components/expenses/AddExpenseForm'
 import AnyExpensesAdvice from 'components/pages/AnyAdvice'
+import RegisterButton from 'components/pages/RegisterButton'
 import { SERVER_URL } from 'App'
 
 const Expenses = ({ setCurrentPage }: Props) => {
 
 	const [expenses, setExpenses] = useState<TExpenses>([])
-	const [formButton, setFormButton] = useState(true)
+	const [addExpenseForm, setAddExpenseForm] = useState(false)
 
 	useEffect(() => {
 		fetch(`${SERVER_URL}/all-expenses`)
@@ -33,12 +34,12 @@ const Expenses = ({ setCurrentPage }: Props) => {
 	            	: <AnyExpensesAdvice page='despesa' />
 	        }
 	        {
-	        	formButton
-	        		? <button onClick={() => setFormButton(false)} className='btn btn-sm btn-outline-dark align-self-start'>Adicionar</button>
-	        		: <AddExpenseForm 
-	        				setFormButton={setFormButton}
+	        	addExpenseForm
+	        		? <AddExpenseForm 
+	        				setAddExpenseForm={setAddExpenseForm}
 	        				expensesState={[expenses, setExpenses]}
-	        			/> 
+	        			/>
+	        		: <RegisterButton setForm={setAddExpenseForm} />
 	        }
 		</div>
 	)

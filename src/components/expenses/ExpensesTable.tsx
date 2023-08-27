@@ -52,7 +52,7 @@ const ExpensesTable = ({ expensesState }: Props) => {
     }
 
     return (
-        <div className='table-container mb-4'>
+        <div className='table-container mb-3'>
             <table className={tableStyle}>
                 <thead className='table-dark'>
                     <tr>
