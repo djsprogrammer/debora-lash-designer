@@ -1,11 +1,10 @@
-import { useEffect, useContext, useState } from 'react'
+import { useContext, useState } from 'react'
 import ServiceRow from './ServiceRow'
 import DeleteForm from 'components/pages/DeleteForm'
 import { Service } from 'types/services'
 import { BooleanState, ButtonRef } from 'types/common'
 import { tableStyle } from 'commonStyles'
 import { ServicesContext } from 'ServicesContext'
-import { changeFormState } from 'formFunctions/GenericForm'
 import { SERVER_URL } from 'App'
 import { DB_ERROR_TEXT, SERVER_ERROR_TEXT } from 'errorAdvices'
 
@@ -22,22 +21,10 @@ const ServiceTable = ({ blockedActionsState }: Props) => {
     const [deleteServiceForm, setDeleteServiceForm] = useState(false)
     const [targetService, setTargetService] = useState<Service>({} as Service)
     const [possibleToCancel, setPossibleToCancel] = useState(true)
-
-    useEffect(() => {
-        if (!deleteServiceForm) setBlockedActions(false)
-    }, [deleteServiceForm, setBlockedActions])
-
-    const showDeleteServiceForm = () => {
-        if (!blockedActions) {
-            setBlockedActions(true) 
-            setDeleteServiceForm(true)
-        }
-    }
     
     const deleteService = (buttonRef: ButtonRef) => {
         if (buttonRef.current) buttonRef.current.innerText = '...'
         setPossibleToCancel(false)
-        changeFormState('', '')
         const options = {
             method: 'delete',
             headers: { 'Content-Type': 'application/json' },
@@ -86,7 +73,7 @@ const ServiceTable = ({ blockedActionsState }: Props) => {
                         <ServiceRow
                             service={service}
                             setTargetService={setTargetService}
-                            showDeleteServiceForm={showDeleteServiceForm}
+                            setDeleteServiceForm={setDeleteServiceForm}
                         />)}
                 </tbody>
             </table>
