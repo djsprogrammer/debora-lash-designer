@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from 'react'
 import { v4 } from 'uuid'
 import { saveRefsInMemory, setButtonText, getExpenseInfo, resetForm } from 'formFunctions/AddExpenseForm'
 import { validNumber, fetchOptions } from 'formFunctions/common'
-import { deleteButtonStyle } from 'commonStyles'
+import { addFormContainer, addFormCardStyle, deleteButtonStyle } from 'commonStyles'
 import { ExpensesState } from 'types/expenses'
 import { BooleanSet } from 'types/common'
 import { SERVER_URL } from 'App'
@@ -72,8 +72,8 @@ const AddExpenseForm = ({ setAddExpenseForm, expensesState }: Props) => {
 	}
 
 	return (
-		<div className='position-absolute vw-100 vh-100 top-0 start-0 d-flex justify-content-center align-items-start add-form'>
-			<div className='card p-4 mt-5 border border-dark'>
+		<div className={addFormContainer}>
+			<div className={addFormCardStyle}>
 				<form className='d-flex flex-column' onSubmit={e => {
 					e.preventDefault()
 					addExpense()
@@ -91,7 +91,7 @@ const AddExpenseForm = ({ setAddExpenseForm, expensesState }: Props) => {
 		                <input ref={valueRef} className='form-control text-center' type='text' required />
 		            </div>
 		            <div className='text-center'>
-						<button ref={buttonRef} className={'btn btn-sm btn-dark me-2'} type='submit'>Registrar</button>
+						<button ref={buttonRef} className='btn btn-sm btn-dark me-2' type='submit'>Registrar</button>
 						<button onClick={() => {
 							// Só permitindo fechar o formulário quando não estiver ocorrendo alguma ação
 							if (!blockedActions) setAddExpenseForm(false)

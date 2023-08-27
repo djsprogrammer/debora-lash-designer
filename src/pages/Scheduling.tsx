@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import SchedulingTable from 'components/schedulings/SchedulingTable'
 import AnySchedulingAdvice from 'components/pages/AnyAdvice'
 import AddSchedulingForm from 'components/schedulings/AddSchedulingForm'
+import RegisterButton from 'components/pages/RegisterButton'
 import { ServiceSchedulings } from 'types/schedulings'
 import { Props } from 'types/pages'
 import { container } from 'commonStyles'
@@ -10,6 +11,7 @@ import { SERVER_URL } from 'App'
 const Scheduling = ({ setCurrentPage }: Props) => {
 
 	const [servicesScheduling, setServicesScheduling] = useState<ServiceSchedulings>([])
+	const [addSchedulingForm, setAddSchedulingForm] = useState(false)
 	const [blockedActions, setBlockedActions] = useState(false)
 
 	useEffect(() => {
@@ -35,10 +37,15 @@ const Scheduling = ({ setCurrentPage }: Props) => {
 						/>
 					: <AnySchedulingAdvice page='agendamento' />
 			}
-			<AddSchedulingForm 
-				schedulingsState={[servicesScheduling, setServicesScheduling]}
-				setBlockedActions={setBlockedActions}
-			/>
+			{
+				addSchedulingForm
+					? <AddSchedulingForm 
+						schedulingsState={[servicesScheduling, setServicesScheduling]}
+						setAddSchedulingForm={setAddSchedulingForm}
+						/>
+					: <RegisterButton setForm={setAddSchedulingForm} />
+			}
+			
 		</div>
 	)
 
