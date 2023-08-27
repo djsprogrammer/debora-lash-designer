@@ -10,13 +10,11 @@ import { SERVER_URL } from 'App'
 import { DB_ERROR_TEXT, SERVER_ERROR_TEXT } from 'errorAdvices'
 
 interface Props {
-    editFormState: BooleanState
     blockedActionsState: BooleanState
 }
 
-const ServiceTable = ({ editFormState, blockedActionsState }: Props) => {
+const ServiceTable = ({ blockedActionsState }: Props) => {
 
-    const [editForm, setEditForm] = editFormState
     const [blockedActions, setBlockedActions] = blockedActionsState
 
     const [services, setServices] = useContext(ServicesContext)
@@ -73,15 +71,6 @@ const ServiceTable = ({ editFormState, blockedActionsState }: Props) => {
             })        
     }
 
-    const setEditValuesInTheForm = (name: string, value: number, row: React.RefObject<HTMLTableRowElement>) => {
-        if (!blockedActions) {
-            if (row.current) row.current.classList.add('table-light')
-            setBlockedActions(true)
-            changeFormState(name, value.toString(), 'Editar')
-            setEditForm(true)
-        }
-    }
-
     return (
         <div className='table-container'>
             <table className={tableStyle}>
@@ -95,11 +84,9 @@ const ServiceTable = ({ editFormState, blockedActionsState }: Props) => {
                 <tbody>
                     {services.map(service =>
                         <ServiceRow
-                            editForm={editForm}
                             service={service}
                             setTargetService={setTargetService}
                             showDeleteServiceForm={showDeleteServiceForm}
-                            setEditValuesInTheForm={setEditValuesInTheForm} 
                         />)}
                 </tbody>
             </table>

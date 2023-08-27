@@ -16,13 +16,11 @@ const INVALID_NUMBER_TEXT = 'Insira um número válido (utilize ponto para casas
 const ALREADY_EXISTS_TEXT = 'Já existe um serviço com esse nome!'
 
 interface Props {
-    editFormState: BooleanState
     blockedActionsState: BooleanState
 }
 
-const GenericForm = ({ editFormState, blockedActionsState }: Props) => {
+const AddServiceForm = ({ blockedActionsState }: Props) => {
 
-    const [editForm, setEditForm] = editFormState
     const [blockedActions, setBlockedActions] = blockedActionsState
 
     const [services, setServices] = useContext(ServicesContext)
@@ -36,17 +34,6 @@ const GenericForm = ({ editFormState, blockedActionsState }: Props) => {
         saveReferenciesOnMemory(nameInput, valueInput, button)
     }, [])
 
-    // Deixando o nome indisponível para modificar
-    useEffect(() => {
-        if (nameGroup.current) {
-            if (editForm) {
-                nameGroup.current.style.display = 'none'
-            } else {
-                nameGroup.current.style.display = 'flex'
-            }
-        }
-    }, [editForm])
-
     const addService = () => {
         if (!blockedActions) {
             setBlockedActions(true)
@@ -59,7 +46,6 @@ const GenericForm = ({ editFormState, blockedActionsState }: Props) => {
                         name, value: Number(value)
                     }
                     const options = fetchOptions('post', service)
-                    setTimeout(() => {
                         fetch(`${SERVER_URL}/create-service`, options)
                         .then(res => {
                             const newServices = [...services, service]
@@ -70,7 +56,6 @@ const GenericForm = ({ editFormState, blockedActionsState }: Props) => {
                         }).catch(() => {
                             showError(SERVER_ERROR_TEXT, setBlockedActions)
                         })
-                    }, 5000)
                 } else {
                     showError(INVALID_NUMBER_TEXT, setBlockedActions)
                 }
@@ -80,37 +65,10 @@ const GenericForm = ({ editFormState, blockedActionsState }: Props) => {
         }
     }
 
-    const editService = () => {
-        setButtonText(LOAD_BUTTON_TEXT)
-        const [name, value] = getServiceInfo()
-        if (validNumber(value)) {
-            const service = { name, value: Number(value) }
-            const options = fetchOptions('put', service)
-            fetch(`${SERVER_URL}/edit-service`, options)
-                .then(res => {
-                    const otherServices = services.filter(service => {
-                        return service.name !== name
-                    })
-                    const newServices = [...otherServices, { name, value: Number(value) }]
-                    responseHandler(
-                        res, 204, setServices, newServices, 
-                        DB_ERROR_TEXT, ADD_BUTTON_TEXT, setBlockedActions
-                    )
-                    setEditForm(false)
-                }).catch(() => {
-                    showError(SERVER_ERROR_TEXT, setBlockedActions)
-                    setEditForm(false)
-                })
-        } else {
-            showError(INVALID_NUMBER_TEXT, setBlockedActions)
-            setEditForm(false)
-        }
-    }
-
     return (
         <form className='d-flex flex-column' onSubmit={e => {
             e.preventDefault()
-            editForm ? editService() : addService()
+            addService()
         }}>
             <div ref={nameGroup} className='input-group'>
                 <label className='input-group-text' htmlFor='services'>Nome</label>
@@ -126,4 +84,4 @@ const GenericForm = ({ editFormState, blockedActionsState }: Props) => {
 
 }
 
-export default GenericForm
+export default AddServiceForm
