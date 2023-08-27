@@ -61,7 +61,7 @@ const ServiceTable = ({ blockedActionsState }: Props) => {
     return (
         <div className='table-container'>
             <table className={tableStyle}>
-                <thead className='table-dark'>
+                <thead>
                     <tr>
                         <th>Serviço</th>
                         <th>Valor</th>
