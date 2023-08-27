@@ -19,7 +19,7 @@ const DeleteSchedulingForm = ({ deleteTarget, setDeleteForm, possibleToCancel }:
 				<div className='card-body text-center'>
 					<button ref={deleteButtonRef} onClick={() => deleteTarget(deleteButtonRef)} className={confirmButtonStyle}>Excluir</button>
 					<button onClick={() => {
-						if(possibleToCancel) setDeleteForm(false)
+						if (possibleToCancel) setDeleteForm(false)
 					}} className={deleteButtonStyle}>Cancelar</button>
 				</div>
 			</div>

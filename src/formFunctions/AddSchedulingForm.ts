@@ -4,7 +4,6 @@ import { ServiceScheduling } from 'types/schedulings'
 type Options = React.RefObject<HTMLSelectElement>
 type Date = React.RefObject<HTMLInputElement>
 type Client = React.RefObject<HTMLInputElement>
-type Button = React.RefObject<HTMLButtonElement>
 
 let optionsRef: Options
 let dateRef: Date
@@ -38,12 +37,5 @@ export const responseHandler = (res: Response,
 		case 503:
 			alert('Erro ao consultar banco de dados')
 			break
-	}
-}
-
-export const resetForm = () => {
-	if (dateRef.current && clientRef.current) {
-		dateRef.current.value = ''
-		clientRef.current.value = ''
 	}
 }

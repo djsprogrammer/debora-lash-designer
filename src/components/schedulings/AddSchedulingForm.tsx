@@ -3,11 +3,11 @@ import AddFormButtons from 'components/pages/AddFormButtons'
 import { ServicesContext } from 'ServicesContext'
 import { Props } from 'types/schedulings'
 import { BooleanSet } from 'types/common'
-import { addFormContainer, addFormCardStyle, deleteButtonStyle } from 'commonStyles'
+import { addFormContainer, addFormCardStyle } from 'commonStyles'
 import { SERVER_URL } from 'App'
 import { SERVER_ERROR_TEXT } from 'errorAdvices'
 import { fetchOptions } from 'formFunctions/common'
-import { saveRefsInMemory, createSchedulingToSend, responseHandler, resetForm } from 'formFunctions/AddSchedulingForm'
+import { saveRefsInMemory, createSchedulingToSend, responseHandler } from 'formFunctions/AddSchedulingForm'
 
 interface AddSchedulingFormProps extends Props {
 	setAddSchedulingForm: BooleanSet
@@ -39,7 +39,6 @@ const AddSchedulingForm = ({ schedulingsState, setAddSchedulingForm }: AddSchedu
 				})[0]
 				if (alreadyExists) {
 					alert('Já existe um agendamento para essa pessoa nessa data')
-					resetForm()
 					setBlockedActions(false)
 					setAddSchedulingForm(false)
 				} else {
@@ -50,13 +49,11 @@ const AddSchedulingForm = ({ schedulingsState, setAddSchedulingForm }: AddSchedu
 							const newSchedulings = [...servicesScheduling, serviceScheduling]
 								.sort((a, b) => a.date.localeCompare(b.date)).reverse()
 							responseHandler(res, setServicesScheduling, newSchedulings)
-							resetForm()
 							setBlockedActions(false)
 							setAddSchedulingForm(false)
 						})
 						.catch(() => {
 							alert(SERVER_ERROR_TEXT)
-							resetForm()
 							setBlockedActions(false)
 							setAddSchedulingForm(false)	
 						})

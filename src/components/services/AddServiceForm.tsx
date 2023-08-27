@@ -1,10 +1,10 @@
 import { useEffect, useContext, useRef } from 'react'
 import AddFormButtons from 'components/pages/AddFormButtons'
 import { 
-    getServiceInfo, validNumber, saveReferenciesOnMemory, 
+    getServiceInfo, saveRefsInMemory, 
     showError, responseHandler 
 } from '../../formFunctions/AddServiceForm'
-import { fetchOptions } from 'formFunctions/common'
+import { validNumber, fetchOptions } from 'formFunctions/common'
 import { ServicesContext } from 'ServicesContext'
 import { SERVER_URL } from 'App'
 import { addFormContainer, addFormCardStyle } from 'commonStyles'
@@ -31,7 +31,7 @@ const AddServiceForm = ({ blockedActionsState, setAddServiceForm }: Props) => {
     const valueInput = useRef<HTMLInputElement>(null)
 
     useEffect(() => {
-        saveReferenciesOnMemory(nameInput, valueInput)
+        saveRefsInMemory(nameInput, valueInput)
     }, [])
 
     const addService = () => {

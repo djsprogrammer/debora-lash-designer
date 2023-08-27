@@ -1,9 +1,9 @@
 import { useState, useRef, useEffect } from 'react'
 import { v4 } from 'uuid'
 import AddFormButtons from 'components/pages/AddFormButtons'
-import { saveRefsInMemory, setButtonText, getExpenseInfo, resetForm } from 'formFunctions/AddExpenseForm'
+import { saveRefsInMemory, getExpenseInfo } from 'formFunctions/AddExpenseForm'
 import { validNumber, fetchOptions } from 'formFunctions/common'
-import { addFormContainer, addFormCardStyle, deleteButtonStyle } from 'commonStyles'
+import { addFormContainer, addFormCardStyle } from 'commonStyles'
 import { ExpensesState } from 'types/expenses'
 import { BooleanSet } from 'types/common'
 import { SERVER_URL } from 'App'
@@ -22,16 +22,14 @@ const AddExpenseForm = ({ setAddExpenseForm, expensesState }: Props) => {
 	const dateRef = useRef<HTMLInputElement>(null)
 	const nameRef = useRef<HTMLInputElement>(null)
 	const valueRef = useRef<HTMLInputElement>(null)
-	const buttonRef = useRef<HTMLButtonElement>(null)
 
 	useEffect(() => {
-		saveRefsInMemory(dateRef, nameRef, valueRef, buttonRef)
+		saveRefsInMemory(dateRef, nameRef, valueRef)
 	}, [])
 
 	const addExpense = () => {
 		if (!blockedActions) {
 			setBlockedActions(true)
-			setButtonText('...')
 			const [date, name, value] = getExpenseInfo()
 			if (validNumber(value)) {
 				const newExpense = { _id: v4(), date, name, value: Number(value) }
@@ -40,7 +38,6 @@ const AddExpenseForm = ({ setAddExpenseForm, expensesState }: Props) => {
 				})[0]
 				if (alreadyExists) {
 					alert('Já existe uma despesa igual a essa')
-					resetForm()
 					setAddExpenseForm(false)
 					setBlockedActions(false)
 				} else {
@@ -58,14 +55,12 @@ const AddExpenseForm = ({ setAddExpenseForm, expensesState }: Props) => {
 									alert(DB_ERROR_TEXT)
 									break
 							}
-							resetForm()
 							setAddExpenseForm(false)
 							setBlockedActions(false)
 						})
 				}
 			} else {
 				alert(INVALID_NUMBER_TEXT)
-				resetForm()
 				setAddExpenseForm(false)
 				setBlockedActions(false)
 			}
