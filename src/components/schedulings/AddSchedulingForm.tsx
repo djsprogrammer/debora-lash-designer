@@ -1,4 +1,5 @@
 import { useContext, useRef, useEffect, useState } from 'react'
+import AddFormButtons from 'components/pages/AddFormButtons'
 import { ServicesContext } from 'ServicesContext'
 import { Props } from 'types/schedulings'
 import { BooleanSet } from 'types/common'
@@ -22,16 +23,14 @@ const AddSchedulingForm = ({ schedulingsState, setAddSchedulingForm }: AddSchedu
 	const date = useRef<HTMLInputElement>(null)
 	const options = useRef<HTMLSelectElement>(null)
 	const client = useRef<HTMLInputElement>(null)
-	const addButton = useRef<HTMLButtonElement>(null)
 
 	useEffect(() => {
-		saveRefsInMemory(options, date, client, addButton)
+		saveRefsInMemory(options, date, client)
 	}, [])
 
 	const addScheduling = () => {
 		if (!blockedActions) {
 			setBlockedActions(true)
-			if (addButton.current) addButton.current.innerText = '...'
 			const serviceScheduling = createSchedulingToSend()
 			if (serviceScheduling) {
 				// Não permitindo criar dois agendamentos para a mesma pessoa no mesmo dia
@@ -86,13 +85,7 @@ const AddSchedulingForm = ({ schedulingsState, setAddSchedulingForm }: AddSchedu
 						</select>
 					</div>
 					<input ref={client} className='form-control text-center p-1 mb-3' type='text' placeholder='Digite o nome do cliente' required />
-					<div className='text-center'>
-						<button ref={addButton} className='btn btn-sm btn-dark me-2' type='submit'>Agendar</button>
-						<button onClick={() => {
-							// Só permitindo fechar o formulário quando não estiver ocorrendo alguma ação
-							if (!blockedActions) setAddSchedulingForm(false)
-						}} className={deleteButtonStyle}>Cancelar</button>
-					</div>
+					<AddFormButtons confirmText='Agendar' blockedActions={blockedActions} setAddForm={setAddSchedulingForm} />
 				</form>
 			</div>
 		</div>

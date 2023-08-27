@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
 import { v4 } from 'uuid'
+import AddFormButtons from 'components/pages/AddFormButtons'
 import { saveRefsInMemory, setButtonText, getExpenseInfo, resetForm } from 'formFunctions/AddExpenseForm'
 import { validNumber, fetchOptions } from 'formFunctions/common'
 import { addFormContainer, addFormCardStyle, deleteButtonStyle } from 'commonStyles'
@@ -90,13 +91,11 @@ const AddExpenseForm = ({ setAddExpenseForm, expensesState }: Props) => {
 		                <label className='input-group-text' htmlFor='services'>Valor</label>
 		                <input ref={valueRef} className='form-control text-center' type='text' required />
 		            </div>
-		            <div className='text-center'>
-						<button ref={buttonRef} className='btn btn-sm btn-dark me-2' type='submit'>Registrar</button>
-						<button onClick={() => {
-							// Só permitindo fechar o formulário quando não estiver ocorrendo alguma ação
-							if (!blockedActions) setAddExpenseForm(false)
-						}} className={deleteButtonStyle}>Cancelar</button>
-					</div>
+		            <AddFormButtons 
+		            	confirmText='Registrar'
+		            	blockedActions={blockedActions}
+		            	setAddForm={setAddExpenseForm}
+		            />
 				</form>
 			</div>
 		</div>

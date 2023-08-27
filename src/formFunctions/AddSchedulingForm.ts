@@ -9,13 +9,11 @@ type Button = React.RefObject<HTMLButtonElement>
 let optionsRef: Options
 let dateRef: Date
 let clientRef: Client
-let addButtonRef: Button
 
-export const saveRefsInMemory = (options: Options, date: Date, client: Client, addButton: Button) => {
+export const saveRefsInMemory = (options: Options, date: Date, client: Client) => {
 	optionsRef = options
 	dateRef = date
 	clientRef = client
-	addButtonRef = addButton
 }
 
 export const createSchedulingToSend = () => {
@@ -48,5 +46,4 @@ export const resetForm = () => {
 		dateRef.current.value = ''
 		clientRef.current.value = ''
 	}
-	if (addButtonRef.current) addButtonRef.current.innerText = 'Agendar'
 }

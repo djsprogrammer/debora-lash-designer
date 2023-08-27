@@ -39,7 +39,7 @@ const Expenses = ({ setCurrentPage }: Props) => {
 	        				setAddExpenseForm={setAddExpenseForm}
 	        				expensesState={[expenses, setExpenses]}
 	        			/>
-	        		: <RegisterButton setForm={setAddExpenseForm} />
+	        		: <RegisterButton setForm={setAddExpenseForm} text='Registrar' />
 	        }
 		</div>
 	)

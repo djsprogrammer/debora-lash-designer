@@ -43,7 +43,7 @@ const Scheduling = ({ setCurrentPage }: Props) => {
 						schedulingsState={[servicesScheduling, setServicesScheduling]}
 						setAddSchedulingForm={setAddSchedulingForm}
 						/>
-					: <RegisterButton setForm={setAddSchedulingForm} />
+					: <RegisterButton setForm={setAddSchedulingForm} text='Agendar' />
 			}
 			
 		</div>
