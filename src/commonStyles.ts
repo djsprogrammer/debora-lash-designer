@@ -1,7 +1,7 @@
 export const container = 'container d-flex flex-column align-items-center'
 export const tableStyle = 'table text-center mt-1'
 export const formContainer = 'position-absolute vw-100 vh-100 top-0 start-0 d-flex justify-content-center align-items-center form-bg'
-export const addFormCardStyle = 'card p-4'
+export const addFormCardStyle = 'card border-light p-4'
 export const addFormCardHeaderStyle = 'card-header mb-2'
 export const confirmButtonStyle = 'btn btn-sm btn-dark'
 export const cancelButtonStyle = 'btn btn-sm btn-outline-danger'

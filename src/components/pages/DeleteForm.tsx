@@ -6,7 +6,7 @@ interface Props {
 	deleteTarget: () => void
 }
 
-const DeleteSchedulingForm = ({ deleteTarget, setDeleteForm }: Props) => {
+const DeleteForm = ({ deleteTarget, setDeleteForm }: Props) => {
 
 	const [possibleToCancel, setPossibleToCancel] = useState(true)
 
@@ -22,7 +22,7 @@ const DeleteSchedulingForm = ({ deleteTarget, setDeleteForm }: Props) => {
 
 	return (
 		<div style={{ zIndex: 1 }} className={formContainer}>
-			<div className='card'>
+			<div className='card border-light'>
 				<p className='card-header'>Tem certeza que deseja excluir?</p>
 				<div className='card-body text-center'>
 					<button ref={deleteButtonRef} onClick={() => prepareToDelete()} className={`${confirmButtonStyle} me-2`}>Excluir</button>
@@ -36,4 +36,4 @@ const DeleteSchedulingForm = ({ deleteTarget, setDeleteForm }: Props) => {
 
 }
 
-export default DeleteSchedulingForm
+export default DeleteForm
