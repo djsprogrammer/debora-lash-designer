@@ -1,4 +1,4 @@
-import { confirmButtonStyle, deleteButtonStyle } from 'commonStyles'
+import { confirmButtonStyle, cancelButtonStyle } from 'commonStyles'
 import { useRef } from 'react'
 
 interface Props {
@@ -25,7 +25,7 @@ const DeleteSchedulingForm = ({ deleteTarget, setDeleteForm, possibleToCancel }:
 					<button ref={deleteButtonRef} onClick={() => prepareToDelete()} className={confirmButtonStyle}>Excluir</button>
 					<button onClick={() => {
 						if (possibleToCancel) setDeleteForm(false)
-					}} className={deleteButtonStyle}>Cancelar</button>
+					}} className={cancelButtonStyle}>Cancelar</button>
 				</div>
 			</div>
 		</div>

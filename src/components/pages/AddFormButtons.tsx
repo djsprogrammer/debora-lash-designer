@@ -1,6 +1,6 @@
 import { useRef } from 'react'
 import { BooleanSet } from 'types/common'
-import { deleteButtonStyle } from 'commonStyles'
+import { cancelButtonStyle } from 'commonStyles'
 
 interface Props {
 	confirmText: string
@@ -20,7 +20,7 @@ const AddFormButtons = ({ confirmText, blockedActions, setAddForm }: Props) => {
 			<button onClick={() => {
 				// Só permitindo fechar o formulário quando não estiver ocorrendo alguma ação
 				if (!blockedActions) setAddForm(false)
-			}} className={deleteButtonStyle}>Cancelar</button>
+			}} className={cancelButtonStyle}>Cancelar</button>
 		</div>
 	)
 

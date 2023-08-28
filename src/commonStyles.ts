@@ -4,4 +4,4 @@ export const addFormContainer = 'position-absolute vw-100 vh-100 top-0 start-0 d
 export const addFormCardStyle = 'card p-4 mt-5'
 export const formButtonStyle = 'btn btn-sm btn-outline-dark'
 export const confirmButtonStyle = 'btn btn-sm btn-dark me-2'
-export const deleteButtonStyle = 'btn btn-sm btn-danger'
+export const cancelButtonStyle = 'btn btn-sm btn-danger'
