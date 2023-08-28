@@ -1,4 +1,6 @@
+import { memo } from 'react'
 import DeleteButton from 'components/pages/DeleteButton'
+import { moneyFormat } from 'formFunctions/common'
 import { BooleanSet } from 'types/common'
 import { Service, SetService } from 'types/services'
 
@@ -11,7 +13,9 @@ interface Props {
 const ServiceRow = ({ service, setTargetService, setDeleteServiceForm }: Props) => {
 
     const name = service._id
-    const value = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(Number(service.value)).replace('R$', '')
+
+    // Deixando no formato 0,00
+    const value = moneyFormat(service.value)
 
     return (
         <tr key={name}>
@@ -28,4 +32,4 @@ const ServiceRow = ({ service, setTargetService, setDeleteServiceForm }: Props) 
 
 }
 
-export default ServiceRow
+export default memo(ServiceRow)

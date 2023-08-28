@@ -1,5 +1,6 @@
+import { memo } from 'react'
 import DeleteButton from 'components/pages/DeleteButton'
-import { valueAndDateFormat } from 'formFunctions/common'
+import { moneyFormat, dateFormat } from 'formFunctions/common'
 import { Expense, SetExpense } from 'types/expenses'
 
 interface Props {
@@ -10,7 +11,11 @@ interface Props {
 
 const ExpenseRow = ({ expense, setTargetExpense, setDeleteExpenseForm }: Props) => {
 
-    const [value, date] = valueAndDateFormat(expense.value, expense.date)
+    // Deixando no formato 0,00
+    const value = moneyFormat(expense.value)
+
+    // Deixando no formato dd/mm
+    const date = dateFormat(expense.date)
 
     return (
         <tr key={expense.name}>
@@ -28,4 +33,4 @@ const ExpenseRow = ({ expense, setTargetExpense, setDeleteExpenseForm }: Props) 
 
 }
 
-export default ExpenseRow
+export default memo(ExpenseRow)

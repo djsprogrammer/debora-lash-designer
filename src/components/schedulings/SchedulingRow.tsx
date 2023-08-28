@@ -1,7 +1,7 @@
 import { memo } from 'react'
 import DeleteButton from 'components/pages/DeleteButton'
 import { ServiceScheduling, SetScheduling } from 'types/schedulings'
-import { valueAndDateFormat } from 'formFunctions/common'
+import { moneyFormat, dateFormat } from 'formFunctions/common'
 
 interface Props {
     scheduling: ServiceScheduling
@@ -11,7 +11,11 @@ interface Props {
 
 const SchedulingRow = ({ scheduling, setDeleteSchedulingForm, setTargetScheduling }: Props) => {
 
-    const [value, date] = valueAndDateFormat(scheduling.service.value, scheduling.date)
+    // Deixando no formato 0,00
+    const value = moneyFormat(scheduling.service.value)
+
+    // Deixando no formato dd/mm
+    const date = dateFormat(scheduling.date)
     
     return (
         <tr>

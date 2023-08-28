@@ -22,13 +22,13 @@ export const fetchOptions = (targetMethod: string, payload: Payload) => {
     }
 }
 
-export const valueAndDateFormat = (targetValue: Number, targetDate: string) => {
+export const moneyFormat = (value: number) => {
+    const formatedData =  new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' })
+    .format(Number(value)).replace('R$', '')
+    return formatedData
+}
 
-    const value = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' })
-    .format(Number(targetValue)).replace('R$', '')
-
-    const date = format(parseISO(targetDate), 'dd/MM')
-
-    return [value, date]
-    
+export const dateFormat = (date: string) => {
+    const formatedDate = format(parseISO(date), 'dd/MM')
+    return formatedDate
 }
