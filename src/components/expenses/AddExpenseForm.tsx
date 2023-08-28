@@ -3,7 +3,7 @@ import { v4 } from 'uuid'
 import AddFormButtons from 'components/pages/AddFormButtons'
 import { saveRefsInMemory, getExpenseInfo } from 'formFunctions/AddExpenseForm'
 import { validNumber, fetchOptions } from 'formFunctions/common'
-import { formContainer, addFormCardStyle } from 'commonStyles'
+import { formContainer, addFormCardStyle, addFormCardHeaderStyle } from 'commonStyles'
 import { ExpensesState } from 'types/expenses'
 import { BooleanSet } from 'types/common'
 import { SERVER_URL } from 'App'
@@ -70,28 +70,33 @@ const AddExpenseForm = ({ setAddExpenseForm, expensesState }: Props) => {
 	return (
 		<div className={formContainer}>
 			<div className={addFormCardStyle}>
-				<form className='d-flex flex-column' onSubmit={e => {
-					e.preventDefault()
-					addExpense()
-				}}>
-					<div className='input-group'>
-						<label className='input-group-text'>Escolha uma data</label>
-						<input ref={dateRef} className='pe-1 form-control text-center' type='date' required />
-					</div>
-					<div className='input-group my-3'>
-		                <label className='input-group-text' htmlFor='services'>Nome</label>
-		                <input ref={nameRef} className='form-control text-center' type='text' required />
-		            </div>
-		            <div className='input-group mb-3'>
-		                <label className='input-group-text' htmlFor='services'>Valor</label>
-		                <input ref={valueRef} className='form-control text-center' type='text' required />
-		            </div>
-		            <AddFormButtons 
-		            	confirmText='Registrar'
-		            	blockedActions={blockedActions}
-		            	setAddForm={setAddExpenseForm}
-		            />
-				</form>
+				<div className={addFormCardHeaderStyle}>
+					<h5>Registrar Despesa</h5>
+				</div>
+				<div className='card-body'>
+					<form className='d-flex flex-column' onSubmit={e => {
+						e.preventDefault()
+						addExpense()
+					}}>
+						<div className='input-group'>
+							<label className='input-group-text'>Escolha uma data</label>
+							<input ref={dateRef} className='pe-1 form-control text-center' type='date' required />
+						</div>
+						<div className='input-group my-3'>
+			                <label className='input-group-text' htmlFor='services'>Nome</label>
+			                <input ref={nameRef} className='form-control text-center' type='text' required />
+			            </div>
+			            <div className='input-group mb-3'>
+			                <label className='input-group-text' htmlFor='services'>Valor</label>
+			                <input ref={valueRef} className='form-control text-center' type='text' required />
+			            </div>
+			            <AddFormButtons 
+			            	confirmText='Registrar'
+			            	blockedActions={blockedActions}
+			            	setAddForm={setAddExpenseForm}
+			            />
+					</form>
+				</div>
 			</div>
 		</div>
 	)

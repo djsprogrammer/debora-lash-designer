@@ -7,7 +7,7 @@ import {
 import { validNumber, fetchOptions } from 'formFunctions/common'
 import { ServicesContext } from 'ServicesContext'
 import { SERVER_URL } from 'App'
-import { formContainer, addFormCardStyle } from 'commonStyles'
+import { formContainer, addFormCardStyle, addFormCardHeaderStyle } from 'commonStyles'
 import { SERVER_ERROR_TEXT, DB_ERROR_TEXT } from 'errorAdvices'
 import { BooleanSet } from 'types/common'
 
@@ -69,20 +69,25 @@ const AddServiceForm = ({ setAddServiceForm }: Props) => {
     return (
         <div className={formContainer}>
             <div className={addFormCardStyle}>
-                <form className='d-flex flex-column' onSubmit={e => {
-                    e.preventDefault()
-                    addService()
-                }}>
-                    <div ref={nameGroup} className='input-group'>
-                        <label className='input-group-text' htmlFor='services'>Nome</label>
-                        <input ref={nameInput} className='form-control text-center' type='text' required />
-                    </div>
-                    <div className='input-group my-3'>
-                        <label className='input-group-text' htmlFor='services'>Valor</label>
-                        <input ref={valueInput} className='form-control text-center' type='text' required />
-                    </div>
-                    <AddFormButtons confirmText='Registrar' blockedActions={blockedActions} setAddForm={setAddServiceForm} />
-                </form>
+                <div className={addFormCardHeaderStyle}>
+                    <h5>Criar Serviço</h5>
+                </div>
+                <div className='card-body'>
+                    <form className='d-flex flex-column' onSubmit={e => {
+                        e.preventDefault()
+                        addService()
+                    }}>
+                        <div ref={nameGroup} className='input-group'>
+                            <label className='input-group-text' htmlFor='services'>Nome</label>
+                            <input ref={nameInput} className='form-control text-center' type='text' required />
+                        </div>
+                        <div className='input-group my-3'>
+                            <label className='input-group-text' htmlFor='services'>Valor</label>
+                            <input ref={valueInput} className='form-control text-center' type='text' required />
+                        </div>
+                        <AddFormButtons confirmText='Registrar' blockedActions={blockedActions} setAddForm={setAddServiceForm} />
+                    </form>
+                </div>
             </div>
         </div>
     )

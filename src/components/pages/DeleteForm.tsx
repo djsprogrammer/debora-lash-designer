@@ -25,7 +25,7 @@ const DeleteSchedulingForm = ({ deleteTarget, setDeleteForm }: Props) => {
 			<div className='card'>
 				<p className='card-header'>Tem certeza que deseja excluir?</p>
 				<div className='card-body text-center'>
-					<button ref={deleteButtonRef} onClick={() => prepareToDelete()} className={confirmButtonStyle}>Excluir</button>
+					<button ref={deleteButtonRef} onClick={() => prepareToDelete()} className={`${confirmButtonStyle} me-2`}>Excluir</button>
 					<button onClick={() => {
 						if (possibleToCancel) setDeleteForm(false)
 					}} className={cancelButtonStyle}>Cancelar</button>
