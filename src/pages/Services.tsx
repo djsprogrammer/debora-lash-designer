@@ -15,18 +15,17 @@ const Services = ({ setCurrentPage }: Props) => {
 
     const [services] = useContext(ServicesContext)
     const [addServiceForm, setAddServiceForm] = useState(false)
-    const [blockedActions, setBlockedActions] = useState(false)
 
     return (
         <div className={container}>
             {
                 services[0] 
-                ? <ServiceTable blockedActionsState={[blockedActions, setBlockedActions]} /> 
+                ? <ServiceTable /> 
                 : <AnyServiceAdvice page='serviço' />
             }
             {
                 addServiceForm
-                ? <AddServiceForm blockedActionsState={[blockedActions, setBlockedActions]} setAddServiceForm={setAddServiceForm} />
+                ? <AddServiceForm setAddServiceForm={setAddServiceForm} />
                 : <RegisterButton setForm={setAddServiceForm} text='Registrar' />
             }
         </div>

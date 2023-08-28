@@ -2,19 +2,13 @@ import { useContext, useState } from 'react'
 import ServiceRow from './ServiceRow'
 import DeleteForm from 'components/pages/DeleteForm'
 import { Service } from 'types/services'
-import { BooleanState, ButtonRef } from 'types/common'
+import { ButtonRef } from 'types/common'
 import { tableStyle } from 'commonStyles'
 import { ServicesContext } from 'ServicesContext'
 import { SERVER_URL } from 'App'
 import { DB_ERROR_TEXT, SERVER_ERROR_TEXT } from 'errorAdvices'
 
-interface Props {
-    blockedActionsState: BooleanState
-}
-
-const ServiceTable = ({ blockedActionsState }: Props) => {
-
-    const [blockedActions, setBlockedActions] = blockedActionsState
+const ServiceTable = () => {
 
     const [services, setServices] = useContext(ServicesContext)
 
@@ -47,11 +41,9 @@ const ServiceTable = ({ blockedActionsState }: Props) => {
                 }
                 setDeleteServiceForm(false)
                 setPossibleToCancel(true)
-                setBlockedActions(false)
             }).catch(() => {
                 setDeleteServiceForm(false)
                 setPossibleToCancel(true)
-                setBlockedActions(false)
                 setTimeout(() => {
                     alert(SERVER_ERROR_TEXT)
                 }, 100)

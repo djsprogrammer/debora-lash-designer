@@ -1,4 +1,4 @@
-import { useEffect, useContext, useRef } from 'react'
+import { useEffect, useContext, useRef, useState } from 'react'
 import AddFormButtons from 'components/pages/AddFormButtons'
 import { 
     getServiceInfo, saveRefsInMemory, 
@@ -9,22 +9,20 @@ import { ServicesContext } from 'ServicesContext'
 import { SERVER_URL } from 'App'
 import { addFormContainer, addFormCardStyle } from 'commonStyles'
 import { SERVER_ERROR_TEXT, DB_ERROR_TEXT } from 'errorAdvices'
-import { BooleanState, BooleanSet } from 'types/common'
+import { BooleanSet } from 'types/common'
 
 const ADD_BUTTON_TEXT = 'Adicionar Serviço'
 const INVALID_NUMBER_TEXT = 'Insira um número válido (utilize ponto para casas decimais)'
 const ALREADY_EXISTS_TEXT = 'Já existe um serviço com esse nome!'
 
 interface Props {
-    blockedActionsState: BooleanState
     setAddServiceForm: BooleanSet
 }
 
-const AddServiceForm = ({ blockedActionsState, setAddServiceForm }: Props) => {
-
-    const [blockedActions, setBlockedActions] = blockedActionsState
+const AddServiceForm = ({ setAddServiceForm }: Props) => {
 
     const [services, setServices] = useContext(ServicesContext)
+    const [blockedActions, setBlockedActions] = useState(false)
 
     const nameGroup = useRef<HTMLDivElement>(null)
     const nameInput = useRef<HTMLInputElement>(null)
