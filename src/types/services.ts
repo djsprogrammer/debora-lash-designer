@@ -1,5 +1,5 @@
 export interface Service {
-    name: string
+    _id: string
     value: number
 }
 
@@ -11,7 +11,7 @@ export type SetServices = React.Dispatch<React.SetStateAction<Services>>
 
 export type ServicesState = [Services, SetServices]
 
-export const DEFAULT_USER = {
-    name: '',
+export const DEFAULT_SERVICE = {
+    _id: '',
     value: 0
 }

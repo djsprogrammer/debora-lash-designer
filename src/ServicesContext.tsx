@@ -1,7 +1,7 @@
 import { ReactNode, createContext } from 'react'
-import { DEFAULT_USER, ServicesState } from './types/services'
+import { DEFAULT_SERVICE, ServicesState } from './types/services'
 
-export const ServicesContext = createContext<ServicesState>([[DEFAULT_USER], () => { }])
+export const ServicesContext = createContext<ServicesState>([[DEFAULT_SERVICE], () => { }])
 
 interface Props {
     children: ReactNode

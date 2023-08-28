@@ -77,7 +77,7 @@ const AddSchedulingForm = ({ schedulingsState, setAddSchedulingForm }: AddSchedu
 						<label className='input-group-text'>Escolha um serviço</label>
 						<select ref={options} className='form-select text-center' required>
 							{services.map(service => (
-								<option key={service.name} value={JSON.stringify(service)}>{service.name}</option>
+								<option key={service._id} value={JSON.stringify(service)}>{service._id}</option>
 							))}
 						</select>
 					</div>

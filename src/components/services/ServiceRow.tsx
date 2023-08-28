@@ -10,7 +10,7 @@ interface Props {
 
 const ServiceRow = ({ service, setTargetService, setDeleteServiceForm }: Props) => {
 
-    const name = service.name
+    const name = service._id
     const value = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(Number(service.value)).replace('R$', '')
 
     return (

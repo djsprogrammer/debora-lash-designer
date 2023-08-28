@@ -25,7 +25,7 @@ const ServiceTable = () => {
                 switch (res.status) {
                     case 204:
                         const remainingServices = services.filter(service => {
-                            return service.name !== targetService.name
+                            return service._id !== targetService._id
                         })
                         setServices(remainingServices.sort((a, b) => a.value - b.value))
                         break

@@ -35,12 +35,12 @@ const AddServiceForm = ({ setAddServiceForm }: Props) => {
     const addService = () => {
         if (!blockedActions) {
             setBlockedActions(true)
-            const [name, value] = getServiceInfo()
-            const alreadyExists = services.filter(service => service.name === name)[0]
+            const [_id, value] = getServiceInfo()
+            const alreadyExists = services.filter(service => service._id === _id)[0]
             if (!alreadyExists) {
                 if (validNumber(value)) {
                     const service = {
-                        name, value: Number(value)
+                        _id, value: Number(value)
                     }
                     const options = fetchOptions('post', service)
                         fetch(`${SERVER_URL}/create-service`, options)
