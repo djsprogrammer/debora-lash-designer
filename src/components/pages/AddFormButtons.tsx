@@ -13,10 +13,10 @@ const AddFormButtons = ({ confirmText, blockedActions, setAddForm }: Props) => {
 	const confirmButtonRef = useRef<HTMLButtonElement>(null)
 
 	return (
-		<div className='text-center'>
+		<div className='d-flex flex-column mt-1'>
 			<button ref={confirmButtonRef} onClick={() => {
 				if (confirmButtonRef.current) confirmButtonRef.current.innerText = '...'
-			}} className={confirmButtonStyle} type='submit'>{confirmText}</button>
+			}} className={`${confirmButtonStyle} mb-2`} type='submit'>{confirmText}</button>
 			<button onClick={() => {
 				// Só permitindo fechar o formulário quando não estiver ocorrendo alguma ação
 				if (!blockedActions) setAddForm(false)
