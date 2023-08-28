@@ -12,7 +12,10 @@ const Scheduling = ({ setCurrentPage }: Props) => {
 
 	const [servicesScheduling, setServicesScheduling] = useState<ServiceSchedulings>([])
 	const [addSchedulingForm, setAddSchedulingForm] = useState(false)
-	const [blockedActions, setBlockedActions] = useState(false)
+
+	useEffect(() => {
+		setCurrentPage(0)
+	}, [setCurrentPage])
 
 	useEffect(() => {
 		fetch(`${SERVER_URL}/all-schedulings`)
@@ -23,17 +26,12 @@ const Scheduling = ({ setCurrentPage }: Props) => {
 			})
 	}, [])
 
-	useEffect(() => {
-		setCurrentPage(0)
-	}, [setCurrentPage])
-
 	return (
 		<div className={container}>
 			{
 				servicesScheduling[0]
 					? <SchedulingTable 
 						schedulingsState={[servicesScheduling, setServicesScheduling]}
-						blockedActions={blockedActions}
 						/>
 					: <AnySchedulingAdvice page='agendamento' />
 			}

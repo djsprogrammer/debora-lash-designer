@@ -7,10 +7,9 @@ interface Props {
     scheduling: ServiceScheduling
     setDeleteSchedulingForm: React.Dispatch<React.SetStateAction<boolean>>
     setTargetScheduling: SetScheduling
-    blockedActions: boolean
 }
 
-const SchedulingRow = ({ scheduling, setDeleteSchedulingForm, setTargetScheduling, blockedActions }: Props) => {
+const SchedulingRow = ({ scheduling, setDeleteSchedulingForm, setTargetScheduling }: Props) => {
 
     const [value, date] = valueAndDateFormat(scheduling.service.value, scheduling.date)
     
@@ -21,10 +20,8 @@ const SchedulingRow = ({ scheduling, setDeleteSchedulingForm, setTargetSchedulin
             <td>{date}</td>
             <td>
                 <DeleteButton onClick={() => {
-                    if (!blockedActions) {
-                        setDeleteSchedulingForm(true)
-                        setTargetScheduling(scheduling)
-                    }
+                    setDeleteSchedulingForm(true)
+                    setTargetScheduling(scheduling)
                 }} />
             </td>
         </tr>

@@ -7,11 +7,7 @@ import { SERVER_URL } from 'App'
 import { DB_ERROR_TEXT, SERVER_ERROR_TEXT } from 'errorAdvices'
 import { ButtonRef } from 'types/common'
 
-interface SchedulingTableProps extends Props {
-    blockedActions: boolean
-}
-
-const SchedulingTable = ({ schedulingsState, blockedActions }: SchedulingTableProps) => {
+const SchedulingTable = ({ schedulingsState }: Props) => {
 
     const [servicesScheduling, setServicesScheduling] = schedulingsState
 
@@ -27,6 +23,7 @@ const SchedulingTable = ({ schedulingsState, blockedActions }: SchedulingTablePr
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(targetScheduling)
         }
+        setTimeout(() => {
         fetch(`${SERVER_URL}/delete-scheduling`, options)
             .then(res => {
                 switch (res.status) {
@@ -51,6 +48,7 @@ const SchedulingTable = ({ schedulingsState, blockedActions }: SchedulingTablePr
                     alert(SERVER_ERROR_TEXT)
                 }, 100)
             })
+        }, 3000)
     }
 
     return (
@@ -72,7 +70,6 @@ const SchedulingTable = ({ schedulingsState, blockedActions }: SchedulingTablePr
                                 scheduling={scheduling}
                                 setDeleteSchedulingForm={setDeleteSchedulingForm}
                                 setTargetScheduling={setTargetScheduling}
-                                blockedActions={blockedActions}
                             />
                         )
                     })}
