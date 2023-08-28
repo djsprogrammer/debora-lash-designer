@@ -5,7 +5,6 @@ import { tableStyle } from 'commonStyles'
 import DeleteForm from 'components/pages/DeleteForm'
 import { SERVER_URL } from 'App'
 import { DB_ERROR_TEXT, SERVER_ERROR_TEXT } from 'errorAdvices'
-import { ButtonRef } from 'types/common'
 
 const SchedulingTable = ({ schedulingsState }: Props) => {
 
@@ -15,8 +14,7 @@ const SchedulingTable = ({ schedulingsState }: Props) => {
     const [targetScheduling, setTargetScheduling] = useState<ServiceScheduling>({} as ServiceScheduling)
     const [possibleToCancel, setPossibleToCancel] = useState(true)
 
-    const deleteScheduling = (buttonRef: ButtonRef) => {
-        if (buttonRef.current) buttonRef.current.innerText = '...'
+    const deleteScheduling = () => {
         setPossibleToCancel(false)
         const options = {
             method: 'delete',

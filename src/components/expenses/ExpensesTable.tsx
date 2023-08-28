@@ -2,7 +2,6 @@ import { useState } from 'react'
 import { tableStyle } from 'commonStyles'
 import { Expense, ExpensesState } from 'types/expenses'
 import ExpenseRow from './ExpenseRow'
-import { ButtonRef } from 'types/common'
 import DeleteForm from 'components/pages/DeleteForm'
 import { fetchOptions } from 'formFunctions/common'
 import { DB_ERROR_TEXT, SERVER_ERROR_TEXT } from 'errorAdvices'
@@ -20,9 +19,7 @@ const ExpensesTable = ({ expensesState }: Props) => {
     const [targetExpense, setTargetExpense] = useState<Expense>({} as Expense)
     const [possibleToCancel, setPossibleToCancel] = useState(true)
 
-    const deleteExpense = (buttonRef: ButtonRef) => {
-        if (buttonRef.current) buttonRef.current.innerText = '...'
-        console.log(targetExpense)
+    const deleteExpense = () => {
         setPossibleToCancel(false)
         const options = fetchOptions('delete', targetExpense)
         fetch(`${SERVER_URL}/delete-expense`, options)

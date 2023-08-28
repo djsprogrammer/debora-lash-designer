@@ -2,7 +2,6 @@ import { useContext, useState } from 'react'
 import ServiceRow from './ServiceRow'
 import DeleteForm from 'components/pages/DeleteForm'
 import { Service } from 'types/services'
-import { ButtonRef } from 'types/common'
 import { tableStyle } from 'commonStyles'
 import { ServicesContext } from 'ServicesContext'
 import { SERVER_URL } from 'App'
@@ -16,8 +15,7 @@ const ServiceTable = () => {
     const [targetService, setTargetService] = useState<Service>({} as Service)
     const [possibleToCancel, setPossibleToCancel] = useState(true)
     
-    const deleteService = (buttonRef: ButtonRef) => {
-        if (buttonRef.current) buttonRef.current.innerText = '...'
+    const deleteService = () => {
         setPossibleToCancel(false)
         const options = {
             method: 'delete',

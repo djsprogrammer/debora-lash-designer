@@ -1,10 +1,9 @@
 import { confirmButtonStyle, deleteButtonStyle } from 'commonStyles'
 import { useRef } from 'react'
-import { ButtonRef } from 'types/common'
 
 interface Props {
 	setDeleteForm: React.Dispatch<React.SetStateAction<boolean>>
-	deleteTarget: (buttonRef: ButtonRef) => void
+	deleteTarget: () => void
 	possibleToCancel: boolean
 }
 
@@ -17,7 +16,10 @@ const DeleteSchedulingForm = ({ deleteTarget, setDeleteForm, possibleToCancel }:
 			<div className='card'>
 				<p className='card-header'>Tem certeza que deseja excluir?</p>
 				<div className='card-body text-center'>
-					<button ref={deleteButtonRef} onClick={() => deleteTarget(deleteButtonRef)} className={confirmButtonStyle}>Excluir</button>
+					<button ref={deleteButtonRef} onClick={() => {
+						if (deleteButtonRef.current) deleteButtonRef.current.innerText = '...'
+						deleteTarget()
+					}} className={confirmButtonStyle}>Excluir</button>
 					<button onClick={() => {
 						if (possibleToCancel) setDeleteForm(false)
 					}} className={deleteButtonStyle}>Cancelar</button>
