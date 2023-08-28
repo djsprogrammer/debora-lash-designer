@@ -7,7 +7,7 @@ import {
 import { validNumber, fetchOptions } from 'formFunctions/common'
 import { ServicesContext } from 'ServicesContext'
 import { SERVER_URL } from 'App'
-import { addFormContainer, addFormCardStyle } from 'commonStyles'
+import { formContainer, addFormCardStyle } from 'commonStyles'
 import { SERVER_ERROR_TEXT, DB_ERROR_TEXT } from 'errorAdvices'
 import { BooleanSet } from 'types/common'
 
@@ -67,7 +67,7 @@ const AddServiceForm = ({ setAddServiceForm }: Props) => {
     }
 
     return (
-        <div className={addFormContainer}>
+        <div className={formContainer}>
             <div className={addFormCardStyle}>
                 <form className='d-flex flex-column' onSubmit={e => {
                     e.preventDefault()

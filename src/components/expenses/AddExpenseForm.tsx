@@ -3,7 +3,7 @@ import { v4 } from 'uuid'
 import AddFormButtons from 'components/pages/AddFormButtons'
 import { saveRefsInMemory, getExpenseInfo } from 'formFunctions/AddExpenseForm'
 import { validNumber, fetchOptions } from 'formFunctions/common'
-import { addFormContainer, addFormCardStyle } from 'commonStyles'
+import { formContainer, addFormCardStyle } from 'commonStyles'
 import { ExpensesState } from 'types/expenses'
 import { BooleanSet } from 'types/common'
 import { SERVER_URL } from 'App'
@@ -68,7 +68,7 @@ const AddExpenseForm = ({ setAddExpenseForm, expensesState }: Props) => {
 	}
 
 	return (
-		<div className={addFormContainer}>
+		<div className={formContainer}>
 			<div className={addFormCardStyle}>
 				<form className='d-flex flex-column' onSubmit={e => {
 					e.preventDefault()

@@ -1,4 +1,4 @@
-import { confirmButtonStyle, cancelButtonStyle } from 'commonStyles'
+import { formContainer, confirmButtonStyle, cancelButtonStyle } from 'commonStyles'
 import { useRef } from 'react'
 
 interface Props {
@@ -18,7 +18,7 @@ const DeleteSchedulingForm = ({ deleteTarget, setDeleteForm, possibleToCancel }:
 	}
 
 	return (
-		<div style={{ zIndex: 1 }} className='position-absolute vw-100 vh-100 top-0 start-0 d-flex justify-content-center align-items-center delete-form'>
+		<div style={{ zIndex: 1 }} className={formContainer}>
 			<div className='card'>
 				<p className='card-header'>Tem certeza que deseja excluir?</p>
 				<div className='card-body text-center'>

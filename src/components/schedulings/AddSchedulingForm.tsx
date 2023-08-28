@@ -3,7 +3,7 @@ import AddFormButtons from 'components/pages/AddFormButtons'
 import { ServicesContext } from 'ServicesContext'
 import { Props } from 'types/schedulings'
 import { BooleanSet } from 'types/common'
-import { addFormContainer, addFormCardStyle } from 'commonStyles'
+import { formContainer, addFormCardStyle } from 'commonStyles'
 import { SERVER_URL } from 'App'
 import { SERVER_ERROR_TEXT } from 'errorAdvices'
 import { fetchOptions } from 'formFunctions/common'
@@ -63,7 +63,7 @@ const AddSchedulingForm = ({ schedulingsState, setAddSchedulingForm }: AddSchedu
 	}
 
 	return (
-		<div className={addFormContainer}>
+		<div className={formContainer}>
 			<div className={addFormCardStyle}>
 				<form className='d-flex flex-column' onSubmit={e => {
 					e.preventDefault()
