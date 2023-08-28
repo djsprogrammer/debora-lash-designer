@@ -11,15 +11,18 @@ const DeleteSchedulingForm = ({ deleteTarget, setDeleteForm, possibleToCancel }:
 
 	const deleteButtonRef = useRef<HTMLButtonElement>(null)
 
+	const prepareToDelete = () => {
+		// Indicando ao usuário que a operação começou
+		if (deleteButtonRef.current) deleteButtonRef.current.innerText = '...'
+		deleteTarget()
+	}
+
 	return (
 		<div style={{ zIndex: 1 }} className='position-absolute vw-100 vh-100 top-0 start-0 d-flex justify-content-center align-items-center delete-form'>
 			<div className='card'>
 				<p className='card-header'>Tem certeza que deseja excluir?</p>
 				<div className='card-body text-center'>
-					<button ref={deleteButtonRef} onClick={() => {
-						if (deleteButtonRef.current) deleteButtonRef.current.innerText = '...'
-						deleteTarget()
-					}} className={confirmButtonStyle}>Excluir</button>
+					<button ref={deleteButtonRef} onClick={() => prepareToDelete()} className={confirmButtonStyle}>Excluir</button>
 					<button onClick={() => {
 						if (possibleToCancel) setDeleteForm(false)
 					}} className={deleteButtonStyle}>Cancelar</button>
