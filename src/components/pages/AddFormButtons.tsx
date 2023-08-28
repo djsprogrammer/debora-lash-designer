@@ -1,6 +1,6 @@
 import { useRef } from 'react'
 import { BooleanSet } from 'types/common'
-import { cancelButtonStyle } from 'commonStyles'
+import { confirmButtonStyle, cancelButtonStyle } from 'commonStyles'
 
 interface Props {
 	confirmText: string
@@ -16,7 +16,7 @@ const AddFormButtons = ({ confirmText, blockedActions, setAddForm }: Props) => {
 		<div className='text-center'>
 			<button ref={confirmButtonRef} onClick={() => {
 				if (confirmButtonRef.current) confirmButtonRef.current.innerText = '...'
-			}} className='btn btn-sm btn-dark me-2' type='submit'>{confirmText}</button>
+			}} className={confirmButtonStyle} type='submit'>{confirmText}</button>
 			<button onClick={() => {
 				// Só permitindo fechar o formulário quando não estiver ocorrendo alguma ação
 				if (!blockedActions) setAddForm(false)
