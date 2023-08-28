@@ -1,5 +1,5 @@
 import { memo } from 'react'
-import { Trash } from 'lucide-react'
+import DeleteButton from 'components/pages/DeleteButton'
 import { ServiceScheduling, SetScheduling } from 'types/schedulings'
 import { valueAndDateFormat } from 'formFunctions/common'
 
@@ -20,7 +20,7 @@ const SchedulingRow = ({ scheduling, setDeleteSchedulingForm, setTargetSchedulin
             <td>{scheduling.service.name} -{value}</td>
             <td>{date}</td>
             <td>
-                <Trash size={20} className='button' onClick={() => {
+                <DeleteButton onClick={() => {
                     if (!blockedActions) {
                         setDeleteSchedulingForm(true)
                         setTargetScheduling(scheduling)

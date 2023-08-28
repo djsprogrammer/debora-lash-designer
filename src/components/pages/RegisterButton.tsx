@@ -1,3 +1,4 @@
+import { FilePlus } from 'lucide-react'
 import { BooleanSet } from 'types/common'
 
 interface Props {
@@ -8,7 +9,7 @@ interface Props {
 const RegisterButton = ({ setForm, text }: Props) => {
 
 	return (
-		<button onClick={() => setForm(true)} className='btn btn-sm btn-outline-dark align-self-start'>{text}</button>
+		<FilePlus onClick={() => setForm(true)} className='align-self-start button' />
 	)
 
 }

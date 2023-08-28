@@ -1,4 +1,4 @@
-import { Trash } from 'lucide-react'
+import DeleteButton from 'components/pages/DeleteButton'
 import { BooleanSet } from 'types/common'
 import { Service, SetService } from 'types/services'
 
@@ -18,10 +18,10 @@ const ServiceRow = ({ service, setTargetService, setDeleteServiceForm }: Props) 
             <td>{name}</td>
             <td>{value}</td>
             <td>
-                <Trash size={20} className='button' onClick={() => {
+                <DeleteButton onClick={() => {
                     setTargetService(service)
                     setDeleteServiceForm(true)
-                }} />
+                }} /> 
             </td>
         </tr>
     )

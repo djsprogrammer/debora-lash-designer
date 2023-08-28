@@ -1,4 +1,4 @@
-import { Trash } from 'lucide-react'
+import DeleteButton from 'components/pages/DeleteButton'
 import { valueAndDateFormat } from 'formFunctions/common'
 import { Expense, SetExpense } from 'types/expenses'
 
@@ -18,7 +18,7 @@ const ExpenseRow = ({ expense, setTargetExpense, setDeleteExpenseForm }: Props) 
             <td>{value}</td>
             <td>{date}</td>
             <td>
-                <Trash size={20} className='button' onClick={() => {
+                <DeleteButton onClick={() => {
                     setDeleteExpenseForm(true)
                     setTargetExpense(expense)
                 }} />
