@@ -12,16 +12,13 @@ const SchedulingTable = ({ schedulingsState }: Props) => {
 
     const [deleteSchedulingForm, setDeleteSchedulingForm] = useState(false)
     const [targetScheduling, setTargetScheduling] = useState<ServiceScheduling>({} as ServiceScheduling)
-    const [possibleToCancel, setPossibleToCancel] = useState(true)
 
     const deleteScheduling = () => {
-        setPossibleToCancel(false)
         const options = {
             method: 'delete',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(targetScheduling)
         }
-        setTimeout(() => {
         fetch(`${SERVER_URL}/delete-scheduling`, options)
             .then(res => {
                 switch (res.status) {
@@ -38,15 +35,12 @@ const SchedulingTable = ({ schedulingsState }: Props) => {
                         break
                 }
                 setDeleteSchedulingForm(false)
-                setPossibleToCancel(true)
             }).catch(() => {
                 setDeleteSchedulingForm(false)
-                setPossibleToCancel(true)
                 setTimeout(() => {
                     alert(SERVER_ERROR_TEXT)
                 }, 100)
             })
-        }, 3000)
     }
 
     return (
@@ -78,7 +72,6 @@ const SchedulingTable = ({ schedulingsState }: Props) => {
                 ? <DeleteForm 
                         setDeleteForm={setDeleteSchedulingForm} 
                         deleteTarget={deleteScheduling}
-                        possibleToCancel={possibleToCancel}
                     />
                 : null
             }

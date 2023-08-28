@@ -17,10 +17,8 @@ const ExpensesTable = ({ expensesState }: Props) => {
 
     const [deleteExpenseForm, setDeleteExpenseForm] = useState(false)
     const [targetExpense, setTargetExpense] = useState<Expense>({} as Expense)
-    const [possibleToCancel, setPossibleToCancel] = useState(true)
 
     const deleteExpense = () => {
-        setPossibleToCancel(false)
         const options = fetchOptions('delete', targetExpense)
         fetch(`${SERVER_URL}/delete-expense`, options)
             .then(res => {
@@ -38,10 +36,8 @@ const ExpensesTable = ({ expensesState }: Props) => {
                         break
                 }
                 setDeleteExpenseForm(false)
-                setPossibleToCancel(true)
             }).catch(() => {
                 setDeleteExpenseForm(false)
-                setPossibleToCancel(true)
                 setTimeout(() => {
                     alert(SERVER_ERROR_TEXT)
                 }, 100)
@@ -71,7 +67,6 @@ const ExpensesTable = ({ expensesState }: Props) => {
                 ? <DeleteForm 
                         setDeleteForm={setDeleteExpenseForm} 
                         deleteTarget={deleteExpense}
-                        possibleToCancel={possibleToCancel}
                     />
                 : null
             }

@@ -13,10 +13,8 @@ const ServiceTable = () => {
 
     const [deleteServiceForm, setDeleteServiceForm] = useState(false)
     const [targetService, setTargetService] = useState<Service>({} as Service)
-    const [possibleToCancel, setPossibleToCancel] = useState(true)
     
     const deleteService = () => {
-        setPossibleToCancel(false)
         const options = {
             method: 'delete',
             headers: { 'Content-Type': 'application/json' },
@@ -38,14 +36,12 @@ const ServiceTable = () => {
                         break
                 }
                 setDeleteServiceForm(false)
-                setPossibleToCancel(true)
             }).catch(() => {
                 setDeleteServiceForm(false)
-                setPossibleToCancel(true)
                 setTimeout(() => {
                     alert(SERVER_ERROR_TEXT)
                 }, 100)
-            })        
+            })
     }
 
     return (
@@ -71,7 +67,6 @@ const ServiceTable = () => {
                 deleteServiceForm
                 ? <DeleteForm 
                     deleteTarget={deleteService}
-                    possibleToCancel={possibleToCancel}
                     setDeleteForm={setDeleteServiceForm}
                     />
                 : null

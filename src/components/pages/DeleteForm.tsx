@@ -1,19 +1,22 @@
+import { useState, useRef } from 'react'
 import { formContainer, confirmButtonStyle, cancelButtonStyle } from 'commonStyles'
-import { useRef } from 'react'
 
 interface Props {
 	setDeleteForm: React.Dispatch<React.SetStateAction<boolean>>
 	deleteTarget: () => void
-	possibleToCancel: boolean
 }
 
-const DeleteSchedulingForm = ({ deleteTarget, setDeleteForm, possibleToCancel }: Props) => {
+const DeleteSchedulingForm = ({ deleteTarget, setDeleteForm }: Props) => {
+
+	const [possibleToCancel, setPossibleToCancel] = useState(true)
 
 	const deleteButtonRef = useRef<HTMLButtonElement>(null)
 
 	const prepareToDelete = () => {
 		// Indicando ao usuário que a operação começou
 		if (deleteButtonRef.current) deleteButtonRef.current.innerText = '...'
+		// Impossibilitando o cancelamento da operação
+		setPossibleToCancel(false)
 		deleteTarget()
 	}
 
