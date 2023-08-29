@@ -72,7 +72,6 @@ const AddServiceForm = ({ setAddServiceForm }: Props) => {
                         <NameInput setName={setName} />
                         <ValueInput margin='my-3' setValue={setValue} />
                         <AddFormButtons 
-                            confirmText='Registrar'
                             blockedActions={blockedActions}
                             setAddForm={setAddServiceForm}
                         />

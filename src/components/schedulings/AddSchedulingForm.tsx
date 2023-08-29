@@ -84,7 +84,10 @@ const AddSchedulingForm = ({ schedulingsState, setAddSchedulingForm }: AddSchedu
 							</select>
 						</div>
 						<input ref={client} className='form-control text-center p-1 mb-3' type='text' placeholder='Digite o nome do cliente' required />
-						<AddFormButtons confirmText='Agendar' blockedActions={blockedActions} setAddForm={setAddSchedulingForm} />
+						<AddFormButtons
+							blockedActions={blockedActions}
+							setAddForm={setAddSchedulingForm}
+						/>
 					</form>
 				</div>
 			</div>

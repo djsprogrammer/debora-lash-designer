@@ -81,7 +81,6 @@ const AddExpenseForm = ({ setAddExpenseForm, expensesState }: Props) => {
 						<NameInput margin='my-3' setName={setName} />
 			            <ValueInput margin='mb-3' setValue={setValue} />
 			            <AddFormButtons 
-			            	confirmText='Registrar'
 			            	blockedActions={blockedActions}
 			            	setAddForm={setAddExpenseForm}
 			            />
