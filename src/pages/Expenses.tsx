@@ -8,23 +8,41 @@ import AnyExpensesAdvice from 'components/pages/AnyAdvice'
 import RegisterButton from 'components/pages/RegisterButton'
 import { SERVER_URL } from 'App'
 
+export const BACKEND_EXPENSES = 'backend-expenses'
+
 const Expenses = ({ setCurrentPage }: Props) => {
-
-	const [expenses, setExpenses] = useState<TExpenses>([])
-	const [addExpenseForm, setAddExpenseForm] = useState(false)
-
-	useEffect(() => {
-		fetch(`${SERVER_URL}/all-expenses`)
-			.then(res => res.json())
-			.then((expenses: TExpenses) => {
-				const orderExpenses = expenses.sort((a, b) => a.date.localeCompare(b.date)).reverse()
-				setExpenses(orderExpenses)
-			})
-	}, [])
 
 	useEffect(() => {
 		setCurrentPage(2)
 	}, [setCurrentPage])
+
+	const cacheExpenses = sessionStorage.getItem(BACKEND_EXPENSES)
+
+	const getExpensesFromCache = () => {
+		// Iniciando o state com as expenses em cache da sessão
+		if (cacheExpenses) {
+			return JSON.parse(cacheExpenses)
+		} else {
+			return []
+		}
+	}
+
+	const [expenses, setExpenses] = useState<TExpenses>(getExpensesFromCache)
+	const [addExpenseForm, setAddExpenseForm] = useState(false)
+
+	useEffect(() => {
+		// Verificando se já existe as expenses em cache
+		if (!cacheExpenses) {
+			fetch(`${SERVER_URL}/all-expenses`)
+				.then(res => res.json())
+				.then((expenses: TExpenses) => {
+					const orderExpenses = expenses.sort((a, b) => a.date.localeCompare(b.date)).reverse()
+					setExpenses(orderExpenses)
+					// Salvando em cache para futuras renderizações na mesma sessão
+					sessionStorage.setItem(BACKEND_EXPENSES, JSON.stringify(orderExpenses))
+				})
+		}
+	}, [])
 
 	return (
 		<div className={container}>

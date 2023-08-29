@@ -9,6 +9,7 @@ import { BooleanSet } from 'types/common'
 import { SERVER_URL } from 'App'
 import { DB_ERROR_TEXT, INVALID_NUMBER_TEXT } from 'errorAdvices'
 import DateInput from 'components/forms/DateInput'
+import { BACKEND_EXPENSES } from 'pages/Expenses'
 
 interface Props {
 	setAddExpenseForm: BooleanSet
@@ -51,6 +52,8 @@ const AddExpenseForm = ({ setAddExpenseForm, expensesState }: Props) => {
 									const newExpenses = [...expenses, newExpense]
 										.sort((a, b) => a.date.localeCompare(b.date)).reverse()
 									setExpenses(newExpenses)
+									// Salvando em cache
+									sessionStorage.setItem(BACKEND_EXPENSES, JSON.stringify(newExpenses))
 									break
 								case 503: 
 									alert(DB_ERROR_TEXT)

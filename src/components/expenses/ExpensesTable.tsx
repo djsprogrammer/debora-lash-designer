@@ -6,6 +6,7 @@ import DeleteForm from 'components/pages/DeleteForm'
 import { fetchOptions } from 'formFunctions/common'
 import { DB_ERROR_TEXT, SERVER_ERROR_TEXT } from 'errorAdvices'
 import { SERVER_URL } from 'App'
+import { BACKEND_EXPENSES } from 'pages/Expenses'
 
 interface Props {
     expensesState: ExpensesState
@@ -28,6 +29,8 @@ const ExpensesTable = ({ expensesState }: Props) => {
                             return expense._id !== targetExpense._id
                         }).sort((a, b) => a.date.localeCompare(b.date)).reverse()
                         setExpenses(remainingExpenses)
+                        // Salvando em cache
+                        sessionStorage.setItem(BACKEND_EXPENSES, JSON.stringify(remainingExpenses))
                         break
                     case 503:                        
                         setTimeout(() => {

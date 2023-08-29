@@ -12,6 +12,10 @@ export const BACKEND_SCHEDULINGS = 'backend-schedulings'
 
 const Scheduling = ({ setCurrentPage }: Props) => {
 
+	useEffect(() => {
+		setCurrentPage(0)
+	}, [setCurrentPage])
+
 	const cacheSchedulings = sessionStorage.getItem(BACKEND_SCHEDULINGS)
 
 	const getSchedulingsFromCache = () => {
@@ -25,10 +29,6 @@ const Scheduling = ({ setCurrentPage }: Props) => {
 
 	const [servicesScheduling, setServicesScheduling] = useState<ServiceSchedulings>(getSchedulingsFromCache)
 	const [addSchedulingForm, setAddSchedulingForm] = useState(false)
-
-	useEffect(() => {
-		setCurrentPage(0)
-	}, [setCurrentPage])
 
 	useEffect(() => {
 		// Verificando se já existe os schedulings em cache
