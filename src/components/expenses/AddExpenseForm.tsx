@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
 import { v4 } from 'uuid'
+import NameInput from 'components/forms/NameInput'
 import AddFormButtons from 'components/pages/AddFormButtons'
 import { saveRefsInMemory, getExpenseInfo } from 'formFunctions/AddExpenseForm'
 import { validNumber, fetchOptions } from 'formFunctions/common'
@@ -21,18 +22,18 @@ const AddExpenseForm = ({ setAddExpenseForm, expensesState }: Props) => {
 	const [expenses, setExpenses] = expensesState
 	const [blockedActions, setBlockedActions] = useState(false)
 	const [date, setDate] = useState('')
+	const [name, setName] = useState('')
 
-	const nameRef = useRef<HTMLInputElement>(null)
 	const valueRef = useRef<HTMLInputElement>(null)
 
 	useEffect(() => {
-		saveRefsInMemory(nameRef, valueRef)
+		saveRefsInMemory(valueRef)
 	}, [])
 
 	const addExpense = () => {
 		if (!blockedActions) {
 			setBlockedActions(true)
-			const [name, value] = getExpenseInfo()
+			const [value] = getExpenseInfo()
 			if (validNumber(value)) {
 				const newExpense = { _id: v4(), date, name, value: Number(value) }
 				const alreadyExists = expenses.filter(expense => {
@@ -83,10 +84,7 @@ const AddExpenseForm = ({ setAddExpenseForm, expensesState }: Props) => {
 						addExpense()
 					}}>
 						<DateInput setDate={setDate} />
-						<div className='input-group my-3'>
-			                <label className='input-group-text' htmlFor='services'>Nome</label>
-			                <input ref={nameRef} className='form-control text-center' type='text' required />
-			            </div>
+						<NameInput margin='my-3' setName={setName} />
 			            <div className='input-group mb-3'>
 			                <label className='input-group-text' htmlFor='services'>Valor</label>
 			                <input ref={valueRef} className='form-control text-center' type='text' required />
