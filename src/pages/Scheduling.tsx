@@ -42,7 +42,7 @@ const Scheduling = ({ setCurrentPage }: Props) => {
 					sessionStorage.setItem(BACKEND_SCHEDULINGS, JSON.stringify(orderSchedulings))
 				})
 		} 
-	}, [])
+	}, [cacheSchedulings])
 
 	return (
 		<div className={container}>

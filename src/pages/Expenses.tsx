@@ -42,7 +42,7 @@ const Expenses = ({ setCurrentPage }: Props) => {
 					sessionStorage.setItem(BACKEND_EXPENSES, JSON.stringify(orderExpenses))
 				})
 		}
-	}, [])
+	}, [cacheExpenses])
 
 	return (
 		<div className={container}>
