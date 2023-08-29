@@ -4,7 +4,7 @@ import { ServicesContext } from 'ServicesContext'
 import { Props } from 'types/schedulings'
 import { BooleanSet } from 'types/common'
 import { formContainer, addFormCardStyle, addFormCardHeaderStyle } from 'commonStyles'
-import { SERVER_URL } from 'App'
+import { CREATE_SCHEDULING } from 'constants/urls'
 import { SERVER_ERROR_TEXT } from 'errorAdvices'
 import { fetchOptions } from 'formFunctions/common'
 import { saveRefsInMemory, createSchedulingToSend, responseHandler } from 'formFunctions/AddSchedulingForm'
@@ -44,7 +44,7 @@ const AddSchedulingForm = ({ schedulingsState, setAddSchedulingForm }: AddSchedu
 					setAddSchedulingForm(false)
 				} else {
 					const payload = fetchOptions('post', serviceScheduling)
-					fetch(`${SERVER_URL}/create-scheduling`, payload)
+					fetch(CREATE_SCHEDULING, payload)
 						.then(res => {
 							// Organizando novos agendamentos por datas
 							const newSchedulings = [...servicesScheduling, serviceScheduling]

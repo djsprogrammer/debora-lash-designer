@@ -7,7 +7,7 @@ import { validNumber, fetchOptions } from 'formFunctions/common'
 import { formContainer, addFormCardStyle, addFormCardHeaderStyle } from 'commonStyles'
 import { ExpensesState } from 'types/expenses'
 import { BooleanSet } from 'types/common'
-import { SERVER_URL } from 'App'
+import { CREATE_EXPENSE } from 'constants/urls'
 import { DB_ERROR_TEXT, INVALID_NUMBER_TEXT } from 'errorAdvices'
 import DateInput from 'components/forms/DateInput'
 import { BACKEND_EXPENSES } from 'pages/Expenses'
@@ -39,7 +39,7 @@ const AddExpenseForm = ({ setAddExpenseForm, expensesState }: Props) => {
 					setBlockedActions(false)
 				} else {
 					const options = fetchOptions('post', newExpense)
-					fetch(`${SERVER_URL}/create-expense`, options)
+					fetch(CREATE_EXPENSE, options)
 						.then(res => {
 							switch (res.status) {
 								case 201:
