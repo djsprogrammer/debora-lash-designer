@@ -24,7 +24,6 @@ const AddServiceForm = ({ setAddServiceForm }: Props) => {
     const [services, setServices] = useContext(ServicesContext)
     const [blockedActions, setBlockedActions] = useState(false)
 
-    const nameGroup = useRef<HTMLDivElement>(null)
     const nameInput = useRef<HTMLInputElement>(null)
     const valueInput = useRef<HTMLInputElement>(null)
 
@@ -77,7 +76,7 @@ const AddServiceForm = ({ setAddServiceForm }: Props) => {
                         e.preventDefault()
                         addService()
                     }}>
-                        <div ref={nameGroup} className='input-group'>
+                        <div className='input-group'>
                             <label className='input-group-text' htmlFor='services'>Nome</label>
                             <input ref={nameInput} className='form-control text-center' type='text' required />
                         </div>
