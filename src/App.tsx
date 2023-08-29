@@ -1,14 +1,14 @@
 import { useCallback, useEffect, useState } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import './App.css'
-import { Services as TServices } from './types/services'
-import HandlePages from 'components/main/HandlePages'
-import Header from './components/fixed/Header'
-import Navegation from './components/fixed/Navegation'
-import Services from './pages/Services'
-import Expenses from './pages/Expenses'
-import ServicesProvider from './ServicesContext'
+import 'App.css'
+import { Services as TServices } from 'types/services'
+import HandlePages from 'HandlePages'
+import Header from 'components/fixed/Header'
+import Navegation from 'components/fixed/Navegation'
+import Services from 'pages/Services'
+import Expenses from 'pages/Expenses'
+import ServicesProvider from 'ServicesContext'
 import { GET_SERVICES } from 'constants/urls'
 
 const App = () => {
@@ -30,21 +30,21 @@ const App = () => {
 
     const searchServicesFromServer = useCallback(() => {
         fetch(GET_SERVICES)
-        .then(res => {
-            switch (res.status) {
-                case 200:
-                    setServicesFromServer(res)
-                    setDatabaseLoaded(true)
-                    break
-                case 503:
-                    alert('Erro ao consultar banco de dados')
-                    searchServicesFromServer()
-                    break
-            }
-        }).catch(() => {
-            alert('Erro ao conectar com o servidor')
-            searchServicesFromServer()
-        })
+            .then(res => {
+                switch (res.status) {
+                    case 200:
+                        setServicesFromServer(res)
+                        setDatabaseLoaded(true)
+                        break
+                    case 503:
+                        alert('Erro ao consultar banco de dados')
+                        searchServicesFromServer()
+                        break
+                }
+            }).catch(() => {
+                alert('Erro ao conectar com o servidor')
+                searchServicesFromServer()
+            })
     }, [])
 
     useEffect(() => {
@@ -58,9 +58,21 @@ const App = () => {
                     <Header />
                     <Navegation navDisplay={navDisplay} currentPage={currentPage} />
                     <Routes>
-                        <Route path='/' element={<HandlePages databaseLoaded={databaseLoaded} setNavDisplay={setNavDisplay} setCurrentPage={setCurrentPage} />} />
-                        <Route path='/services' element={<Services setCurrentPage={setCurrentPage} />} />
-                        <Route path='/expenses' element={<Expenses setCurrentPage={setCurrentPage} />} />
+                        <Route path='/'
+                            element={
+                                <HandlePages
+                                    databaseLoaded={databaseLoaded}
+                                    setNavDisplay={setNavDisplay}
+                                    setCurrentPage={setCurrentPage} 
+                                />
+                            } 
+                        />
+                        <Route path='/services'
+                            element={<Services setCurrentPage={setCurrentPage} />} 
+                        />
+                        <Route path='/expenses'
+                            element={<Expenses setCurrentPage={setCurrentPage} />} 
+                        />
                     </Routes>
                 </Router>
             </ServicesProvider>

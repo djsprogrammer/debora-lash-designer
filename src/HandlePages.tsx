@@ -1,5 +1,5 @@
 import Scheduling from 'pages/Scheduling'
-import LoadingPage from 'components/main/LoadingPage'
+import Loading from 'pages/Loading'
 
 interface HandlePagesProps {
     databaseLoaded: boolean
@@ -14,7 +14,7 @@ const HandlePages = ({ databaseLoaded, setNavDisplay, setCurrentPage }: HandlePa
         // Atual página padrão
         return <Scheduling setCurrentPage={setCurrentPage} />
     }
-    return <LoadingPage />
+    return <Loading />
 }
 
 export default HandlePages
