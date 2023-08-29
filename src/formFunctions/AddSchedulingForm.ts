@@ -1,5 +1,6 @@
 import { v4 } from 'uuid'
 import { ServiceScheduling } from 'types/schedulings'
+import { BACKEND_SCHEDULINGS } from 'pages/Scheduling'
 
 type Options = React.RefObject<HTMLSelectElement>
 type Client = React.RefObject<HTMLInputElement>
@@ -30,6 +31,8 @@ export const responseHandler = (res: Response,
 	switch (res.status) {
 		case 201:
 			setServicesScheduling(newSchedulings)
+			// Salvando em cache
+			sessionStorage.setItem(BACKEND_SCHEDULINGS, JSON.stringify(newSchedulings))
 			break
 		case 503:
 			alert('Erro ao consultar banco de dados')

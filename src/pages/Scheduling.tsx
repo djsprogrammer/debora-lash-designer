@@ -8,6 +8,8 @@ import { Props } from 'types/pages'
 import { container } from 'commonStyles'
 import { SERVER_URL } from 'App'
 
+export const BACKEND_SCHEDULINGS = 'backend-schedulings'
+
 const Scheduling = ({ setCurrentPage }: Props) => {
 
 	const [servicesScheduling, setServicesScheduling] = useState<ServiceSchedulings>([])
@@ -18,12 +20,20 @@ const Scheduling = ({ setCurrentPage }: Props) => {
 	}, [setCurrentPage])
 
 	useEffect(() => {
-		fetch(`${SERVER_URL}/all-schedulings`)
-			.then(res => res.json())
-			.then((schedulings: ServiceSchedulings) => {
-				const orderSchedulings = schedulings.sort((a, b) => a.date.localeCompare(b.date)).reverse()
-				setServicesScheduling(orderSchedulings)
-			})
+		const backendSchedulings = sessionStorage.getItem(BACKEND_SCHEDULINGS)
+		// Verificando se já existe os schedulings em cache
+		if (backendSchedulings) {
+			setServicesScheduling(JSON.parse(backendSchedulings))
+		} else {
+			fetch(`${SERVER_URL}/all-schedulings`)
+				.then(res => res.json())
+				.then((schedulings: ServiceSchedulings) => {
+					const orderSchedulings = schedulings.sort((a, b) => a.date.localeCompare(b.date)).reverse()
+					setServicesScheduling(orderSchedulings)
+					// Salvando em cache para futuras renderizações na mesma sessão
+					sessionStorage.setItem(BACKEND_SCHEDULINGS, JSON.stringify(orderSchedulings))
+				})
+		}
 	}, [])
 
 	return (
