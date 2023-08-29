@@ -1,5 +1,6 @@
 import { useEffect, useContext, useRef, useState } from 'react'
 import AddFormButtons from 'components/pages/AddFormButtons'
+import NameInput from 'components/forms/NameInput'
 import { 
     getServiceInfo, saveRefsInMemory, 
     showError, responseHandler 
@@ -23,23 +24,23 @@ const AddServiceForm = ({ setAddServiceForm }: Props) => {
 
     const [services, setServices] = useContext(ServicesContext)
     const [blockedActions, setBlockedActions] = useState(false)
+    const [name, setName] = useState('')
 
-    const nameInput = useRef<HTMLInputElement>(null)
     const valueInput = useRef<HTMLInputElement>(null)
 
     useEffect(() => {
-        saveRefsInMemory(nameInput, valueInput)
+        saveRefsInMemory(valueInput)
     }, [])
 
     const addService = () => {
         if (!blockedActions) {
             setBlockedActions(true)
-            const [_id, value] = getServiceInfo()
-            const alreadyExists = services.filter(service => service._id === _id)[0]
+            const [value] = getServiceInfo()
+            const alreadyExists = services.filter(service => service._id === name)[0]
             if (!alreadyExists) {
                 if (validNumber(value)) {
                     const service = {
-                        _id, value: Number(value)
+                        _id: name, value: Number(value)
                     }
                     const options = fetchOptions('post', service)
                         fetch(`${SERVER_URL}/create-service`, options)
@@ -76,15 +77,16 @@ const AddServiceForm = ({ setAddServiceForm }: Props) => {
                         e.preventDefault()
                         addService()
                     }}>
-                        <div className='input-group'>
-                            <label className='input-group-text' htmlFor='services'>Nome</label>
-                            <input ref={nameInput} className='form-control text-center' type='text' required />
-                        </div>
+                        <NameInput setName={setName} />
                         <div className='input-group my-3'>
                             <label className='input-group-text' htmlFor='services'>Valor</label>
                             <input ref={valueInput} className='form-control text-center' type='text' required />
                         </div>
-                        <AddFormButtons confirmText='Registrar' blockedActions={blockedActions} setAddForm={setAddServiceForm} />
+                        <AddFormButtons 
+                            confirmText='Registrar'
+                            blockedActions={blockedActions}
+                            setAddForm={setAddServiceForm}
+                        />
                     </form>
                 </div>
             </div>

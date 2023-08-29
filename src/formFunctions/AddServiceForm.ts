@@ -1,24 +1,20 @@
 import React from 'react'
 import { Service, SetServices } from '../types/services'
 
-let nameInput: Input
 let valueInput: Input
 
-export const saveRefsInMemory = (targetNameInput: Input, targetValueInput: Input) => {
-    nameInput = targetNameInput
+export const saveRefsInMemory = (targetValueInput: Input) => {
     valueInput = targetValueInput
 }
 
 type Input = React.RefObject<HTMLInputElement>
 
 export const getServiceInfo = () => {
-    let name = ''
     let value = ''
-    if (nameInput.current && valueInput.current) {
-        name = nameInput.current.value
+    if (valueInput.current) {
         value = valueInput.current.value
     }
-    return [name, value]
+    return [value]
 }
 
 export const setNewService = (setServices: SetServices, services: Service[], buttonText: string) => {
