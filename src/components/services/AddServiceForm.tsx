@@ -1,10 +1,8 @@
-import { useEffect, useContext, useRef, useState } from 'react'
+import { useContext, useState } from 'react'
 import AddFormButtons from 'components/pages/AddFormButtons'
 import NameInput from 'components/forms/NameInput'
-import { 
-    getServiceInfo, saveRefsInMemory, 
-    showError, responseHandler 
-} from '../../formFunctions/AddServiceForm'
+import ValueInput from 'components/forms/ValueInput'
+import { showError, responseHandler } from '../../formFunctions/AddServiceForm'
 import { validNumber, fetchOptions } from 'formFunctions/common'
 import { ServicesContext } from 'ServicesContext'
 import { SERVER_URL } from 'App'
@@ -25,17 +23,11 @@ const AddServiceForm = ({ setAddServiceForm }: Props) => {
     const [services, setServices] = useContext(ServicesContext)
     const [blockedActions, setBlockedActions] = useState(false)
     const [name, setName] = useState('')
-
-    const valueInput = useRef<HTMLInputElement>(null)
-
-    useEffect(() => {
-        saveRefsInMemory(valueInput)
-    }, [])
+    const [value, setValue] = useState('')
 
     const addService = () => {
         if (!blockedActions) {
             setBlockedActions(true)
-            const [value] = getServiceInfo()
             const alreadyExists = services.filter(service => service._id === name)[0]
             if (!alreadyExists) {
                 if (validNumber(value)) {
@@ -78,10 +70,7 @@ const AddServiceForm = ({ setAddServiceForm }: Props) => {
                         addService()
                     }}>
                         <NameInput setName={setName} />
-                        <div className='input-group my-3'>
-                            <label className='input-group-text' htmlFor='services'>Valor</label>
-                            <input ref={valueInput} className='form-control text-center' type='text' required />
-                        </div>
+                        <ValueInput setValue={setValue} />
                         <AddFormButtons 
                             confirmText='Registrar'
                             blockedActions={blockedActions}

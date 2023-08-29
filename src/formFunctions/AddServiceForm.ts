@@ -1,22 +1,6 @@
 import React from 'react'
 import { Service, SetServices } from '../types/services'
 
-let valueInput: Input
-
-export const saveRefsInMemory = (targetValueInput: Input) => {
-    valueInput = targetValueInput
-}
-
-type Input = React.RefObject<HTMLInputElement>
-
-export const getServiceInfo = () => {
-    let value = ''
-    if (valueInput.current) {
-        value = valueInput.current.value
-    }
-    return [value]
-}
-
 export const setNewService = (setServices: SetServices, services: Service[], buttonText: string) => {
     setServices(services.sort((a, b) => a.value - b.value))
 }
