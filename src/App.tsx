@@ -32,7 +32,6 @@ const App = () => {
 
     useEffect(() => {
         const searchDataFromServer = () => {
-            setTimeout(() => {
             fetch(`${SERVER_URL}/all-services`)
             .then(res => {
                 switch (res.status) {
@@ -56,7 +55,6 @@ const App = () => {
                     searchDataFromServer()
                 }, 10)
             })
-        }, 3000)
         }
         searchDataFromServer()
     }, [])
