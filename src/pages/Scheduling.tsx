@@ -12,7 +12,18 @@ export const BACKEND_SCHEDULINGS = 'backend-schedulings'
 
 const Scheduling = ({ setCurrentPage }: Props) => {
 
-	const [servicesScheduling, setServicesScheduling] = useState<ServiceSchedulings>([])
+	const cacheSchedulings = sessionStorage.getItem(BACKEND_SCHEDULINGS)
+
+	const getSchedulingsFromCache = () => {
+		// Iniciando o state com os schedulings em cache da sessão
+		if (cacheSchedulings) {
+			return JSON.parse(cacheSchedulings)
+		} else {
+			return []
+		}
+	}
+
+	const [servicesScheduling, setServicesScheduling] = useState<ServiceSchedulings>(getSchedulingsFromCache)
 	const [addSchedulingForm, setAddSchedulingForm] = useState(false)
 
 	useEffect(() => {
@@ -20,11 +31,8 @@ const Scheduling = ({ setCurrentPage }: Props) => {
 	}, [setCurrentPage])
 
 	useEffect(() => {
-		const backendSchedulings = sessionStorage.getItem(BACKEND_SCHEDULINGS)
 		// Verificando se já existe os schedulings em cache
-		if (backendSchedulings) {
-			setServicesScheduling(JSON.parse(backendSchedulings))
-		} else {
+		if (!cacheSchedulings) {
 			fetch(`${SERVER_URL}/all-schedulings`)
 				.then(res => res.json())
 				.then((schedulings: ServiceSchedulings) => {
@@ -33,7 +41,7 @@ const Scheduling = ({ setCurrentPage }: Props) => {
 					// Salvando em cache para futuras renderizações na mesma sessão
 					sessionStorage.setItem(BACKEND_SCHEDULINGS, JSON.stringify(orderSchedulings))
 				})
-		}
+		} 
 	}, [])
 
 	return (
