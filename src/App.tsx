@@ -5,12 +5,11 @@ import './App.css'
 import { Services as TServices } from './types/services'
 import HandlePages from 'components/main/HandlePages'
 import Header from './components/fixed/Header'
-import LoadingPage from 'components/main/LoadingPage'
 import Navegation from './components/fixed/Navegation'
-import Scheduling from './pages/Scheduling'
 import Services from './pages/Services'
 import Expenses from './pages/Expenses'
 import ServicesProvider from './ServicesContext'
+import { GET_SERVICES } from 'constants/urls'
 
 export const SERVER_URL = 'http://localhost:8080'
 
@@ -32,7 +31,7 @@ const App = () => {
     }
 
     const searchServicesFromServer = useCallback(() => {
-        fetch(`${SERVER_URL}/all-services`)
+        fetch(GET_SERVICES)
         .then(res => {
             switch (res.status) {
                 case 200:

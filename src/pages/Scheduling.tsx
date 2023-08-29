@@ -6,7 +6,7 @@ import RegisterButton from 'components/pages/RegisterButton'
 import { ServiceSchedulings } from 'types/schedulings'
 import { Props } from 'types/pages'
 import { container } from 'commonStyles'
-import { SERVER_URL } from 'App'
+import { GET_SCHEDULINGS } from 'constants/urls'
 
 export const BACKEND_SCHEDULINGS = 'backend-schedulings'
 
@@ -33,7 +33,7 @@ const Scheduling = ({ setCurrentPage }: Props) => {
 	useEffect(() => {
 		// Verificando se já existe os schedulings em cache
 		if (!cacheSchedulings) {
-			fetch(`${SERVER_URL}/all-schedulings`)
+			fetch(GET_SCHEDULINGS)
 				.then(res => res.json())
 				.then((schedulings: ServiceSchedulings) => {
 					const orderSchedulings = schedulings.sort((a, b) => a.date.localeCompare(b.date)).reverse()

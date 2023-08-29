@@ -6,7 +6,7 @@ import ExpensesTable from 'components/expenses/ExpensesTable'
 import AddExpenseForm from 'components/expenses/AddExpenseForm'
 import AnyExpensesAdvice from 'components/pages/AnyAdvice'
 import RegisterButton from 'components/pages/RegisterButton'
-import { SERVER_URL } from 'App'
+import { GET_EXPENSES } from 'constants/urls'
 
 export const BACKEND_EXPENSES = 'backend-expenses'
 
@@ -33,7 +33,7 @@ const Expenses = ({ setCurrentPage }: Props) => {
 	useEffect(() => {
 		// Verificando se já existe as expenses em cache
 		if (!cacheExpenses) {
-			fetch(`${SERVER_URL}/all-expenses`)
+			fetch(GET_EXPENSES)
 				.then(res => res.json())
 				.then((expenses: TExpenses) => {
 					const orderExpenses = expenses.sort((a, b) => a.date.localeCompare(b.date)).reverse()
