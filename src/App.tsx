@@ -16,7 +16,6 @@ export const SERVER_URL = 'http://localhost:8080'
 const App = () => {
 
     const [services, setServices] = useState<TServices>([])
-    const [loadingDatabaseText, setLoadingDatabaseText] = useState('Carregando...')
     const [databaseLoaded, setDatabaseLoaded] = useState(false)
     const [currentPage, setCurrentPage] = useState(0)
     const [navDisplay, setNavDisplay] = useState('d-none')
@@ -39,21 +38,13 @@ const App = () => {
                         getDataFromServer(res)
                         break
                     case 503:
-                        setLoadingDatabaseText('')
-                        setTimeout(() => {
-                            alert('Erro ao consultar banco de dados')    
-                            setLoadingDatabaseText('Carregando...')
-                            searchDataFromServer()
-                        }, 10)
+                        alert('Erro ao consultar banco de dados')    
+                        searchDataFromServer()
                         break
                 }
             }).catch(() => {
-                setLoadingDatabaseText('')
-                setTimeout(() => {
-                    alert('Erro ao conectar com o servidor')
-                    setLoadingDatabaseText('Carregando...')
-                    searchDataFromServer()
-                }, 10)
+                alert('Erro ao conectar com o servidor')
+                searchDataFromServer()
             })
         }
         searchDataFromServer()
@@ -61,11 +52,12 @@ const App = () => {
 
     const HandlePages = () => {
         if (databaseLoaded) {
+            // Deixando a barra de navegação visível
             setNavDisplay('d-flex')
             // Atual página padrão
             return <Scheduling setCurrentPage={setCurrentPage} />
         } else {
-            return <LoadingPage loadingDatabaseText={loadingDatabaseText} />
+            return <LoadingPage />
         }
     }
 
