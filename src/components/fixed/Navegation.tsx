@@ -2,10 +2,11 @@ import { useRef, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
 interface Props {
+	navDisplay: string
 	currentPage: number
 }
 
-const Navegation = ({ currentPage }: Props) => {
+const Navegation = ({ navDisplay, currentPage }: Props) => {
 
 	const link1 = useRef<HTMLAnchorElement>(null)
 	const link2 = useRef<HTMLAnchorElement>(null)
@@ -29,7 +30,7 @@ const Navegation = ({ currentPage }: Props) => {
 	const linkStyle = 'link-dark link-underline-opacity-50'
 
 	return (
-		<nav className='d-flex justify-content-center p-3'>
+		<nav className={`${navDisplay} justify-content-center p-3`}>
 			<Link ref={link1} className={linkStyle} to='/'><h5>Agendamentos</h5></Link>
 			<Link ref={link2} className={`${linkStyle} mx-4`} to='/services'><h5>Serviços</h5></Link>
 			<Link ref={link3} className={linkStyle} to='/expenses'><h5>Despesas</h5></Link>

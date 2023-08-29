@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css'
 import { Services as TServices } from './types/services'
 import Header from './components/fixed/Header'
+import LoadingPage from 'components/main/LoadingPage'
 import Navegation from './components/fixed/Navegation'
 import Scheduling from './pages/Scheduling'
 import Services from './pages/Services'
@@ -18,6 +19,7 @@ const App = () => {
     const [loadingDatabaseText, setLoadingDatabaseText] = useState('Carregando...')
     const [databaseLoaded, setDatabaseLoaded] = useState(false)
     const [currentPage, setCurrentPage] = useState(0)
+    const [navDisplay, setNavDisplay] = useState('d-none')
 
     const getDataFromServer = (res: Response) => {
         res.json().then((services: TServices) => {
@@ -30,6 +32,7 @@ const App = () => {
 
     useEffect(() => {
         const searchDataFromServer = () => {
+            setTimeout(() => {
             fetch(`${SERVER_URL}/all-services`)
             .then(res => {
                 switch (res.status) {
@@ -53,14 +56,19 @@ const App = () => {
                     searchDataFromServer()
                 }, 10)
             })
+        }, 3000)
         }
         searchDataFromServer()
     }, [])
 
     const HandlePages = () => {
-        return databaseLoaded 
-        ? <Scheduling setCurrentPage={setCurrentPage} /> // Atual página padrão
-        : <h4 className='text-center my-4'>{loadingDatabaseText}</h4>
+        if (databaseLoaded) {
+            setNavDisplay('d-flex')
+            // Atual página padrão
+            return <Scheduling setCurrentPage={setCurrentPage} />
+        } else {
+            return <LoadingPage loadingDatabaseText={loadingDatabaseText} />
+        }
     }
 
     return (
@@ -68,7 +76,7 @@ const App = () => {
             <ServicesProvider servicesState={[services, setServices]}>
                 <Router>
                     <Header />
-                    <Navegation currentPage={currentPage} />
+                    <Navegation navDisplay={navDisplay} currentPage={currentPage} />
                     <Routes>
                         <Route path='/' element={<HandlePages />} />
                         <Route path='/services' element={<Services setCurrentPage={setCurrentPage} />} />
