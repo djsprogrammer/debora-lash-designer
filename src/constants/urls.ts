@@ -7,3 +7,7 @@ export const GET_EXPENSES = `${SERVER_URL}/all-expenses`
 export const CREATE_SCHEDULING = `${SERVER_URL}/create-scheduling`
 export const CREATE_SERVICE = `${SERVER_URL}/create-service`
 export const CREATE_EXPENSE = `${SERVER_URL}/create-expense`
+
+export const DELETE_SCHEDULING = `${SERVER_URL}/delete-scheduling`
+export const DELETE_SERVICE = `${SERVER_URL}/delete-service`
+export const DELETE_EXPENSE = `${SERVER_URL}/delete-expense`

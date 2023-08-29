@@ -11,8 +11,6 @@ import Expenses from './pages/Expenses'
 import ServicesProvider from './ServicesContext'
 import { GET_SERVICES } from 'constants/urls'
 
-export const SERVER_URL = 'http://localhost:8080'
-
 const App = () => {
 
     const [services, setServices] = useState<TServices>([])

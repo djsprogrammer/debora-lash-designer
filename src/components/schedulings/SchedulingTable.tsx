@@ -3,7 +3,7 @@ import SchedulingRow from './SchedulingRow'
 import { Props, ServiceScheduling } from 'types/schedulings'
 import { tableStyle } from 'commonStyles'
 import DeleteForm from 'components/pages/DeleteForm'
-import { SERVER_URL } from 'App'
+import { DELETE_SCHEDULING } from 'constants/urls'
 import { DB_ERROR_TEXT, SERVER_ERROR_TEXT } from 'errorAdvices'
 import { BACKEND_SCHEDULINGS } from 'pages/Scheduling'
 
@@ -20,7 +20,7 @@ const SchedulingTable = ({ schedulingsState }: Props) => {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(targetScheduling)
         }
-        fetch(`${SERVER_URL}/delete-scheduling`, options)
+        fetch(DELETE_SCHEDULING, options)
             .then(res => {
                 switch (res.status) {
                     case 204:

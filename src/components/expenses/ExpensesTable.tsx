@@ -5,7 +5,7 @@ import ExpenseRow from './ExpenseRow'
 import DeleteForm from 'components/pages/DeleteForm'
 import { fetchOptions } from 'formFunctions/common'
 import { DB_ERROR_TEXT, SERVER_ERROR_TEXT } from 'errorAdvices'
-import { SERVER_URL } from 'App'
+import { DELETE_EXPENSE } from 'constants/urls'
 import { BACKEND_EXPENSES } from 'pages/Expenses'
 
 interface Props {
@@ -21,7 +21,7 @@ const ExpensesTable = ({ expensesState }: Props) => {
 
     const deleteExpense = () => {
         const options = fetchOptions('delete', targetExpense)
-        fetch(`${SERVER_URL}/delete-expense`, options)
+        fetch(DELETE_EXPENSE, options)
             .then(res => {
                 switch (res.status) {
                     case 204:

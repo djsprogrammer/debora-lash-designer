@@ -4,7 +4,7 @@ import DeleteForm from 'components/pages/DeleteForm'
 import { Service } from 'types/services'
 import { tableStyle } from 'commonStyles'
 import { ServicesContext } from 'ServicesContext'
-import { SERVER_URL } from 'App'
+import { DELETE_SERVICE } from 'constants/urls'
 import { DB_ERROR_TEXT, SERVER_ERROR_TEXT } from 'errorAdvices'
 
 const ServiceTable = () => {
@@ -20,7 +20,7 @@ const ServiceTable = () => {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(targetService)
         }
-        fetch(`${SERVER_URL}/delete-service`, options)
+        fetch(DELETE_SERVICE, options)
             .then(res => {
                 switch (res.status) {
                     case 204:
