@@ -8,6 +8,7 @@ import { SERVER_URL } from 'App'
 import { SERVER_ERROR_TEXT } from 'errorAdvices'
 import { fetchOptions } from 'formFunctions/common'
 import { saveRefsInMemory, createSchedulingToSend, responseHandler } from 'formFunctions/AddSchedulingForm'
+import DateInput from 'components/forms/DateInput'
 
 interface AddSchedulingFormProps extends Props {
 	setAddSchedulingForm: BooleanSet
@@ -19,19 +20,19 @@ const AddSchedulingForm = ({ schedulingsState, setAddSchedulingForm }: AddSchedu
 
 	const [servicesScheduling, setServicesScheduling] = schedulingsState
 	const [blockedActions, setBlockedActions] = useState(false)
+	const [date, setDate] = useState('')
 
-	const date = useRef<HTMLInputElement>(null)
 	const options = useRef<HTMLSelectElement>(null)
 	const client = useRef<HTMLInputElement>(null)
 
 	useEffect(() => {
-		saveRefsInMemory(options, date, client)
+		saveRefsInMemory(options, client)
 	}, [])
 
 	const addScheduling = () => {
 		if (!blockedActions) {
 			setBlockedActions(true)
-			const serviceScheduling = createSchedulingToSend()
+			const serviceScheduling = createSchedulingToSend(date)
 			if (serviceScheduling) {
 				// Não permitindo criar dois agendamentos para a mesma pessoa no mesmo dia
 				const alreadyExists = servicesScheduling.filter(scheduling => {
@@ -73,10 +74,7 @@ const AddSchedulingForm = ({ schedulingsState, setAddSchedulingForm }: AddSchedu
 						e.preventDefault()
 						addScheduling()
 					}}>
-						<div className='input-group'>
-							<label className='input-group-text'>Escolha uma data</label>
-							<input ref={date} className='pe-1 form-control text-center' type='date' required />
-						</div>
+						<DateInput setDate={setDate} />
 						<div className='input-group my-3'>
 							<label className='input-group-text'>Escolha um serviço</label>
 							<select ref={options} className='form-select text-center' required>

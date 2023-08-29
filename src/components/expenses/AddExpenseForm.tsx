@@ -8,6 +8,7 @@ import { ExpensesState } from 'types/expenses'
 import { BooleanSet } from 'types/common'
 import { SERVER_URL } from 'App'
 import { DB_ERROR_TEXT, INVALID_NUMBER_TEXT } from 'errorAdvices'
+import DateInput from 'components/forms/DateInput'
 
 interface Props {
 	setAddExpenseForm: BooleanSet
@@ -18,19 +19,19 @@ const AddExpenseForm = ({ setAddExpenseForm, expensesState }: Props) => {
 
 	const [expenses, setExpenses] = expensesState
 	const [blockedActions, setBlockedActions] = useState(false)
+	const [date, setDate] = useState('')
 
-	const dateRef = useRef<HTMLInputElement>(null)
 	const nameRef = useRef<HTMLInputElement>(null)
 	const valueRef = useRef<HTMLInputElement>(null)
 
 	useEffect(() => {
-		saveRefsInMemory(dateRef, nameRef, valueRef)
+		saveRefsInMemory(nameRef, valueRef)
 	}, [])
 
 	const addExpense = () => {
 		if (!blockedActions) {
 			setBlockedActions(true)
-			const [date, name, value] = getExpenseInfo()
+			const [name, value] = getExpenseInfo()
 			if (validNumber(value)) {
 				const newExpense = { _id: v4(), date, name, value: Number(value) }
 				const alreadyExists = expenses.filter(expense => {
@@ -78,10 +79,7 @@ const AddExpenseForm = ({ setAddExpenseForm, expensesState }: Props) => {
 						e.preventDefault()
 						addExpense()
 					}}>
-						<div className='input-group'>
-							<label className='input-group-text'>Escolha uma data</label>
-							<input ref={dateRef} className='pe-1 form-control text-center' type='date' required />
-						</div>
+						<DateInput setDate={setDate} />
 						<div className='input-group my-3'>
 			                <label className='input-group-text' htmlFor='services'>Nome</label>
 			                <input ref={nameRef} className='form-control text-center' type='text' required />
