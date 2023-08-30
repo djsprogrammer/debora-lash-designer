@@ -3,12 +3,13 @@ import AddFormButtons from 'components/pages/AddFormButtons'
 import { ServicesContext } from 'ServicesContext'
 import { Props } from 'types/schedulings'
 import { BooleanSet } from 'types/common'
-import { formContainer, addFormCardStyle, addFormCardHeaderStyle } from 'commonStyles'
+import { formContainer, addFormCardStyle } from 'commonStyles'
 import { CREATE_SCHEDULING } from 'constants/urls'
 import { SERVER_ERROR_TEXT } from 'errorAdvices'
 import { fetchOptions } from 'formFunctions/common'
 import { saveRefsInMemory, createSchedulingToSend, responseHandler } from 'formFunctions/AddSchedulingForm'
 import DateInput from 'components/forms/DateInput'
+import FormHeader from 'components/forms/Header'
 
 interface AddSchedulingFormProps extends Props {
 	setAddSchedulingForm: BooleanSet
@@ -66,9 +67,7 @@ const AddSchedulingForm = ({ schedulingsState, setAddSchedulingForm }: AddSchedu
 	return (
 		<div className={formContainer}>
 			<div className={addFormCardStyle}>
-				<div className={addFormCardHeaderStyle}>
-					<h5>Registrar Agendamento</h5>
-				</div>
+				<FormHeader page='Agendamento' />
 				<div className='card-body'>
 					<form className='d-flex flex-column' onSubmit={e => {
 						e.preventDefault()

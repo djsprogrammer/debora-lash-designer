@@ -4,13 +4,14 @@ import NameInput from 'components/forms/NameInput'
 import ValueInput from 'components/forms/ValueInput'
 import AddFormButtons from 'components/pages/AddFormButtons'
 import { validNumber, fetchOptions } from 'formFunctions/common'
-import { formContainer, addFormCardStyle, addFormCardHeaderStyle } from 'commonStyles'
+import { formContainer, addFormCardStyle } from 'commonStyles'
 import { ExpensesState } from 'types/expenses'
 import { BooleanSet } from 'types/common'
 import { CREATE_EXPENSE } from 'constants/urls'
 import { DB_ERROR_TEXT, INVALID_NUMBER_TEXT } from 'errorAdvices'
 import DateInput from 'components/forms/DateInput'
 import { BACKEND_EXPENSES } from 'pages/Expenses'
+import FormHeader from 'components/forms/Header'
 
 interface Props {
 	setAddExpenseForm: BooleanSet
@@ -69,9 +70,7 @@ const AddExpenseForm = ({ setAddExpenseForm, expensesState }: Props) => {
 	return (
 		<div className={formContainer}>
 			<div className={addFormCardStyle}>
-				<div className={addFormCardHeaderStyle}>
-					<h5>Registrar Despesa</h5>
-				</div>
+				<FormHeader page='Despesa' />
 				<div className='card-body'>
 					<form className='d-flex flex-column' onSubmit={e => {
 						e.preventDefault()

@@ -6,9 +6,10 @@ import { showError, responseHandler } from '../../formFunctions/AddServiceForm'
 import { validNumber, fetchOptions } from 'formFunctions/common'
 import { ServicesContext } from 'ServicesContext'
 import { CREATE_SERVICE } from 'constants/urls'
-import { formContainer, addFormCardStyle, addFormCardHeaderStyle } from 'commonStyles'
+import { formContainer, addFormCardStyle } from 'commonStyles'
 import { SERVER_ERROR_TEXT, DB_ERROR_TEXT } from 'errorAdvices'
 import { BooleanSet } from 'types/common'
+import FormHeader from 'components/forms/Header'
 
 const ADD_BUTTON_TEXT = 'Adicionar Serviço'
 const INVALID_NUMBER_TEXT = 'Insira um número válido (utilize ponto para casas decimais)'
@@ -61,9 +62,7 @@ const AddServiceForm = ({ setAddServiceForm }: Props) => {
     return (
         <div className={formContainer}>
             <div className={addFormCardStyle}>
-                <div className={addFormCardHeaderStyle}>
-                    <h5>Criar Serviço</h5>
-                </div>
+                <FormHeader page='Serviço' />
                 <div className='card-body'>
                     <form className='d-flex flex-column' onSubmit={e => {
                         e.preventDefault()
