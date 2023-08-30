@@ -2,22 +2,19 @@ import { v4 } from 'uuid'
 import { ServiceScheduling } from 'types/schedulings'
 import { BACKEND_SCHEDULINGS } from 'pages/Scheduling'
 
-type Options = React.RefObject<HTMLSelectElement>
 type Client = React.RefObject<HTMLInputElement>
 
-let optionsRef: Options
 let clientRef: Client
 
-export const saveRefsInMemory = (options: Options, client: Client) => {
-	optionsRef = options
+export const saveRefsInMemory = (client: Client) => {
 	clientRef = client
 }
 
-export const createSchedulingToSend = (date: string) => {
-	if (clientRef.current && optionsRef.current) {
+export const createSchedulingToSend = (date: string, option: string) => {
+	if (clientRef.current) {
 		const serviceScheduling: ServiceScheduling = {
 			_id: v4(),
-			service: JSON.parse(optionsRef.current.value),
+			service: JSON.parse(option),
 			date,
 			client: clientRef.current.value
 		}

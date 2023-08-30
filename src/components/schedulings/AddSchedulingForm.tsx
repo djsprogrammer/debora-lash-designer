@@ -22,18 +22,19 @@ const AddSchedulingForm = ({ schedulingsState, setAddSchedulingForm }: AddSchedu
 	const [servicesScheduling, setServicesScheduling] = schedulingsState
 	const [blockedActions, setBlockedActions] = useState(false)
 	const [date, setDate] = useState('')
+	// Começando o state com a primeira opção caso o usuário não mude
+	const [option, setOption] = useState(JSON.stringify(services[0]))
 
-	const options = useRef<HTMLSelectElement>(null)
 	const client = useRef<HTMLInputElement>(null)
 
 	useEffect(() => {
-		saveRefsInMemory(options, client)
+		saveRefsInMemory(client)
 	}, [])
 
 	const addScheduling = () => {
 		if (!blockedActions) {
 			setBlockedActions(true)
-			const serviceScheduling = createSchedulingToSend(date)
+			const serviceScheduling = createSchedulingToSend(date, option)
 			if (serviceScheduling) {
 				// Não permitindo criar dois agendamentos para a mesma pessoa no mesmo dia
 				const alreadyExists = servicesScheduling.filter(scheduling => {
@@ -76,7 +77,7 @@ const AddSchedulingForm = ({ schedulingsState, setAddSchedulingForm }: AddSchedu
 						<DateInput setDate={setDate} />
 						<div className='input-group my-3'>
 							<label className='input-group-text'>Escolha um serviço</label>
-							<select ref={options} className='form-select text-center' required>
+							<select onChange={e => setOption(e.target.value)} className='form-select text-center' required>
 								{services.map(service => (
 									<option key={service._id} value={JSON.stringify(service)}>{service._id}</option>
 								))}
