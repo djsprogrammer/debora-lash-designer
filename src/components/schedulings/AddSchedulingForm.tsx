@@ -1,4 +1,4 @@
-import { useContext, useRef, useEffect, useState } from 'react'
+import { useContext, useState } from 'react'
 import AddFormButtons from 'components/pages/AddFormButtons'
 import { ServicesContext } from 'ServicesContext'
 import { Props } from 'types/schedulings'
@@ -7,7 +7,7 @@ import { formContainer, addFormCardStyle } from 'commonStyles'
 import { CREATE_SCHEDULING } from 'constants/urls'
 import { SERVER_ERROR_TEXT } from 'errorAdvices'
 import { fetchOptions } from 'formFunctions/common'
-import { saveRefsInMemory, createSchedulingToSend, responseHandler } from 'formFunctions/AddSchedulingForm'
+import { createSchedulingToSend, responseHandler } from 'formFunctions/AddSchedulingForm'
 import DateInput from 'components/forms/DateInput'
 import FormHeader from 'components/forms/Header'
 
@@ -24,17 +24,12 @@ const AddSchedulingForm = ({ schedulingsState, setAddSchedulingForm }: AddSchedu
 	const [date, setDate] = useState('')
 	// Começando o state com a primeira opção caso o usuário não mude
 	const [option, setOption] = useState(JSON.stringify(services[0]))
-
-	const client = useRef<HTMLInputElement>(null)
-
-	useEffect(() => {
-		saveRefsInMemory(client)
-	}, [])
+	const [client, setClient] = useState('')
 
 	const addScheduling = () => {
 		if (!blockedActions) {
 			setBlockedActions(true)
-			const serviceScheduling = createSchedulingToSend(date, option)
+			const serviceScheduling = createSchedulingToSend(date, option, client)
 			if (serviceScheduling) {
 				// Não permitindo criar dois agendamentos para a mesma pessoa no mesmo dia
 				const alreadyExists = servicesScheduling.filter(scheduling => {
@@ -83,7 +78,7 @@ const AddSchedulingForm = ({ schedulingsState, setAddSchedulingForm }: AddSchedu
 								))}
 							</select>
 						</div>
-						<input ref={client} className='form-control text-center p-1 mb-3' type='text' placeholder='Digite o nome do cliente' required />
+						<input onChange={e => setClient(e.target.value)} className='form-control text-center p-1 mb-3' type='text' placeholder='Digite o nome do cliente' required />
 						<AddFormButtons
 							blockedActions={blockedActions}
 							setAddForm={setAddSchedulingForm}
