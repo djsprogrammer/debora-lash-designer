@@ -36,32 +36,30 @@ const AddSchedulingForm = ({ schedulingsState, setAddSchedulingForm }: AddSchedu
 				date,
 				client: client
 			}
-			if (serviceScheduling) {
-				// Não permitindo criar dois agendamentos para a mesma pessoa no mesmo dia
-				const alreadyExists = servicesScheduling.filter(scheduling => {
-					return scheduling.client === serviceScheduling.client && scheduling.date === serviceScheduling.date
-				})[0]
-				if (alreadyExists) {
-					alert('Já existe um agendamento para essa pessoa nessa data')
-					setBlockedActions(false)
-					setAddSchedulingForm(false)
-				} else {
-					const payload = fetchOptions('post', serviceScheduling)
-					fetch(CREATE_SCHEDULING, payload)
-						.then(res => {
-							// Organizando novos agendamentos por datas
-							const newSchedulings = [...servicesScheduling, serviceScheduling]
-								.sort((a, b) => a.date.localeCompare(b.date)).reverse()
-							responseHandler(res, setServicesScheduling, newSchedulings)
-							setBlockedActions(false)
-							setAddSchedulingForm(false)
-						})
-						.catch(() => {
-							alert(SERVER_ERROR_TEXT)
-							setBlockedActions(false)
-							setAddSchedulingForm(false)	
-						})
-				}
+			// Não permitindo criar dois agendamentos para a mesma pessoa no mesmo dia
+			const alreadyExists = servicesScheduling.filter(scheduling => {
+				return scheduling.client === serviceScheduling.client && scheduling.date === serviceScheduling.date
+			})[0]
+			if (alreadyExists) {
+				alert('Já existe um agendamento para essa pessoa nessa data')
+				setBlockedActions(false)
+				setAddSchedulingForm(false)
+			} else {
+				const payload = fetchOptions('post', serviceScheduling)
+				fetch(CREATE_SCHEDULING, payload)
+					.then(res => {
+						// Organizando novos agendamentos por datas
+						const newSchedulings = [...servicesScheduling, serviceScheduling]
+							.sort((a, b) => a.date.localeCompare(b.date)).reverse()
+						responseHandler(res, setServicesScheduling, newSchedulings)
+						setBlockedActions(false)
+						setAddSchedulingForm(false)
+					})
+					.catch(() => {
+						alert(SERVER_ERROR_TEXT)
+						setBlockedActions(false)
+						setAddSchedulingForm(false)	
+					})
 			}
 		}
 	}
