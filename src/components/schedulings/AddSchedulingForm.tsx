@@ -1,4 +1,5 @@
 import { useContext, useState } from 'react'
+import { v4 } from 'uuid'
 import AddFormButtons from 'components/pages/AddFormButtons'
 import { ServicesContext } from 'ServicesContext'
 import { Props } from 'types/schedulings'
@@ -7,7 +8,7 @@ import { formContainer, addFormCardStyle } from 'commonStyles'
 import { CREATE_SCHEDULING } from 'constants/urls'
 import { SERVER_ERROR_TEXT } from 'errorAdvices'
 import { fetchOptions } from 'formFunctions/common'
-import { createSchedulingToSend, responseHandler } from 'formFunctions/AddSchedulingForm'
+import { responseHandler } from 'formFunctions/AddSchedulingForm'
 import DateInput from 'components/forms/DateInput'
 import FormHeader from 'components/forms/Header'
 
@@ -29,7 +30,12 @@ const AddSchedulingForm = ({ schedulingsState, setAddSchedulingForm }: AddSchedu
 	const addScheduling = () => {
 		if (!blockedActions) {
 			setBlockedActions(true)
-			const serviceScheduling = createSchedulingToSend(date, option, client)
+			const serviceScheduling = {
+				_id: v4(),
+				service: JSON.parse(option),
+				date,
+				client: client
+			}
 			if (serviceScheduling) {
 				// Não permitindo criar dois agendamentos para a mesma pessoa no mesmo dia
 				const alreadyExists = servicesScheduling.filter(scheduling => {
