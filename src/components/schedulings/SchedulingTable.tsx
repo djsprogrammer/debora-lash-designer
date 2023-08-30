@@ -53,6 +53,7 @@ const SchedulingTable = ({ schedulingsState }: Props) => {
                     <tr>
                         <th>Cliente</th>
                         <th>Serviço</th>
+                        <th>Valor</th>
                         <th>Data</th>
                         <th></th>
                     </tr>

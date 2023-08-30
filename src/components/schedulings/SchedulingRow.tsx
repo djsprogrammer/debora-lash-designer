@@ -20,7 +20,8 @@ const SchedulingRow = ({ scheduling, setDeleteSchedulingForm, setTargetSchedulin
     return (
         <tr>
             <td>{scheduling.client}</td>
-            <td>{scheduling.service._id} -{value}</td>
+            <td>{scheduling.service._id}</td>
+            <td>{value}</td>
             <td>{date}</td>
             <td>
                 <DeleteButton onClick={() => {
