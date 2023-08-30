@@ -8,9 +8,9 @@ import { formContainer, addFormCardStyle } from 'commonStyles'
 import { CREATE_SCHEDULING } from 'constants/urls'
 import { SERVER_ERROR_TEXT } from 'errorAdvices'
 import { fetchOptions } from 'formFunctions/common'
-import { responseHandler } from 'formFunctions/AddSchedulingForm'
 import DateInput from 'components/forms/DateInput'
 import FormHeader from 'components/forms/Header'
+import { BACKEND_SCHEDULINGS } from 'pages/Scheduling'
 
 interface AddSchedulingFormProps extends Props {
 	setAddSchedulingForm: BooleanSet
@@ -48,10 +48,19 @@ const AddSchedulingForm = ({ schedulingsState, setAddSchedulingForm }: AddSchedu
 				const payload = fetchOptions('post', serviceScheduling)
 				fetch(CREATE_SCHEDULING, payload)
 					.then(res => {
-						// Organizando novos agendamentos por datas
-						const newSchedulings = [...servicesScheduling, serviceScheduling]
-							.sort((a, b) => a.date.localeCompare(b.date)).reverse()
-						responseHandler(res, setServicesScheduling, newSchedulings)
+						switch (res.status) {
+							case 201:
+								// Organizando novos agendamentos por datas
+								const newSchedulings = [...servicesScheduling, serviceScheduling]
+									.sort((a, b) => a.date.localeCompare(b.date)).reverse()
+								setServicesScheduling(newSchedulings)
+								// Salvando em cache
+								sessionStorage.setItem(BACKEND_SCHEDULINGS, JSON.stringify(newSchedulings))
+								break
+							case 503:
+								alert('Erro ao consultar banco de dados')
+								break
+						}
 						setBlockedActions(false)
 						setAddSchedulingForm(false)
 					})
