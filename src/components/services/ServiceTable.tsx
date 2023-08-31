@@ -1,7 +1,6 @@
 import { useContext, useState } from 'react'
 import ServiceRow from './ServiceRow'
 import DeleteForm from 'components/pages/DeleteForm'
-import { Service } from 'types/services'
 import { tableStyle } from 'commonStyles'
 import { ServicesContext } from 'ServicesContext'
 import { DELETE_SERVICE } from 'constants/urls'
@@ -12,20 +11,20 @@ const ServiceTable = () => {
     const [services, setServices] = useContext(ServicesContext)
 
     const [deleteServiceForm, setDeleteServiceForm] = useState(false)
-    const [targetService, setTargetService] = useState<Service>({} as Service)
+    const [targetId, setTargetId] = useState('')
     
     const deleteService = () => {
         const options = {
             method: 'delete',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(targetService)
+            headers: { 'Content-Type': 'text/plain' },
+            body: targetId
         }
         fetch(DELETE_SERVICE, options)
             .then(res => {
                 switch (res.status) {
                     case 204:
                         const remainingServices = services.filter(service => {
-                            return service._id !== targetService._id
+                            return service._id !== targetId
                         })
                         setServices(remainingServices.sort((a, b) => a.value.value - b.value.value))
                         break
@@ -59,7 +58,7 @@ const ServiceTable = () => {
                         <ServiceRow
                             key={service._id}
                             service={service}
-                            setTargetService={setTargetService}
+                            setTargetId={setTargetId}
                             setDeleteServiceForm={setDeleteServiceForm}
                         />)}
                 </tbody>

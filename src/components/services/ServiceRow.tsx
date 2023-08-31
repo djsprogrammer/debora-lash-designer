@@ -6,11 +6,11 @@ import { Service, SetService } from 'types/services'
 
 interface Props {
     service: Service
-    setTargetService: SetService
+    setTargetId: React.Dispatch<React.SetStateAction<string>>
     setDeleteServiceForm: BooleanSet
 }
 
-const ServiceRow = ({ service, setTargetService, setDeleteServiceForm }: Props) => {
+const ServiceRow = ({ service, setTargetId, setDeleteServiceForm }: Props) => {
 
     const name = service._id
 
@@ -18,12 +18,12 @@ const ServiceRow = ({ service, setTargetService, setDeleteServiceForm }: Props) 
     const value = moneyFormat(service.value.value)
 
     return (
-        <tr key={name}>
+        <tr>
             <td>{name}</td>
             <td>{value}</td>
             <td>
                 <DeleteButton onClick={() => {
-                    setTargetService(service)
+                    setTargetId(service._id)
                     setDeleteServiceForm(true)
                 }} /> 
             </td>
