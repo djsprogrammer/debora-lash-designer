@@ -2,7 +2,6 @@ import { useContext, useState, useEffect } from 'react'
 import AddFormButtons from 'components/pages/AddFormButtons'
 import NameInput from 'components/forms/NameInput'
 import ValueInput from 'components/forms/ValueInput'
-import { showError, responseHandler } from '../../formFunctions/AddServiceForm'
 import { validNumber, fetchOptions } from 'formFunctions/common'
 import { ServicesContext } from 'ServicesContext'
 import { CREATE_SERVICE } from 'constants/urls'
@@ -11,7 +10,6 @@ import { SERVER_ERROR_TEXT, DB_ERROR_TEXT } from 'errorAdvices'
 import { BooleanSet } from 'types/common'
 import FormHeader from 'components/forms/Header'
 
-const ADD_BUTTON_TEXT = 'Adicionar Serviço'
 const INVALID_NUMBER_TEXT = 'Insira um número válido (utilize ponto para casas decimais)'
 const ALREADY_EXISTS_TEXT = 'Já existe um serviço com esse nome!'
 
@@ -45,24 +43,33 @@ const AddServiceForm = ({ setAddServiceForm }: Props) => {
                         _id: name, value: Number(value)
                     }
                     const options = fetchOptions('post', service)
-                        fetch(CREATE_SERVICE, options)
+                    fetch(CREATE_SERVICE, options)
                         .then(res => {
-                            const newServices = [...services, service]
-                            responseHandler(
-                                res, 201, setServices, newServices, 
-                                DB_ERROR_TEXT, ADD_BUTTON_TEXT, setBlockedActions
-                            )
+                            switch (res.status) {
+                                case 201:
+                                    const newServices = [...services, service]
+                                        .sort((a, b) => a.value - b.value)
+                                    setServices(newServices)
+                                    break
+                                case 503:
+                                    alert(DB_ERROR_TEXT)
+                                    break
+                            }
+                            setBlockedActions(false)
                             setAddServiceForm(false)
                         }).catch(() => {
-                            showError(SERVER_ERROR_TEXT, setBlockedActions)
+                            alert(SERVER_ERROR_TEXT)
+                            setBlockedActions(false)
                             setAddServiceForm(false)
                         })
                 } else {
-                    showError(INVALID_NUMBER_TEXT, setBlockedActions)
+                    alert(INVALID_NUMBER_TEXT)
+                    setBlockedActions(false)
                     setAddServiceForm(false)
                 }
             } else {
-                showError(ALREADY_EXISTS_TEXT, setBlockedActions)
+                alert(ALREADY_EXISTS_TEXT)
+                setBlockedActions(false)
                 setAddServiceForm(false)
             }
         }
