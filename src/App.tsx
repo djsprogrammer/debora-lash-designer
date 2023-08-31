@@ -5,8 +5,7 @@ import 'App.css'
 import { Services as TServices } from 'types/services'
 import Header from 'components/fixed/Header'
 import Navegation from 'components/fixed/Navegation'
-import Loading from 'pages/Loading'
-import Scheduling from 'pages/Scheduling'
+import MainPage from 'pages/MainPage'
 import Services from 'pages/Services'
 import Expenses from 'pages/Expenses'
 import ServicesProvider from 'ServicesContext'
@@ -52,17 +51,6 @@ const App = () => {
         searchServicesFromServer()
     }, [searchServicesFromServer])
 
-    const MainPage = () => {
-        if (databaseLoaded) {
-            return <Scheduling 
-                setNavDisplay={setNavDisplay}
-                setCurrentPage={setCurrentPage} 
-            />
-        } else {
-            return <Loading />
-        }
-    }
-
     return (
         <div>
             <ServicesProvider servicesState={[services, setServices]}>
@@ -70,7 +58,16 @@ const App = () => {
                     <Header />
                     <Navegation navDisplay={navDisplay} currentPage={currentPage} />
                     <Routes>
-                        <Route path='/' element={<MainPage />} />
+                        <Route 
+                            path='/'
+                            element={
+                                <MainPage
+                                    databaseLoaded={databaseLoaded}
+                                    setNavDisplay={setNavDisplay}
+                                    setCurrentPage={setCurrentPage}
+                                />
+                            } 
+                        />
                         <Route path='/services'
                             element={<Services setCurrentPage={setCurrentPage} />} 
                         />
