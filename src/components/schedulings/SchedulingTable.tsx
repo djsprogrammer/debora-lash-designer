@@ -29,7 +29,7 @@ const SchedulingTable = ({ schedulingsState }: Props) => {
                         }).sort((a, b) => a.date.localeCompare(b.date)).reverse()
                         setServicesScheduling(remainingSchedulings)
                         // Salvando em cache
-                        sessionStorage.setItem(BACKEND_SCHEDULINGS, JSON.stringify(remainingSchedulings))
+                        localStorage.setItem(BACKEND_SCHEDULINGS, JSON.stringify(remainingSchedulings))
                         break
                     case 503:                        
                         setTimeout(() => {

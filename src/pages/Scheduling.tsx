@@ -26,7 +26,7 @@ const Scheduling = ({ setNavDisplay, setCurrentPage }: SchedulingProps) => {
 		setCurrentPage(0)
 	}, [setCurrentPage])
 
-	const cacheSchedulings = sessionStorage.getItem(BACKEND_SCHEDULINGS)
+	const cacheSchedulings = localStorage.getItem(BACKEND_SCHEDULINGS)
 
 	const getSchedulingsFromCache = () => {
 		// Iniciando o state com os schedulings em cache da sessão
@@ -49,7 +49,7 @@ const Scheduling = ({ setNavDisplay, setCurrentPage }: SchedulingProps) => {
 					const orderSchedulings = schedulings.sort((a, b) => a.date.localeCompare(b.date)).reverse()
 					setServicesScheduling(orderSchedulings)
 					// Salvando em cache para futuras renderizações na mesma sessão
-					sessionStorage.setItem(BACKEND_SCHEDULINGS, JSON.stringify(orderSchedulings))
+					localStorage.setItem(BACKEND_SCHEDULINGS, JSON.stringify(orderSchedulings))
 				})
 		} 
 	}, [cacheSchedulings])

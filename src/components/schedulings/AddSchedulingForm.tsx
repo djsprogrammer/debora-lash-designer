@@ -64,7 +64,7 @@ const AddSchedulingForm = ({ schedulingsState, setAddSchedulingForm }: AddSchedu
 									.sort((a, b) => a.date.localeCompare(b.date)).reverse()
 								setServicesScheduling(newSchedulings)
 								// Salvando em cache
-								sessionStorage.setItem(BACKEND_SCHEDULINGS, JSON.stringify(newSchedulings))
+								localStorage.setItem(BACKEND_SCHEDULINGS, JSON.stringify(newSchedulings))
 								break
 							case 503:
 								alert(DATABASE_ERROR_TEXT)

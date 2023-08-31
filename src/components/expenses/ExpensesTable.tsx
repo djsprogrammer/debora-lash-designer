@@ -30,7 +30,7 @@ const ExpensesTable = ({ expensesState }: Props) => {
                         }).sort((a, b) => a.date.localeCompare(b.date)).reverse()
                         setExpenses(remainingExpenses)
                         // Salvando em cache
-                        sessionStorage.setItem(BACKEND_EXPENSES, JSON.stringify(remainingExpenses))
+                        localStorage.setItem(BACKEND_EXPENSES, JSON.stringify(remainingExpenses))
                         break
                     case 503:                        
                         setTimeout(() => {

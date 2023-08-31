@@ -58,7 +58,7 @@ const AddExpenseForm = ({ setAddExpenseForm, expensesState }: Props) => {
 										.sort((a, b) => a.date.localeCompare(b.date)).reverse()
 									setExpenses(newExpenses)
 									// Salvando em cache
-									sessionStorage.setItem(BACKEND_EXPENSES, JSON.stringify(newExpenses))
+									localStorage.setItem(BACKEND_EXPENSES, JSON.stringify(newExpenses))
 									break
 								case 503: 
 									alert(DATABASE_ERROR_TEXT)
