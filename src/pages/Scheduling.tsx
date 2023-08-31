@@ -10,7 +10,17 @@ import { GET_SCHEDULINGS } from 'constants/urls'
 
 export const BACKEND_SCHEDULINGS = 'backend-schedulings'
 
-const Scheduling = ({ setCurrentPage }: Props) => {
+interface SchedulingProps extends Props {
+	setNavDisplay: React.Dispatch<React.SetStateAction<string>>
+}
+
+const Scheduling = ({ setNavDisplay, setCurrentPage }: SchedulingProps) => {
+
+	useEffect(() => {
+		// Deixando a barra de navegação a mostra 
+		// depois do carregamento do banco de dados
+		setNavDisplay('d-flex')
+	}, [setNavDisplay])
 
 	useEffect(() => {
 		setCurrentPage(0)

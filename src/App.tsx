@@ -3,9 +3,10 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'App.css'
 import { Services as TServices } from 'types/services'
-import HandlePages from 'HandlePages'
 import Header from 'components/fixed/Header'
 import Navegation from 'components/fixed/Navegation'
+import Loading from 'pages/Loading'
+import Scheduling from 'pages/Scheduling'
 import Services from 'pages/Services'
 import Expenses from 'pages/Expenses'
 import ServicesProvider from 'ServicesContext'
@@ -51,6 +52,17 @@ const App = () => {
         searchServicesFromServer()
     }, [searchServicesFromServer])
 
+    const MainPage = () => {
+        if (databaseLoaded) {
+            return <Scheduling 
+                setNavDisplay={setNavDisplay}
+                setCurrentPage={setCurrentPage} 
+            />
+        } else {
+            return <Loading />
+        }
+    }
+
     return (
         <div>
             <ServicesProvider servicesState={[services, setServices]}>
@@ -58,15 +70,7 @@ const App = () => {
                     <Header />
                     <Navegation navDisplay={navDisplay} currentPage={currentPage} />
                     <Routes>
-                        <Route path='/'
-                            element={
-                                <HandlePages
-                                    databaseLoaded={databaseLoaded}
-                                    setNavDisplay={setNavDisplay}
-                                    setCurrentPage={setCurrentPage} 
-                                />
-                            } 
-                        />
+                        <Route path='/' element={<MainPage />} />
                         <Route path='/services'
                             element={<Services setCurrentPage={setCurrentPage} />} 
                         />
