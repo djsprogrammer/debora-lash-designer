@@ -59,7 +59,8 @@ const ExpensesTable = ({ expensesState }: Props) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {expenses.map(expense => <ExpenseRow 
+                    {expenses.map(expense => <ExpenseRow
+                        key={expense._id}
                         expense={expense} 
                         setTargetExpense={setTargetExpense} 
                         setDeleteExpenseForm={setDeleteExpenseForm} />)}

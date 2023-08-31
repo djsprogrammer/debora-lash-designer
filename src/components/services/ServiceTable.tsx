@@ -57,6 +57,7 @@ const ServiceTable = () => {
                 <tbody>
                     {services.map(service =>
                         <ServiceRow
+                            key={service._id}
                             service={service}
                             setTargetService={setTargetService}
                             setDeleteServiceForm={setDeleteServiceForm}
