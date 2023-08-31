@@ -15,7 +15,7 @@ const ServiceRow = ({ service, setTargetService, setDeleteServiceForm }: Props) 
     const name = service._id
 
     // Deixando no formato 0,00
-    const value = moneyFormat(service.value)
+    const value = moneyFormat(service.value.value)
 
     return (
         <tr key={name}>

@@ -23,7 +23,7 @@ const App = () => {
         res.json().then((services: TServices) => {
             if (services[0]) {
                 // Ordenando os services por valor
-                const orderServices = services.sort((a, b) => a.value - b.value)
+                const orderServices = services.sort((a, b) => a.value.value - b.value.value)
                 setServices(orderServices)
             }
         })

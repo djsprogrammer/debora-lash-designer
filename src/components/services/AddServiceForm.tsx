@@ -9,6 +9,7 @@ import { formContainer, addFormCardStyle } from 'commonStyles'
 import { SERVER_ERROR_TEXT, DB_ERROR_TEXT } from 'errorAdvices'
 import { BooleanSet } from 'types/common'
 import FormHeader from 'components/forms/Header'
+import { Service } from 'types/services'
 
 const INVALID_NUMBER_TEXT = 'Insira um número válido (utilize ponto para casas decimais)'
 const ALREADY_EXISTS_TEXT = 'Já existe um serviço com esse nome!'
@@ -21,6 +22,7 @@ const AddServiceForm = ({ setAddServiceForm }: Props) => {
 
     const [services, setServices] = useContext(ServicesContext)
     const [blockedActions, setBlockedActions] = useState(false)
+    const [currentDate, setCurrentDate] = useState('')
     const [name, setName] = useState('')
     const [value, setValue] = useState('')
     const [allInputsFilled, setAllInputsFilled] = useState(false)
@@ -30,7 +32,7 @@ const AddServiceForm = ({ setAddServiceForm }: Props) => {
         const year = new Date().getFullYear()
         const month = String(new Date().getMonth() + 1).padStart(2, '0')
         const day = String(new Date().getDate()).padStart(2, '0')
-        console.log(`${year}-${month}-${day}`)
+        setCurrentDate(`${year}-${month}-${day}`)
     }, [])
 
     // Verificando se todos os inputs foram preenchidos
@@ -47,8 +49,11 @@ const AddServiceForm = ({ setAddServiceForm }: Props) => {
             const alreadyExists = services.filter(service => service._id === name)[0]
             if (!alreadyExists) {
                 if (validNumber(value)) {
-                    const service = {
-                        _id: name, value: Number(value)
+                    const service: Service = {
+                        _id: name, value: {
+                            value: Number(value),
+                            date: currentDate
+                        }
                     }
                     const options = fetchOptions('post', service)
                     fetch(CREATE_SERVICE, options)
@@ -56,7 +61,7 @@ const AddServiceForm = ({ setAddServiceForm }: Props) => {
                             switch (res.status) {
                                 case 201:
                                     const newServices = [...services, service]
-                                        .sort((a, b) => a.value - b.value)
+                                        .sort((a, b) => a.value.value - b.value.value)
                                     setServices(newServices)
                                     break
                                 case 503:
