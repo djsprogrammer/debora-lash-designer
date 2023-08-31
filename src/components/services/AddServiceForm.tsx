@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useContext, useState, useEffect } from 'react'
 import AddFormButtons from 'components/pages/AddFormButtons'
 import NameInput from 'components/forms/NameInput'
 import ValueInput from 'components/forms/ValueInput'
@@ -25,6 +25,15 @@ const AddServiceForm = ({ setAddServiceForm }: Props) => {
     const [blockedActions, setBlockedActions] = useState(false)
     const [name, setName] = useState('')
     const [value, setValue] = useState('')
+    const [allInputsFilled, setAllInputsFilled] = useState(false)
+
+    // Verificando se todos os inputs foram preenchidos
+    // Pois caso não tenham sido, será impedido a mudança no comportamento do botão
+    useEffect(() => {
+        if (name && value) {
+            setAllInputsFilled(true)
+        }
+    }, [name, value])
 
     const addService = () => {
         if (!blockedActions) {
@@ -70,7 +79,8 @@ const AddServiceForm = ({ setAddServiceForm }: Props) => {
                     }}>
                         <NameInput setName={setName} />
                         <ValueInput margin='my-3' setValue={setValue} />
-                        <AddFormButtons 
+                        <AddFormButtons
+                            allInputsFilled={allInputsFilled}
                             blockedActions={blockedActions}
                             setAddForm={setAddServiceForm}
                         />

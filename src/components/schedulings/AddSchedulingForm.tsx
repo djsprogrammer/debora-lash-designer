@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useContext, useState, useEffect } from 'react'
 import { v4 } from 'uuid'
 import AddFormButtons from 'components/pages/AddFormButtons'
 import { ServicesContext } from 'ServicesContext'
@@ -26,6 +26,15 @@ const AddSchedulingForm = ({ schedulingsState, setAddSchedulingForm }: AddSchedu
 	// Começando o state com a primeira opção caso o usuário não mude
 	const [option, setOption] = useState(JSON.stringify(services[0]))
 	const [client, setClient] = useState('')
+	const [allInputsFilled, setAllInputsFilled] = useState(false)
+
+	// Verificando se todos os inputs foram preenchidos
+	// Pois caso não tenham sido, será impedido a mudança no comportamento do botão
+	useEffect(() => {
+		if (date && option && client) {
+			setAllInputsFilled(true)
+		}
+	}, [date, option, client])
 
 	const addScheduling = () => {
 		if (!blockedActions) {
@@ -93,6 +102,7 @@ const AddSchedulingForm = ({ schedulingsState, setAddSchedulingForm }: AddSchedu
 						</div>
 						<input onChange={e => setClient(e.target.value)} className='form-control text-center p-1 mb-3' type='text' placeholder='Digite o nome do cliente' required />
 						<AddFormButtons
+							allInputsFilled={allInputsFilled}
 							blockedActions={blockedActions}
 							setAddForm={setAddSchedulingForm}
 						/>

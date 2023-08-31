@@ -3,11 +3,12 @@ import { BooleanSet } from 'types/common'
 import { confirmButtonStyle, cancelButtonStyle } from 'commonStyles'
 
 interface Props {
+	allInputsFilled: boolean
 	blockedActions: boolean
 	setAddForm: BooleanSet
 }
 
-const AddFormButtons = ({ blockedActions, setAddForm }: Props) => {
+const AddFormButtons = ({ allInputsFilled, blockedActions, setAddForm }: Props) => {
 
 	const confirmButtonRef = useRef<HTMLButtonElement>(null)
 	const cancelButtonRef = useRef<HTMLButtonElement>(null)
@@ -17,9 +18,11 @@ const AddFormButtons = ({ blockedActions, setAddForm }: Props) => {
 
 			<button ref={confirmButtonRef} onClick={() => {
 				if (confirmButtonRef.current && cancelButtonRef.current) {
-					// Indicando que a operação foi realizada
-					confirmButtonRef.current.innerText = '...'
-					cancelButtonRef.current.style.display = 'none'
+					if (allInputsFilled) {
+						// Indicando que a operação foi realizada
+						confirmButtonRef.current.innerText = '...'
+						cancelButtonRef.current.style.display = 'none'
+					}
 				}
 			}} className={`${confirmButtonStyle} mb-2`} type='submit'>Registrar</button>
 

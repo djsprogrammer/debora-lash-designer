@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { v4 } from 'uuid'
 import NameInput from 'components/forms/NameInput'
 import ValueInput from 'components/forms/ValueInput'
@@ -25,6 +25,15 @@ const AddExpenseForm = ({ setAddExpenseForm, expensesState }: Props) => {
 	const [date, setDate] = useState('')
 	const [name, setName] = useState('')
 	const [value, setValue] = useState('')
+	const [allInputsFilled, setAllInputsFilled] = useState(false)
+
+	// Verificando se todos os inputs foram preenchidos
+	// Pois caso não tenham sido, será impedido a mudança no comportamento do botão
+	useEffect(() => {
+		if (date && name && value) {
+			setAllInputsFilled(true)
+		}
+	}, [date, name, value])
 
 	const addExpense = () => {
 		if (!blockedActions) {
@@ -79,7 +88,8 @@ const AddExpenseForm = ({ setAddExpenseForm, expensesState }: Props) => {
 						<DateInput setDate={setDate} />
 						<NameInput margin='my-3' setName={setName} />
 			            <ValueInput margin='mb-3' setValue={setValue} />
-			            <AddFormButtons 
+			            <AddFormButtons
+			            	allInputsFilled={allInputsFilled}
 			            	blockedActions={blockedActions}
 			            	setAddForm={setAddExpenseForm}
 			            />
