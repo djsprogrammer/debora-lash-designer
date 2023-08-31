@@ -25,6 +25,14 @@ const AddServiceForm = ({ setAddServiceForm }: Props) => {
     const [value, setValue] = useState('')
     const [allInputsFilled, setAllInputsFilled] = useState(false)
 
+    // Usando a data atual para salvar o serviço
+    useEffect(() => {
+        const year = new Date().getFullYear()
+        const month = String(new Date().getMonth() + 1).padStart(2, '0')
+        const day = String(new Date().getDate()).padStart(2, '0')
+        console.log(`${year}-${month}-${day}`)
+    }, [])
+
     // Verificando se todos os inputs foram preenchidos
     // Pois caso não tenham sido, será impedido a mudança no comportamento do botão
     useEffect(() => {
