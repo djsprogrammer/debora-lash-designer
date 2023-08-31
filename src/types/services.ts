@@ -1,6 +1,11 @@
+interface Value {
+    value: number
+    date: string
+}
+
 export interface Service {
     _id: string
-    value: number
+    value: Value
 }
 
 export type Services = Service[]
@@ -11,7 +16,10 @@ export type SetServices = React.Dispatch<React.SetStateAction<Services>>
 
 export type ServicesState = [Services, SetServices]
 
-export const DEFAULT_SERVICE = {
+export const DEFAULT_SERVICE: Service = {
     _id: '',
-    value: 0
+    value: {
+        value: 0,
+        date: ''
+    }
 }
