@@ -4,8 +4,8 @@ import { Expense, ExpensesState } from 'types/expenses'
 import ExpenseRow from './ExpenseRow'
 import DeleteForm from 'components/pages/DeleteForm'
 import { fetchOptions } from 'formFunctions/common'
-import { DB_ERROR_TEXT, SERVER_ERROR_TEXT } from 'errorAdvices'
 import { DELETE_EXPENSE } from 'constants/urls'
+import { DATABASE_ERROR_TEXT, SERVER_ERROR_TEXT } from 'constants/errors'
 import { BACKEND_EXPENSES } from 'pages/Expenses'
 
 interface Props {
@@ -34,7 +34,7 @@ const ExpensesTable = ({ expensesState }: Props) => {
                         break
                     case 503:                        
                         setTimeout(() => {
-                            alert(DB_ERROR_TEXT)
+                            alert(DATABASE_ERROR_TEXT)
                         }, 100)
                         break
                 }

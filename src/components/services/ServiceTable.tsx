@@ -5,7 +5,7 @@ import { Service } from 'types/services'
 import { tableStyle } from 'commonStyles'
 import { ServicesContext } from 'ServicesContext'
 import { DELETE_SERVICE } from 'constants/urls'
-import { DB_ERROR_TEXT, SERVER_ERROR_TEXT } from 'errorAdvices'
+import { DATABASE_ERROR_TEXT, SERVER_ERROR_TEXT } from 'constants/errors'
 
 const ServiceTable = () => {
 
@@ -31,7 +31,7 @@ const ServiceTable = () => {
                         break
                     case 503:
                         setTimeout(() => {
-                            alert(DB_ERROR_TEXT)
+                            alert(DATABASE_ERROR_TEXT)
                         }, 100)
                         break
                 }

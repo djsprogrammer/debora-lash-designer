@@ -10,6 +10,7 @@ import Services from 'pages/Services'
 import Expenses from 'pages/Expenses'
 import ServicesProvider from 'ServicesContext'
 import { GET_SERVICES } from 'constants/urls'
+import { DATABASE_ERROR_TEXT, SERVER_ERROR_TEXT } from 'constants/errors'
 
 const App = () => {
 
@@ -37,12 +38,12 @@ const App = () => {
                         setDatabaseLoaded(true)
                         break
                     case 503:
-                        alert('Erro ao consultar banco de dados')
+                        alert(DATABASE_ERROR_TEXT)
                         searchServicesFromServer()
                         break
                 }
             }).catch(() => {
-                alert('Erro ao conectar com o servidor')
+                alert(SERVER_ERROR_TEXT)
                 searchServicesFromServer()
             })
     }, [])

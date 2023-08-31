@@ -4,7 +4,7 @@ import { Props, ServiceScheduling } from 'types/schedulings'
 import { tableStyle } from 'commonStyles'
 import DeleteForm from 'components/pages/DeleteForm'
 import { DELETE_SCHEDULING } from 'constants/urls'
-import { DB_ERROR_TEXT, SERVER_ERROR_TEXT } from 'errorAdvices'
+import { DATABASE_ERROR_TEXT, SERVER_ERROR_TEXT } from 'constants/errors'
 import { BACKEND_SCHEDULINGS } from 'pages/Scheduling'
 
 const SchedulingTable = ({ schedulingsState }: Props) => {
@@ -33,7 +33,7 @@ const SchedulingTable = ({ schedulingsState }: Props) => {
                         break
                     case 503:                        
                         setTimeout(() => {
-                            alert(DB_ERROR_TEXT)
+                            alert(DATABASE_ERROR_TEXT)
                         }, 100)
                         break
                 }

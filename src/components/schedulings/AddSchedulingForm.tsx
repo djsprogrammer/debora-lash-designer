@@ -6,7 +6,7 @@ import { Props } from 'types/schedulings'
 import { BooleanSet } from 'types/common'
 import { formContainer, addFormCardStyle } from 'commonStyles'
 import { CREATE_SCHEDULING } from 'constants/urls'
-import { SERVER_ERROR_TEXT } from 'errorAdvices'
+import { DATABASE_ERROR_TEXT, SERVER_ERROR_TEXT } from 'constants/errors'
 import { fetchOptions } from 'formFunctions/common'
 import DateInput from 'components/forms/DateInput'
 import FormHeader from 'components/forms/Header'
@@ -67,7 +67,7 @@ const AddSchedulingForm = ({ schedulingsState, setAddSchedulingForm }: AddSchedu
 								sessionStorage.setItem(BACKEND_SCHEDULINGS, JSON.stringify(newSchedulings))
 								break
 							case 503:
-								alert('Erro ao consultar banco de dados')
+								alert(DATABASE_ERROR_TEXT)
 								break
 						}
 						setBlockedActions(false)

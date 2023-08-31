@@ -8,7 +8,7 @@ import { formContainer, addFormCardStyle } from 'commonStyles'
 import { ExpensesState } from 'types/expenses'
 import { BooleanSet } from 'types/common'
 import { CREATE_EXPENSE } from 'constants/urls'
-import { DB_ERROR_TEXT, INVALID_NUMBER_TEXT } from 'errorAdvices'
+import { DATABASE_ERROR_TEXT, INVALID_NUMBER_TEXT } from 'constants/errors'
 import DateInput from 'components/forms/DateInput'
 import { BACKEND_EXPENSES } from 'pages/Expenses'
 import FormHeader from 'components/forms/Header'
@@ -61,7 +61,7 @@ const AddExpenseForm = ({ setAddExpenseForm, expensesState }: Props) => {
 									sessionStorage.setItem(BACKEND_EXPENSES, JSON.stringify(newExpenses))
 									break
 								case 503: 
-									alert(DB_ERROR_TEXT)
+									alert(DATABASE_ERROR_TEXT)
 									break
 							}
 							setAddExpenseForm(false)

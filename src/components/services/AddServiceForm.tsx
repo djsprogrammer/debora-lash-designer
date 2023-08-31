@@ -5,13 +5,12 @@ import ValueInput from 'components/forms/ValueInput'
 import { validNumber, fetchOptions } from 'formFunctions/common'
 import { ServicesContext } from 'ServicesContext'
 import { CREATE_SERVICE } from 'constants/urls'
+import { DATABASE_ERROR_TEXT, SERVER_ERROR_TEXT, INVALID_NUMBER_TEXT } from 'constants/errors'
 import { formContainer, addFormCardStyle } from 'commonStyles'
-import { SERVER_ERROR_TEXT, DB_ERROR_TEXT } from 'errorAdvices'
 import { BooleanSet } from 'types/common'
 import FormHeader from 'components/forms/Header'
 import { Service } from 'types/services'
 
-const INVALID_NUMBER_TEXT = 'Insira um número válido (utilize ponto para casas decimais)'
 const ALREADY_EXISTS_TEXT = 'Já existe um serviço com esse nome!'
 
 interface Props {
@@ -65,7 +64,7 @@ const AddServiceForm = ({ setAddServiceForm }: Props) => {
                                     setServices(newServices)
                                     break
                                 case 503:
-                                    alert(DB_ERROR_TEXT)
+                                    alert(DATABASE_ERROR_TEXT)
                                     break
                             }
                             setBlockedActions(false)
