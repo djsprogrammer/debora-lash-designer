@@ -5,6 +5,7 @@ import 'App.css'
 import { AllDocs } from 'types/allDocs'
 import { Services as TServices } from 'types/services'
 import { ServiceSchedulings } from 'types/schedulings'
+import { Expenses as TExpenses } from 'types/expenses'
 import Header from 'components/fixed/Header'
 import Navegation from 'components/fixed/Navegation'
 import Loading from 'pages/Loading'
@@ -20,6 +21,7 @@ const App = () => {
     // Documentos usados na aplicação
     const [services, setServices] = useState<TServices>([])
     const [schedulings, setSchedulings] = useState<ServiceSchedulings>([])
+    const [expenses, setExpenses] = useState<TExpenses>([])
 
     const [databaseLoaded, setDatabaseLoaded] = useState(false)
     const [currentPage, setCurrentPage] = useState(0)
@@ -30,13 +32,16 @@ const App = () => {
 
             const services = allDocs.services
             const schedulings = allDocs.schedulings
+            const expenses = allDocs.expenses
 
             // Ordenando os documentos
             const orderServices = services.sort((a, b) => a.value.value - b.value.value)
             const orderSchedulings = schedulings.sort((a, b) => a.date.localeCompare(b.date)).reverse()
+            const orderExpenses = expenses.sort((a, b) => a.date.localeCompare(b.date)).reverse()
 
             setServices(orderServices)
             setSchedulings(orderSchedulings)
+            setExpenses(orderExpenses)
 
         })
     }
@@ -88,7 +93,12 @@ const App = () => {
                             element={<Services setCurrentPage={setCurrentPage} />} 
                         />
                         <Route path='/expenses'
-                            element={<Expenses setCurrentPage={setCurrentPage} />} 
+                            element={
+                                <Expenses
+                                    setCurrentPage={setCurrentPage}
+                                    expensesState={[expenses, setExpenses]}
+                                />
+                            } 
                         />
                     </Routes>
                 </Router>
