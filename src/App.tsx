@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'App.css'
+import { AllDocs } from 'types/allDocs'
 import { Services as TServices } from 'types/services'
 import Header from 'components/fixed/Header'
 import Navegation from 'components/fixed/Navegation'
@@ -10,7 +11,7 @@ import Scheduling from 'pages/Scheduling'
 import Services from 'pages/Services'
 import Expenses from 'pages/Expenses'
 import ServicesProvider from 'ServicesContext'
-import { GET_SERVICES } from 'constants/urls'
+import { GET_ALL_DOCS } from 'constants/urls'
 import { DATABASE_ERROR_TEXT, SERVER_ERROR_TEXT } from 'constants/errors'
 
 const App = () => {
@@ -21,7 +22,8 @@ const App = () => {
     const [navDisplay, setNavDisplay] = useState('d-none')
 
     const setServicesFromServer = (res: Response) => {
-        res.json().then((services: TServices) => {
+        res.json().then((allDocs: AllDocs) => {
+            const services = allDocs.services
             if (services[0]) {
                 // Ordenando os services por valor
                 const orderServices = services.sort((a, b) => a.value.value - b.value.value)
@@ -31,7 +33,7 @@ const App = () => {
     }
 
     const searchServicesFromServer = useCallback(() => {
-        fetch(GET_SERVICES)
+        fetch(GET_ALL_DOCS)
             .then(res => {
                 switch (res.status) {
                     case 200:
