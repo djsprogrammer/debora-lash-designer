@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import 'App.css'
 import { AllDocs } from 'types/allDocs'
 import { Services as TServices } from 'types/services'
+import { ServiceSchedulings } from 'types/schedulings'
 import Header from 'components/fixed/Header'
 import Navegation from 'components/fixed/Navegation'
 import Loading from 'pages/Loading'
@@ -16,44 +17,53 @@ import { DATABASE_ERROR_TEXT, SERVER_ERROR_TEXT } from 'constants/errors'
 
 const App = () => {
 
+    // Documentos usados na aplicação
     const [services, setServices] = useState<TServices>([])
+    const [schedulings, setSchedulings] = useState<ServiceSchedulings>([])
+
     const [databaseLoaded, setDatabaseLoaded] = useState(false)
     const [currentPage, setCurrentPage] = useState(0)
     const [navDisplay, setNavDisplay] = useState('d-none')
 
-    const setServicesFromServer = (res: Response) => {
+    const setDocsFromServer = (res: Response) => {
         res.json().then((allDocs: AllDocs) => {
+
             const services = allDocs.services
-            if (services[0]) {
-                // Ordenando os services por valor
-                const orderServices = services.sort((a, b) => a.value.value - b.value.value)
-                setServices(orderServices)
-            }
+            const schedulings = allDocs.schedulings
+
+            // Ordenando os documentos
+            const orderServices = services.sort((a, b) => a.value.value - b.value.value)
+            const orderSchedulings = schedulings.sort((a, b) => a.date.localeCompare(b.date)).reverse()
+
+            setServices(orderServices)
+            setSchedulings(orderSchedulings)
+
         })
     }
 
-    const searchServicesFromServer = useCallback(() => {
+    const searchDocsFromServer = useCallback(() => {
         fetch(GET_ALL_DOCS)
             .then(res => {
                 switch (res.status) {
                     case 200:
-                        setServicesFromServer(res)
+                        setDocsFromServer(res)
                         setDatabaseLoaded(true)
                         break
                     case 503:
                         alert(DATABASE_ERROR_TEXT)
-                        searchServicesFromServer()
+                        searchDocsFromServer()
                         break
                 }
             }).catch(() => {
                 alert(SERVER_ERROR_TEXT)
-                searchServicesFromServer()
+                searchDocsFromServer()
             })
     }, [])
 
     useEffect(() => {
-        searchServicesFromServer()
-    }, [searchServicesFromServer])
+        // Buscando dados do servidor ao iniciar aplicação
+        searchDocsFromServer()
+    }, [searchDocsFromServer])
 
     return (
         <div>
@@ -68,7 +78,8 @@ const App = () => {
                                 databaseLoaded
                                 ? <Scheduling // Página padrão
                                     setNavDisplay={setNavDisplay}
-                                    setCurrentPage={setCurrentPage} 
+                                    setCurrentPage={setCurrentPage}
+                                    schedulingsState={[schedulings, setSchedulings]}
                                 />
                                 : <Loading />
                             } 
