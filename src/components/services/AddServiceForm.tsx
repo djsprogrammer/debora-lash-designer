@@ -1,14 +1,14 @@
 import { useContext, useState, useEffect } from 'react'
 import AddFormButtons from 'components/pages/AddFormButtons'
-import NameInput from 'components/forms/NameInput'
-import ValueInput from 'components/forms/ValueInput'
 import { validNumber, fetchOptions } from 'formFunctions/common'
 import { ServicesContext } from 'ServicesContext'
 import { CREATE_SERVICE } from 'constants/urls'
 import { DATABASE_ERROR_TEXT, SERVER_ERROR_TEXT, INVALID_NUMBER_TEXT } from 'constants/errors'
-import { formContainer, addFormCardStyle } from 'commonStyles'
 import { BooleanSet } from 'types/common'
+import Container from 'components/forms/Container'
 import FormHeader from 'components/forms/Header'
+import NameInput from 'components/forms/NameInput'
+import ValueInput from 'components/forms/ValueInput'
 import { Service } from 'types/services'
 
 const ALREADY_EXISTS_TEXT = 'Já existe um serviço com esse nome!'
@@ -88,25 +88,23 @@ const AddServiceForm = ({ setAddServiceForm }: Props) => {
     }
 
     return (
-        <div className={formContainer}>
-            <div className={addFormCardStyle}>
-                <FormHeader page='Serviço' />
-                <div className='card-body'>
-                    <form className='d-flex flex-column' onSubmit={e => {
-                        e.preventDefault()
-                        addService()
-                    }}>
-                        <NameInput setName={setName} />
-                        <ValueInput margin='my-3' setValue={setValue} />
-                        <AddFormButtons
-                            allInputsFilled={allInputsFilled}
-                            blockedActions={blockedActions}
-                            setAddForm={setAddServiceForm}
-                        />
-                    </form>
-                </div>
+        <Container>
+            <FormHeader page='Serviço' />
+            <div className='card-body'>
+                <form className='d-flex flex-column' onSubmit={e => {
+                    e.preventDefault()
+                    addService()
+                }}>
+                    <NameInput setName={setName} />
+                    <ValueInput margin='my-3' setValue={setValue} />
+                    <AddFormButtons
+                        allInputsFilled={allInputsFilled}
+                        blockedActions={blockedActions}
+                        setAddForm={setAddServiceForm}
+                    />
+                </form>
             </div>
-        </div>
+        </Container>
     )
 
 }

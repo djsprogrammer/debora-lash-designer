@@ -4,10 +4,10 @@ import AddFormButtons from 'components/pages/AddFormButtons'
 import { ServicesContext } from 'ServicesContext'
 import { Props } from 'types/schedulings'
 import { BooleanSet } from 'types/common'
-import { formContainer, addFormCardStyle } from 'commonStyles'
 import { CREATE_SCHEDULING } from 'constants/urls'
 import { DATABASE_ERROR_TEXT, SERVER_ERROR_TEXT } from 'constants/errors'
 import { fetchOptions } from 'formFunctions/common'
+import Container from 'components/forms/Container'
 import DateInput from 'components/forms/DateInput'
 import FormHeader from 'components/forms/Header'
 
@@ -80,33 +80,31 @@ const AddSchedulingForm = ({ schedulingsState, setAddSchedulingForm }: AddSchedu
 	}
 
 	return (
-		<div className={formContainer}>
-			<div className={addFormCardStyle}>
-				<FormHeader page='Agendamento' />
-				<div className='card-body'>
-					<form className='d-flex flex-column' onSubmit={e => {
-						e.preventDefault()
-						addScheduling()
-					}}>
-						<DateInput setDate={setDate} />
-						<div className='input-group my-3'>
-							<label className='input-group-text'>Escolha um serviço</label>
-							<select onChange={e => setOption(e.target.value)} className='form-select text-center' required>
-								{services.map(service => (
-									<option key={service._id} value={JSON.stringify(service)}>{service._id}</option>
-								))}
-							</select>
-						</div>
-						<input onChange={e => setClient(e.target.value)} className='form-control text-center p-1 mb-3' type='text' placeholder='Digite o nome do cliente' required />
-						<AddFormButtons
-							allInputsFilled={allInputsFilled}
-							blockedActions={blockedActions}
-							setAddForm={setAddSchedulingForm}
-						/>
-					</form>
-				</div>
+		<Container>
+			<FormHeader page='Agendamento' />
+			<div className='card-body'>
+				<form className='d-flex flex-column' onSubmit={e => {
+					e.preventDefault()
+					addScheduling()
+				}}>
+					<DateInput setDate={setDate} />
+					<div className='input-group my-3'>
+						<label className='input-group-text'>Escolha um serviço</label>
+						<select onChange={e => setOption(e.target.value)} className='form-select text-center' required>
+							{services.map(service => (
+								<option key={service._id} value={JSON.stringify(service)}>{service._id}</option>
+							))}
+						</select>
+					</div>
+					<input onChange={e => setClient(e.target.value)} className='form-control text-center p-1 mb-3' type='text' placeholder='Digite o nome do cliente' required />
+					<AddFormButtons
+						allInputsFilled={allInputsFilled}
+						blockedActions={blockedActions}
+						setAddForm={setAddSchedulingForm}
+					/>
+				</form>
 			</div>
-		</div>
+		</Container>
 	)
 }
 

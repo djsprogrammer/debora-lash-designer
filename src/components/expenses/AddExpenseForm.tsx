@@ -4,13 +4,13 @@ import NameInput from 'components/forms/NameInput'
 import ValueInput from 'components/forms/ValueInput'
 import AddFormButtons from 'components/pages/AddFormButtons'
 import { validNumber, fetchOptions } from 'formFunctions/common'
-import { formContainer, addFormCardStyle } from 'commonStyles'
 import { ExpensesState } from 'types/expenses'
 import { BooleanSet } from 'types/common'
 import { CREATE_EXPENSE } from 'constants/urls'
 import { DATABASE_ERROR_TEXT, INVALID_NUMBER_TEXT } from 'constants/errors'
-import DateInput from 'components/forms/DateInput'
+import Container from 'components/forms/Container'
 import FormHeader from 'components/forms/Header'
+import DateInput from 'components/forms/DateInput'
 
 interface Props {
 	setAddExpenseForm: BooleanSet
@@ -74,26 +74,24 @@ const AddExpenseForm = ({ setAddExpenseForm, expensesState }: Props) => {
 	}
 
 	return (
-		<div className={formContainer}>
-			<div className={addFormCardStyle}>
-				<FormHeader page='Despesa' />
-				<div className='card-body'>
-					<form className='d-flex flex-column' onSubmit={e => {
-						e.preventDefault()
-						addExpense()
-					}}>
-						<DateInput setDate={setDate} />
-						<NameInput margin='my-3' setName={setName} />
-			            <ValueInput margin='mb-3' setValue={setValue} />
-			            <AddFormButtons
-			            	allInputsFilled={allInputsFilled}
-			            	blockedActions={blockedActions}
-			            	setAddForm={setAddExpenseForm}
-			            />
-					</form>
-				</div>
+		<Container>
+			<FormHeader page='Despesa' />
+			<div className='card-body'>
+				<form className='d-flex flex-column' onSubmit={e => {
+					e.preventDefault()
+					addExpense()
+				}}>
+					<DateInput setDate={setDate} />
+					<NameInput margin='my-3' setName={setName} />
+		            <ValueInput margin='mb-3' setValue={setValue} />
+		            <AddFormButtons
+		            	allInputsFilled={allInputsFilled}
+		            	blockedActions={blockedActions}
+		            	setAddForm={setAddExpenseForm}
+		            />
+				</form>
 			</div>
-		</div>
+		</Container>
 	)
 
 }
