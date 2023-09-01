@@ -8,8 +8,6 @@ import { Props } from 'types/pages'
 import { container } from 'commonStyles'
 import { GET_SCHEDULINGS } from 'constants/urls'
 
-export const BACKEND_SCHEDULINGS = 'backend-schedulings'
-
 interface SchedulingProps extends Props {
 	setNavDisplay: React.Dispatch<React.SetStateAction<string>>
 }
@@ -26,33 +24,17 @@ const Scheduling = ({ setNavDisplay, setCurrentPage }: SchedulingProps) => {
 		setCurrentPage(0)
 	}, [setCurrentPage])
 
-	const cacheSchedulings = localStorage.getItem(BACKEND_SCHEDULINGS)
-
-	const getSchedulingsFromCache = () => {
-		// Iniciando o state com os schedulings em cache da sessão
-		if (cacheSchedulings) {
-			return JSON.parse(cacheSchedulings)
-		} else {
-			return []
-		}
-	}
-
-	const [servicesScheduling, setServicesScheduling] = useState<ServiceSchedulings>(getSchedulingsFromCache)
+	const [servicesScheduling, setServicesScheduling] = useState<ServiceSchedulings>([])
 	const [addSchedulingForm, setAddSchedulingForm] = useState(false)
 
 	useEffect(() => {
-		// Verificando se já existe os schedulings em cache
-		if (!cacheSchedulings) {
-			fetch(GET_SCHEDULINGS)
-				.then(res => res.json())
-				.then((schedulings: ServiceSchedulings) => {
-					const orderSchedulings = schedulings.sort((a, b) => a.date.localeCompare(b.date)).reverse()
-					setServicesScheduling(orderSchedulings)
-					// Salvando em cache para futuras renderizações na mesma sessão
-					localStorage.setItem(BACKEND_SCHEDULINGS, JSON.stringify(orderSchedulings))
-				})
-		} 
-	}, [cacheSchedulings])
+		fetch(GET_SCHEDULINGS)
+			.then(res => res.json())
+			.then((schedulings: ServiceSchedulings) => {
+				const orderSchedulings = schedulings.sort((a, b) => a.date.localeCompare(b.date)).reverse()
+				setServicesScheduling(orderSchedulings)
+			})
+	}, [])
 
 	return (
 		<div className={container}>

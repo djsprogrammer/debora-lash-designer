@@ -10,7 +10,6 @@ import { DATABASE_ERROR_TEXT, SERVER_ERROR_TEXT } from 'constants/errors'
 import { fetchOptions } from 'formFunctions/common'
 import DateInput from 'components/forms/DateInput'
 import FormHeader from 'components/forms/Header'
-import { BACKEND_SCHEDULINGS } from 'pages/Scheduling'
 
 interface AddSchedulingFormProps extends Props {
 	setAddSchedulingForm: BooleanSet
@@ -63,8 +62,6 @@ const AddSchedulingForm = ({ schedulingsState, setAddSchedulingForm }: AddSchedu
 								const newSchedulings = [...servicesScheduling, serviceScheduling]
 									.sort((a, b) => a.date.localeCompare(b.date)).reverse()
 								setServicesScheduling(newSchedulings)
-								// Salvando em cache
-								localStorage.setItem(BACKEND_SCHEDULINGS, JSON.stringify(newSchedulings))
 								break
 							case 503:
 								alert(DATABASE_ERROR_TEXT)

@@ -5,7 +5,6 @@ import { tableStyle } from 'commonStyles'
 import DeleteForm from 'components/pages/DeleteForm'
 import { DELETE_SCHEDULING } from 'constants/urls'
 import { DATABASE_ERROR_TEXT, SERVER_ERROR_TEXT } from 'constants/errors'
-import { BACKEND_SCHEDULINGS } from 'pages/Scheduling'
 import { deleteFetchOptions } from 'formFunctions/common'
 
 const SchedulingTable = ({ schedulingsState }: Props) => {
@@ -25,8 +24,6 @@ const SchedulingTable = ({ schedulingsState }: Props) => {
                             return scheduling._id !== targetId
                         }).sort((a, b) => a.date.localeCompare(b.date)).reverse()
                         setServicesScheduling(remainingSchedulings)
-                        // Salvando em cache
-                        localStorage.setItem(BACKEND_SCHEDULINGS, JSON.stringify(remainingSchedulings))
                         break
                     case 503:                        
                         setTimeout(() => {
