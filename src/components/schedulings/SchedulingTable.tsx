@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import SchedulingRow from './SchedulingRow'
-import { Props, ServiceScheduling } from 'types/schedulings'
+import { Props } from 'types/schedulings'
 import { tableStyle } from 'commonStyles'
 import DeleteForm from 'components/pages/DeleteForm'
 import { DELETE_SCHEDULING } from 'constants/urls'
@@ -12,20 +12,20 @@ const SchedulingTable = ({ schedulingsState }: Props) => {
     const [servicesScheduling, setServicesScheduling] = schedulingsState
 
     const [deleteSchedulingForm, setDeleteSchedulingForm] = useState(false)
-    const [targetScheduling, setTargetScheduling] = useState<ServiceScheduling>({} as ServiceScheduling)
+    const [targetId, setTargetId] = useState('')
 
     const deleteScheduling = () => {
         const options = {
             method: 'delete',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(targetScheduling)
+            headers: { 'Content-Type': 'text/plain' },
+            body: targetId
         }
         fetch(DELETE_SCHEDULING, options)
             .then(res => {
                 switch (res.status) {
                     case 204:
                         const remainingSchedulings = servicesScheduling.filter(scheduling => {
-                            return scheduling._id !== targetScheduling._id
+                            return scheduling._id !== targetId
                         }).sort((a, b) => a.date.localeCompare(b.date)).reverse()
                         setServicesScheduling(remainingSchedulings)
                         // Salvando em cache
@@ -65,7 +65,7 @@ const SchedulingTable = ({ schedulingsState }: Props) => {
                                 key={scheduling._id}
                                 scheduling={scheduling}
                                 setDeleteSchedulingForm={setDeleteSchedulingForm}
-                                setTargetScheduling={setTargetScheduling}
+                                setTargetId={setTargetId}
                             />
                         )
                     })}

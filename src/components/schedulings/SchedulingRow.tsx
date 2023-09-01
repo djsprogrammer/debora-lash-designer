@@ -1,15 +1,15 @@
 import { memo } from 'react'
 import DeleteButton from 'components/pages/DeleteButton'
-import { ServiceScheduling, SetScheduling } from 'types/schedulings'
+import { ServiceScheduling } from 'types/schedulings'
 import { moneyFormat, dateFormat } from 'formFunctions/common'
 
 interface Props {
     scheduling: ServiceScheduling
     setDeleteSchedulingForm: React.Dispatch<React.SetStateAction<boolean>>
-    setTargetScheduling: SetScheduling
+    setTargetId: React.Dispatch<React.SetStateAction<string>>
 }
 
-const SchedulingRow = ({ scheduling, setDeleteSchedulingForm, setTargetScheduling }: Props) => {
+const SchedulingRow = ({ scheduling, setDeleteSchedulingForm, setTargetId }: Props) => {
 
     // Deixando no formato 0,00
     const value = moneyFormat(scheduling.service.value.value)
@@ -26,7 +26,7 @@ const SchedulingRow = ({ scheduling, setDeleteSchedulingForm, setTargetSchedulin
             <td>
                 <DeleteButton onClick={() => {
                     setDeleteSchedulingForm(true)
-                    setTargetScheduling(scheduling)
+                    setTargetId(scheduling._id)
                 }} />
             </td>
         </tr>
