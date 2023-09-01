@@ -5,7 +5,8 @@ import 'App.css'
 import { Services as TServices } from 'types/services'
 import Header from 'components/fixed/Header'
 import Navegation from 'components/fixed/Navegation'
-import MainPage from 'pages/MainPage'
+import Loading from 'pages/Loading'
+import Scheduling from 'pages/Scheduling'
 import Services from 'pages/Services'
 import Expenses from 'pages/Expenses'
 import ServicesProvider from 'ServicesContext'
@@ -62,11 +63,12 @@ const App = () => {
                         <Route 
                             path='/'
                             element={
-                                <MainPage
-                                    databaseLoaded={databaseLoaded}
+                                databaseLoaded
+                                ? <Scheduling // Página padrão
                                     setNavDisplay={setNavDisplay}
-                                    setCurrentPage={setCurrentPage}
+                                    setCurrentPage={setCurrentPage} 
                                 />
+                                : <Loading />
                             } 
                         />
                         <Route path='/services'
