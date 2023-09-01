@@ -5,6 +5,7 @@ import { tableStyle } from 'commonStyles'
 import { ServicesContext } from 'ServicesContext'
 import { DELETE_SERVICE } from 'constants/urls'
 import { DATABASE_ERROR_TEXT, SERVER_ERROR_TEXT } from 'constants/errors'
+import { deleteFetchOptions } from 'formFunctions/common'
 
 const ServiceTable = () => {
 
@@ -14,11 +15,7 @@ const ServiceTable = () => {
     const [targetId, setTargetId] = useState('')
     
     const deleteService = () => {
-        const options = {
-            method: 'delete',
-            headers: { 'Content-Type': 'text/plain' },
-            body: targetId
-        }
+        const options = deleteFetchOptions(targetId)
         fetch(DELETE_SERVICE, options)
             .then(res => {
                 switch (res.status) {

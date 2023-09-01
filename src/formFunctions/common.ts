@@ -22,6 +22,14 @@ export const fetchOptions = (targetMethod: string, payload: Payload) => {
     }
 }
 
+export const deleteFetchOptions = (targetId: string) => {
+    return {
+        method: 'delete',
+        headers: { 'Content-Type': 'text/plain' },
+        body: targetId
+    }
+}
+
 export const moneyFormat = (value: number) => {
     const formatedData =  new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' })
     .format(Number(value)).replace('R$', '')

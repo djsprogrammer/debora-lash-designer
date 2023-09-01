@@ -6,6 +6,7 @@ import DeleteForm from 'components/pages/DeleteForm'
 import { DELETE_SCHEDULING } from 'constants/urls'
 import { DATABASE_ERROR_TEXT, SERVER_ERROR_TEXT } from 'constants/errors'
 import { BACKEND_SCHEDULINGS } from 'pages/Scheduling'
+import { deleteFetchOptions } from 'formFunctions/common'
 
 const SchedulingTable = ({ schedulingsState }: Props) => {
 
@@ -15,11 +16,7 @@ const SchedulingTable = ({ schedulingsState }: Props) => {
     const [targetId, setTargetId] = useState('')
 
     const deleteScheduling = () => {
-        const options = {
-            method: 'delete',
-            headers: { 'Content-Type': 'text/plain' },
-            body: targetId
-        }
+        const options = deleteFetchOptions(targetId)
         fetch(DELETE_SCHEDULING, options)
             .then(res => {
                 switch (res.status) {

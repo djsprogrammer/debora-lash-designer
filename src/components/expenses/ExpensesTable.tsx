@@ -6,6 +6,7 @@ import DeleteForm from 'components/pages/DeleteForm'
 import { DELETE_EXPENSE } from 'constants/urls'
 import { DATABASE_ERROR_TEXT, SERVER_ERROR_TEXT } from 'constants/errors'
 import { BACKEND_EXPENSES } from 'pages/Expenses'
+import { deleteFetchOptions } from 'formFunctions/common'
 
 interface Props {
     expensesState: ExpensesState
@@ -19,11 +20,7 @@ const ExpensesTable = ({ expensesState }: Props) => {
     const [targetId, setTargetId] = useState('')
 
     const deleteExpense = () => {
-        const options = {
-            method: 'delete',
-            headers: { 'Content-Type': 'text/plain' },
-            body: targetId
-        }
+        const options = deleteFetchOptions(targetId)
         fetch(DELETE_EXPENSE, options)
             .then(res => {
                 switch (res.status) {
