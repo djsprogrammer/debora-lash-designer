@@ -4,9 +4,10 @@ import AnySchedulingAdvice from 'components/pages/AnyAdvice'
 import AddSchedulingForm from 'components/schedulings/AddSchedulingForm'
 import RegisterButton from 'components/pages/RegisterButton'
 import { ServiceSchedulings } from 'types/schedulings'
+import { AllDocs } from 'types/allDocs'
 import { Props } from 'types/pages'
 import { container } from 'commonStyles'
-import { GET_SCHEDULINGS } from 'constants/urls'
+import { GET_ALL_DOCS } from 'constants/urls'
 
 interface SchedulingProps extends Props {
 	setNavDisplay: React.Dispatch<React.SetStateAction<string>>
@@ -28,9 +29,10 @@ const Scheduling = ({ setNavDisplay, setCurrentPage }: SchedulingProps) => {
 	const [addSchedulingForm, setAddSchedulingForm] = useState(false)
 
 	useEffect(() => {
-		fetch(GET_SCHEDULINGS)
+		fetch(GET_ALL_DOCS)
 			.then(res => res.json())
-			.then((schedulings: ServiceSchedulings) => {
+			.then((allDocs: AllDocs) => {
+				const schedulings = allDocs.schedulings
 				const orderSchedulings = schedulings.sort((a, b) => a.date.localeCompare(b.date)).reverse()
 				setServicesScheduling(orderSchedulings)
 			})
