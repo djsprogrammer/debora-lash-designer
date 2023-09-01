@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react'
 import { Props } from 'types/pages'
 import { Expenses as TExpenses } from 'types/expenses'
+import { AllDocs } from 'types/allDocs'
 import { container } from 'commonStyles'
 import ExpensesTable from 'components/expenses/ExpensesTable'
 import AddExpenseForm from 'components/expenses/AddExpenseForm'
 import AnyExpensesAdvice from 'components/pages/AnyAdvice'
 import RegisterButton from 'components/pages/RegisterButton'
-import { GET_EXPENSES } from 'constants/urls'
+import { GET_ALL_DOCS } from 'constants/urls'
 
 const Expenses = ({ setCurrentPage }: Props) => {
 
@@ -18,9 +19,10 @@ const Expenses = ({ setCurrentPage }: Props) => {
 	const [addExpenseForm, setAddExpenseForm] = useState(false)
 
 	useEffect(() => {
-		fetch(GET_EXPENSES)
+		fetch(GET_ALL_DOCS)
 			.then(res => res.json())
-			.then((expenses: TExpenses) => {
+			.then((allDocs: AllDocs) => {
+				const expenses = allDocs.expenses
 				const orderExpenses = expenses.sort((a, b) => a.date.localeCompare(b.date)).reverse()
 				setExpenses(orderExpenses)
 			})
