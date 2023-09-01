@@ -1,9 +1,8 @@
 import { useState } from 'react'
 import { tableStyle } from 'commonStyles'
-import { Expense, ExpensesState } from 'types/expenses'
+import { ExpensesState } from 'types/expenses'
 import ExpenseRow from './ExpenseRow'
 import DeleteForm from 'components/pages/DeleteForm'
-import { fetchOptions } from 'formFunctions/common'
 import { DELETE_EXPENSE } from 'constants/urls'
 import { DATABASE_ERROR_TEXT, SERVER_ERROR_TEXT } from 'constants/errors'
 import { BACKEND_EXPENSES } from 'pages/Expenses'
@@ -17,16 +16,20 @@ const ExpensesTable = ({ expensesState }: Props) => {
     const [expenses, setExpenses] = expensesState
 
     const [deleteExpenseForm, setDeleteExpenseForm] = useState(false)
-    const [targetExpense, setTargetExpense] = useState<Expense>({} as Expense)
+    const [targetId, setTargetId] = useState('')
 
     const deleteExpense = () => {
-        const options = fetchOptions('delete', targetExpense)
+        const options = {
+            method: 'delete',
+            headers: { 'Content-Type': 'text/plain' },
+            body: targetId
+        }
         fetch(DELETE_EXPENSE, options)
             .then(res => {
                 switch (res.status) {
                     case 204:
                         const remainingExpenses = expenses.filter(expense => {
-                            return expense._id !== targetExpense._id
+                            return expense._id !== targetId
                         }).sort((a, b) => a.date.localeCompare(b.date)).reverse()
                         setExpenses(remainingExpenses)
                         // Salvando em cache
@@ -62,7 +65,7 @@ const ExpensesTable = ({ expensesState }: Props) => {
                     {expenses.map(expense => <ExpenseRow
                         key={expense._id}
                         expense={expense} 
-                        setTargetExpense={setTargetExpense} 
+                        setTargetId={setTargetId} 
                         setDeleteExpenseForm={setDeleteExpenseForm} />)}
                 </tbody>
             </table>

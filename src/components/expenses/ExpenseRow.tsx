@@ -1,15 +1,15 @@
 import { memo } from 'react'
 import DeleteButton from 'components/pages/DeleteButton'
 import { moneyFormat, dateFormat } from 'formFunctions/common'
-import { Expense, SetExpense } from 'types/expenses'
+import { Expense } from 'types/expenses'
 
 interface Props {
     expense: Expense
-    setTargetExpense: SetExpense
+    setTargetId: React.Dispatch<React.SetStateAction<string>>
     setDeleteExpenseForm: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const ExpenseRow = ({ expense, setTargetExpense, setDeleteExpenseForm }: Props) => {
+const ExpenseRow = ({ expense, setTargetId, setDeleteExpenseForm }: Props) => {
 
     // Deixando no formato 0,00
     const value = moneyFormat(expense.value)
@@ -25,7 +25,7 @@ const ExpenseRow = ({ expense, setTargetExpense, setDeleteExpenseForm }: Props) 
             <td>
                 <DeleteButton onClick={() => {
                     setDeleteExpenseForm(true)
-                    setTargetExpense(expense)
+                    setTargetId(expense._id)
                 }} />
             </td>
         </tr>
