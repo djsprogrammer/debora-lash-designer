@@ -1,5 +1,5 @@
 import { useContext, useState, useEffect } from 'react'
-import AddFormButtons from 'components/pages/AddFormButtons'
+import ConfirmFormButtons from 'components/pages/ConfirmFormButtons'
 import { validNumber, fetchOptions, orderServices } from 'formFunctions/common'
 import { ServicesContext } from 'ServicesContext'
 import { CREATE_SERVICE } from 'constants/urls'
@@ -96,7 +96,7 @@ const AddServiceForm = ({ setAddServiceForm }: Props) => {
                 }}>
                     <NameInput setName={setName} />
                     <ValueInput margin='my-3' setValue={setValue} />
-                    <AddFormButtons
+                    <ConfirmFormButtons
                         allInputsFilled={allInputsFilled}
                         blockedActions={blockedActions}
                         setForm={setAddServiceForm}

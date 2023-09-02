@@ -1,6 +1,6 @@
 import { useContext, useState, useEffect } from 'react'
 import { v4 } from 'uuid'
-import AddFormButtons from 'components/pages/AddFormButtons'
+import ConfirmFormButtons from 'components/pages/ConfirmFormButtons'
 import { ServicesContext } from 'ServicesContext'
 import { Props, ServiceScheduling } from 'types/schedulings'
 import { BooleanSet } from 'types/common'
@@ -102,7 +102,7 @@ const AddSchedulingForm = ({ schedulingsState, setAddSchedulingForm }: AddSchedu
 						</select>
 					</div>
 					<input onChange={e => setClient(e.target.value)} className='form-control text-center p-1 mb-3' type='text' placeholder='Digite o nome do cliente' required />
-					<AddFormButtons
+					<ConfirmFormButtons
 						allInputsFilled={allInputsFilled}
 						blockedActions={blockedActions}
 						setForm={setAddSchedulingForm}

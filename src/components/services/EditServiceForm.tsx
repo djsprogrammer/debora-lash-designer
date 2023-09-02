@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import Container from 'components/forms/Container'
 import FormHeader from 'components/forms/Header'
 import ValueInput from 'components/forms/ValueInput'
-import AddFormButtons from 'components/pages/AddFormButtons'
+import ConfirmFormButtons from 'components/pages/ConfirmFormButtons'
 
 interface EditServiceFormProps {
 	setEditServiceForm: React.Dispatch<React.SetStateAction<boolean>>
@@ -32,7 +32,7 @@ const EditServiceForm = ({ setEditServiceForm }: EditServiceFormProps) => {
 					editService()
 				}}>
 					<ValueInput margin='my-3' setValue={setValue} />
-					<AddFormButtons
+					<ConfirmFormButtons
 						allInputsFilled={allInputsFilled}
 						blockedActions={blockedActions}
 						setForm={setEditServiceForm}

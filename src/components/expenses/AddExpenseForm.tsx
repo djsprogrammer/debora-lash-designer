@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { v4 } from 'uuid'
 import NameInput from 'components/forms/NameInput'
 import ValueInput from 'components/forms/ValueInput'
-import AddFormButtons from 'components/pages/AddFormButtons'
+import ConfirmFormButtons from 'components/pages/ConfirmFormButtons'
 import { validNumber, fetchOptions } from 'formFunctions/common'
 import { ExpensesState } from 'types/expenses'
 import { BooleanSet } from 'types/common'
@@ -84,7 +84,7 @@ const AddExpenseForm = ({ setAddExpenseForm, expensesState }: Props) => {
 					<DateInput setDate={setDate} />
 					<NameInput margin='my-3' setName={setName} />
 		            <ValueInput margin='mb-3' setValue={setValue} />
-		            <AddFormButtons
+		            <ConfirmFormButtons
 		            	allInputsFilled={allInputsFilled}
 		            	blockedActions={blockedActions}
 		            	setForm={setAddExpenseForm}
