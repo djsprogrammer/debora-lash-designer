@@ -14,17 +14,17 @@ const ServiceTable = () => {
 
     const [deleteServiceForm, setDeleteServiceForm] = useState(false)
     const [editServiceForm, setEditServiceForm] = useState(false)
-    const [targetId, setTargetId] = useState('')
+    const [idForDeletion, setIdForDeletion] = useState('')
 
     
     const deleteService = () => {
-        const options = deleteFetchOptions(targetId)
+        const options = deleteFetchOptions(idForDeletion)
         fetch(DELETE_SERVICE, options)
             .then(res => {
                 switch (res.status) {
                     case 204:
                         const remainingServices = services.filter(service => {
-                            return service._id !== targetId
+                            return service._id !== idForDeletion
                         })
                         setServices(orderServices(remainingServices))
                         break
@@ -58,7 +58,7 @@ const ServiceTable = () => {
                         <ServiceRow
                             key={service._id}
                             service={service}
-                            setTargetId={setTargetId}
+                            setIdForDeletion={setIdForDeletion}
                             setDeleteServiceForm={setDeleteServiceForm}
                             setEditServiceForm={setEditServiceForm}
                         />)}
@@ -76,7 +76,6 @@ const ServiceTable = () => {
                 editServiceForm
                 ? <EditServiceForm
                     setEditServiceForm={setEditServiceForm}
-                    serviceName={targetId}
                     />
                 : null
             }

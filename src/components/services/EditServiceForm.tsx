@@ -6,10 +6,9 @@ import AddFormButtons from 'components/pages/AddFormButtons'
 
 interface EditServiceFormProps {
 	setEditServiceForm: React.Dispatch<React.SetStateAction<boolean>>
-	serviceName: string
 }
 
-const EditServiceForm = ({ setEditServiceForm, serviceName }: EditServiceFormProps) => {
+const EditServiceForm = ({ setEditServiceForm }: EditServiceFormProps) => {
 
 	const [blockedActions, setBlockedActions] = useState(false)
 	const [value, setValue] = useState('')
@@ -20,21 +19,14 @@ const EditServiceForm = ({ setEditServiceForm, serviceName }: EditServiceFormPro
 	}, [value])
 
 	const editService = () => {
-		const payload = {
-			service: serviceName,
-			value
-		}
-		console.log(payload)
-		setTimeout(() => {
-			setEditServiceForm(false)
-		}, 3000)
+		setEditServiceForm(false)
 	}
 
 	return (
 		<Container>
 			<FormHeader text='Editar Serviço' />
 			<div className='card-body'>
-				<h6 className='text-center'>{serviceName}</h6>
+				<h6 className='text-center'>Nome do Serviço</h6>
 				<form onSubmit={e => {
 					e.preventDefault()
 					editService()
