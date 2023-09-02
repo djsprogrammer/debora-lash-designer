@@ -49,10 +49,10 @@ const AddServiceForm = ({ setAddServiceForm }: Props) => {
             if (!alreadyExists) {
                 if (validNumber(value)) {
                     const service: Service = {
-                        _id: name, value: {
+                        _id: name, value: [{
                             value: Number(value),
                             date: currentDate
-                        }
+                        }]
                     }
                     const options = fetchOptions('post', service)
                     fetch(CREATE_SERVICE, options)
@@ -60,7 +60,12 @@ const AddServiceForm = ({ setAddServiceForm }: Props) => {
                             switch (res.status) {
                                 case 201:
                                     const newServices = [...services, service]
-                                        .sort((a, b) => a.value.value - b.value.value)
+                                        .sort((a, b) => {
+                                            // Pegando o último valor salvo do serviço
+                                            const aLastValue = a.value.length - 1
+                                            const bLastValue = b.value.length - 1
+                                            return a.value[aLastValue].value - b.value[bLastValue].value
+                                        })
                                     setServices(newServices)
                                     break
                                 case 503:

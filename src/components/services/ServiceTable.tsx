@@ -23,7 +23,12 @@ const ServiceTable = () => {
                         const remainingServices = services.filter(service => {
                             return service._id !== targetId
                         })
-                        setServices(remainingServices.sort((a, b) => a.value.value - b.value.value))
+                        setServices(remainingServices.sort((a, b) => {
+                            // Pegando o último valor salvo do serviço
+                            const aLastValue = a.value.length - 1
+                            const bLastValue = b.value.length - 1
+                            return a.value[aLastValue].value - b.value[bLastValue].value
+                        }))
                         break
                     case 503:
                         setTimeout(() => {

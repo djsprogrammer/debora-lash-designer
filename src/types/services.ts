@@ -5,7 +5,7 @@ interface Value {
 
 export interface Service {
     _id: string
-    value: Value
+    value: Value[]
 }
 
 export type Services = Service[]
@@ -18,8 +18,8 @@ export type ServicesState = [Services, SetServices]
 
 export const DEFAULT_SERVICE: Service = {
     _id: '',
-    value: {
+    value: [{
         value: 0,
         date: ''
-    }
+    }]
 }

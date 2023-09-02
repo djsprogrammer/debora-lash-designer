@@ -2,7 +2,7 @@ import { memo } from 'react'
 import DeleteButton from 'components/pages/DeleteButton'
 import { moneyFormat } from 'formFunctions/common'
 import { BooleanSet } from 'types/common'
-import { Service, SetService } from 'types/services'
+import { Service } from 'types/services'
 
 interface Props {
     service: Service
@@ -15,8 +15,8 @@ const ServiceRow = ({ service, setTargetId, setDeleteServiceForm }: Props) => {
     const name = service._id
 
     // Deixando no formato 0,00
-    const value = moneyFormat(service.value.value)
-
+    const lastServiceValue = service.value.length - 1
+    const value = moneyFormat(service.value[lastServiceValue].value)
     return (
         <tr>
             <td>{name}</td>
