@@ -1,6 +1,6 @@
 import { useContext, useState, useEffect } from 'react'
 import ConfirmFormButtons from 'components/pages/ConfirmFormButtons'
-import { validNumber, fetchOptions, orderServices } from 'formFunctions/common'
+import { validNumber, fetchOptions, orderServices, getCurrentDate } from 'formFunctions/common'
 import { ServicesContext } from 'ServicesContext'
 import { CREATE_SERVICE } from 'constants/urls'
 import { DATABASE_ERROR_TEXT, SERVER_ERROR_TEXT, INVALID_NUMBER_TEXT } from 'constants/errors'
@@ -21,18 +21,9 @@ const AddServiceForm = ({ setAddServiceForm }: Props) => {
 
     const [services, setServices] = useContext(ServicesContext)
     const [blockedActions, setBlockedActions] = useState(false)
-    const [currentDate, setCurrentDate] = useState('')
     const [name, setName] = useState('')
     const [value, setValue] = useState('')
     const [allInputsFilled, setAllInputsFilled] = useState(false)
-
-    // Usando a data atual para salvar o serviço
-    useEffect(() => {
-        const year = new Date().getFullYear()
-        const month = String(new Date().getMonth() + 1).padStart(2, '0')
-        const day = String(new Date().getDate()).padStart(2, '0')
-        setCurrentDate(`${year}-${month}-${day}`)
-    }, [])
 
     // Verificando se todos os inputs foram preenchidos
     // Pois caso não tenham sido, será impedido a mudança no comportamento do botão
@@ -51,7 +42,7 @@ const AddServiceForm = ({ setAddServiceForm }: Props) => {
                     const service: Service = {
                         _id: name, value: [{
                             value: Number(value),
-                            date: currentDate
+                            date: getCurrentDate()
                         }]
                     }
                     const options = fetchOptions('post', service)

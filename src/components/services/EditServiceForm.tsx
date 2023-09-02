@@ -1,14 +1,18 @@
 import { useState, useEffect } from 'react'
+import { Service } from 'types/services'
+import { INVALID_NUMBER_TEXT } from 'constants/errors'
 import Container from 'components/forms/Container'
 import FormHeader from 'components/forms/Header'
 import ValueInput from 'components/forms/ValueInput'
 import ConfirmFormButtons from 'components/pages/ConfirmFormButtons'
+import { validNumber, getCurrentDate } from 'formFunctions/common'
 
 interface EditServiceFormProps {
+	serviceForEdition: Service
 	setEditServiceForm: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const EditServiceForm = ({ setEditServiceForm }: EditServiceFormProps) => {
+const EditServiceForm = ({ serviceForEdition, setEditServiceForm }: EditServiceFormProps) => {
 
 	const [blockedActions, setBlockedActions] = useState(false)
 	const [value, setValue] = useState('')
@@ -19,14 +23,27 @@ const EditServiceForm = ({ setEditServiceForm }: EditServiceFormProps) => {
 	}, [value])
 
 	const editService = () => {
-		setEditServiceForm(false)
+		if (!blockedActions) {
+			setBlockedActions(true)
+			if (validNumber(value)) {
+		        const newValue = {
+		        	value: Number(value),
+		        	date: getCurrentDate()
+		        }
+				serviceForEdition.value.push(newValue)
+				setEditServiceForm(false)
+			} else {
+				alert(INVALID_NUMBER_TEXT)
+				setEditServiceForm(false)
+			}
+		}
 	}
 
 	return (
 		<Container>
 			<FormHeader text='Editar Serviço' />
 			<div className='card-body'>
-				<h6 className='text-center'>Nome do Serviço</h6>
+				<h6 className='text-center'>{serviceForEdition._id}</h6>
 				<form onSubmit={e => {
 					e.preventDefault()
 					editService()

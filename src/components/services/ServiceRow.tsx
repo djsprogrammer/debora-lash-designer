@@ -8,11 +8,12 @@ import { Service } from 'types/services'
 interface Props {
     service: Service
     setIdForDeletion: React.Dispatch<React.SetStateAction<string>>
+    setServiceForEdition: React.Dispatch<React.SetStateAction<Service>>
     setDeleteServiceForm: BooleanSet
     setEditServiceForm: BooleanSet
 }
 
-const ServiceRow = ({ service, setIdForDeletion, setDeleteServiceForm, setEditServiceForm }: Props) => {
+const ServiceRow = ({ service, setIdForDeletion, setServiceForEdition, setDeleteServiceForm, setEditServiceForm }: Props) => {
 
     const name = service._id
 
@@ -25,6 +26,7 @@ const ServiceRow = ({ service, setIdForDeletion, setDeleteServiceForm, setEditSe
             <td>{value}</td>
             <td>
                 <Pencil size={20} className='me-2 button' onClick={() => {
+                    setServiceForEdition(service)
                     setEditServiceForm(true)
                 }} />
                 <DeleteButton onClick={() => {

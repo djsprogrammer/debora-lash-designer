@@ -1,4 +1,5 @@
 import { useContext, useState } from 'react'
+import { Service } from 'types/services'
 import ServiceRow from './ServiceRow'
 import DeleteForm from 'components/pages/DeleteForm'
 import EditServiceForm from './EditServiceForm'
@@ -15,6 +16,7 @@ const ServiceTable = () => {
     const [deleteServiceForm, setDeleteServiceForm] = useState(false)
     const [editServiceForm, setEditServiceForm] = useState(false)
     const [idForDeletion, setIdForDeletion] = useState('')
+    const [serviceForEdition, setServiceForEdition] = useState<Service>({} as Service)
 
     
     const deleteService = () => {
@@ -59,6 +61,7 @@ const ServiceTable = () => {
                             key={service._id}
                             service={service}
                             setIdForDeletion={setIdForDeletion}
+                            setServiceForEdition={setServiceForEdition}
                             setDeleteServiceForm={setDeleteServiceForm}
                             setEditServiceForm={setEditServiceForm}
                         />)}
@@ -75,6 +78,7 @@ const ServiceTable = () => {
             {
                 editServiceForm
                 ? <EditServiceForm
+                    serviceForEdition={serviceForEdition}
                     setEditServiceForm={setEditServiceForm}
                     />
                 : null
