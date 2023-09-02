@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Service } from 'types/services'
+import { EDIT_SERVICE } from 'constants/urls'
 import { INVALID_NUMBER_TEXT } from 'constants/errors'
 import Container from 'components/forms/Container'
 import FormHeader from 'components/forms/Header'
@@ -30,7 +31,13 @@ const EditServiceForm = ({ serviceForEdition, setEditServiceForm }: EditServiceF
 		        	value: Number(value),
 		        	date: getCurrentDate()
 		        }
-				serviceForEdition.value.push(newValue)
+		        serviceForEdition.value.push(newValue)
+				const options = {
+					method: 'put',
+					headers: { 'Content-Type': 'application/json' },
+					body: JSON.stringify(serviceForEdition)
+				}
+				fetch(EDIT_SERVICE, options)
 				setEditServiceForm(false)
 			} else {
 				alert(INVALID_NUMBER_TEXT)
