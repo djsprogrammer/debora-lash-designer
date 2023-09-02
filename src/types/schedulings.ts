@@ -1,8 +1,11 @@
-import { Service } from './services'
+interface SchedulingService {
+	_id: string
+	value: number
+}
 
 export interface ServiceScheduling {
     _id: string
-	service: Service
+	service: SchedulingService
 	date: string
 	client: string
 }
