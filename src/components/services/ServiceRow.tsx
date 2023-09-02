@@ -1,4 +1,5 @@
 import { memo } from 'react'
+import { Pencil } from 'lucide-react'
 import DeleteButton from 'components/pages/DeleteButton'
 import { moneyFormat } from 'formFunctions/common'
 import { BooleanSet } from 'types/common'
@@ -22,6 +23,7 @@ const ServiceRow = ({ service, setTargetId, setDeleteServiceForm }: Props) => {
             <td>{name}</td>
             <td>{value}</td>
             <td>
+                <Pencil size={20} className='me-2 button' />
                 <DeleteButton onClick={() => {
                     setTargetId(service._id)
                     setDeleteServiceForm(true)
