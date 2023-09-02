@@ -15,6 +15,7 @@ import Expenses from 'pages/Expenses'
 import ServicesProvider from 'ServicesContext'
 import { GET_ALL_DOCS } from 'constants/urls'
 import { DATABASE_ERROR_TEXT, SERVER_ERROR_TEXT } from 'constants/errors'
+import { orderServices } from 'formFunctions/common'
 
 const App = () => {
 
@@ -35,16 +36,11 @@ const App = () => {
             const expenses = allDocs.expenses
 
             // Ordenando os documentos
-            const orderServices = services.sort((a, b) => {
-                // Pegando o último valor salvo do serviço
-                const aLastValue = a.value.length - 1
-                const bLastValue = b.value.length - 1
-                return a.value[aLastValue].value - b.value[bLastValue].value
-            })
+            const orderedServices = orderServices(services)
             const orderSchedulings = schedulings.sort((a, b) => a.date.localeCompare(b.date)).reverse()
             const orderExpenses = expenses.sort((a, b) => a.date.localeCompare(b.date)).reverse()
 
-            setServices(orderServices)
+            setServices(orderedServices)
             setSchedulings(orderSchedulings)
             setExpenses(orderExpenses)
 

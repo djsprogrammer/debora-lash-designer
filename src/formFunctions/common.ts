@@ -1,5 +1,5 @@
 import { format, parseISO } from 'date-fns'
-import { Service } from '../types/services'
+import { Service, Services } from '../types/services'
 import { ServiceScheduling } from 'types/schedulings'
 import { Expense } from 'types/expenses'
 
@@ -39,4 +39,17 @@ export const moneyFormat = (value: number) => {
 export const dateFormat = (date: string) => {
     const formatedDate = format(parseISO(date), 'dd/MM')
     return formatedDate
+}
+
+export const orderServices = (services: Services) => {
+
+    const orderedServices = services.sort((a, b) => {
+        // Pegando o último valor salvo do serviço
+        const aLastValue = a.value.length - 1
+        const bLastValue = b.value.length - 1
+        return a.value[aLastValue].value - b.value[bLastValue].value
+    })
+
+    return orderedServices
+    
 }

@@ -5,7 +5,7 @@ import { tableStyle } from 'commonStyles'
 import { ServicesContext } from 'ServicesContext'
 import { DELETE_SERVICE } from 'constants/urls'
 import { DATABASE_ERROR_TEXT, SERVER_ERROR_TEXT } from 'constants/errors'
-import { deleteFetchOptions } from 'formFunctions/common'
+import { deleteFetchOptions, orderServices } from 'formFunctions/common'
 
 const ServiceTable = () => {
 
@@ -23,12 +23,7 @@ const ServiceTable = () => {
                         const remainingServices = services.filter(service => {
                             return service._id !== targetId
                         })
-                        setServices(remainingServices.sort((a, b) => {
-                            // Pegando o último valor salvo do serviço
-                            const aLastValue = a.value.length - 1
-                            const bLastValue = b.value.length - 1
-                            return a.value[aLastValue].value - b.value[bLastValue].value
-                        }))
+                        setServices(orderServices(remainingServices))
                         break
                     case 503:
                         setTimeout(() => {

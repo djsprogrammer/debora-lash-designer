@@ -1,6 +1,6 @@
 import { useContext, useState, useEffect } from 'react'
 import AddFormButtons from 'components/pages/AddFormButtons'
-import { validNumber, fetchOptions } from 'formFunctions/common'
+import { validNumber, fetchOptions, orderServices } from 'formFunctions/common'
 import { ServicesContext } from 'ServicesContext'
 import { CREATE_SERVICE } from 'constants/urls'
 import { DATABASE_ERROR_TEXT, SERVER_ERROR_TEXT, INVALID_NUMBER_TEXT } from 'constants/errors'
@@ -59,13 +59,7 @@ const AddServiceForm = ({ setAddServiceForm }: Props) => {
                         .then(res => {
                             switch (res.status) {
                                 case 201:
-                                    const newServices = [...services, service]
-                                        .sort((a, b) => {
-                                            // Pegando o último valor salvo do serviço
-                                            const aLastValue = a.value.length - 1
-                                            const bLastValue = b.value.length - 1
-                                            return a.value[aLastValue].value - b.value[bLastValue].value
-                                        })
+                                    const newServices = orderServices([...services, service])
                                     setServices(newServices)
                                     break
                                 case 503:
