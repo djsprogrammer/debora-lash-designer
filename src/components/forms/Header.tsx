@@ -1,11 +1,11 @@
 interface HeaderProps {
-    page: string
+    text: string
 }
 
-const Header = ({ page }: HeaderProps) => {
+const Header = ({ text }: HeaderProps) => {
     return (
         <div className='card-header mb-2'>
-            <h5>Registrar {page}</h5>
+            <h5>{text}</h5>
         </div>
     )
 }

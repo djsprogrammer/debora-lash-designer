@@ -9,9 +9,10 @@ interface Props {
     service: Service
     setTargetId: React.Dispatch<React.SetStateAction<string>>
     setDeleteServiceForm: BooleanSet
+    setEditServiceForm: BooleanSet
 }
 
-const ServiceRow = ({ service, setTargetId, setDeleteServiceForm }: Props) => {
+const ServiceRow = ({ service, setTargetId, setDeleteServiceForm, setEditServiceForm }: Props) => {
 
     const name = service._id
 
@@ -23,7 +24,10 @@ const ServiceRow = ({ service, setTargetId, setDeleteServiceForm }: Props) => {
             <td>{name}</td>
             <td>{value}</td>
             <td>
-                <Pencil size={20} className='me-2 button' />
+                <Pencil size={20} className='me-2 button' onClick={() => {
+                    setTargetId(service._id)
+                    setEditServiceForm(true)
+                }} />
                 <DeleteButton onClick={() => {
                     setTargetId(service._id)
                     setDeleteServiceForm(true)

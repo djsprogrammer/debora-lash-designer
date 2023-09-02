@@ -5,10 +5,10 @@ import { confirmButtonStyle, cancelButtonStyle } from 'commonStyles'
 interface Props {
 	allInputsFilled: boolean
 	blockedActions: boolean
-	setAddForm: BooleanSet
+	setForm: BooleanSet
 }
 
-const AddFormButtons = ({ allInputsFilled, blockedActions, setAddForm }: Props) => {
+const AddFormButtons = ({ allInputsFilled, blockedActions, setForm }: Props) => {
 
 	const confirmButtonRef = useRef<HTMLButtonElement>(null)
 	const cancelButtonRef = useRef<HTMLButtonElement>(null)
@@ -28,7 +28,7 @@ const AddFormButtons = ({ allInputsFilled, blockedActions, setAddForm }: Props) 
 
 			<button ref={cancelButtonRef} onClick={() => {
 				// Só permitindo fechar o formulário quando não estiver ocorrendo alguma ação
-				if (!blockedActions) setAddForm(false)
+				if (!blockedActions) setForm(false)
 			}} className={cancelButtonStyle}>Cancelar</button>
 
 		</div>

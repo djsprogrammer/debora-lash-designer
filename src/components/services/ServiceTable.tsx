@@ -1,6 +1,7 @@
 import { useContext, useState } from 'react'
 import ServiceRow from './ServiceRow'
 import DeleteForm from 'components/pages/DeleteForm'
+import EditServiceForm from './EditServiceForm'
 import { tableStyle } from 'commonStyles'
 import { ServicesContext } from 'ServicesContext'
 import { DELETE_SERVICE } from 'constants/urls'
@@ -12,7 +13,9 @@ const ServiceTable = () => {
     const [services, setServices] = useContext(ServicesContext)
 
     const [deleteServiceForm, setDeleteServiceForm] = useState(false)
+    const [editServiceForm, setEditServiceForm] = useState(false)
     const [targetId, setTargetId] = useState('')
+
     
     const deleteService = () => {
         const options = deleteFetchOptions(targetId)
@@ -57,6 +60,7 @@ const ServiceTable = () => {
                             service={service}
                             setTargetId={setTargetId}
                             setDeleteServiceForm={setDeleteServiceForm}
+                            setEditServiceForm={setEditServiceForm}
                         />)}
                 </tbody>
             </table>
@@ -65,6 +69,14 @@ const ServiceTable = () => {
                 ? <DeleteForm 
                     deleteTarget={deleteService}
                     setDeleteForm={setDeleteServiceForm}
+                    />
+                : null
+            }
+            {
+                editServiceForm
+                ? <EditServiceForm
+                    setEditServiceForm={setEditServiceForm}
+                    serviceName={targetId}
                     />
                 : null
             }

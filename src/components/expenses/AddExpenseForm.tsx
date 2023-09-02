@@ -75,7 +75,7 @@ const AddExpenseForm = ({ setAddExpenseForm, expensesState }: Props) => {
 
 	return (
 		<Container>
-			<FormHeader page='Despesa' />
+			<FormHeader text='Registrar Despesa' />
 			<div className='card-body'>
 				<form className='d-flex flex-column' onSubmit={e => {
 					e.preventDefault()
@@ -87,7 +87,7 @@ const AddExpenseForm = ({ setAddExpenseForm, expensesState }: Props) => {
 		            <AddFormButtons
 		            	allInputsFilled={allInputsFilled}
 		            	blockedActions={blockedActions}
-		            	setAddForm={setAddExpenseForm}
+		            	setForm={setAddExpenseForm}
 		            />
 				</form>
 			</div>

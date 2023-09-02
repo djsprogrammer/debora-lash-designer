@@ -88,7 +88,7 @@ const AddServiceForm = ({ setAddServiceForm }: Props) => {
 
     return (
         <Container>
-            <FormHeader page='Serviço' />
+            <FormHeader text='Registrar Serviço' />
             <div className='card-body'>
                 <form className='d-flex flex-column' onSubmit={e => {
                     e.preventDefault()
@@ -99,7 +99,7 @@ const AddServiceForm = ({ setAddServiceForm }: Props) => {
                     <AddFormButtons
                         allInputsFilled={allInputsFilled}
                         blockedActions={blockedActions}
-                        setAddForm={setAddServiceForm}
+                        setForm={setAddServiceForm}
                     />
                 </form>
             </div>

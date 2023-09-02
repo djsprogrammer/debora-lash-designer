@@ -86,7 +86,7 @@ const AddSchedulingForm = ({ schedulingsState, setAddSchedulingForm }: AddSchedu
 
 	return (
 		<Container>
-			<FormHeader page='Agendamento' />
+			<FormHeader text='Registrar Agendamento' />
 			<div className='card-body'>
 				<form className='d-flex flex-column' onSubmit={e => {
 					e.preventDefault()
@@ -105,7 +105,7 @@ const AddSchedulingForm = ({ schedulingsState, setAddSchedulingForm }: AddSchedu
 					<AddFormButtons
 						allInputsFilled={allInputsFilled}
 						blockedActions={blockedActions}
-						setAddForm={setAddSchedulingForm}
+						setForm={setAddSchedulingForm}
 					/>
 				</form>
 			</div>
