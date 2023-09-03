@@ -78,6 +78,7 @@ const ServiceTable = () => {
             {
                 editServiceForm
                 ? <EditServiceForm
+                    servicesState={[services, setServices]}
                     serviceForEdition={serviceForEdition}
                     setEditServiceForm={setEditServiceForm}
                     />

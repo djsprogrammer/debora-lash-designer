@@ -1,4 +1,3 @@
-import { memo } from 'react'
 import { Pencil } from 'lucide-react'
 import DeleteButton from 'components/pages/DeleteButton'
 import { moneyFormat } from 'formFunctions/common'
@@ -39,4 +38,4 @@ const ServiceRow = ({ service, setIdForDeletion, setServiceForEdition, setDelete
 
 }
 
-export default memo(ServiceRow)
+export default ServiceRow
