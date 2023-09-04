@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Service, ServicesState } from 'types/services'
+import { Service, ServicesState, Value } from 'types/services'
 import { EDIT_SERVICE } from 'constants/urls'
 import { INVALID_NUMBER_TEXT, DATABASE_ERROR_TEXT, SERVER_ERROR_TEXT } from 'constants/errors'
 import Container from 'components/forms/Container'
@@ -25,15 +25,30 @@ const EditServiceForm = ({ servicesState, serviceForEdition, setEditServiceForm 
 		if (value) setAllInputsFilled(true)
 	}, [value])
 
+	/* Essa função verifica se já existe algum valor registrado nessa data
+	antes de registrar a edição */
+	const checkForValueInTheSameDate = (newValue: Value) => {
+
+		serviceForEdition.value.forEach((value, index) => {
+			if (value.date === newValue.date) {
+				// Removendo o valor salvo anteriormente
+				serviceForEdition.value.splice(index, 1)
+			}
+		})
+
+		serviceForEdition.value.push(newValue)
+
+	}
+
 	const editService = () => {
 		if (!blockedActions) {
 			setBlockedActions(true)
 			if (validNumber(value)) {
-		        const newValue = {
+		        const newValue: Value = {
 		        	value: Number(value),
 		        	date: getCurrentDate()
 		        }
-		        serviceForEdition.value.push(newValue)
+		        checkForValueInTheSameDate(newValue)
 				const options = {
 					method: 'put',
 					headers: { 'Content-Type': 'application/json' },
