@@ -7,6 +7,7 @@ import FormHeader from 'components/forms/Header'
 import ValueInput from 'components/forms/ValueInput'
 import ConfirmFormButtons from 'components/pages/ConfirmFormButtons'
 import { validNumber, getCurrentDate, orderServices } from 'formFunctions/common'
+import { checkForValueInTheSameDate } from 'formFunctions/editService'
 
 interface EditServiceFormProps {
 	servicesState: ServicesState
@@ -25,21 +26,6 @@ const EditServiceForm = ({ servicesState, serviceForEdition, setEditServiceForm 
 		if (value) setAllInputsFilled(true)
 	}, [value])
 
-	/* Essa função verifica se já existe algum valor registrado nessa data
-	antes de registrar a edição */
-	const checkForValueInTheSameDate = (newValue: Value) => {
-
-		serviceForEdition.value.forEach((value, index) => {
-			if (value.date === newValue.date) {
-				// Removendo o valor salvo anteriormente
-				serviceForEdition.value.splice(index, 1)
-			}
-		})
-
-		serviceForEdition.value.push(newValue)
-
-	}
-
 	const editService = () => {
 		if (!blockedActions) {
 			setBlockedActions(true)
@@ -48,7 +34,7 @@ const EditServiceForm = ({ servicesState, serviceForEdition, setEditServiceForm 
 		        	value: Number(value),
 		        	date: getCurrentDate()
 		        }
-		        checkForValueInTheSameDate(newValue)
+		        checkForValueInTheSameDate(serviceForEdition, newValue)
 				const options = {
 					method: 'put',
 					headers: { 'Content-Type': 'application/json' },
