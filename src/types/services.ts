@@ -1,4 +1,4 @@
-interface Value {
+export interface Value {
     value: number
     date: string
 }
