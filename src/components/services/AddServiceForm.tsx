@@ -1,6 +1,6 @@
 import { useContext, useState, useEffect } from 'react'
 import ConfirmFormButtons from 'components/pages/ConfirmFormButtons'
-import { validNumber, fetchOptions, orderServices, getCurrentDate } from 'formFunctions/common'
+import { validNumber, fetchOptions, orderServices } from 'formFunctions/common'
 import { ServicesContext } from 'ServicesContext'
 import { CREATE_SERVICE } from 'constants/urls'
 import { DATABASE_ERROR_TEXT, SERVER_ERROR_TEXT, INVALID_NUMBER_TEXT } from 'constants/errors'
@@ -10,6 +10,7 @@ import FormHeader from 'components/forms/Header'
 import NameInput from 'components/forms/NameInput'
 import ValueInput from 'components/forms/ValueInput'
 import { Service } from 'types/services'
+import { generateNewValue } from 'formFunctions/service/common'
 
 const ALREADY_EXISTS_TEXT = 'Já existe um serviço com esse nome!'
 
@@ -40,10 +41,8 @@ const AddServiceForm = ({ setAddServiceForm }: Props) => {
             if (!alreadyExists) {
                 if (validNumber(value)) {
                     const service: Service = {
-                        _id: name, value: [{
-                            value: Number(value),
-                            date: getCurrentDate()
-                        }]
+                        _id: name, 
+                        value: [generateNewValue(value)]
                     }
                     const options = fetchOptions('post', service)
                     fetch(CREATE_SERVICE, options)

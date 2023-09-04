@@ -6,8 +6,9 @@ import Container from 'components/forms/Container'
 import FormHeader from 'components/forms/Header'
 import ValueInput from 'components/forms/ValueInput'
 import ConfirmFormButtons from 'components/pages/ConfirmFormButtons'
-import { validNumber, getCurrentDate, orderServices } from 'formFunctions/common'
-import { checkForValueInTheSameDate } from 'formFunctions/editService'
+import { validNumber, orderServices } from 'formFunctions/common'
+import { generateNewValue } from 'formFunctions/service/common'
+import { checkForValueInTheSameDate } from 'formFunctions/service/editService'
 
 interface EditServiceFormProps {
 	servicesState: ServicesState
@@ -30,10 +31,7 @@ const EditServiceForm = ({ servicesState, serviceForEdition, setEditServiceForm 
 		if (!blockedActions) {
 			setBlockedActions(true)
 			if (validNumber(value)) {
-		        const newValue: Value = {
-		        	value: Number(value),
-		        	date: getCurrentDate()
-		        }
+		        const newValue: Value = generateNewValue(value)
 		        checkForValueInTheSameDate(serviceForEdition, newValue)
 				const options = {
 					method: 'put',
