@@ -7,7 +7,7 @@ import { Value } from 'types/services'
 import { BooleanSet } from 'types/common'
 import { CREATE_SCHEDULING } from 'constants/urls'
 import { DATABASE_ERROR_TEXT, SERVER_ERROR_TEXT } from 'constants/errors'
-import { fetchOptions } from 'formFunctions/common'
+import { fetchOptions, dateFormat } from 'formFunctions/common'
 import Container from 'components/forms/Container'
 import DateInput from 'components/forms/DateInput'
 import FormHeader from 'components/forms/Header'
@@ -54,10 +54,11 @@ const AddSchedulingForm = ({ schedulingsState, setAddSchedulingForm }: AddSchedu
 		return initialValue
 	}
 
+	const service: Service = JSON.parse(option)
+
 	const addScheduling = () => {
 		if (!blockedActions) {
 			setBlockedActions(true)
-			const service: Service = JSON.parse(option)
 			const serviceScheduling: ServiceScheduling = {
 				_id: v4(),
 				service: {
@@ -105,27 +106,35 @@ const AddSchedulingForm = ({ schedulingsState, setAddSchedulingForm }: AddSchedu
 	return (
 		<Container>
 			<FormHeader text='Registrar Agendamento' />
-			<div className='card-body'>
-				<form className='d-flex flex-column' onSubmit={e => {
-					e.preventDefault()
-					addScheduling()
-				}}>
-					<DateInput setDate={setDate} />
-					<div className='input-group my-3'>
-						<label className='input-group-text'>Escolha um serviço</label>
-						<select onChange={e => setOption(e.target.value)} className='form-select text-center' required>
-							{services.map(service => (
-								<option key={service._id} value={JSON.stringify(service)}>{service._id}</option>
-							))}
-						</select>
-					</div>
-					<input onChange={e => setClient(e.target.value)} className='form-control text-center p-1 mb-3' type='text' placeholder='Digite o nome do cliente' required />
-					<ConfirmFormButtons
-						allInputsFilled={allInputsFilled}
-						blockedActions={blockedActions}
-						setForm={setAddSchedulingForm}
-					/>
-				</form>
+			<div className='card-body d-flex'>
+				<div>
+					<form className='d-flex flex-column' onSubmit={e => {
+						e.preventDefault()
+						addScheduling()
+					}}>
+						<DateInput setDate={setDate} />
+						<div className='input-group my-3'>
+							<label className='input-group-text'>Escolha um serviço</label>
+							<select onChange={e => setOption(e.target.value)} className='form-select text-center' required>
+								{services.map(service => (
+									<option key={service._id} value={JSON.stringify(service)}>{service._id}</option>
+								))}
+							</select>
+						</div>
+						<input onChange={e => setClient(e.target.value)} className='form-control text-center p-1 mb-3' type='text' placeholder='Digite o nome do cliente' required />
+						<ConfirmFormButtons
+							allInputsFilled={allInputsFilled}
+							blockedActions={blockedActions}
+							setForm={setAddSchedulingForm}
+						/>
+					</form>
+				</div>
+				<div className='mx-5'>
+					<h6 className='mb-2'><strong>Cliente:</strong> {client}</h6>
+					<h6><strong>Data:</strong> {date ? dateFormat(date) : null}</h6>
+					<h6 className='my-2'><strong>Serviço:</strong> {service._id}</h6>
+					<h6><strong>Valor:</strong> {getRightValue(date, service.value)}</h6>
+				</div>
 			</div>
 		</Container>
 	)
