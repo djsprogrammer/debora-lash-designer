@@ -7,12 +7,13 @@ import { Value } from 'types/services'
 import { BooleanSet } from 'types/common'
 import { CREATE_SCHEDULING } from 'constants/urls'
 import { DATABASE_ERROR_TEXT, SERVER_ERROR_TEXT } from 'constants/errors'
-import { fetchOptions, dateFormat } from 'formFunctions/common'
+import { fetchOptions } from 'formFunctions/common'
 import Container from 'components/forms/Container'
 import DateInput from 'components/forms/DateInput'
 import FormHeader from 'components/forms/Header'
 import { Service } from 'types/services'
 import ServicesOptionsInput from './ServicesOptionsInput'
+import SchedulingInfo from './SchedulingInfo'
 
 interface AddSchedulingFormProps extends Props {
 	setAddSchedulingForm: BooleanSet
@@ -123,12 +124,12 @@ const AddSchedulingForm = ({ schedulingsState, setAddSchedulingForm }: AddSchedu
 						/>
 					</form>
 				</div>
-				<div className='mx-5'>
-					<h6 className='mb-2'><strong>Cliente:</strong> {client}</h6>
-					<h6><strong>Data:</strong> {date ? dateFormat(date) : null}</h6>
-					<h6 className='my-2'><strong>Serviço:</strong> {service._id}</h6>
-					<h6><strong>Valor:</strong> {getRightValue(date, service.value)}</h6>
-				</div>
+				<SchedulingInfo
+					client={client}
+					date={date}
+					service={service}
+					getRightValue={getRightValue}
+				/>
 			</div>
 		</Container>
 	)
