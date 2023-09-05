@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import SchedulingTable from 'components/schedulings/SchedulingTable'
 import AnySchedulingAdvice from 'components/pages/AnyAdvice'
-import AddSchedulingForm from 'components/schedulings/AddSchedulingForm'
+import AddSchedulingForm from 'components/schedulings/AddSchedulingForm/AddSchedulingForm'
 import RegisterButton from 'components/pages/RegisterButton'
 import { SchedulingsState } from 'types/schedulings'
 import { Props } from 'types/pages'

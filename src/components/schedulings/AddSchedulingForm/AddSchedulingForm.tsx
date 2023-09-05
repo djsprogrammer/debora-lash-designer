@@ -12,6 +12,7 @@ import Container from 'components/forms/Container'
 import DateInput from 'components/forms/DateInput'
 import FormHeader from 'components/forms/Header'
 import { Service } from 'types/services'
+import ServicesOptionsInput from './ServicesOptionsInput'
 
 interface AddSchedulingFormProps extends Props {
 	setAddSchedulingForm: BooleanSet
@@ -113,14 +114,7 @@ const AddSchedulingForm = ({ schedulingsState, setAddSchedulingForm }: AddSchedu
 						addScheduling()
 					}}>
 						<DateInput setDate={setDate} />
-						<div className='input-group my-3'>
-							<label className='input-group-text'>Escolha um serviço</label>
-							<select onChange={e => setOption(e.target.value)} className='form-select text-center' required>
-								{services.map(service => (
-									<option key={service._id} value={JSON.stringify(service)}>{service._id}</option>
-								))}
-							</select>
-						</div>
+						<ServicesOptionsInput margin='my-3' setOption={setOption} services={services} />
 						<input onChange={e => setClient(e.target.value)} className='form-control text-center p-1 mb-3' type='text' placeholder='Digite o nome do cliente' required />
 						<ConfirmFormButtons
 							allInputsFilled={allInputsFilled}
