@@ -144,7 +144,8 @@ const AddSchedulingForm = ({ schedulingsState, setAddSchedulingForm }: AddSchedu
 				<SchedulingInfo
 					client={client}
 					date={date}
-					service={service}
+					servicesName={servicesName}
+					servicesValue={servicesValue}
 				/>
 			</div>
 		</Container>
