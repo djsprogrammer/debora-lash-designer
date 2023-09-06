@@ -31,6 +31,8 @@ const AddSchedulingForm = ({ schedulingsState, setAddSchedulingForm }: AddSchedu
 	const [client, setClient] = useState('')
 	const [allInputsFilled, setAllInputsFilled] = useState(false)
 
+	const [showSecondOption, setShowSecondOption] = useState(false)
+
 	// Verificando se todos os inputs foram preenchidos
 	// Pois caso não tenham sido, será impedido a mudança no comportamento do botão
 	useEffect(() => {
@@ -105,6 +107,14 @@ const AddSchedulingForm = ({ schedulingsState, setAddSchedulingForm }: AddSchedu
 		}
 	}
 
+	const SecondOption = () => {
+		return showSecondOption
+		? <ServicesOptionsInput margin='mt-1 mb-3' setOption={setOption} services={services} />
+		: <button onClick={() => setShowSecondOption(true)} 
+			className='align-self-start mb-1 btn btn-sm btn-link' 
+			type='button'>+1 Serviço</button>
+	}
+
 	return (
 		<Container>
 			<FormHeader text='Registrar Agendamento' />
@@ -116,7 +126,7 @@ const AddSchedulingForm = ({ schedulingsState, setAddSchedulingForm }: AddSchedu
 					}}>
 						<DateInput setDate={setDate} />
 						<ServicesOptionsInput margin='mt-3 mb-1' setOption={setOption} services={services} />
-						<button className='align-self-start mb-1 btn btn-sm btn-link' type='button'>+1 Serviço</button>
+						<SecondOption />
 						<input onChange={e => setClient(e.target.value)} className='form-control text-center p-1 mb-3' type='text' placeholder='Digite o nome do cliente' required />
 						<ConfirmFormButtons
 							allInputsFilled={allInputsFilled}
