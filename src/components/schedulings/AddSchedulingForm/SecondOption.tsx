@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import ServicesOptionsInput from './ServicesOptionsInput'
 import { Services, Service } from 'types/services'
 
@@ -14,6 +15,10 @@ const SecondOption = ({ services, service, setShowSecondOption, setSecondOption 
 	const servicesForSecondOption = services.filter(current => {
 		return current._id !== service._id
 	})
+
+	useEffect(() => {
+		setSecondOption(JSON.stringify(servicesForSecondOption[0]))
+	}, [])
 
 	return (
 		<div className='mt-1 mb-3'>
