@@ -117,6 +117,15 @@ const AddSchedulingForm = ({ schedulingsState, setAddSchedulingForm }: AddSchedu
 		}
 	}
 
+	const SecondOption = () => {
+		return (
+			<div className='mt-1 mb-3'>
+				<ServicesOptionsInput setOption={setOption} services={servicesForSecondOption} />
+				<button onClick={() => setShowSecondOption(false)} className='btn btn-sm btn-link' type='button'>Cancelar</button>
+			</div>
+		)
+	}
+
 	return (
 		<Container>
 			<FormHeader text='Registrar Agendamento' />
@@ -130,7 +139,7 @@ const AddSchedulingForm = ({ schedulingsState, setAddSchedulingForm }: AddSchedu
 						<ServicesOptionsInput margin='mt-3 mb-1' setOption={setOption} services={services} />
 						{
 							showSecondOption
-							? <ServicesOptionsInput margin='mt-1 mb-3' setOption={setOption} services={servicesForSecondOption} />
+							? <SecondOption />
 							: <button onClick={() => setShowSecondOption(true)} 
 								className='align-self-start mb-1 btn btn-sm btn-link' 
 								type='button'>
