@@ -14,6 +14,7 @@ import FormHeader from 'components/forms/Header'
 import { Service } from 'types/services'
 import ServicesOptionsInput from './ServicesOptionsInput'
 import SchedulingInfo from './SchedulingInfo'
+import SecondOption from './SecondOption'
 
 interface AddSchedulingFormProps extends Props {
 	setAddSchedulingForm: BooleanSet
@@ -22,7 +23,6 @@ interface AddSchedulingFormProps extends Props {
 const AddSchedulingForm = ({ schedulingsState, setAddSchedulingForm }: AddSchedulingFormProps) => {
 
 	const [services] = useContext(ServicesContext)
-	const [servicesForSecondOption, setServicesForSecondOption] = useState(services)
 	const [servicesScheduling, setServicesScheduling] = schedulingsState
 	
 	const [blockedActions, setBlockedActions] = useState(false)
@@ -45,21 +45,11 @@ const AddSchedulingForm = ({ schedulingsState, setAddSchedulingForm }: AddSchedu
 		}
 	}, [date, option, client])
 
-	// Filtrando as opções para a segunda opção de serviço
-	useEffect(() => {
-		const firstService: Service = JSON.parse(option)
-		const otherServices = services.filter(service => {
-			return service._id !== firstService._id
-		})
-		setServicesForSecondOption(otherServices)
-	}, [option, services])
-
 	const service: Service = JSON.parse(option)
 
 	const addScheduling = () => {
 		if (!blockedActions) {
 			setBlockedActions(true)
-			console.log(secondOption)
 			const serviceScheduling: ServiceScheduling = {
 				_id: v4(),
 				service: {
@@ -104,15 +94,6 @@ const AddSchedulingForm = ({ schedulingsState, setAddSchedulingForm }: AddSchedu
 		}
 	}
 
-	const SecondOption = () => {
-		return (
-			<div className='mt-1 mb-3'>
-				<ServicesOptionsInput setOption={setOption} services={servicesForSecondOption} />
-				<button onClick={() => setShowSecondOption(false)} className='btn btn-sm btn-link' type='button'>Cancelar</button>
-			</div>
-		)
-	}
-
 	return (
 		<Container>
 			<FormHeader text='Registrar Agendamento' />
@@ -126,10 +107,13 @@ const AddSchedulingForm = ({ schedulingsState, setAddSchedulingForm }: AddSchedu
 						<ServicesOptionsInput margin='mt-3 mb-1' setOption={setOption} services={services} />
 						{
 							showSecondOption
-							? <SecondOption />
+							? <SecondOption
+									services={services}
+									service={service}
+									setShowSecondOption={setShowSecondOption}
+									setSecondOption={setSecondOption}
+								/>
 							: <button onClick={() => {
-									// Setando o state do secondOption com a primeira opção oferecida
-									setSecondOption(JSON.stringify(servicesForSecondOption[0]))
 									setShowSecondOption(true)
 								}}
 								className='align-self-start mb-1 btn btn-sm btn-link' 
