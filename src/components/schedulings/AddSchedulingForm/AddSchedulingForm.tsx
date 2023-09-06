@@ -32,6 +32,7 @@ const AddSchedulingForm = ({ schedulingsState, setAddSchedulingForm }: AddSchedu
 	const [allInputsFilled, setAllInputsFilled] = useState(false)
 
 	const [showSecondOption, setShowSecondOption] = useState(false)
+	const [servicesForSecondOption, setServicesForSecondOption] = useState(services)
 
 	// Verificando se todos os inputs foram preenchidos
 	// Pois caso não tenham sido, será impedido a mudança no comportamento do botão
@@ -40,6 +41,15 @@ const AddSchedulingForm = ({ schedulingsState, setAddSchedulingForm }: AddSchedu
 			setAllInputsFilled(true)
 		}
 	}, [date, option, client])
+
+	// Filtrando as opções para a segunda opção de serviço
+	useEffect(() => {
+		const firstService: Service = JSON.parse(option)
+		const otherServices = services.filter(service => {
+			return service._id !== firstService._id
+		})
+		setServicesForSecondOption(otherServices)
+	}, [option, services])
 
 	const getRightValue = (schedulingDate: string, serviceValues: Value[]) => {
 		const previousValues: number[] = []
@@ -109,7 +119,7 @@ const AddSchedulingForm = ({ schedulingsState, setAddSchedulingForm }: AddSchedu
 
 	const SecondOption = () => {
 		return showSecondOption
-		? <ServicesOptionsInput margin='mt-1 mb-3' setOption={setOption} services={services} />
+		? <ServicesOptionsInput margin='mt-1 mb-3' setOption={setOption} services={servicesForSecondOption} />
 		: <button onClick={() => setShowSecondOption(true)} 
 			className='align-self-start mb-1 btn btn-sm btn-link' 
 			type='button'>+1 Serviço</button>
