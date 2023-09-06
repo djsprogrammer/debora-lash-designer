@@ -3,11 +3,11 @@ import { v4 } from 'uuid'
 import ConfirmFormButtons from 'components/pages/ConfirmFormButtons'
 import { ServicesContext } from 'ServicesContext'
 import { Props, ServiceScheduling } from 'types/schedulings'
-import { Value } from 'types/services'
 import { BooleanSet } from 'types/common'
 import { CREATE_SCHEDULING } from 'constants/urls'
 import { DATABASE_ERROR_TEXT, SERVER_ERROR_TEXT } from 'constants/errors'
 import { fetchOptions } from 'formFunctions/common'
+import { getRightValue } from 'formFunctions/scheduling/common'
 import Container from 'components/forms/Container'
 import DateInput from 'components/forms/DateInput'
 import FormHeader from 'components/forms/Header'
@@ -23,8 +23,8 @@ const AddSchedulingForm = ({ schedulingsState, setAddSchedulingForm }: AddSchedu
 
 	const [services] = useContext(ServicesContext)
 	const [servicesForSecondOption, setServicesForSecondOption] = useState(services)
-
 	const [servicesScheduling, setServicesScheduling] = schedulingsState
+	
 	const [blockedActions, setBlockedActions] = useState(false)
 	const [date, setDate] = useState('')
 
@@ -53,23 +53,6 @@ const AddSchedulingForm = ({ schedulingsState, setAddSchedulingForm }: AddSchedu
 		})
 		setServicesForSecondOption(otherServices)
 	}, [option, services])
-
-	const getRightValue = (schedulingDate: string, serviceValues: Value[]) => {
-		const previousValues: number[] = []
-		serviceValues.forEach(value => {
-			if (value.date.localeCompare(schedulingDate) < 0) {
-				previousValues.push(value.value)
-			}
-		})
-		const initialValue = serviceValues[0].value
-		const lastValue = previousValues[previousValues.length - 1]
-		if (lastValue) {
-			return lastValue
-		}
-		/* Retornando o valor inicial
-		caso o serviço não tenha sofrido edições */
-		return initialValue
-	}
 
 	const service: Service = JSON.parse(option)
 
@@ -166,7 +149,6 @@ const AddSchedulingForm = ({ schedulingsState, setAddSchedulingForm }: AddSchedu
 					client={client}
 					date={date}
 					service={service}
-					getRightValue={getRightValue}
 				/>
 			</div>
 		</Container>

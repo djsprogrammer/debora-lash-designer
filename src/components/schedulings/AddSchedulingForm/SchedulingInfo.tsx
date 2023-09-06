@@ -1,14 +1,14 @@
 import { dateFormat } from 'formFunctions/common'
-import { Service, Value } from 'types/services'
+import { getRightValue } from 'formFunctions/scheduling/common'
+import { Service } from 'types/services'
 
 interface SchedulingInfoProps {
 	client: string
 	date: string
 	service: Service
-	getRightValue: (schedulingDate: string, serviceValues: Value[]) => number
 }
 
-const SchedulingInfo = ({ client, date, service, getRightValue }: SchedulingInfoProps) => {
+const SchedulingInfo = ({ client, date, service }: SchedulingInfoProps) => {
 	return (
 		<div className='mx-5'>
 			<h6 className='mb-2'><strong>Cliente:</strong> {client}</h6>
