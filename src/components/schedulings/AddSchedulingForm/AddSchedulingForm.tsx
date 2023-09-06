@@ -117,14 +117,6 @@ const AddSchedulingForm = ({ schedulingsState, setAddSchedulingForm }: AddSchedu
 		}
 	}
 
-	const SecondOption = () => {
-		return showSecondOption
-		? <ServicesOptionsInput margin='mt-1 mb-3' setOption={setOption} services={servicesForSecondOption} />
-		: <button onClick={() => setShowSecondOption(true)} 
-			className='align-self-start mb-1 btn btn-sm btn-link' 
-			type='button'>+1 Serviço</button>
-	}
-
 	return (
 		<Container>
 			<FormHeader text='Registrar Agendamento' />
@@ -136,7 +128,15 @@ const AddSchedulingForm = ({ schedulingsState, setAddSchedulingForm }: AddSchedu
 					}}>
 						<DateInput setDate={setDate} />
 						<ServicesOptionsInput margin='mt-3 mb-1' setOption={setOption} services={services} />
-						<SecondOption />
+						{
+							showSecondOption
+							? <ServicesOptionsInput margin='mt-1 mb-3' setOption={setOption} services={servicesForSecondOption} />
+							: <button onClick={() => setShowSecondOption(true)} 
+								className='align-self-start mb-1 btn btn-sm btn-link' 
+								type='button'>
+									+1 Serviço
+								</button>
+						}
 						<input onChange={e => setClient(e.target.value)} className='form-control text-center p-1 mb-3' type='text' placeholder='Digite o nome do cliente' required />
 						<ConfirmFormButtons
 							allInputsFilled={allInputsFilled}
