@@ -22,17 +22,20 @@ interface AddSchedulingFormProps extends Props {
 const AddSchedulingForm = ({ schedulingsState, setAddSchedulingForm }: AddSchedulingFormProps) => {
 
 	const [services] = useContext(ServicesContext)
+	const [servicesForSecondOption, setServicesForSecondOption] = useState(services)
 
 	const [servicesScheduling, setServicesScheduling] = schedulingsState
 	const [blockedActions, setBlockedActions] = useState(false)
 	const [date, setDate] = useState('')
+
 	// Começando o state com a primeira opção caso o usuário não mude
 	const [option, setOption] = useState(JSON.stringify(services[0]))
+	const [secondOption, setSecondOption] = useState('')
+
 	const [client, setClient] = useState('')
 	const [allInputsFilled, setAllInputsFilled] = useState(false)
 
 	const [showSecondOption, setShowSecondOption] = useState(false)
-	const [servicesForSecondOption, setServicesForSecondOption] = useState(services)
 
 	// Verificando se todos os inputs foram preenchidos
 	// Pois caso não tenham sido, será impedido a mudança no comportamento do botão
@@ -73,6 +76,7 @@ const AddSchedulingForm = ({ schedulingsState, setAddSchedulingForm }: AddSchedu
 	const addScheduling = () => {
 		if (!blockedActions) {
 			setBlockedActions(true)
+			console.log(secondOption)
 			const serviceScheduling: ServiceScheduling = {
 				_id: v4(),
 				service: {
@@ -140,7 +144,11 @@ const AddSchedulingForm = ({ schedulingsState, setAddSchedulingForm }: AddSchedu
 						{
 							showSecondOption
 							? <SecondOption />
-							: <button onClick={() => setShowSecondOption(true)} 
+							: <button onClick={() => {
+									// Setando o state do secondOption com a primeira opção oferecida
+									setSecondOption(JSON.stringify(servicesForSecondOption[0]))
+									setShowSecondOption(true)
+								}}
 								className='align-self-start mb-1 btn btn-sm btn-link' 
 								type='button'>
 									+1 Serviço
