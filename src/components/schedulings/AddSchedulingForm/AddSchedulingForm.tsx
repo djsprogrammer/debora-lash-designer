@@ -64,8 +64,8 @@ const AddSchedulingForm = ({ schedulingsState, setAddSchedulingForm }: AddSchedu
 			const serviceScheduling: ServiceScheduling = {
 				_id: v4(),
 				service: {
-					_id: service._id,
-					value: getRightValue(date, service.value)
+					name: [service._id],
+					value: [getRightValue(date, service.value)]
 				},
 				date,
 				client: client

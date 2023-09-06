@@ -1,6 +1,6 @@
 interface SchedulingService {
-	_id: string
-	value: number
+	name: string[]
+	value: number[]
 }
 
 export interface ServiceScheduling {

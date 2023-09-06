@@ -12,7 +12,7 @@ interface Props {
 const SchedulingRow = ({ scheduling, setDeleteSchedulingForm, setTargetId }: Props) => {
 
     // Deixando no formato 0,00
-    const value = moneyFormat(scheduling.service.value)
+    const value = moneyFormat(scheduling.service.value[0])
 
     // Deixando no formato dd/mm
     const date = dateFormat(scheduling.date)
@@ -20,7 +20,7 @@ const SchedulingRow = ({ scheduling, setDeleteSchedulingForm, setTargetId }: Pro
     return (
         <tr>
             <td>{scheduling.client}</td>
-            <td>{scheduling.service._id}</td>
+            <td>{scheduling.service.name}</td>
             <td>{value}</td>
             <td>{date}</td>
             <td>
