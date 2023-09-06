@@ -115,7 +115,8 @@ const AddSchedulingForm = ({ schedulingsState, setAddSchedulingForm }: AddSchedu
 						addScheduling()
 					}}>
 						<DateInput setDate={setDate} />
-						<ServicesOptionsInput margin='my-3' setOption={setOption} services={services} />
+						<ServicesOptionsInput margin='mt-3 mb-1' setOption={setOption} services={services} />
+						<button className='align-self-start mb-1 btn btn-sm btn-link' type='button'>+1 Serviço</button>
 						<input onChange={e => setClient(e.target.value)} className='form-control text-center p-1 mb-3' type='text' placeholder='Digite o nome do cliente' required />
 						<ConfirmFormButtons
 							allInputsFilled={allInputsFilled}
