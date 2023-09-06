@@ -32,6 +32,11 @@ const AddSchedulingForm = ({ schedulingsState, setAddSchedulingForm }: AddSchedu
 	const [option, setOption] = useState(JSON.stringify(services[0]))
 	const [secondOption, setSecondOption] = useState('')
 
+	const service: Service = JSON.parse(option)
+
+	const [servicesName, setServicesName] = useState<string[]>([])
+	const [servicesValue, setServicesValue] = useState<number[]>([])
+
 	const [client, setClient] = useState('')
 	const [allInputsFilled, setAllInputsFilled] = useState(false)
 
@@ -45,7 +50,14 @@ const AddSchedulingForm = ({ schedulingsState, setAddSchedulingForm }: AddSchedu
 		}
 	}, [date, option, client])
 
-	const service: Service = JSON.parse(option)
+	useEffect(() => {
+
+		const firstService: Service = JSON.parse(option)
+
+		setServicesName([firstService._id])
+		setServicesValue([getRightValue(date, firstService.value)])
+
+	}, [option, date])
 
 	const addScheduling = () => {
 		if (!blockedActions) {
@@ -53,8 +65,8 @@ const AddSchedulingForm = ({ schedulingsState, setAddSchedulingForm }: AddSchedu
 			const serviceScheduling: ServiceScheduling = {
 				_id: v4(),
 				service: {
-					name: [service._id],
-					value: [getRightValue(date, service.value)]
+					name: servicesName,
+					value: servicesValue
 				},
 				date,
 				client: client
