@@ -7,18 +7,21 @@ interface SecondOptionProps {
 	service: Service
 	setShowSecondOption: React.Dispatch<React.SetStateAction<boolean>>
 	setSecondOption: React.Dispatch<React.SetStateAction<string>>
+	setFirstOptionOnSecondService: (firstOption: string) => void
 }
 
-const SecondOption = ({ services, service, setShowSecondOption, setSecondOption }: SecondOptionProps) => {
+const SecondOption = ({ services, service, setShowSecondOption, setSecondOption, setFirstOptionOnSecondService }: SecondOptionProps) => {
 
 	// Não disponibilizando a primeira opção
 	const servicesForSecondOption = services.filter(current => {
 		return current._id !== service._id
 	})
 
+	const firstOption = JSON.stringify(servicesForSecondOption[0])
+
 	useEffect(() => {
-		setSecondOption(JSON.stringify(servicesForSecondOption[0]))
-	}, [])
+		setFirstOptionOnSecondService(firstOption)
+	}, [setFirstOptionOnSecondService, firstOption])
 
 	return (
 		<div className='mt-1 mb-3'>

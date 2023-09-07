@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from 'react'
+import { useContext, useState, useEffect, useCallback } from 'react'
 import { v4 } from 'uuid'
 import ConfirmFormButtons from 'components/pages/ConfirmFormButtons'
 import { ServicesContext } from 'ServicesContext'
@@ -58,6 +58,10 @@ const AddSchedulingForm = ({ schedulingsState, setAddSchedulingForm }: AddSchedu
 		setServicesValue([getRightValue(date, firstService.value)])
 
 	}, [option, date])
+
+	const setFirstOptionOnSecondService = useCallback((firstOption: string) => {
+		setSecondOption(firstOption)
+	}, [])
 
 	const addScheduling = () => {
 		if (!blockedActions) {
@@ -124,6 +128,7 @@ const AddSchedulingForm = ({ schedulingsState, setAddSchedulingForm }: AddSchedu
 									service={service}
 									setShowSecondOption={setShowSecondOption}
 									setSecondOption={setSecondOption}
+									setFirstOptionOnSecondService={setFirstOptionOnSecondService}
 								/>
 							: <button onClick={() => {
 									setShowSecondOption(true)
