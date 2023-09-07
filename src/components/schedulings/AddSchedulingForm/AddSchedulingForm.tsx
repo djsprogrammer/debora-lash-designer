@@ -57,15 +57,27 @@ const AddSchedulingForm = ({ schedulingsState, setAddSchedulingForm }: AddSchedu
 		setServicesName([firstService._id])
 		setServicesValue([getRightValue(date, firstService.value)])
 
-	}, [option, date])
+	}, [option])
+
+	useEffect(() => {
+		
+		if (secondOption) {
+
+			const secondService: Service = JSON.parse(secondOption)
+
+			const firstName = servicesName[0]
+			setServicesName([firstName, secondService._id])
+
+			const firstValue = servicesValue[0]
+			setServicesValue([firstValue, getRightValue(date, secondService.value)])
+
+		}
+
+	}, [secondOption])
 
 	const setFirstOptionOnSecondService = useCallback((firstOption: string) => {
 		setSecondOption(firstOption)
 	}, [])
-
-	useEffect(() => {
-		console.log(secondOption)
-	}, [secondOption])
 
 	const addScheduling = () => {
 		if (!blockedActions) {
@@ -123,6 +135,7 @@ const AddSchedulingForm = ({ schedulingsState, setAddSchedulingForm }: AddSchedu
 						e.preventDefault()
 						addScheduling()
 					}}>
+						<input onChange={e => setClient(e.target.value)} className='form-control text-center p-1 mb-3' type='text' placeholder='Digite o nome do cliente' required />
 						<DateInput setDate={setDate} />
 						<ServicesOptionsInput showSecondOption={showSecondOption} margin='mt-3 mb-1' setOption={setOption} services={services} />
 						{
@@ -133,6 +146,8 @@ const AddSchedulingForm = ({ schedulingsState, setAddSchedulingForm }: AddSchedu
 									setShowSecondOption={setShowSecondOption}
 									setSecondOption={setSecondOption}
 									setFirstOptionOnSecondService={setFirstOptionOnSecondService}
+									setServicesName={setServicesName}
+									setServicesValue={setServicesValue}
 								/>
 							: <button onClick={() => {
 									setShowSecondOption(true)
@@ -142,7 +157,6 @@ const AddSchedulingForm = ({ schedulingsState, setAddSchedulingForm }: AddSchedu
 									+1 Serviço
 								</button>
 						}
-						<input onChange={e => setClient(e.target.value)} className='form-control text-center p-1 mb-3' type='text' placeholder='Digite o nome do cliente' required />
 						<ConfirmFormButtons
 							allInputsFilled={allInputsFilled}
 							blockedActions={blockedActions}

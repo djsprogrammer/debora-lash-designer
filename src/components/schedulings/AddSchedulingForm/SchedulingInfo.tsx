@@ -1,5 +1,4 @@
 import { dateFormat } from 'formFunctions/common'
-import { getRightValue } from 'formFunctions/scheduling/common'
 
 interface SchedulingInfoProps {
 	client: string
@@ -20,12 +19,16 @@ const SchedulingInfo = ({ client, date, servicesName, servicesValue }: Schedulin
 		)
 	}
 
+	const value = servicesValue.reduce((acc, current) => {
+		return acc + current
+	}, 0)
+
 	return (
 		<div className='mx-5'>
 			<h6 className='mb-2'><strong>Cliente:</strong> {client}</h6>
 			<h6><strong>Data:</strong> {date ? dateFormat(date) : null}</h6>
 			<h6 className='my-2'><strong>Serviço:</strong> <ServicesList /></h6>
-			<h6><strong>Valor:</strong> {servicesValue[0]}</h6>
+			<h6><strong>Valor:</strong> {value}</h6>
 		</div>
 	)
 }

@@ -8,9 +8,11 @@ interface SecondOptionProps {
 	setShowSecondOption: React.Dispatch<React.SetStateAction<boolean>>
 	setSecondOption: React.Dispatch<React.SetStateAction<string>>
 	setFirstOptionOnSecondService: (firstOption: string) => void
+	setServicesName: React.Dispatch<React.SetStateAction<string[]>>
+	setServicesValue: React.Dispatch<React.SetStateAction<number[]>>
 }
 
-const SecondOption = ({ services, service, setShowSecondOption, setSecondOption, setFirstOptionOnSecondService }: SecondOptionProps) => {
+const SecondOption = ({ services, service, setShowSecondOption, setSecondOption, setFirstOptionOnSecondService, setServicesName, setServicesValue }: SecondOptionProps) => {
 
 	// Não disponibilizando a primeira opção
 	const servicesForSecondOption = services.filter(current => {
@@ -26,7 +28,13 @@ const SecondOption = ({ services, service, setShowSecondOption, setSecondOption,
 	return (
 		<div className='mt-1 mb-3'>
 			<ServicesOptionsInput setOption={setSecondOption} services={servicesForSecondOption} />
-			<button onClick={() => setShowSecondOption(false)} className='btn btn-sm btn-link' type='button'>Cancelar</button>
+			<button onClick={() => {
+				// Removendo a segunda opção do array de serviços
+				setSecondOption('')
+				setServicesName(prev => [prev[0]])
+				setServicesValue(prev => [prev[0]])
+				setShowSecondOption(false)
+			}} className='btn btn-sm btn-link' type='button'>Cancelar</button>
 		</div>
 	)
 
