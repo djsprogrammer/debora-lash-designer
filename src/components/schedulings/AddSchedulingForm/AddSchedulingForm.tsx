@@ -63,6 +63,10 @@ const AddSchedulingForm = ({ schedulingsState, setAddSchedulingForm }: AddSchedu
 		setSecondOption(firstOption)
 	}, [])
 
+	useEffect(() => {
+		console.log(secondOption)
+	}, [secondOption])
+
 	const addScheduling = () => {
 		if (!blockedActions) {
 			setBlockedActions(true)
@@ -120,7 +124,7 @@ const AddSchedulingForm = ({ schedulingsState, setAddSchedulingForm }: AddSchedu
 						addScheduling()
 					}}>
 						<DateInput setDate={setDate} />
-						<ServicesOptionsInput margin='mt-3 mb-1' setOption={setOption} services={services} />
+						<ServicesOptionsInput showSecondOption={showSecondOption} margin='mt-3 mb-1' setOption={setOption} services={services} />
 						{
 							showSecondOption
 							? <SecondOption

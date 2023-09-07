@@ -1,14 +1,17 @@
 import { Services } from 'types/services'
 
 interface ServicesOptionsInputProps {
-    margin?: string
     setOption: React.Dispatch<React.SetStateAction<string>>
     services: Services
+    showSecondOption?: boolean
+    margin?: string
 }
 
-const ServicesOptionsInput = ({ margin, setOption, services }: ServicesOptionsInputProps) => {
+const ServicesOptionsInput = ({ showSecondOption, margin, setOption, services }: ServicesOptionsInputProps) => {
     return (
-        <div className={`input-group ${margin}`}>
+        <div onMouseDown={e => {
+            if (showSecondOption) e.preventDefault()
+        }} className={`input-group ${margin}`}>
             <label className='input-group-text'>Escolha um serviço</label>
             <select onChange={e => setOption(e.target.value)} className='form-select text-center' required>
                 {services.map(service => (
