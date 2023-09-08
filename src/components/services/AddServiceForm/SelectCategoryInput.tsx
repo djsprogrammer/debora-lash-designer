@@ -6,7 +6,12 @@ interface SelectCategoryInputProps {
 
 const SelectCategoryInput = ({ setCategory }: SelectCategoryInputProps) => {
 
-    const categories = ['Categoria 1', 'Categoria 2', 'Categoria 3']
+    const categories = [
+        'Colocação de Cílios', 
+        'Manutenção de Cílios', 
+        'Remoção de Cílios', 
+        'Sobrancelha'
+    ]
 
     // Setando a primeira opção caso o usuário não mude
     useEffect(() => {
