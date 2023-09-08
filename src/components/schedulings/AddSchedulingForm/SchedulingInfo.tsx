@@ -1,4 +1,4 @@
-import { dateFormat } from 'formFunctions/common'
+import { dateFormat, moneyFormat } from 'formFunctions/common'
 
 interface SchedulingInfoProps {
 	client: string
@@ -28,7 +28,7 @@ const SchedulingInfo = ({ client, date, servicesName, servicesValue }: Schedulin
 			<h6 className='mb-2'><strong>Cliente:</strong> {client}</h6>
 			<h6><strong>Data:</strong> {date ? dateFormat(date) : null}</h6>
 			<h6 className='my-2'><strong>Serviço:</strong> <ServicesList /></h6>
-			<h6><strong>Valor:</strong> {value}</h6>
+			<h6><strong>Valor:</strong> {moneyFormat(value)}</h6>
 		</div>
 	)
 }
