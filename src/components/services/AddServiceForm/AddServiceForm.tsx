@@ -11,6 +11,7 @@ import NameInput from 'components/forms/NameInput'
 import ValueInput from 'components/forms/ValueInput'
 import { Service } from 'types/services'
 import { generateNewValue } from 'formFunctions/service/common'
+import SelectCategoryInput from './SelectCategoryInput'
 
 const ALREADY_EXISTS_TEXT = 'Já existe um serviço com esse nome!'
 
@@ -84,6 +85,7 @@ const AddServiceForm = ({ setAddServiceForm }: Props) => {
                     e.preventDefault()
                     addService()
                 }}>
+                    <SelectCategoryInput />
                     <NameInput setName={setName} />
                     <ValueInput margin='my-3' setValue={setValue} />
                     <ConfirmFormButtons

@@ -1,6 +1,6 @@
 import { useContext, useState, useEffect } from 'react'
 import ServiceTable from 'components/services/ServiceTable'
-import AddServiceForm from 'components/services/AddServiceForm'
+import AddServiceForm from 'components/services/AddServiceForm/AddServiceForm'
 import AnyServiceAdvice from 'components/pages/AnyAdvice'
 import RegisterButton from 'components/pages/RegisterButton'
 import { ServicesContext } from 'ServicesContext'
