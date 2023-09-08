@@ -23,8 +23,11 @@ const AddServiceForm = ({ setAddServiceForm }: Props) => {
 
     const [services, setServices] = useContext(ServicesContext)
     const [blockedActions, setBlockedActions] = useState(false)
+
+    const [category, setCategory] = useState('')
     const [name, setName] = useState('')
     const [value, setValue] = useState('')
+
     const [allInputsFilled, setAllInputsFilled] = useState(false)
 
     // Verificando se todos os inputs foram preenchidos
@@ -42,6 +45,7 @@ const AddServiceForm = ({ setAddServiceForm }: Props) => {
             if (!alreadyExists) {
                 if (validNumber(value)) {
                     const service: Service = {
+                        category,
                         _id: name, 
                         value: [generateNewValue(value)]
                     }
