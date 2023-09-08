@@ -2,6 +2,7 @@ import { memo } from 'react'
 import DeleteButton from 'components/pages/DeleteButton'
 import { ServiceScheduling } from 'types/schedulings'
 import { moneyFormat, dateFormat } from 'formFunctions/common'
+import { sumOfServices } from 'formFunctions/scheduling/common'
 
 interface Props {
     scheduling: ServiceScheduling
@@ -19,12 +20,8 @@ const SchedulingRow = ({ scheduling, setDeleteSchedulingForm, setTargetId }: Pro
         return names[0]
     }
 
-    const sum = scheduling.service.value.reduce((acc, current) => {
-        return acc + current
-    }, 0)
-
     // Deixando no formato 0,00
-    const value = moneyFormat(sum)
+    const value = sumOfServices(scheduling.service.value)
 
     // Deixando no formato dd/mm
     const date = dateFormat(scheduling.date)
@@ -33,7 +30,7 @@ const SchedulingRow = ({ scheduling, setDeleteSchedulingForm, setTargetId }: Pro
         <tr>
             <td>{scheduling.client}</td>
             <td>{name()}</td>
-            <td>{value}</td>
+            <td>{moneyFormat(value)}</td>
             <td>{date}</td>
             <td>
                 <DeleteButton onClick={() => {

@@ -16,3 +16,9 @@ export const getRightValue = (schedulingDate: string, serviceValues: Value[]) =>
     caso o serviço não tenha sofrido edições */
     return initialValue
 }
+
+export const sumOfServices = (servicesValue: number[]) => {
+    return servicesValue.reduce((acc, current) => {
+        return acc + current
+    }, 0)
+}

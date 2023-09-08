@@ -1,4 +1,5 @@
 import { dateFormat, moneyFormat } from 'formFunctions/common'
+import { sumOfServices } from 'formFunctions/scheduling/common'
 
 interface SchedulingInfoProps {
 	client: string
@@ -19,9 +20,7 @@ const SchedulingInfo = ({ client, date, servicesName, servicesValue }: Schedulin
 		)
 	}
 
-	const value = servicesValue.reduce((acc, current) => {
-		return acc + current
-	}, 0)
+	const value = sumOfServices(servicesValue)
 
 	return (
 		<div className='mx-5'>
