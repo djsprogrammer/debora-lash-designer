@@ -89,7 +89,7 @@ const AddServiceForm = ({ setAddServiceForm }: Props) => {
                     e.preventDefault()
                     addService()
                 }}>
-                    <SelectCategoryInput />
+                    <SelectCategoryInput setCategory={setCategory} />
                     <NameInput setName={setName} />
                     <ValueInput margin='my-3' setValue={setValue} />
                     <ConfirmFormButtons

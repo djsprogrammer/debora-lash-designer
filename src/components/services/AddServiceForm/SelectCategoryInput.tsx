@@ -1,12 +1,25 @@
-const SelectCategoryInput = () => {
+import { useEffect } from 'react'
+
+interface SelectCategoryInputProps {
+    setCategory: React.Dispatch<React.SetStateAction<string>>
+}
+
+const SelectCategoryInput = ({ setCategory }: SelectCategoryInputProps) => {
+
+    const categories = ['Categoria 1', 'Categoria 2', 'Categoria 3']
+
+    // Setando a primeira opção caso o usuário não mude
+    useEffect(() => {
+        setCategory(categories[0])
+    }, [])
 
     return (
         <div className='input-group mb-3'>
             <label className='input-group-text'>Categoria</label>
-            <select className='form-select text-center' required>
-                <option>Categoria 1</option>
-                <option>Categoria 2</option>
-                <option>Categoria 3</option>
+            <select onChange={e => setCategory(e.target.value)} className='form-select text-center' required>
+                {categories.map(category => {
+                    return <option key={category}>{category}</option>
+                })}
             </select>
         </div>
     )
