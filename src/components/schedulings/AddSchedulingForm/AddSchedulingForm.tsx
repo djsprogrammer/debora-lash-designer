@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect, useCallback } from 'react'
+import { useContext, useState, useEffect, useCallback, useMemo } from 'react'
 import { v4 } from 'uuid'
 import ConfirmFormButtons from 'components/pages/ConfirmFormButtons'
 import { ServicesContext } from 'ServicesContext'
@@ -42,6 +42,30 @@ const AddSchedulingForm = ({ schedulingsState, setAddSchedulingForm }: AddSchedu
 
 	const [showSecondOption, setShowSecondOption] = useState(false)
 
+	useMemo(() => {
+
+		let names: string[] = []
+		let values: number[] = []
+
+		const firstService: Service = JSON.parse(option)
+
+		names.push(firstService._id)
+		values.push(getRightValue(date, firstService.value))
+
+		if (secondOption) {
+
+			const secondService: Service = JSON.parse(secondOption)
+
+			names.push(secondService._id)
+			values.push(getRightValue(date, secondService.value))
+
+		}
+
+		setServicesName(names)
+		setServicesValue(values)
+
+	}, [date, option, secondOption])
+
 	// Verificando se todos os inputs foram preenchidos
 	// Pois caso não tenham sido, será impedido a mudança no comportamento do botão
 	useEffect(() => {
@@ -49,31 +73,6 @@ const AddSchedulingForm = ({ schedulingsState, setAddSchedulingForm }: AddSchedu
 			setAllInputsFilled(true)
 		}
 	}, [date, option, client])
-
-	useEffect(() => {
-
-		const firstService: Service = JSON.parse(option)
-
-		setServicesName([firstService._id])
-		setServicesValue([getRightValue(date, firstService.value)])
-
-	}, [option])
-
-	useEffect(() => {
-		
-		if (secondOption) {
-
-			const secondService: Service = JSON.parse(secondOption)
-
-			const firstName = servicesName[0]
-			setServicesName([firstName, secondService._id])
-
-			const firstValue = servicesValue[0]
-			setServicesValue([firstValue, getRightValue(date, secondService.value)])
-
-		}
-
-	}, [secondOption])
 
 	const setFirstOptionOnSecondService = useCallback((firstOption: string) => {
 		setSecondOption(firstOption)
