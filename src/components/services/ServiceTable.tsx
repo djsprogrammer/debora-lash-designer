@@ -1,5 +1,6 @@
 import { useContext, useState } from 'react'
 import { Service } from 'types/services'
+import ServiceFilterInput from './ServiceFilterInput'
 import ServiceRow from './ServiceRow'
 import DeleteForm from 'components/pages/DeleteForm'
 import EditServiceForm from './EditServiceForm'
@@ -47,7 +48,8 @@ const ServiceTable = () => {
 
     return (
         <div className='table-container'>
-            <table className={tableStyle}>
+            <ServiceFilterInput />
+            <table className={`${tableStyle} mt-2`}>
                 <thead>
                     <tr>
                         <th>Serviço</th>
