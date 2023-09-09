@@ -14,6 +14,7 @@ const ServiceTable = () => {
 
     const [services, setServices] = useContext(ServicesContext)
 
+    const [serviceFilter, setServiceFilter] = useState('')
     const [deleteServiceForm, setDeleteServiceForm] = useState(false)
     const [editServiceForm, setEditServiceForm] = useState(false)
     const [idForDeletion, setIdForDeletion] = useState('')
@@ -46,9 +47,18 @@ const ServiceTable = () => {
             })
     }
 
+    const filteredServices = () => {
+        if (serviceFilter) {
+            return services.filter(service => {
+                return service.category === serviceFilter
+            })
+        }
+        return services
+    }
+
     return (
         <div className='table-container'>
-            <ServiceFilterInput />
+            <ServiceFilterInput setServiceFilter={setServiceFilter} />
             <table className={`${tableStyle} mt-2`}>
                 <thead>
                     <tr>
@@ -58,7 +68,7 @@ const ServiceTable = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {services.map(service =>
+                    {filteredServices().map(service =>
                         <ServiceRow
                             key={service._id}
                             service={service}

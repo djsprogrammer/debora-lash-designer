@@ -12,6 +12,5 @@ export const checkForValueInTheSameDate = (serviceForEdition: Service, newValue:
     })
 
     serviceForEdition.value.push(newValue)
-    console.log(serviceForEdition)
 
 }
