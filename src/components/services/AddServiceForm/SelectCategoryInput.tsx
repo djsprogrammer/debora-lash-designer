@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import categories from 'constants/servicesCategory'
 
 interface SelectCategoryInputProps {
     setFirstCategoryOption: (firstCategory: string) => void
@@ -7,14 +8,9 @@ interface SelectCategoryInputProps {
 
 const SelectCategoryInput = ({ setFirstCategoryOption, setCategory }: SelectCategoryInputProps) => {
 
-    const categories = [
-        'Colocação de Cílios', 
-        'Manutenção de Cílios', 
-        'Remoção de Cílios', 
-        'Sobrancelha'
-    ]
+    const formCategories = categories.slice(1)
 
-    const firstCategory = categories[0]
+    const firstCategory = formCategories[0]
 
     // Setando a primeira opção caso o usuário não mude
     useEffect(() => {
@@ -25,7 +21,7 @@ const SelectCategoryInput = ({ setFirstCategoryOption, setCategory }: SelectCate
         <div className='input-group mb-3'>
             <label className='input-group-text'>Categoria</label>
             <select onChange={e => setCategory(e.target.value)} className='form-select text-center' required>
-                {categories.map(category => {
+                {formCategories.map(category => {
                     return <option key={category}>{category}</option>
                 })}
             </select>
