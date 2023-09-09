@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from 'react'
+import { useContext, useState, useEffect, useCallback } from 'react'
 import ConfirmFormButtons from 'components/pages/ConfirmFormButtons'
 import { validNumber, fetchOptions, orderServices } from 'formFunctions/common'
 import { ServicesContext } from 'ServicesContext'
@@ -37,6 +37,10 @@ const AddServiceForm = ({ setAddServiceForm }: Props) => {
             setAllInputsFilled(true)
         }
     }, [name, value])
+
+    const setFirstCategoryOption = useCallback((firstCategory: string) => {
+        setCategory(firstCategory)
+    }, [])
 
     const addService = () => {
         if (!blockedActions) {
@@ -89,7 +93,10 @@ const AddServiceForm = ({ setAddServiceForm }: Props) => {
                     e.preventDefault()
                     addService()
                 }}>
-                    <SelectCategoryInput setCategory={setCategory} />
+                    <SelectCategoryInput
+                        setFirstCategoryOption={setFirstCategoryOption}
+                        setCategory={setCategory}
+                    />
                     <NameInput setName={setName} />
                     <ValueInput margin='my-3' setValue={setValue} />
                     <ConfirmFormButtons

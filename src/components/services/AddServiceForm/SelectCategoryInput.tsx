@@ -1,10 +1,11 @@
 import { useEffect } from 'react'
 
 interface SelectCategoryInputProps {
+    setFirstCategoryOption: (firstCategory: string) => void
     setCategory: React.Dispatch<React.SetStateAction<string>>
 }
 
-const SelectCategoryInput = ({ setCategory }: SelectCategoryInputProps) => {
+const SelectCategoryInput = ({ setFirstCategoryOption, setCategory }: SelectCategoryInputProps) => {
 
     const categories = [
         'Colocação de Cílios', 
@@ -13,10 +14,12 @@ const SelectCategoryInput = ({ setCategory }: SelectCategoryInputProps) => {
         'Sobrancelha'
     ]
 
+    const firstCategory = categories[0]
+
     // Setando a primeira opção caso o usuário não mude
     useEffect(() => {
-        setCategory(categories[0])
-    }, [])
+        setFirstCategoryOption(firstCategory)
+    }, [setFirstCategoryOption, firstCategory])
 
     return (
         <div className='input-group mb-3'>
