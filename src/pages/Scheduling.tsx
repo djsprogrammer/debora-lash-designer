@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react'
+import { useContext, useState, useEffect } from 'react'
+import { ServicesContext } from 'ServicesContext'
 import SchedulingTable from 'components/schedulings/SchedulingTable'
 import AnySchedulingAdvice from 'components/pages/AnyAdvice'
 import AddSchedulingForm from 'components/schedulings/AddSchedulingForm/AddSchedulingForm'
@@ -24,8 +25,16 @@ const Scheduling = ({ setNavDisplay, setCurrentPage, schedulingsState }: Schedul
 		setCurrentPage(0)
 	}, [setCurrentPage])
 
+	const [services] = useContext(ServicesContext)
 	const [schedulings, setSchedulings] = schedulingsState
 	const [addSchedulingForm, setAddSchedulingForm] = useState(false)
+
+	const DoesServiceExist = () => {
+		// Só permitindo agendar com algum serviço salvo
+		return services[0]
+		? <RegisterButton setForm={setAddSchedulingForm} text='Agendar' />
+		: <div className='alert alert-warning'>Não existe serviço para realizar um agendamento</div>
+	}
 
 	return (
 		<div className={container}>
@@ -42,7 +51,7 @@ const Scheduling = ({ setNavDisplay, setCurrentPage, schedulingsState }: Schedul
 						schedulingsState={[schedulings, setSchedulings]}
 						setAddSchedulingForm={setAddSchedulingForm}
 						/>
-					: <RegisterButton setForm={setAddSchedulingForm} text='Agendar' />
+					: <DoesServiceExist />
 			}
 			
 		</div>
