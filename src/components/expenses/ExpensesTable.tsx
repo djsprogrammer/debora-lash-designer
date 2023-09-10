@@ -1,17 +1,20 @@
 import { useState } from 'react'
-import { tableStyle } from 'commonStyles'
-import { ExpensesState } from 'types/expenses'
-import ExpenseRow from './ExpenseRow'
-import DeleteForm from 'components/pages/DeleteForm'
+
+import { deleteFetchOptions } from 'formFunctions/common'
 import { DELETE_EXPENSE } from 'constants/urls'
 import { DATABASE_ERROR_TEXT, SERVER_ERROR_TEXT } from 'constants/errors'
-import { deleteFetchOptions } from 'formFunctions/common'
+import { tableStyle } from 'commonStyles'
 
-interface Props {
+import { ExpensesState } from 'types/expenses'
+
+import ExpenseRow from './ExpenseRow'
+import DeleteForm from 'components/pages/DeleteForm'
+
+interface ExpensesTableProps {
     expensesState: ExpensesState
 }
 
-const ExpensesTable = ({ expensesState }: Props) => {
+const ExpensesTable = ({ expensesState }: ExpensesTableProps) => {
 
     const [expenses, setExpenses] = expensesState
 

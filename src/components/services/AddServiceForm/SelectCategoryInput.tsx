@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+
 import categories from 'constants/servicesCategory'
 
 interface SelectCategoryInputProps {

@@ -1,12 +1,16 @@
 import { useContext, useState, useEffect } from 'react'
-import { ServicesContext } from 'ServicesContext'
+
+import { container } from 'commonStyles'
+
+import { Props } from 'types/pages'
+import { SchedulingsState } from 'types/schedulings'
+
 import SchedulingTable from 'components/schedulings/SchedulingTable'
 import AnySchedulingAdvice from 'components/pages/AnyAdvice'
 import AddSchedulingForm from 'components/schedulings/AddSchedulingForm/AddSchedulingForm'
 import RegisterButton from 'components/pages/RegisterButton'
-import { SchedulingsState } from 'types/schedulings'
-import { Props } from 'types/pages'
-import { container } from 'commonStyles'
+
+import { ServicesContext } from 'ServicesContext'
 
 interface SchedulingProps extends Props {
 	setNavDisplay: React.Dispatch<React.SetStateAction<string>>

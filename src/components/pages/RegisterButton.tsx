@@ -1,12 +1,11 @@
 import { FilePlus } from 'lucide-react'
-import { BooleanSet } from 'types/common'
 
-interface Props {
-	setForm: BooleanSet
+interface RegisterButtonProps {
+	setForm: React.Dispatch<React.SetStateAction<boolean>>
 	text: string
 }
 
-const RegisterButton = ({ setForm, text }: Props) => {
+const RegisterButton = ({ setForm, text }: RegisterButtonProps) => {
 
 	return (
 		<FilePlus onClick={() => setForm(true)} className='align-self-start button' />

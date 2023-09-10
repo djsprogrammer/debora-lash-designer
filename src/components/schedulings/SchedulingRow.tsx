@@ -1,8 +1,11 @@
 import { memo } from 'react'
-import DeleteButton from 'components/pages/DeleteButton'
-import { ServiceScheduling } from 'types/schedulings'
-import { moneyFormat, dateFormat } from 'formFunctions/common'
+
 import { sumOfServices } from 'formFunctions/scheduling/common'
+import { moneyFormat, dateFormat } from 'formFunctions/common'
+
+import { ServiceScheduling } from 'types/schedulings'
+
+import DeleteButton from 'components/pages/DeleteButton'
 
 interface Props {
     scheduling: ServiceScheduling

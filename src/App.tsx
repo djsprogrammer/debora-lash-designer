@@ -1,21 +1,26 @@
 import { useCallback, useEffect, useState } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'App.css'
+
+import { orderServices } from 'formFunctions/common'
+import { GET_ALL_DOCS } from 'constants/urls'
+import { DATABASE_ERROR_TEXT, SERVER_ERROR_TEXT } from 'constants/errors'
+
 import { AllDocs } from 'types/allDocs'
 import { Services as TServices } from 'types/services'
 import { ServiceSchedulings } from 'types/schedulings'
 import { Expenses as TExpenses } from 'types/expenses'
+
 import Header from 'components/fixed/Header'
 import Navegation from 'components/fixed/Navegation'
 import Loading from 'pages/Loading'
 import Scheduling from 'pages/Scheduling'
 import Services from 'pages/Services'
 import Expenses from 'pages/Expenses'
+
 import ServicesProvider from 'ServicesContext'
-import { GET_ALL_DOCS } from 'constants/urls'
-import { DATABASE_ERROR_TEXT, SERVER_ERROR_TEXT } from 'constants/errors'
-import { orderServices } from 'formFunctions/common'
 
 const App = () => {
 

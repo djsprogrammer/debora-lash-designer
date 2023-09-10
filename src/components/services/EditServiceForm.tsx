@@ -1,14 +1,18 @@
 import { useState, useEffect } from 'react'
-import { Service, ServicesState, Value } from 'types/services'
+
+import { generateNewValue } from 'formFunctions/service/common'
+import { checkForValueInTheSameDate } from 'formFunctions/service/editService'
+import { validNumber, orderServices } from 'formFunctions/common'
 import { EDIT_SERVICE } from 'constants/urls'
 import { INVALID_NUMBER_TEXT, DATABASE_ERROR_TEXT, SERVER_ERROR_TEXT } from 'constants/errors'
+
+import { Service, ServicesState, Value } from 'types/services'
+
 import Container from 'components/forms/Container'
 import FormHeader from 'components/forms/Header'
 import ValueInput from 'components/forms/ValueInput'
 import ConfirmFormButtons from 'components/pages/ConfirmFormButtons'
-import { validNumber, orderServices } from 'formFunctions/common'
-import { generateNewValue } from 'formFunctions/service/common'
-import { checkForValueInTheSameDate } from 'formFunctions/service/editService'
+
 
 interface EditServiceFormProps {
 	servicesState: ServicesState

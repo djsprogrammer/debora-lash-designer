@@ -1,12 +1,12 @@
 import { useRef, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
-interface Props {
+interface NavegationProps {
 	navDisplay: string
 	currentPage: number
 }
 
-const Navegation = ({ navDisplay, currentPage }: Props) => {
+const Navegation = ({ navDisplay, currentPage }: NavegationProps) => {
 
 	const link1 = useRef<HTMLAnchorElement>(null)
 	const link2 = useRef<HTMLAnchorElement>(null)

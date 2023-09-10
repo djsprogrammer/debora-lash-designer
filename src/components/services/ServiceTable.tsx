@@ -1,14 +1,18 @@
 import { useContext, useState } from 'react'
+
+import { deleteFetchOptions, orderServices } from 'formFunctions/common'
+import { DELETE_SERVICE } from 'constants/urls'
+import { DATABASE_ERROR_TEXT, SERVER_ERROR_TEXT } from 'constants/errors'
+import { tableStyle } from 'commonStyles'
+
 import { Service } from 'types/services'
+
 import ServiceFilterInput from './ServiceFilterInput'
 import ServiceRow from './ServiceRow'
 import DeleteForm from 'components/pages/DeleteForm'
 import EditServiceForm from './EditServiceForm'
-import { tableStyle } from 'commonStyles'
+
 import { ServicesContext } from 'ServicesContext'
-import { DELETE_SERVICE } from 'constants/urls'
-import { DATABASE_ERROR_TEXT, SERVER_ERROR_TEXT } from 'constants/errors'
-import { deleteFetchOptions, orderServices } from 'formFunctions/common'
 
 const ServiceTable = () => {
 

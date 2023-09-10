@@ -1,8 +1,8 @@
-interface Props {
+interface AnyAdviceProps {
     page: string
 }
 
-const AnyAdvice = ({ page }: Props) => {
+const AnyAdvice = ({ page }: AnyAdviceProps) => {
 
     return (
         <div>

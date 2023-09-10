@@ -1,11 +1,15 @@
 import { useContext, useState, useEffect } from 'react'
-import ServiceTable from 'components/services/ServiceTable'
-import AddServiceForm from 'components/services/AddServiceForm/AddServiceForm'
-import AnyServiceAdvice from 'components/pages/AnyAdvice'
-import RegisterButton from 'components/pages/RegisterButton'
-import { ServicesContext } from 'ServicesContext'
+
 import { container } from 'commonStyles'
+
 import { Props } from 'types/pages'
+
+import ServiceTable from 'components/services/ServiceTable'
+import AnyServiceAdvice from 'components/pages/AnyAdvice'
+import AddServiceForm from 'components/services/AddServiceForm/AddServiceForm'
+import RegisterButton from 'components/pages/RegisterButton'
+
+import { ServicesContext } from 'ServicesContext'
 
 const Services = ({ setCurrentPage }: Props) => {
 

@@ -1,12 +1,13 @@
 import { useState, useRef } from 'react'
+
 import { formContainer, confirmButtonStyle, cancelButtonStyle } from 'commonStyles'
 
-interface Props {
+interface DeleteFormProps {
 	setDeleteForm: React.Dispatch<React.SetStateAction<boolean>>
 	deleteTarget: () => void
 }
 
-const DeleteForm = ({ deleteTarget, setDeleteForm }: Props) => {
+const DeleteForm = ({ deleteTarget, setDeleteForm }: DeleteFormProps) => {
 
 	const [possibleToCancel, setPossibleToCancel] = useState(true)
 

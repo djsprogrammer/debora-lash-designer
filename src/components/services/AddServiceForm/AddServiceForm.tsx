@@ -1,22 +1,25 @@
-import { useContext, useState, useEffect, useCallback } from 'react'
-import ConfirmFormButtons from 'components/pages/ConfirmFormButtons'
+import React, { useContext, useState, useEffect, useCallback } from 'react'
+
+import { generateNewValue } from 'formFunctions/service/common'
 import { validNumber, fetchOptions, orderServices } from 'formFunctions/common'
-import { ServicesContext } from 'ServicesContext'
 import { CREATE_SERVICE } from 'constants/urls'
 import { DATABASE_ERROR_TEXT, SERVER_ERROR_TEXT, INVALID_NUMBER_TEXT } from 'constants/errors'
-import { BooleanSet } from 'types/common'
+
+import { Service } from 'types/services'
+
 import Container from 'components/forms/Container'
 import FormHeader from 'components/forms/Header'
+import SelectCategoryInput from './SelectCategoryInput'
 import NameInput from 'components/forms/NameInput'
 import ValueInput from 'components/forms/ValueInput'
-import { Service } from 'types/services'
-import { generateNewValue } from 'formFunctions/service/common'
-import SelectCategoryInput from './SelectCategoryInput'
+import ConfirmFormButtons from 'components/pages/ConfirmFormButtons'
+
+import { ServicesContext } from 'ServicesContext'
 
 const ALREADY_EXISTS_TEXT = 'Já existe um serviço com esse nome!'
 
 interface Props {
-    setAddServiceForm: BooleanSet
+    setAddServiceForm: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const AddServiceForm = ({ setAddServiceForm }: Props) => {

@@ -1,15 +1,17 @@
 import { Pencil } from 'lucide-react'
-import DeleteButton from 'components/pages/DeleteButton'
+
 import { moneyFormat } from 'formFunctions/common'
-import { BooleanSet } from 'types/common'
+
 import { Service } from 'types/services'
+
+import DeleteButton from 'components/pages/DeleteButton'
 
 interface Props {
     service: Service
     setIdForDeletion: React.Dispatch<React.SetStateAction<string>>
     setServiceForEdition: React.Dispatch<React.SetStateAction<Service>>
-    setDeleteServiceForm: BooleanSet
-    setEditServiceForm: BooleanSet
+    setDeleteServiceForm: React.Dispatch<React.SetStateAction<boolean>>
+    setEditServiceForm: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const ServiceRow = ({ service, setIdForDeletion, setServiceForEdition, setDeleteServiceForm, setEditServiceForm }: Props) => {

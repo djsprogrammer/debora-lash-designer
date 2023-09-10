@@ -1,14 +1,16 @@
 import { useRef } from 'react'
-import { BooleanSet } from 'types/common'
+
 import { confirmButtonStyle, cancelButtonStyle } from 'commonStyles'
 
-interface Props {
+import { BooleanSet } from 'types/common'
+
+interface ConfirmFormButtonsProps {
 	allInputsFilled: boolean
 	blockedActions: boolean
 	setForm: BooleanSet
 }
 
-const AddFormButtons = ({ allInputsFilled, blockedActions, setForm }: Props) => {
+const ConfirmFormButtons = ({ allInputsFilled, blockedActions, setForm }: ConfirmFormButtonsProps) => {
 
 	const confirmButtonRef = useRef<HTMLButtonElement>(null)
 	const cancelButtonRef = useRef<HTMLButtonElement>(null)
@@ -36,4 +38,4 @@ const AddFormButtons = ({ allInputsFilled, blockedActions, setForm }: Props) => 
 
 }
 
-export default AddFormButtons
+export default ConfirmFormButtons

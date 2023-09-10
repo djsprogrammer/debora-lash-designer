@@ -1,19 +1,21 @@
 import { useState, useEffect } from 'react'
 import { v4 } from 'uuid'
-import NameInput from 'components/forms/NameInput'
-import ValueInput from 'components/forms/ValueInput'
-import ConfirmFormButtons from 'components/pages/ConfirmFormButtons'
+
 import { validNumber, fetchOptions } from 'formFunctions/common'
-import { ExpensesState } from 'types/expenses'
-import { BooleanSet } from 'types/common'
 import { CREATE_EXPENSE } from 'constants/urls'
 import { DATABASE_ERROR_TEXT, INVALID_NUMBER_TEXT } from 'constants/errors'
+
+import { ExpensesState } from 'types/expenses'
+
 import Container from 'components/forms/Container'
 import FormHeader from 'components/forms/Header'
 import DateInput from 'components/forms/DateInput'
+import NameInput from 'components/forms/NameInput'
+import ValueInput from 'components/forms/ValueInput'
+import ConfirmFormButtons from 'components/pages/ConfirmFormButtons'
 
 interface Props {
-	setAddExpenseForm: BooleanSet
+	setAddExpenseForm: React.Dispatch<React.SetStateAction<boolean>>
 	expensesState: ExpensesState
 }
 

@@ -1,5 +1,5 @@
-import { dateFormat, moneyFormat } from 'formFunctions/common'
 import { sumOfServices } from 'formFunctions/scheduling/common'
+import { dateFormat, moneyFormat } from 'formFunctions/common'
 
 interface SchedulingInfoProps {
 	client: string

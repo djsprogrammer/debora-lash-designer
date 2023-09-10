@@ -1,15 +1,18 @@
 import { memo } from 'react'
-import DeleteButton from 'components/pages/DeleteButton'
+
 import { moneyFormat, dateFormat } from 'formFunctions/common'
+
 import { Expense } from 'types/expenses'
 
-interface Props {
+import DeleteButton from 'components/pages/DeleteButton'
+
+interface ExpenseRowProps {
     expense: Expense
     setTargetId: React.Dispatch<React.SetStateAction<string>>
     setDeleteExpenseForm: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const ExpenseRow = ({ expense, setTargetId, setDeleteExpenseForm }: Props) => {
+const ExpenseRow = ({ expense, setTargetId, setDeleteExpenseForm }: ExpenseRowProps) => {
 
     // Deixando no formato 0,00
     const value = moneyFormat(expense.value)

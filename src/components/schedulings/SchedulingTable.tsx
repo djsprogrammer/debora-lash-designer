@@ -1,11 +1,14 @@
 import { useState } from 'react'
-import SchedulingRow from './SchedulingRow'
-import { Props } from 'types/schedulings'
-import { tableStyle } from 'commonStyles'
-import DeleteForm from 'components/pages/DeleteForm'
+
+import { deleteFetchOptions } from 'formFunctions/common'
 import { DELETE_SCHEDULING } from 'constants/urls'
 import { DATABASE_ERROR_TEXT, SERVER_ERROR_TEXT } from 'constants/errors'
-import { deleteFetchOptions } from 'formFunctions/common'
+
+import { Props } from 'types/schedulings'
+import { tableStyle } from 'commonStyles'
+
+import SchedulingRow from './SchedulingRow'
+import DeleteForm from 'components/pages/DeleteForm'
 
 const SchedulingTable = ({ schedulingsState }: Props) => {
 

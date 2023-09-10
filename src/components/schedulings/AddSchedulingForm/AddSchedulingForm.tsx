@@ -1,23 +1,26 @@
-import { useContext, useState, useEffect, useCallback, useMemo } from 'react'
+import React, { useContext, useState, useEffect, useCallback, useMemo } from 'react'
 import { v4 } from 'uuid'
-import ConfirmFormButtons from 'components/pages/ConfirmFormButtons'
-import { ServicesContext } from 'ServicesContext'
-import { Props, ServiceScheduling } from 'types/schedulings'
-import { BooleanSet } from 'types/common'
-import { CREATE_SCHEDULING } from 'constants/urls'
-import { DATABASE_ERROR_TEXT, SERVER_ERROR_TEXT } from 'constants/errors'
+
 import { fetchOptions } from 'formFunctions/common'
 import { getRightValue } from 'formFunctions/scheduling/common'
-import Container from 'components/forms/Container'
-import DateInput from 'components/forms/DateInput'
-import FormHeader from 'components/forms/Header'
+import { CREATE_SCHEDULING } from 'constants/urls'
+import { DATABASE_ERROR_TEXT, SERVER_ERROR_TEXT } from 'constants/errors'
+
+import { Props, ServiceScheduling } from 'types/schedulings'
 import { Service } from 'types/services'
+
+import Container from 'components/forms/Container'
+import FormHeader from 'components/forms/Header'
+import DateInput from 'components/forms/DateInput'
 import ServicesOptionsInput from './ServicesOptionsInput'
-import SchedulingInfo from './SchedulingInfo'
 import SecondOption from './SecondOption'
+import ConfirmFormButtons from 'components/pages/ConfirmFormButtons'
+import SchedulingInfo from './SchedulingInfo'
+
+import { ServicesContext } from 'ServicesContext'
 
 interface AddSchedulingFormProps extends Props {
-	setAddSchedulingForm: BooleanSet
+	setAddSchedulingForm: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const AddSchedulingForm = ({ schedulingsState, setAddSchedulingForm }: AddSchedulingFormProps) => {

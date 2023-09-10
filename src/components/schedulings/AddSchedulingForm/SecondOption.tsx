@@ -1,6 +1,8 @@
 import { useEffect } from 'react'
-import ServicesOptionsInput from './ServicesOptionsInput'
+
 import { Services, Service } from 'types/services'
+
+import ServicesOptionsInput from './ServicesOptionsInput'
 
 interface SecondOptionProps {
 	services: Services
