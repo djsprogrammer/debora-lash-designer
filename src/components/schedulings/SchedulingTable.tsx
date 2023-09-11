@@ -13,17 +13,21 @@ import SchedulingFilterInput from './SchedulingFilterInput'
 
 const SchedulingTable = ({ schedulingsState }: Props) => {
 
+    const getCurrentMonth = () => {
+        const currentYear = new Date().getFullYear()
+        const currentMonth = String(new Date().getMonth() + 1).padStart(2, '0')
+        return `${currentYear}-${currentMonth}`
+    }
+
     const [servicesScheduling, setServicesScheduling] = schedulingsState
 
-    const [schedulingFilter, setSchedulingFilter] = useState('')
+    const [schedulingFilter, setSchedulingFilter] = useState(getCurrentMonth())
     const [deleteSchedulingForm, setDeleteSchedulingForm] = useState(false)
     const [targetId, setTargetId] = useState('')
 
     useEffect(() => {
-        const currentYear = new Date().getFullYear()
-        const currentMonth = String(new Date().getMonth() + 1).padStart(2, '0')
-        setSchedulingFilter(`${currentYear}-${currentMonth}`)
-    }, [])
+        console.log(schedulingFilter)
+    }, [schedulingFilter])
 
     const deleteScheduling = () => {
         const options = deleteFetchOptions(targetId)
