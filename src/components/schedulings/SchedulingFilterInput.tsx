@@ -22,7 +22,7 @@ const SchedulingFilterInput = ({ setSchedulingFilter }: SchedulingFilterInputPro
     return (
         <select className='mt-2 text-center form-select w-25'>
             {months.map(month => {
-                return <option value={month[0]}>{month[1]}</option>
+                return <option key={month[0]} value={month[0]}>{month[1]}</option>
             })}
         </select>
     )
