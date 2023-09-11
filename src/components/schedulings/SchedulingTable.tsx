@@ -9,6 +9,7 @@ import { tableStyle } from 'commonStyles'
 
 import SchedulingRow from './SchedulingRow'
 import DeleteForm from 'components/pages/DeleteForm'
+import SchedulingFilterInput from './SchedulingFilterInput'
 
 const SchedulingTable = ({ schedulingsState }: Props) => {
 
@@ -45,6 +46,7 @@ const SchedulingTable = ({ schedulingsState }: Props) => {
 
     return (
         <div className='table-container mb-4'>
+            <SchedulingFilterInput />
             <table className={tableStyle}>
                 <thead>
                     <tr>
