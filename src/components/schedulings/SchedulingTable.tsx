@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 
 import { deleteFetchOptions } from 'formFunctions/common'
 import { DELETE_SCHEDULING } from 'constants/urls'
@@ -24,10 +24,6 @@ const SchedulingTable = ({ schedulingsState }: Props) => {
     const [schedulingFilter, setSchedulingFilter] = useState(getCurrentMonth())
     const [deleteSchedulingForm, setDeleteSchedulingForm] = useState(false)
     const [targetId, setTargetId] = useState('')
-
-    useEffect(() => {
-        console.log(schedulingFilter)
-    }, [schedulingFilter])
 
     const deleteScheduling = () => {
         const options = deleteFetchOptions(targetId)
@@ -57,7 +53,9 @@ const SchedulingTable = ({ schedulingsState }: Props) => {
 
     return (
         <div className='table-container mb-4'>
-            <SchedulingFilterInput setSchedulingFilter={setSchedulingFilter} />
+            <SchedulingFilterInput
+                setSchedulingFilter={setSchedulingFilter}
+            />
             <table className={tableStyle}>
                 <thead>
                     <tr>
