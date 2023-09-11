@@ -22,8 +22,6 @@ import Expenses from 'pages/Expenses'
 
 import ServicesProvider from 'ServicesContext'
 
-import testSchedulings from 'constants/testSchedulings'
-
 const App = () => {
 
     // Documentos usados na aplicação
@@ -48,7 +46,7 @@ const App = () => {
             const orderExpenses = expenses.sort((a, b) => a.date.localeCompare(b.date)).reverse()
 
             setServices(orderedServices)
-            setSchedulings(testSchedulings.sort((a, b) => a.date.localeCompare(b.date)).reverse())
+            setSchedulings(orderSchedulings)
             setExpenses(orderExpenses)
 
         })
