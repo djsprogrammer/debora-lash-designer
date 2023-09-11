@@ -15,6 +15,7 @@ const SchedulingTable = ({ schedulingsState }: Props) => {
 
     const [servicesScheduling, setServicesScheduling] = schedulingsState
 
+    const [schedulingFilter, setSchedulingFilter] = useState('')
     const [deleteSchedulingForm, setDeleteSchedulingForm] = useState(false)
     const [targetId, setTargetId] = useState('')
 
@@ -46,7 +47,7 @@ const SchedulingTable = ({ schedulingsState }: Props) => {
 
     return (
         <div className='table-container mb-4'>
-            <SchedulingFilterInput />
+            <SchedulingFilterInput setSchedulingFilter={setSchedulingFilter} />
             <table className={tableStyle}>
                 <thead>
                     <tr>

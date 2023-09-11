@@ -1,4 +1,8 @@
-const SchedulingFilterInput = () => {
+interface SchedulingFilterInputProps {
+    setSchedulingFilter: React.Dispatch<React.SetStateAction<string>>
+}
+
+const SchedulingFilterInput = ({ setSchedulingFilter }: SchedulingFilterInputProps) => {
 
     return (
         <select className='mt-2 text-center form-select w-25'>
