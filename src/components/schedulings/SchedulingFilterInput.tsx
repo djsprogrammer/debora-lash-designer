@@ -24,8 +24,13 @@ const SchedulingFilterInput = ({ setSchedulingFilter }: SchedulingFilterInputPro
         ? true : false
     }
 
+    const setFilter = (value: string) => {
+        const date = `${new Date().getFullYear()}-${String(Number(value) + 1).padStart(2, '0')}`
+        setSchedulingFilter(date)
+    }
+
     return (
-        <select className='mt-2 text-center form-select w-25'>
+        <select onChange={e => setFilter(e.target.value)} className='mt-2 text-center form-select w-25'>
             {months.map((month, index) => {
                 return <option key={index} value={index} selected={checkCurrentMonth(index)}>{month}</option>
             })}

@@ -25,6 +25,12 @@ const SchedulingTable = ({ schedulingsState }: Props) => {
     const [deleteSchedulingForm, setDeleteSchedulingForm] = useState(false)
     const [targetId, setTargetId] = useState('')
 
+    const filteredShedulings = () => {
+        return servicesScheduling.filter(scheduling => {
+            return scheduling.date.slice(0, 7) === schedulingFilter
+        })
+    }
+
     const deleteScheduling = () => {
         const options = deleteFetchOptions(targetId)
         fetch(DELETE_SCHEDULING, options)
@@ -67,7 +73,7 @@ const SchedulingTable = ({ schedulingsState }: Props) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {servicesScheduling.map(scheduling => {
+                    {filteredShedulings().map(scheduling => {
                         return (
                             <SchedulingRow 
                                 key={scheduling._id}
