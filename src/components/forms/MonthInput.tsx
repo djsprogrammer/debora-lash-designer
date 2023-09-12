@@ -1,8 +1,8 @@
-interface SchedulingFilterInputProps {
-    setSchedulingFilter: React.Dispatch<React.SetStateAction<string>>
+interface MonthInputProps {
+    setTargetFilter: React.Dispatch<React.SetStateAction<string>>
 }
 
-const SchedulingFilterInput = ({ setSchedulingFilter }: SchedulingFilterInputProps) => {
+const MonthInput = ({ setTargetFilter }: MonthInputProps) => {
 
     const months = [
         'Janeiro',
@@ -26,7 +26,7 @@ const SchedulingFilterInput = ({ setSchedulingFilter }: SchedulingFilterInputPro
 
     const setFilter = (value: string) => {
         const date = `${new Date().getFullYear()}-${String(Number(value) + 1).padStart(2, '0')}`
-        setSchedulingFilter(date)
+        setTargetFilter(date)
     }
 
     return (
@@ -39,4 +39,4 @@ const SchedulingFilterInput = ({ setSchedulingFilter }: SchedulingFilterInputPro
 
 }
 
-export default SchedulingFilterInput
+export default MonthInput
