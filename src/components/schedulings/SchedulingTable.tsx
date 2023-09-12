@@ -7,9 +7,9 @@ import { DATABASE_ERROR_TEXT, SERVER_ERROR_TEXT } from 'constants/errors'
 import { Props } from 'types/schedulings'
 import { tableStyle } from 'commonStyles'
 
+import MonthInput from 'components/forms/MonthInput'
 import SchedulingRow from './SchedulingRow'
 import DeleteForm from 'components/pages/DeleteForm'
-import MonthInput from 'components/forms/MonthInput'
 
 const SchedulingTable = ({ schedulingsState }: Props) => {
 

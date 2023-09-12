@@ -1,12 +1,13 @@
 import { useState } from 'react'
 
-import { deleteFetchOptions } from 'formFunctions/common'
+import { deleteFetchOptions, getCurrentMonth } from 'formFunctions/common'
 import { DELETE_EXPENSE } from 'constants/urls'
 import { DATABASE_ERROR_TEXT, SERVER_ERROR_TEXT } from 'constants/errors'
 import { tableStyle } from 'commonStyles'
 
 import { ExpensesState } from 'types/expenses'
 
+import MonthInput from 'components/forms/MonthInput'
 import ExpenseRow from './ExpenseRow'
 import DeleteForm from 'components/pages/DeleteForm'
 
@@ -18,6 +19,7 @@ const ExpensesTable = ({ expensesState }: ExpensesTableProps) => {
 
     const [expenses, setExpenses] = expensesState
 
+    const [expenseFilter, setExpenseFilter] = useState(getCurrentMonth())
     const [deleteExpenseForm, setDeleteExpenseForm] = useState(false)
     const [targetId, setTargetId] = useState('')
 
@@ -49,6 +51,9 @@ const ExpensesTable = ({ expensesState }: ExpensesTableProps) => {
 
     return (
         <div className='table-container mb-3'>
+            <MonthInput 
+                setTargetFilter={setExpenseFilter}
+            />
             <table className={tableStyle}>
                 <thead>
                     <tr>
