@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react'
+import { useRef, useCallback, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
 interface NavegationProps {
@@ -12,11 +12,19 @@ const Navegation = ({ navDisplay, currentPage }: NavegationProps) => {
 	const link2 = useRef<HTMLAnchorElement>(null)
 	const link3 = useRef<HTMLAnchorElement>(null)
 
-	const links = [link1, link2, link3]
+	const getSelectedLink = useCallback((currentPage: number) => {
+		const links = [link1, link2, link3]
+		return links.filter((link, index) => index === currentPage)[0].current
+	}, [])
+
+	const getUnselectedLinks = useCallback((currentPage: number) => {
+		const links = [link1, link2, link3]
+		return links.filter((link, index) => index !== currentPage)
+	}, [])
 
 	useEffect(() => {
-		const selectedLink = links.filter((link, index) => index === currentPage)[0].current
-		const unselectedLinks = links.filter((link, index) => index !== currentPage)
+		const selectedLink = getSelectedLink(currentPage)
+		const unselectedLinks = getUnselectedLinks(currentPage)
 		if (selectedLink) {
 			selectedLink.classList.add('link-underline-opacity-100')
 			for (const link of unselectedLinks) {
@@ -25,7 +33,7 @@ const Navegation = ({ navDisplay, currentPage }: NavegationProps) => {
 				}
 			}
 		}
-	}, [currentPage])
+	}, [currentPage, getSelectedLink, getUnselectedLinks])
 
 	const linkStyle = 'link-dark link-underline-opacity-50'
 
