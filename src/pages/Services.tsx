@@ -9,7 +9,7 @@ import AnyServiceAdvice from 'components/pages/AnyAdvice'
 import AddServiceForm from 'components/services/AddServiceForm/AddServiceForm'
 import RegisterButton from 'components/pages/RegisterButton'
 
-import { ServicesContext } from 'ServicesContext'
+import { DocsContext } from 'DocsContext'
 
 const Services = ({ setCurrentPage }: Props) => {
 
@@ -17,7 +17,7 @@ const Services = ({ setCurrentPage }: Props) => {
         setCurrentPage(2)
     }, [setCurrentPage])
 
-    const [services] = useContext(ServicesContext)
+    const [services] = useContext(DocsContext).services
     const [addServiceForm, setAddServiceForm] = useState(false)
 
     return (

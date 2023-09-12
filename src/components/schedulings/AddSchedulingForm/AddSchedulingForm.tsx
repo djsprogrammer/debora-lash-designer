@@ -17,7 +17,7 @@ import SecondOption from './SecondOption'
 import ConfirmFormButtons from 'components/pages/ConfirmFormButtons'
 import SchedulingInfo from './SchedulingInfo'
 
-import { ServicesContext } from 'ServicesContext'
+import { DocsContext } from 'DocsContext'
 
 interface AddSchedulingFormProps extends Props {
 	setAddSchedulingForm: React.Dispatch<React.SetStateAction<boolean>>
@@ -25,7 +25,7 @@ interface AddSchedulingFormProps extends Props {
 
 const AddSchedulingForm = ({ schedulingsState, setAddSchedulingForm }: AddSchedulingFormProps) => {
 
-	const [services] = useContext(ServicesContext)
+	const [services] = useContext(DocsContext).services
 	const [servicesScheduling, setServicesScheduling] = schedulingsState
 	
 	const [blockedActions, setBlockedActions] = useState(false)

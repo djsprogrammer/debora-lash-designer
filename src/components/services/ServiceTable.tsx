@@ -12,11 +12,11 @@ import ServiceRow from './ServiceRow'
 import DeleteForm from 'components/pages/DeleteForm'
 import EditServiceForm from './EditServiceForm'
 
-import { ServicesContext } from 'ServicesContext'
+import { DocsContext } from 'DocsContext'
 
 const ServiceTable = () => {
 
-    const [services, setServices] = useContext(ServicesContext)
+    const [services, setServices] = useContext(DocsContext).services
 
     const [serviceFilter, setServiceFilter] = useState('')
     const [deleteServiceForm, setDeleteServiceForm] = useState(false)

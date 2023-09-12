@@ -14,7 +14,7 @@ import NameInput from 'components/forms/NameInput'
 import ValueInput from 'components/forms/ValueInput'
 import ConfirmFormButtons from 'components/pages/ConfirmFormButtons'
 
-import { ServicesContext } from 'ServicesContext'
+import { DocsContext } from 'DocsContext'
 
 const ALREADY_EXISTS_TEXT = 'Já existe um serviço com esse nome!'
 
@@ -24,7 +24,7 @@ interface Props {
 
 const AddServiceForm = ({ setAddServiceForm }: Props) => {
 
-    const [services, setServices] = useContext(ServicesContext)
+    const [services, setServices] = useContext(DocsContext).services
     const [blockedActions, setBlockedActions] = useState(false)
 
     const [category, setCategory] = useState('')

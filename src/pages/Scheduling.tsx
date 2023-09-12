@@ -10,7 +10,7 @@ import AnySchedulingAdvice from 'components/pages/AnyAdvice'
 import AddSchedulingForm from 'components/schedulings/AddSchedulingForm/AddSchedulingForm'
 import RegisterButton from 'components/pages/RegisterButton'
 
-import { ServicesContext } from 'ServicesContext'
+import { DocsContext } from 'DocsContext'
 
 interface SchedulingProps extends Props {
 	setNavDisplay: React.Dispatch<React.SetStateAction<string>>
@@ -29,7 +29,7 @@ const Scheduling = ({ setNavDisplay, setCurrentPage, schedulingsState }: Schedul
 		setCurrentPage(0)
 	}, [setCurrentPage])
 
-	const [services] = useContext(ServicesContext)
+	const [services] = useContext(DocsContext).services
 	const [schedulings, setSchedulings] = schedulingsState
 	const [addSchedulingForm, setAddSchedulingForm] = useState(false)
 

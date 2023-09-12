@@ -21,7 +21,7 @@ import FinancialMetrics from 'pages/FinancialMetrics'
 import Services from 'pages/Services'
 import Expenses from 'pages/Expenses'
 
-import ServicesProvider from 'ServicesContext'
+import DocsProvider from 'DocsContext'
 
 const App = () => {
 
@@ -79,7 +79,7 @@ const App = () => {
 
     return (
         <div>
-            <ServicesProvider servicesState={[services, setServices]}>
+            <DocsProvider servicesState={[services, setServices]}>
                 <Router>
                     <Header />
                     <Navegation navDisplay={navDisplay} currentPage={currentPage} />
@@ -112,7 +112,7 @@ const App = () => {
                         />
                     </Routes>
                 </Router>
-            </ServicesProvider>
+            </DocsProvider>
         </div>
     )
 
