@@ -17,7 +17,7 @@ interface ExpensesProps extends Props {
 const Expenses = ({ setCurrentPage, expensesState }: ExpensesProps) => {
 
 	useEffect(() => {
-		setCurrentPage(2)
+		setCurrentPage(3)
 	}, [setCurrentPage])
 
 	const [expenses, setExpenses] = expensesState

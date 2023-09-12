@@ -14,7 +14,7 @@ import { ServicesContext } from 'ServicesContext'
 const Services = ({ setCurrentPage }: Props) => {
 
     useEffect(() => {
-        setCurrentPage(1)
+        setCurrentPage(2)
     }, [setCurrentPage])
 
     const [services] = useContext(ServicesContext)

@@ -11,14 +11,15 @@ const Navegation = ({ navDisplay, currentPage }: NavegationProps) => {
 	const link1 = useRef<HTMLAnchorElement>(null)
 	const link2 = useRef<HTMLAnchorElement>(null)
 	const link3 = useRef<HTMLAnchorElement>(null)
+	const link4 = useRef<HTMLAnchorElement>(null)
 
 	const getSelectedLink = useCallback((currentPage: number) => {
-		const links = [link1, link2, link3]
+		const links = [link1, link2, link3, link4]
 		return links.filter((link, index) => index === currentPage)[0].current
 	}, [])
 
 	const getUnselectedLinks = useCallback((currentPage: number) => {
-		const links = [link1, link2, link3]
+		const links = [link1, link2, link3, link4]
 		return links.filter((link, index) => index !== currentPage)
 	}, [])
 
@@ -39,9 +40,10 @@ const Navegation = ({ navDisplay, currentPage }: NavegationProps) => {
 
 	return (
 		<nav className={`${navDisplay} justify-content-center p-3`}>
-			<Link ref={link1} className={linkStyle} to='/'><h5>Agendamentos</h5></Link>
-			<Link ref={link2} className={`${linkStyle} mx-4`} to='/services'><h5>Serviços</h5></Link>
-			<Link ref={link3} className={linkStyle} to='/expenses'><h5>Despesas</h5></Link>
+			<Link ref={link1} className={`${linkStyle} me-4`} to='/'><h5>Agendamentos</h5></Link>
+			<Link ref={link2} className={linkStyle} to='/financial'><h5>Financeiro</h5></Link>
+			<Link ref={link3} className={`${linkStyle} mx-4`} to='/services'><h5>Serviços</h5></Link>
+			<Link ref={link4} className={linkStyle} to='/expenses'><h5>Despesas</h5></Link>
 		</nav>
 	)
 	

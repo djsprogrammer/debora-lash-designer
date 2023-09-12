@@ -17,6 +17,7 @@ import Header from 'components/fixed/Header'
 import Navegation from 'components/fixed/Navegation'
 import Loading from 'pages/Loading'
 import Scheduling from 'pages/Scheduling'
+import FinancialMetrics from 'pages/FinancialMetrics'
 import Services from 'pages/Services'
 import Expenses from 'pages/Expenses'
 
@@ -94,6 +95,9 @@ const App = () => {
                                 />
                                 : <Loading />
                             } 
+                        />
+                        <Route path='/financial'
+                            element={<FinancialMetrics setCurrentPage={setCurrentPage} />}
                         />
                         <Route path='/services'
                             element={<Services setCurrentPage={setCurrentPage} />} 
