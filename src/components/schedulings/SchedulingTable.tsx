@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { deleteFetchOptions } from 'formFunctions/common'
+import { deleteFetchOptions, getCurrentMonth } from 'formFunctions/common'
 import { DELETE_SCHEDULING } from 'constants/urls'
 import { DATABASE_ERROR_TEXT, SERVER_ERROR_TEXT } from 'constants/errors'
 
@@ -12,12 +12,6 @@ import DeleteForm from 'components/pages/DeleteForm'
 import SchedulingFilterInput from './SchedulingFilterInput'
 
 const SchedulingTable = ({ schedulingsState }: Props) => {
-
-    const getCurrentMonth = () => {
-        const currentYear = new Date().getFullYear()
-        const currentMonth = String(new Date().getMonth() + 1).padStart(2, '0')
-        return `${currentYear}-${currentMonth}`
-    }
 
     const [servicesScheduling, setServicesScheduling] = schedulingsState
 

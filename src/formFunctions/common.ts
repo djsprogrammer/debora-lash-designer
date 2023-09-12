@@ -60,3 +60,9 @@ export const getCurrentDate = () => {
     const day = String(new Date().getDate()).padStart(2, '0')
     return `${year}-${month}-${day}`
 }
+
+export const getCurrentMonth = () => {
+    const currentYear = new Date().getFullYear()
+    const currentMonth = String(new Date().getMonth() + 1).padStart(2, '0')
+    return `${currentYear}-${currentMonth}`
+}
