@@ -23,6 +23,12 @@ const ExpensesTable = ({ expensesState }: ExpensesTableProps) => {
     const [deleteExpenseForm, setDeleteExpenseForm] = useState(false)
     const [targetId, setTargetId] = useState('')
 
+    const filteredExpenses = () => {
+        return expenses.filter(expense => {
+            return expense.date.slice(0, 7) === expenseFilter
+        })
+    }
+
     const deleteExpense = () => {
         const options = deleteFetchOptions(targetId)
         fetch(DELETE_EXPENSE, options)
@@ -64,7 +70,7 @@ const ExpensesTable = ({ expensesState }: ExpensesTableProps) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {expenses.map(expense => <ExpenseRow
+                    {filteredExpenses().map(expense => <ExpenseRow
                         key={expense._id}
                         expense={expense} 
                         setTargetId={setTargetId} 
