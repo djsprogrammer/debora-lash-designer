@@ -79,7 +79,10 @@ const App = () => {
 
     return (
         <div>
-            <DocsProvider servicesState={[services, setServices]}>
+            <DocsProvider
+                services={[services, setServices]}
+                schedulings={[schedulings, setSchedulings]}
+            >
                 <Router>
                     <Header />
                     <Navegation navDisplay={navDisplay} currentPage={currentPage} />
@@ -91,7 +94,6 @@ const App = () => {
                                 ? <Scheduling // Página padrão
                                     setNavDisplay={setNavDisplay}
                                     setCurrentPage={setCurrentPage}
-                                    schedulingsState={[schedulings, setSchedulings]}
                                 />
                                 : <Loading />
                             } 

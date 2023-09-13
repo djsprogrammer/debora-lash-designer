@@ -20,3 +20,13 @@ export type SchedulingsState = [ServiceSchedulings, SetSchedulings]
 export interface Props {
     schedulingsState: SchedulingsState
 }
+
+export const DEFAULT_SCHEDULING: ServiceScheduling = {
+	_id: '',
+	service: {
+		name: [''],
+		value: [0]
+	},
+	date: '',
+	client: ''
+}

@@ -3,7 +3,6 @@ import { useContext, useState, useEffect } from 'react'
 import { container } from 'commonStyles'
 
 import { Props } from 'types/pages'
-import { SchedulingsState } from 'types/schedulings'
 
 import SchedulingTable from 'components/schedulings/SchedulingTable'
 import AnySchedulingAdvice from 'components/pages/AnyAdvice'
@@ -14,10 +13,9 @@ import { DocsContext } from 'DocsContext'
 
 interface SchedulingProps extends Props {
 	setNavDisplay: React.Dispatch<React.SetStateAction<string>>
-	schedulingsState: SchedulingsState
 }
 
-const Scheduling = ({ setNavDisplay, setCurrentPage, schedulingsState }: SchedulingProps) => {
+const Scheduling = ({ setNavDisplay, setCurrentPage }: SchedulingProps) => {
 
 	useEffect(() => {
 		// Deixando a barra de navegação a mostra 
@@ -30,7 +28,7 @@ const Scheduling = ({ setNavDisplay, setCurrentPage, schedulingsState }: Schedul
 	}, [setCurrentPage])
 
 	const [services] = useContext(DocsContext).services
-	const [schedulings, setSchedulings] = schedulingsState
+	const [schedulings] = useContext(DocsContext).schedulings
 	const [addSchedulingForm, setAddSchedulingForm] = useState(false)
 
 	const DoesServiceExist = () => {
@@ -44,15 +42,12 @@ const Scheduling = ({ setNavDisplay, setCurrentPage, schedulingsState }: Schedul
 		<div className={container}>
 			{
 				schedulings[0]
-					? <SchedulingTable 
-						schedulingsState={[schedulings, setSchedulings]}
-						/>
+					? <SchedulingTable />
 					: <AnySchedulingAdvice page='agendamento' />
 			}
 			{
 				addSchedulingForm
 					? <AddSchedulingForm 
-						schedulingsState={[schedulings, setSchedulings]}
 						setAddSchedulingForm={setAddSchedulingForm}
 						/>
 					: <DoesServiceExist />

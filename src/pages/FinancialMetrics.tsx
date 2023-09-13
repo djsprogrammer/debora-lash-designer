@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 
 import { getCurrentMonth } from 'formFunctions/common'
-import { container } from 'commonStyles'
 
 import { Props as FinancialMetricsProps } from 'types/pages'
 

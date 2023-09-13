@@ -1,19 +1,20 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 
 import { deleteFetchOptions, getCurrentMonth } from 'formFunctions/common'
 import { DELETE_SCHEDULING } from 'constants/urls'
 import { DATABASE_ERROR_TEXT, SERVER_ERROR_TEXT } from 'constants/errors'
 
-import { Props } from 'types/schedulings'
 import { tableStyle } from 'commonStyles'
 
 import MonthInput from 'components/forms/MonthInput'
 import SchedulingRow from './SchedulingRow'
 import DeleteForm from 'components/pages/DeleteForm'
 
-const SchedulingTable = ({ schedulingsState }: Props) => {
+import { DocsContext } from 'DocsContext'
 
-    const [servicesScheduling, setServicesScheduling] = schedulingsState
+const SchedulingTable = () => {
+
+    const [servicesScheduling, setServicesScheduling] = useContext(DocsContext).schedulings
 
     const [schedulingFilter, setSchedulingFilter] = useState(getCurrentMonth())
     const [deleteSchedulingForm, setDeleteSchedulingForm] = useState(false)

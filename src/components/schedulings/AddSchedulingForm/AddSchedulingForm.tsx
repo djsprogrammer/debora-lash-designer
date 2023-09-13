@@ -6,7 +6,7 @@ import { getRightValue } from 'formFunctions/scheduling/common'
 import { CREATE_SCHEDULING } from 'constants/urls'
 import { DATABASE_ERROR_TEXT, SERVER_ERROR_TEXT } from 'constants/errors'
 
-import { Props, ServiceScheduling } from 'types/schedulings'
+import { ServiceScheduling } from 'types/schedulings'
 import { Service } from 'types/services'
 
 import Container from 'components/forms/Container'
@@ -19,14 +19,14 @@ import SchedulingInfo from './SchedulingInfo'
 
 import { DocsContext } from 'DocsContext'
 
-interface AddSchedulingFormProps extends Props {
+interface AddSchedulingFormProps {
 	setAddSchedulingForm: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const AddSchedulingForm = ({ schedulingsState, setAddSchedulingForm }: AddSchedulingFormProps) => {
+const AddSchedulingForm = ({ setAddSchedulingForm }: AddSchedulingFormProps) => {
 
 	const [services] = useContext(DocsContext).services
-	const [servicesScheduling, setServicesScheduling] = schedulingsState
+	const [servicesScheduling, setServicesScheduling] = useContext(DocsContext).schedulings
 	
 	const [blockedActions, setBlockedActions] = useState(false)
 	const [date, setDate] = useState('')
@@ -69,8 +69,8 @@ const AddSchedulingForm = ({ schedulingsState, setAddSchedulingForm }: AddSchedu
 
 	}, [date, option, secondOption])
 
-	// Verificando se todos os inputs foram preenchidos
-	// Pois caso não tenham sido, será impedido a mudança no comportamento do botão
+	/* Verificando se todos os inputs foram preenchidos
+	pois caso não tenham sido, será impedido a mudança no comportamento do botão */
 	useEffect(() => {
 		if (date && option && client) {
 			setAllInputsFilled(true)
