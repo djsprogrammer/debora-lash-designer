@@ -44,6 +44,10 @@ const FinancialMetrics = ({ setCurrentPage }: FinancialMetricsProps) => {
         }, 0)
     }
 
+    const getProfit = () => {
+        return getMonthRevenue() - getMonthExpense()
+    }
+
     useEffect(() => {
         setCurrentPage(1)
     }, [setCurrentPage])
@@ -53,8 +57,8 @@ const FinancialMetrics = ({ setCurrentPage }: FinancialMetricsProps) => {
             <MonthInput setTargetFilter={setFinancialFilter} />
             <ul className='mt-2 list-group'>
                 <li className='list-group-item'>Receita: {filteredShedulings()[0] ? moneyFormat(getMonthRevenue()) : null}</li>
-                <li className='list-group-item'>Custo: {filteredExpenses()[0] ? moneyFormat(getMonthExpense()) : null}</li>
-                <li className='list-group-item'>Lucro: </li>
+                <li className='list-group-item'>Despesa: {filteredExpenses()[0] ? moneyFormat(getMonthExpense()) : null}</li>
+                <li className='list-group-item'>Lucro: {filteredShedulings()[0] ? moneyFormat(getProfit()) : null}</li>
                 <li className='list-group-item'>Margem de Lucro: </li>
             </ul>
         </div>
