@@ -1,11 +1,9 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { v4 } from 'uuid'
 
 import { validNumber, fetchOptions } from 'formFunctions/common'
 import { CREATE_EXPENSE } from 'constants/urls'
 import { DATABASE_ERROR_TEXT, INVALID_NUMBER_TEXT } from 'constants/errors'
-
-import { ExpensesState } from 'types/expenses'
 
 import Container from 'components/forms/Container'
 import FormHeader from 'components/forms/Header'
@@ -14,14 +12,15 @@ import NameInput from 'components/forms/NameInput'
 import ValueInput from 'components/forms/ValueInput'
 import ConfirmFormButtons from 'components/pages/ConfirmFormButtons'
 
-interface Props {
+import { DocsContext } from 'DocsContext'
+
+interface AddExpenseFormProps {
 	setAddExpenseForm: React.Dispatch<React.SetStateAction<boolean>>
-	expensesState: ExpensesState
 }
 
-const AddExpenseForm = ({ setAddExpenseForm, expensesState }: Props) => {
+const AddExpenseForm = ({ setAddExpenseForm }: AddExpenseFormProps) => {
 
-	const [expenses, setExpenses] = expensesState
+	const [expenses, setExpenses] = useContext(DocsContext).expenses
 	const [blockedActions, setBlockedActions] = useState(false)
 	const [date, setDate] = useState('')
 	const [name, setName] = useState('')

@@ -82,6 +82,7 @@ const App = () => {
             <DocsProvider
                 services={[services, setServices]}
                 schedulings={[schedulings, setSchedulings]}
+                expenses={[expenses, setExpenses]}
             >
                 <Router>
                     <Header />
@@ -108,7 +109,6 @@ const App = () => {
                             element={
                                 <Expenses
                                     setCurrentPage={setCurrentPage}
-                                    expensesState={[expenses, setExpenses]}
                                 />
                             } 
                         />

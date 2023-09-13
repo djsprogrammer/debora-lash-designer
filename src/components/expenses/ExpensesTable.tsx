@@ -1,23 +1,18 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 
 import { deleteFetchOptions, getCurrentMonth } from 'formFunctions/common'
 import { DELETE_EXPENSE } from 'constants/urls'
 import { DATABASE_ERROR_TEXT, SERVER_ERROR_TEXT } from 'constants/errors'
 import { tableStyle } from 'commonStyles'
 
-import { ExpensesState } from 'types/expenses'
-
 import MonthInput from 'components/forms/MonthInput'
 import ExpenseRow from './ExpenseRow'
 import DeleteForm from 'components/pages/DeleteForm'
+import { DocsContext } from 'DocsContext'
 
-interface ExpensesTableProps {
-    expensesState: ExpensesState
-}
+const ExpensesTable = () => {
 
-const ExpensesTable = ({ expensesState }: ExpensesTableProps) => {
-
-    const [expenses, setExpenses] = expensesState
+    const [expenses, setExpenses] = useContext(DocsContext).expenses
 
     const [expenseFilter, setExpenseFilter] = useState(getCurrentMonth())
     const [deleteExpenseForm, setDeleteExpenseForm] = useState(false)

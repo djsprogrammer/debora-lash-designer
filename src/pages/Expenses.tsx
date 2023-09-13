@@ -1,40 +1,36 @@
-import { useState, useEffect } from 'react'
+import { useEffect, useContext, useState } from 'react'
 
 import { container } from 'commonStyles'
 
-import { Props } from 'types/pages'
-import { ExpensesState } from 'types/expenses'
+import { Props as ExpensesProps } from 'types/pages'
 
 import ExpensesTable from 'components/expenses/ExpensesTable'
 import AnyExpensesAdvice from 'components/pages/AnyAdvice'
 import AddExpenseForm from 'components/expenses/AddExpenseForm'
 import RegisterButton from 'components/pages/RegisterButton'
 
-interface ExpensesProps extends Props {
-	expensesState: ExpensesState
-}
+import { DocsContext } from 'DocsContext'
 
-const Expenses = ({ setCurrentPage, expensesState }: ExpensesProps) => {
+const Expenses = ({ setCurrentPage }: ExpensesProps) => {
 
 	useEffect(() => {
 		setCurrentPage(3)
 	}, [setCurrentPage])
 
-	const [expenses, setExpenses] = expensesState
+	const [expenses] = useContext(DocsContext).expenses
 	const [addExpenseForm, setAddExpenseForm] = useState(false)
 
 	return (
 		<div className={container}>
 			{
 				expenses[0] 
-	            	? <ExpensesTable expensesState={[expenses, setExpenses]} />
+	            	? <ExpensesTable />
 	            	: <AnyExpensesAdvice page='despesa' />
 	        }
 	        {
 	        	addExpenseForm
 	        		? <AddExpenseForm 
 	        				setAddExpenseForm={setAddExpenseForm}
-	        				expensesState={[expenses, setExpenses]}
 	        			/>
 	        		: <RegisterButton setForm={setAddExpenseForm} text='Registrar' />
 	        }
