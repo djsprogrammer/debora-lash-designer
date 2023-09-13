@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useContext, useState, useEffect } from 'react'
 
 import { getCurrentMonth } from 'formFunctions/common'
 
@@ -6,7 +6,11 @@ import { Props as FinancialMetricsProps } from 'types/pages'
 
 import MonthInput from 'components/forms/MonthInput'
 
+import { DocsContext } from 'DocsContext'
+
 const FinancialMetrics = ({ setCurrentPage }: FinancialMetricsProps) => {
+
+    const [schedulings] = useContext(DocsContext).schedulings
 
     const [financialFilter, setFinancialFilter] = useState(getCurrentMonth())
 
