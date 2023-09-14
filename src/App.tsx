@@ -16,8 +16,8 @@ import { Expenses as TExpenses } from 'types/expenses'
 import Header from 'components/fixed/Header'
 import Navegation from 'components/fixed/Navegation'
 import Loading from 'pages/Loading'
+import Financial from 'pages/Financial'
 import Scheduling from 'pages/Scheduling'
-import FinancialMetrics from 'pages/FinancialMetrics'
 import Services from 'pages/Services'
 import Expenses from 'pages/Expenses'
 
@@ -92,7 +92,7 @@ const App = () => {
                             path='/'
                             element={
                                 databaseLoaded
-                                ? <FinancialMetrics setNavDisplay={setNavDisplay} setCurrentPage={setCurrentPage} />
+                                ? <Financial setNavDisplay={setNavDisplay} setCurrentPage={setCurrentPage} />
                                 : <Loading />
                             } 
                         />
