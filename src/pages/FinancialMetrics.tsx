@@ -2,14 +2,24 @@ import { useContext, useState, useEffect } from 'react'
 
 import { getCurrentMonth, moneyFormat } from 'formFunctions/common'
 
-import { Props as FinancialMetricsProps } from 'types/pages'
+import { Props } from 'types/pages'
 
 import MonthInput from 'components/forms/MonthInput'
 import FinancialChart from 'components/financialMetrics/FinancialChart'
 
 import { DocsContext } from 'DocsContext'
 
-const FinancialMetrics = ({ setCurrentPage }: FinancialMetricsProps) => {
+interface FinancialMetricsProps extends Props {
+    setNavDisplay: React.Dispatch<React.SetStateAction<string>>
+}
+
+const FinancialMetrics = ({ setNavDisplay, setCurrentPage }: FinancialMetricsProps) => {
+
+    useEffect(() => {
+        // Deixando a barra de navegação a mostra 
+        // depois do carregamento do banco de dados
+        setNavDisplay('d-flex')
+    }, [setNavDisplay])
 
     const [schedulings] = useContext(DocsContext).schedulings
     const [expenses] = useContext(DocsContext).expenses
@@ -54,7 +64,7 @@ const FinancialMetrics = ({ setCurrentPage }: FinancialMetricsProps) => {
     }
 
     useEffect(() => {
-        setCurrentPage(1)
+        setCurrentPage(0)
     }, [setCurrentPage])
 
     return (

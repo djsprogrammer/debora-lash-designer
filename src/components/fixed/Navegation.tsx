@@ -40,10 +40,10 @@ const Navegation = ({ navDisplay, currentPage }: NavegationProps) => {
 
 	return (
 		<nav className={`${navDisplay} justify-content-center p-3`}>
-			<Link ref={link1} className={`${linkStyle} me-4`} to='/'><h5>Agendamentos</h5></Link>
-			<Link ref={link2} className={linkStyle} to='/financial'><h5>Financeiro</h5></Link>
-			<Link ref={link3} className={`${linkStyle} mx-4`} to='/services'><h5>Serviços</h5></Link>
-			<Link ref={link4} className={linkStyle} to='/expenses'><h5>Despesas</h5></Link>
+			<Link ref={link1} className={`${linkStyle} me-4`} to='/'><h5>Financeiro</h5></Link>
+			<Link ref={link2} className={linkStyle} to='/schedulings'><h5>Agendamento</h5></Link>
+			<Link ref={link3} className={`${linkStyle} mx-4`} to='/expenses'><h5>Despesa</h5></Link>
+			<Link ref={link4} className={linkStyle} to='/services'><h5>Serviço</h5></Link>
 		</nav>
 	)
 	

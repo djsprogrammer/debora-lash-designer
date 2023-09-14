@@ -2,7 +2,7 @@ import { useContext, useState, useEffect } from 'react'
 
 import { container } from 'commonStyles'
 
-import { Props } from 'types/pages'
+import { Props as SchedulingProps } from 'types/pages'
 
 import SchedulingTable from 'components/schedulings/SchedulingTable'
 import AnySchedulingAdvice from 'components/pages/AnyAdvice'
@@ -11,20 +11,10 @@ import RegisterButton from 'components/pages/RegisterButton'
 
 import { DocsContext } from 'DocsContext'
 
-interface SchedulingProps extends Props {
-	setNavDisplay: React.Dispatch<React.SetStateAction<string>>
-}
-
-const Scheduling = ({ setNavDisplay, setCurrentPage }: SchedulingProps) => {
+const Scheduling = ({ setCurrentPage }: SchedulingProps) => {
 
 	useEffect(() => {
-		// Deixando a barra de navegação a mostra 
-		// depois do carregamento do banco de dados
-		setNavDisplay('d-flex')
-	}, [setNavDisplay])
-
-	useEffect(() => {
-		setCurrentPage(0)
+		setCurrentPage(1)
 	}, [setCurrentPage])
 
 	const [services] = useContext(DocsContext).services

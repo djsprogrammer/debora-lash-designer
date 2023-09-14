@@ -14,7 +14,7 @@ import { DocsContext } from 'DocsContext'
 const Expenses = ({ setCurrentPage }: ExpensesProps) => {
 
 	useEffect(() => {
-		setCurrentPage(3)
+		setCurrentPage(2)
 	}, [setCurrentPage])
 
 	const [expenses] = useContext(DocsContext).expenses

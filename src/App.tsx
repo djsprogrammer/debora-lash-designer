@@ -92,16 +92,11 @@ const App = () => {
                             path='/'
                             element={
                                 databaseLoaded
-                                ? <Scheduling // Página padrão
-                                    setNavDisplay={setNavDisplay}
-                                    setCurrentPage={setCurrentPage}
-                                />
+                                ? <FinancialMetrics setNavDisplay={setNavDisplay} setCurrentPage={setCurrentPage} />
                                 : <Loading />
                             } 
                         />
-                        <Route path='/financial'
-                            element={<FinancialMetrics setCurrentPage={setCurrentPage} />}
-                        />
+                        <Route path='/schedulings' element={<Scheduling setCurrentPage={setCurrentPage} />} />
                         <Route path='/services'
                             element={<Services setCurrentPage={setCurrentPage} />} 
                         />
