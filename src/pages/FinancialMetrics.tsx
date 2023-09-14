@@ -1,11 +1,12 @@
 import { useContext, useState, useEffect } from 'react'
 
-import { getCurrentMonth, moneyFormat } from 'formFunctions/common'
+import { getCurrentMonth } from 'formFunctions/common'
 
 import { Props } from 'types/pages'
 
 import MonthInput from 'components/forms/MonthInput'
 import FinancialChart from 'components/financialMetrics/FinancialChart'
+import FinancialList from 'components/financialMetrics/FinancialList'
 
 import { DocsContext } from 'DocsContext'
 
@@ -26,7 +27,7 @@ const FinancialMetrics = ({ setNavDisplay, setCurrentPage }: FinancialMetricsPro
 
     const [financialFilter, setFinancialFilter] = useState(getCurrentMonth())
 
-    const filteredShedulings = () => {
+    const filteredSchedulings = () => {
         return schedulings.filter(scheduling => {
             return scheduling.date.slice(0, 7) === financialFilter
         })
@@ -39,7 +40,7 @@ const FinancialMetrics = ({ setNavDisplay, setCurrentPage }: FinancialMetricsPro
     }
 
     const getMonthRevenue = () => {
-        return filteredShedulings().reduce((acc, current) => {
+        return filteredSchedulings().reduce((acc, current) => {
             const values = current.service.value
             let sum = 0
             for (const value of values) {
@@ -72,13 +73,15 @@ const FinancialMetrics = ({ setNavDisplay, setCurrentPage }: FinancialMetricsPro
             <MonthInput setTargetFilter={setFinancialFilter} />
             <div className='mt-3 w-100'>
                 <FinancialChart metrics={[getMonthRevenue(), getMonthExpense(), getMonthProfit()]} />
-                <ul className='mt-3'>
-                    <li><strong>Receita:</strong> {filteredShedulings()[0] ? moneyFormat(getMonthRevenue()) : null}</li>
-                    <li><strong>Despesa:</strong> {filteredExpenses()[0] ? moneyFormat(getMonthExpense()) : null}</li>
-                    <li><strong>Lucro:</strong> {filteredShedulings()[0] ? moneyFormat(getMonthProfit()) : null}</li>
-                    <li><strong>Margem de Lucro:</strong> {filteredShedulings()[0] ? getMonthProfitMargin() : null}</li>
-                </ul>
             </div>
+            <FinancialList 
+                filteredSchedulings={filteredSchedulings}
+                filteredExpenses={filteredExpenses}
+                getMonthRevenue={getMonthRevenue}
+                getMonthExpense={getMonthExpense}
+                getMonthProfit={getMonthProfit}
+                getMonthProfitMargin={getMonthProfitMargin}
+            />
         </div>
     )
 
