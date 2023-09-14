@@ -2,11 +2,10 @@ import { useRef, useCallback, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
 interface NavegationProps {
-	navDisplay: string
 	currentPage: number
 }
 
-const Navegation = ({ navDisplay, currentPage }: NavegationProps) => {
+const Navegation = ({ currentPage }: NavegationProps) => {
 
 	const link1 = useRef<HTMLAnchorElement>(null)
 	const link2 = useRef<HTMLAnchorElement>(null)
@@ -36,14 +35,14 @@ const Navegation = ({ navDisplay, currentPage }: NavegationProps) => {
 		}
 	}, [currentPage, getSelectedLink, getUnselectedLinks])
 
-	const linkStyle = 'link-dark link-underline-opacity-50'
+	const linkStyle = 'link-light link-underline-opacity-0'
 
 	return (
-		<nav className={`${navDisplay} justify-content-center p-3`}>
-			<Link ref={link1} className={`${linkStyle} me-4`} to='/'><h5>Financeiro</h5></Link>
-			<Link ref={link2} className={linkStyle} to='/schedulings'><h5>Agendamento</h5></Link>
-			<Link ref={link3} className={`${linkStyle} mx-4`} to='/expenses'><h5>Despesa</h5></Link>
-			<Link ref={link4} className={linkStyle} to='/services'><h5>Serviço</h5></Link>
+		<nav className='d-flex align-items-center'>
+			<Link ref={link1} className={`${linkStyle} me-3`} to='/'>Financeiro</Link>
+			<Link ref={link2} className={linkStyle} to='/schedulings'>Agendamento</Link>
+			<Link ref={link3} className={`${linkStyle} mx-3`} to='/expenses'>Despesa</Link>
+			<Link ref={link4} className={linkStyle} to='/services'>Serviço</Link>
 		</nav>
 	)
 	

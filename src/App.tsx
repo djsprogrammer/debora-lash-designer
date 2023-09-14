@@ -13,8 +13,7 @@ import { Services as TServices } from 'types/services'
 import { ServiceSchedulings } from 'types/schedulings'
 import { Expenses as TExpenses } from 'types/expenses'
 
-import Header from 'components/fixed/Header'
-import Navegation from 'components/fixed/Navegation'
+import Header from 'components/fixed/header/Header'
 import Loading from 'pages/Loading'
 import Financial from 'pages/Financial'
 import Scheduling from 'pages/Scheduling'
@@ -32,7 +31,6 @@ const App = () => {
 
     const [databaseLoaded, setDatabaseLoaded] = useState(false)
     const [currentPage, setCurrentPage] = useState(0)
-    const [navDisplay, setNavDisplay] = useState('d-none')
 
     const setDocsFromServer = (res: Response) => {
         res.json().then((allDocs: AllDocs) => {
@@ -85,14 +83,13 @@ const App = () => {
                 expenses={[expenses, setExpenses]}
             >
                 <Router>
-                    <Header />
-                    <Navegation navDisplay={navDisplay} currentPage={currentPage} />
+                    <Header currentPage={currentPage} />
                     <Routes>
                         <Route 
                             path='/'
                             element={
                                 databaseLoaded
-                                ? <Financial setNavDisplay={setNavDisplay} setCurrentPage={setCurrentPage} />
+                                ? <Financial setCurrentPage={setCurrentPage} />
                                 : <Loading />
                             } 
                         />

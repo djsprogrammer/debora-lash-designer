@@ -2,7 +2,7 @@ import { useContext, useState, useEffect } from 'react'
 
 import { getCurrentMonth } from 'formFunctions/common'
 
-import { Props } from 'types/pages'
+import { Props as FinancialMetricsProps } from 'types/pages'
 
 import MonthInput from 'components/forms/MonthInput'
 import FinancialChart from 'components/financialMetrics/FinancialChart'
@@ -11,17 +11,7 @@ import FinancialList from 'components/financialMetrics/FinancialList'
 import { DocsContext } from 'DocsContext'
 import { filteredExpenses, filteredSchedulings } from 'formFunctions/financial/common'
 
-interface FinancialMetricsProps extends Props {
-    setNavDisplay: React.Dispatch<React.SetStateAction<string>>
-}
-
-const FinancialMetrics = ({ setNavDisplay, setCurrentPage }: FinancialMetricsProps) => {
-
-    useEffect(() => {
-        // Deixando a barra de navegação a mostra 
-        // depois do carregamento do banco de dados
-        setNavDisplay('d-flex')
-    }, [setNavDisplay])
+const FinancialMetrics = ({ setCurrentPage }: FinancialMetricsProps) => {
 
     useEffect(() => {
         setCurrentPage(0)
@@ -60,7 +50,7 @@ const FinancialMetrics = ({ setNavDisplay, setCurrentPage }: FinancialMetricsPro
     }
 
     return (
-        <div className='container d-flex flex-column align-items-start'>
+        <div className='mt-4 container d-flex flex-column align-items-start'>
             <MonthInput setTargetFilter={setFinancialFilter} />
             <div className='mt-3 w-100'>
                 <FinancialChart metrics={[getMonthRevenue(), getMonthExpense(), getMonthProfit()]} />

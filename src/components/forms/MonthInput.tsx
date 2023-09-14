@@ -30,7 +30,7 @@ const MonthInput = ({ setTargetFilter }: MonthInputProps) => {
     }
 
     return (
-        <select onChange={e => setFilter(e.target.value)} className='mt-2 text-center form-select w-25'>
+        <select onChange={e => setFilter(e.target.value)} className='text-center form-select w-25'>
             {months.map((month, index) => {
                 return <option key={index} value={index} selected={checkCurrentMonth(index)}>{month}</option>
             })}

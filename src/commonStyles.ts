@@ -1,4 +1,4 @@
-export const container = 'container d-flex flex-column align-items-center'
+export const container = 'mt-4 container d-flex flex-column align-items-center'
 export const tableStyle = 'table text-center mt-1'
 export const formContainer = 'position-absolute vw-100 vh-100 top-0 start-0 d-flex justify-content-center align-items-center'
 export const confirmButtonStyle = 'btn btn-sm btn-dark'
