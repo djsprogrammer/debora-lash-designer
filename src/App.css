@@ -24,9 +24,8 @@ h1, h2, h3, h4, h5, h6 {
 
 .table-container {
     display: block;
-    max-height: 500px;
+    max-height: 450px;
     overflow: auto;
-    width: 100%;
 }
 
 .form-bg {

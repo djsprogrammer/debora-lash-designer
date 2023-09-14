@@ -61,28 +61,30 @@ const ServiceTable = () => {
     }
 
     return (
-        <div className='table-container'>
+        <div className='w-100'>
             <ServiceFilterInput setServiceFilter={setServiceFilter} />
-            <table className={`${tableStyle} mt-2`}>
-                <thead>
-                    <tr>
-                        <th>Serviço</th>
-                        <th>Valor</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {filteredServices().map(service =>
-                        <ServiceRow
-                            key={service._id}
-                            service={service}
-                            setIdForDeletion={setIdForDeletion}
-                            setServiceForEdition={setServiceForEdition}
-                            setDeleteServiceForm={setDeleteServiceForm}
-                            setEditServiceForm={setEditServiceForm}
-                        />)}
-                </tbody>
-            </table>
+            <div className='mt-1 mb-4 table-container'>
+                <table className={`${tableStyle} mt-2`}>
+                    <thead>
+                        <tr>
+                            <th>Serviço</th>
+                            <th>Valor</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {filteredServices().map(service =>
+                            <ServiceRow
+                                key={service._id}
+                                service={service}
+                                setIdForDeletion={setIdForDeletion}
+                                setServiceForEdition={setServiceForEdition}
+                                setDeleteServiceForm={setDeleteServiceForm}
+                                setEditServiceForm={setEditServiceForm}
+                            />)}
+                    </tbody>
+                </table>
+            </div>
             {
                 deleteServiceForm
                 ? <DeleteForm 

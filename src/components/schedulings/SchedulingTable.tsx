@@ -53,33 +53,35 @@ const SchedulingTable = () => {
     }
 
     return (
-        <div className='table-container mb-4'>
+        <div className='w-100'>
             <MonthInput
                 setTargetFilter={setSchedulingFilter}
             />
-            <table className={tableStyle}>
-                <thead>
-                    <tr>
-                        <th>Cliente</th>
-                        <th>Serviço</th>
-                        <th>Valor</th>
-                        <th>Data</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {filteredShedulings().map(scheduling => {
-                        return (
-                            <SchedulingRow 
-                                key={scheduling._id}
-                                scheduling={scheduling}
-                                setDeleteSchedulingForm={setDeleteSchedulingForm}
-                                setTargetId={setTargetId}
-                            />
-                        )
-                    })}
-                </tbody>
-            </table>
+            <div className='mt-1 mb-4 table-container'>
+                <table className={tableStyle}>
+                    <thead>
+                        <tr>
+                            <th>Cliente</th>
+                            <th>Serviço</th>
+                            <th>Valor</th>
+                            <th>Data</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {filteredShedulings().map(scheduling => {
+                            return (
+                                <SchedulingRow 
+                                    key={scheduling._id}
+                                    scheduling={scheduling}
+                                    setDeleteSchedulingForm={setDeleteSchedulingForm}
+                                    setTargetId={setTargetId}
+                                />
+                            )
+                        })}
+                    </tbody>
+                </table>
+            </div>
             {
                 deleteSchedulingForm
                 ? <DeleteForm 

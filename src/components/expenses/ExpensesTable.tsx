@@ -51,27 +51,29 @@ const ExpensesTable = () => {
     }
 
     return (
-        <div className='table-container mb-3'>
+        <div className='w-100'>
             <MonthInput 
                 setTargetFilter={setExpenseFilter}
             />
-            <table className={tableStyle}>
-                <thead>
-                    <tr>
-                        <th>Despesa</th>
-                        <th>Valor</th>
-                        <th>Data</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {filteredExpenses().map(expense => <ExpenseRow
-                        key={expense._id}
-                        expense={expense} 
-                        setTargetId={setTargetId} 
-                        setDeleteExpenseForm={setDeleteExpenseForm} />)}
-                </tbody>
-            </table>
+            <div className='mt-1 mb-4 table-container'>
+                <table className={tableStyle}>
+                    <thead>
+                        <tr>
+                            <th>Despesa</th>
+                            <th>Valor</th>
+                            <th>Data</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {filteredExpenses().map(expense => <ExpenseRow
+                            key={expense._id}
+                            expense={expense} 
+                            setTargetId={setTargetId} 
+                            setDeleteExpenseForm={setDeleteExpenseForm} />)}
+                    </tbody>
+                </table>
+            </div>
             {
                 deleteExpenseForm
                 ? <DeleteForm 
