@@ -61,7 +61,7 @@ const FinancialMetrics = ({ setNavDisplay, setCurrentPage }: FinancialMetricsPro
     }
 
     const getMonthProfitMargin = () => {
-        return `${((getMonthProfit() / getMonthRevenue()) * 100).toFixed(1)} %`
+        return `${Math.round(((getMonthProfit() / getMonthRevenue()) * 100))} %`
     }
 
     useEffect(() => {
