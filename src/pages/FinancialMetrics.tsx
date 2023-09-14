@@ -9,6 +9,7 @@ import FinancialChart from 'components/financialMetrics/FinancialChart'
 import FinancialList from 'components/financialMetrics/FinancialList'
 
 import { DocsContext } from 'DocsContext'
+import { filteredExpenses, filteredSchedulings } from 'formFunctions/financial/common'
 
 interface FinancialMetricsProps extends Props {
     setNavDisplay: React.Dispatch<React.SetStateAction<string>>
@@ -22,38 +23,32 @@ const FinancialMetrics = ({ setNavDisplay, setCurrentPage }: FinancialMetricsPro
         setNavDisplay('d-flex')
     }, [setNavDisplay])
 
+    useEffect(() => {
+        setCurrentPage(0)
+    }, [setCurrentPage])
+
     const [schedulings] = useContext(DocsContext).schedulings
     const [expenses] = useContext(DocsContext).expenses
 
     const [financialFilter, setFinancialFilter] = useState(getCurrentMonth())
 
-    const filteredSchedulings = () => {
-        return schedulings.filter(scheduling => {
-            return scheduling.date.slice(0, 7) === financialFilter
-        })
-    }
-
-    const filteredExpenses = () => {
-        return expenses.filter(expense => {
-            return expense.date.slice(0, 7) === financialFilter
-        })
-    }
-
     const getMonthRevenue = () => {
-        return filteredSchedulings().reduce((acc, current) => {
-            const values = current.service.value
-            let sum = 0
-            for (const value of values) {
-                sum += value
-            }
-            return acc + sum
-        }, 0)
+        return filteredSchedulings(schedulings, financialFilter)
+            .reduce((acc, current) => {
+                const values = current.service.value
+                let sum = 0
+                for (const value of values) {
+                    sum += value
+                }
+                return acc + sum
+            }, 0)
     }
 
     const getMonthExpense = () => {
-        return filteredExpenses().reduce((acc, current) => {
-            return acc + current.value
-        }, 0)
+        return filteredExpenses(expenses, financialFilter)
+            .reduce((acc, current) => {
+                return acc + current.value
+            }, 0)
     }
 
     const getMonthProfit = () => {
@@ -64,10 +59,6 @@ const FinancialMetrics = ({ setNavDisplay, setCurrentPage }: FinancialMetricsPro
         return `${Math.round(((getMonthProfit() / getMonthRevenue()) * 100))} %`
     }
 
-    useEffect(() => {
-        setCurrentPage(0)
-    }, [setCurrentPage])
-
     return (
         <div className='container d-flex flex-column align-items-start'>
             <MonthInput setTargetFilter={setFinancialFilter} />
@@ -75,12 +66,12 @@ const FinancialMetrics = ({ setNavDisplay, setCurrentPage }: FinancialMetricsPro
                 <FinancialChart metrics={[getMonthRevenue(), getMonthExpense(), getMonthProfit()]} />
             </div>
             <FinancialList 
-                filteredSchedulings={filteredSchedulings}
-                filteredExpenses={filteredExpenses}
-                getMonthRevenue={getMonthRevenue}
-                getMonthExpense={getMonthExpense}
-                getMonthProfit={getMonthProfit}
-                getMonthProfitMargin={getMonthProfitMargin}
+                schedulings={filteredSchedulings(schedulings, financialFilter)}
+                expenses={filteredExpenses(expenses, financialFilter)}
+                revenue={getMonthRevenue()}
+                expense={getMonthExpense()}
+                profit={getMonthProfit()}
+                profitMargin={getMonthProfitMargin()}
             />
         </div>
     )

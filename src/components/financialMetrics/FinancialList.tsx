@@ -4,49 +4,49 @@ import { ServiceSchedulings } from 'types/schedulings'
 import { Expenses } from 'types/expenses'
 
 interface FinancialListProps {
-    filteredSchedulings: () => ServiceSchedulings
-    filteredExpenses: () => Expenses
-    getMonthRevenue: () => number
-    getMonthExpense: () => number
-    getMonthProfit: () => number
-    getMonthProfitMargin: () => string
+    schedulings: ServiceSchedulings
+    expenses: Expenses
+    revenue: number
+    expense: number
+    profit: number
+    profitMargin: string
 }
 
 const FinancialList = (props: FinancialListProps) => {
 
     const { 
-        filteredSchedulings, 
-        filteredExpenses,
-        getMonthRevenue,
-        getMonthExpense,
-        getMonthProfit,
-        getMonthProfitMargin
+        schedulings, 
+        expenses,
+        revenue,
+        expense,
+        profit,
+        profitMargin
     } = props
 
     return (
         <ul className='mt-3'>
             <li>
                 <strong>Receita:</strong> {
-                filteredSchedulings()[0] 
-                ? moneyFormat(getMonthRevenue()) 
+                schedulings[0] 
+                ? moneyFormat(revenue) 
                 : null}
             </li>
             <li>
                 <strong>Despesa:</strong> {
-                filteredExpenses()[0] 
-                ? moneyFormat(getMonthExpense()) 
+                expenses[0] 
+                ? moneyFormat(expense) 
                 : null}
             </li>
             <li>
                 <strong>Lucro:</strong> {
-                filteredSchedulings()[0] 
-                ? moneyFormat(getMonthProfit()) 
+                schedulings[0] 
+                ? moneyFormat(profit) 
                 : null}
             </li>
             <li>
                 <strong>Margem de Lucro:</strong> {
-                filteredSchedulings()[0] 
-                ? getMonthProfitMargin() 
+                schedulings[0] 
+                ? profitMargin
                 : null}
             </li>
         </ul>
