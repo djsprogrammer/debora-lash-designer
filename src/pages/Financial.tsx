@@ -22,16 +22,23 @@ const FinancialMetrics = ({ setCurrentPage }: FinancialMetricsProps) => {
 
     const [financialFilter, setFinancialFilter] = useState(getCurrentMonth())
 
+    const [showServicesOffered, setShowServicesOffered] = useState(false)
+
     return (
         <div className='mt-4 container d-flex flex-column align-items-start'>
             <MonthInput setTargetFilter={setFinancialFilter} />
-            <FinancialIncome
-                schedulings={filteredSchedulings(schedulings, financialFilter)}
-                expenses={filteredExpenses(expenses, financialFilter)}
-            />
-            <ServicesOffered 
-                schedulings={filteredSchedulings(schedulings, financialFilter)} 
-            />
+            {
+                !showServicesOffered
+                ? <FinancialIncome
+                        schedulings={filteredSchedulings(schedulings, financialFilter)}
+                        expenses={filteredExpenses(expenses, financialFilter)}
+                        setShowServicesOffered={setShowServicesOffered}
+                    />
+                : <ServicesOffered 
+                        schedulings={filteredSchedulings(schedulings, financialFilter)}
+                        setShowServicesOffered={setShowServicesOffered}
+                    />
+            }
         </div>
     )
 

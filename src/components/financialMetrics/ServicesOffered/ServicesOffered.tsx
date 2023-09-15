@@ -4,9 +4,10 @@ import ServicesChart from './ServicesChart'
 
 interface ServicesOfferedProps {
     schedulings: ServiceSchedulings
+    setShowServicesOffered: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const ServicesOffered = ({ schedulings }: ServicesOfferedProps) => {
+const ServicesOffered = ({ schedulings, setShowServicesOffered }: ServicesOfferedProps) => {
 
     const getMostOfferServices = () => {
         const servicesArrays = schedulings.map(scheduling => {
@@ -27,6 +28,7 @@ const ServicesOffered = ({ schedulings }: ServicesOfferedProps) => {
     return (
         <div className='w-100'>
             <ServicesChart services={getMostOfferServices()} />
+            <button onClick={() => setShowServicesOffered(false)} className='btn btn-link'>Rendimentos</button>
         </div>
     )
 
