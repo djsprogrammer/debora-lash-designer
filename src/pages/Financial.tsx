@@ -9,6 +9,7 @@ import MonthInput from 'components/forms/MonthInput'
 import FinancialIncome from 'components/financialMetrics/FinancialIncome/FinancialIncome'
 
 import { DocsContext } from 'DocsContext'
+import ServicesOffered from 'components/financialMetrics/ServicesOffered/ServicesOffered'
 
 const FinancialMetrics = ({ setCurrentPage }: FinancialMetricsProps) => {
 
@@ -21,22 +22,6 @@ const FinancialMetrics = ({ setCurrentPage }: FinancialMetricsProps) => {
 
     const [financialFilter, setFinancialFilter] = useState(getCurrentMonth())
 
-    /* const getMostOfferServices = () => {
-        const servicesArrays = filteredSchedulings(schedulings, financialFilter).map(scheduling => {
-            return scheduling.service.name
-        }).flat()
-        const services: [string, number][] = Array.from(new Set(servicesArrays))
-            .map(service => [service, 0])
-        servicesArrays.forEach(current => {
-            for (const service of services) {
-                if (current === service[0]) {
-                    service[1] += 1
-                }
-            }
-        })
-        return services
-    } */
-
     return (
         <div className='mt-4 container d-flex flex-column align-items-start'>
             <MonthInput setTargetFilter={setFinancialFilter} />
@@ -44,7 +29,9 @@ const FinancialMetrics = ({ setCurrentPage }: FinancialMetricsProps) => {
                 schedulings={filteredSchedulings(schedulings, financialFilter)}
                 expenses={filteredExpenses(expenses, financialFilter)}
             />
-            {/*<ServicesChart services={getMostOfferServices()} />*/}
+            <ServicesOffered 
+                schedulings={filteredSchedulings(schedulings, financialFilter)} 
+            />
         </div>
     )
 

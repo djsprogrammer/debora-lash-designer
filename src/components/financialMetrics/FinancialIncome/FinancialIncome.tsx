@@ -1,8 +1,8 @@
 import { ServiceSchedulings } from 'types/schedulings'
 import { Expenses } from 'types/expenses'
 
-import FinancialChart from '../FinancialChart'
-import FinancialList from '../FinancialList'
+import FinancialChart from './FinancialChart'
+import FinancialList from './FinancialList'
 
 interface FinancialIncomeProps {
     schedulings: ServiceSchedulings
