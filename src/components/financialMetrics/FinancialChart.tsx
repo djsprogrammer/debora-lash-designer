@@ -1,7 +1,11 @@
 import { Bar } from 'react-chartjs-2'
 import 'chart.js/auto'
 
-const FinancialChart = ({ metrics }) => {
+interface FinancialChartProps {
+    metrics: number[]
+}
+
+const FinancialChart = ({ metrics }: FinancialChartProps) => {
 
     const data = {
         labels: ['Receita', 'Despesa', 'Lucro'],

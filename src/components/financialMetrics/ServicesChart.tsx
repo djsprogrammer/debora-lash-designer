@@ -1,7 +1,11 @@
 import { Pie } from 'react-chartjs-2'
 import 'chart.js/auto'
 
-const ServicesChart = ({ services }) => {
+interface ServicesChartProps {
+    services: [string, number][]
+}
+
+const ServicesChart = ({ services }: ServicesChartProps) => {
 
     const data = {
         labels: services.map(service => service[0]),
