@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { HashRouter as Router, Routes, Route } from 'react-router-dom'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'App.css'
@@ -41,12 +41,16 @@ const App = () => {
 
             // Ordenando os documentos
             const orderedServices = orderServices(services)
-            const orderSchedulings = schedulings.sort((a, b) => a.date.localeCompare(b.date)).reverse()
-            const orderExpenses = expenses.sort((a, b) => a.date.localeCompare(b.date)).reverse()
+            const orderedSchedulings = schedulings
+                .sort((a, b) => a.date.localeCompare(b.date)).reverse()
+            const orderedExpenses = expenses
+                .sort((a, b) => a.date.localeCompare(b.date)).reverse()
 
             setServices(orderedServices)
-            setSchedulings(orderSchedulings)
-            setExpenses(orderExpenses)
+            setSchedulings(orderedSchedulings)
+            setExpenses(orderedExpenses)
+
+            setDatabaseLoaded(true)
 
         })
     }
@@ -57,7 +61,6 @@ const App = () => {
                 switch (res.status) {
                     case 200:
                         setDocsFromServer(res)
-                        setDatabaseLoaded(true)
                         break
                     case 503:
                         alert(DATABASE_ERROR_TEXT)
@@ -83,26 +86,28 @@ const App = () => {
                 expenses={[expenses, setExpenses]}
             >
                 <Router>
+                    {
+                        !databaseLoaded
+                        ? <Loading />
+                        : null
+                    }
                     <Header currentPage={currentPage} />
                     <Routes>
-                        <Route 
+                        <Route
                             path='/'
-                            element={
-                                databaseLoaded
-                                ? <Financial setCurrentPage={setCurrentPage} />
-                                : <Loading />
-                            } 
+                            element={<Financial setCurrentPage={setCurrentPage} />}
                         />
-                        <Route path='/schedulings' element={<Scheduling setCurrentPage={setCurrentPage} />} />
-                        <Route path='/services'
-                            element={<Services setCurrentPage={setCurrentPage} />} 
+                        <Route
+                            path='/schedulings'
+                            element={<Scheduling setCurrentPage={setCurrentPage} />}
                         />
-                        <Route path='/expenses'
-                            element={
-                                <Expenses
-                                    setCurrentPage={setCurrentPage}
-                                />
-                            } 
+                        <Route
+                            path='/services'
+                            element={<Services setCurrentPage={setCurrentPage} />}
+                        />
+                        <Route
+                            path='/expenses'
+                            element={<Expenses setCurrentPage={setCurrentPage} />}
                         />
                     </Routes>
                 </Router>
