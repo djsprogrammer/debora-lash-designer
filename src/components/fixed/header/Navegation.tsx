@@ -39,7 +39,7 @@ const Navegation = ({ currentPage }: NavegationProps) => {
 
 	return (
 		<nav className='d-flex align-items-center'>
-			<Link ref={link1} className={`${linkStyle} me-3`} to='/'>Financeiro</Link>
+			<Link ref={link1} className={`${linkStyle} me-3`} to='/'>Informações</Link>
 			<Link ref={link2} className={linkStyle} to='/schedulings'>Agendamento</Link>
 			<Link ref={link3} className={`${linkStyle} mx-3`} to='/expenses'>Despesa</Link>
 			<Link ref={link4} className={linkStyle} to='/services'>Serviço</Link>

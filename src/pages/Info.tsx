@@ -3,15 +3,15 @@ import { useEffect, useContext, useState } from 'react'
 import { getCurrentMonth } from 'formFunctions/common'
 import { filteredExpenses, filteredSchedulings } from 'formFunctions/financial/common'
 
-import { Props as FinancialMetricsProps } from 'types/pages'
+import { Props as InfoProps } from 'types/pages'
 
 import MonthInput from 'components/forms/MonthInput'
-import FinancialIncome from 'components/financialMetrics/FinancialIncome/FinancialIncome'
+import FinancialIncome from 'components/info/FinancialIncome/FinancialIncome'
 
 import { DocsContext } from 'DocsContext'
-import ServicesOffered from 'components/financialMetrics/ServicesOffered/ServicesOffered'
+import ServicesOffered from 'components/info/ServicesOffered/ServicesOffered'
 
-const FinancialMetrics = ({ setCurrentPage }: FinancialMetricsProps) => {
+const Info = ({ setCurrentPage }: InfoProps) => {
 
     useEffect(() => {
         setCurrentPage(0)
@@ -45,4 +45,4 @@ const FinancialMetrics = ({ setCurrentPage }: FinancialMetricsProps) => {
 
 }
 
-export default FinancialMetrics
+export default Info

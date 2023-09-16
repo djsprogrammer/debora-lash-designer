@@ -15,7 +15,7 @@ import { Expenses as TExpenses } from 'types/expenses'
 
 import Header from 'components/fixed/header/Header'
 import Loading from 'pages/Loading'
-import Financial from 'pages/Financial'
+import Info from 'pages/Info'
 import Scheduling from 'pages/Scheduling'
 import Services from 'pages/Services'
 import Expenses from 'pages/Expenses'
@@ -95,7 +95,7 @@ const App = () => {
                     <Routes>
                         <Route
                             path='/'
-                            element={<Financial setCurrentPage={setCurrentPage} />}
+                            element={<Info setCurrentPage={setCurrentPage} />}
                         />
                         <Route
                             path='/schedulings'
