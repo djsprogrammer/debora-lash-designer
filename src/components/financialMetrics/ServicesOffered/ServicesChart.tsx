@@ -16,7 +16,7 @@ const ServicesChart = ({ services }: ServicesChartProps) => {
     }
 
     return (
-        <div id='chart' className='m-auto my-5'>
+        <div id='chart' className='m-auto my-3'>
             <Pie data={data} />
         </div>
     )

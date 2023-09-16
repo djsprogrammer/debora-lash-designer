@@ -28,7 +28,7 @@ const ServicesOffered = ({ schedulings, setShowServicesOffered }: ServicesOffere
     return (
         <div className='w-100'>
             <ServicesChart services={getMostOfferServices()} />
-            <button onClick={() => setShowServicesOffered(false)} className='btn btn-link'>Rendimentos</button>
+            <button onClick={() => setShowServicesOffered(false)} className='btn btn-sm btn-primary'>Rendimentos</button>
         </div>
     )
 

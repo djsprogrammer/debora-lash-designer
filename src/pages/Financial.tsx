@@ -27,6 +27,7 @@ const FinancialMetrics = ({ setCurrentPage }: FinancialMetricsProps) => {
     return (
         <div className='mt-4 container d-flex flex-column align-items-start'>
             <MonthInput setTargetFilter={setFinancialFilter} />
+            <hr className='w-100' />
             {
                 !showServicesOffered
                 ? <FinancialIncome

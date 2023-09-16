@@ -49,7 +49,7 @@ const FinancialIncome = ({ schedulings, expenses, setShowServicesOffered }: Fina
                     profit={getMonthProfit()}
                     profitMargin={getMonthProfitMargin()}
                 />
-                <button onClick={() => setShowServicesOffered(true)} className='align-self-end btn btn-link'>Serviços</button>
+                <button onClick={() => setShowServicesOffered(true)} className='align-self-end btn btn-sm btn-primary'>Serviços</button>
             </div>
         </div>
     )

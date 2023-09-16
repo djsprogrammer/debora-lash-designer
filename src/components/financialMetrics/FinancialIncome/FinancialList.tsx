@@ -24,7 +24,7 @@ const FinancialList = (props: FinancialListProps) => {
     } = props
 
     return (
-        <ul>
+        <ul className='mb-0'>
             <li>
                 <strong>Receita:</strong> {
                 schedulings[0] 

@@ -17,7 +17,7 @@ const FinancialChart = ({ metrics }: FinancialChartProps) => {
     }
 
     return (
-        <div className='w-50 m-auto my-5'>
+        <div className='w-50 m-auto my-3'>
             <Bar data={data} />
         </div>
     )
