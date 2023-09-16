@@ -1,7 +1,7 @@
 import { useEffect, useContext, useState } from 'react'
 
 import { getCurrentMonth } from 'formFunctions/common'
-import { filteredExpenses, filteredSchedulings } from 'formFunctions/financial/common'
+import { filteredExpenses, filteredSchedulings } from 'formFunctions/info/common'
 
 import { Props as InfoProps } from 'types/pages'
 
