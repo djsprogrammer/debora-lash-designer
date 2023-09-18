@@ -1,6 +1,7 @@
 import { ServiceSchedulings } from 'types/schedulings'
 
 import ServicesChart from './ServicesChart'
+import MoreIncomeServices from './MoreIncomeServices'
 
 interface OfferedServicesProps {
     schedulings: ServiceSchedulings
@@ -55,13 +56,16 @@ const OfferedServices = ({ schedulings, setShowServicesOffered }: OfferedService
         return services.sort((a, b) => {
             return b[1] - a[1]
         })
-        
+
     }
 
     return (
         <div className='w-100'>
             <ServicesChart services={getMostOfferedServices()} />
-            <button onClick={() => setShowServicesOffered(false)} className='btn btn-sm btn-primary'>Rendimentos</button>
+            <div className='mb-3 d-flex justify-content-between'>
+                <MoreIncomeServices services={getMoreIncomeServices()} />
+                <button onClick={() => setShowServicesOffered(false)} className='align-self-end btn btn-sm btn-primary'>Rendimentos</button>
+            </div>
         </div>
     )
 
