@@ -7,10 +7,10 @@ import FinancialList from './FinancialList'
 interface FinancialIncomeProps {
     schedulings: ServiceSchedulings
     expenses: Expenses
-    setShowServicesOffered: React.Dispatch<React.SetStateAction<boolean>>
+    setShowOfferedServices: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const FinancialIncome = ({ schedulings, expenses, setShowServicesOffered }: FinancialIncomeProps) => {
+const FinancialIncome = ({ schedulings, expenses, setShowOfferedServices }: FinancialIncomeProps) => {
 
     const getMonthRevenue = () => {
         return schedulings.reduce((acc, current) => {
@@ -52,7 +52,7 @@ const FinancialIncome = ({ schedulings, expenses, setShowServicesOffered }: Fina
                                     profit={getMonthProfit()}
                                     profitMargin={getMonthProfitMargin()}
                                 />
-                                <button onClick={() => setShowServicesOffered(true)} className='align-self-end btn btn-sm btn-primary'>Serviços</button>
+                                <button onClick={() => setShowOfferedServices(true)} className='align-self-end btn btn-sm btn-primary'>Serviços</button>
                             </div>
                         </div>
                     : <div className='alert alert-warning'>Este mês não possui renda registrada</div>

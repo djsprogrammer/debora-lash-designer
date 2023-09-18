@@ -5,10 +5,10 @@ import MoreIncomeServices from './MoreIncomeServices'
 
 interface OfferedServicesProps {
     schedulings: ServiceSchedulings
-    setShowServicesOffered: React.Dispatch<React.SetStateAction<boolean>>
+    setShowOfferedServices: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const OfferedServices = ({ schedulings, setShowServicesOffered }: OfferedServicesProps) => {
+const OfferedServices = ({ schedulings, setShowOfferedServices }: OfferedServicesProps) => {
 
     const getMostOfferedServices = () => {
         const servicesArrays = schedulings.map(scheduling => {
@@ -64,7 +64,7 @@ const OfferedServices = ({ schedulings, setShowServicesOffered }: OfferedService
             <ServicesChart services={getMostOfferedServices()} />
             <div className='mb-3 d-flex justify-content-between'>
                 <MoreIncomeServices services={getMoreIncomeServices()} />
-                <button onClick={() => setShowServicesOffered(false)} className='align-self-end btn btn-sm btn-primary'>Rendimentos</button>
+                <button onClick={() => setShowOfferedServices(false)} className='align-self-end btn btn-sm btn-primary'>Rendimentos</button>
             </div>
         </div>
     )

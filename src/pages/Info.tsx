@@ -7,9 +7,9 @@ import { Props as InfoProps } from 'types/pages'
 
 import MonthInput from 'components/forms/MonthInput'
 import FinancialIncome from 'components/info/FinancialIncome/FinancialIncome'
+import OfferedServices from 'components/info/ServicesOffered/OfferedServices'
 
 import { DocsContext } from 'DocsContext'
-import ServicesOffered from 'components/info/ServicesOffered/ServicesOffered'
 
 const Info = ({ setCurrentPage }: InfoProps) => {
 
@@ -22,22 +22,22 @@ const Info = ({ setCurrentPage }: InfoProps) => {
 
     const [financialFilter, setFinancialFilter] = useState(getCurrentMonth())
 
-    const [showServicesOffered, setShowServicesOffered] = useState(false)
+    const [showOfferedServices, setShowOfferedServices] = useState(false)
 
     return (
         <div className='mt-4 container d-flex flex-column align-items-start'>
             <MonthInput setTargetFilter={setFinancialFilter} />
             <hr className='w-100' />
             {
-                !showServicesOffered
+                !showOfferedServices
                 ? <FinancialIncome
                         schedulings={filteredSchedulings(schedulings, financialFilter)}
                         expenses={filteredExpenses(expenses, financialFilter)}
-                        setShowServicesOffered={setShowServicesOffered}
+                        setShowOfferedServices={setShowOfferedServices}
                     />
-                : <ServicesOffered 
+                : <OfferedServices
                         schedulings={filteredSchedulings(schedulings, financialFilter)}
-                        setShowServicesOffered={setShowServicesOffered}
+                        setShowOfferedServices={setShowOfferedServices}
                     />
             }
         </div>
