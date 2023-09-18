@@ -38,20 +38,26 @@ const FinancialIncome = ({ schedulings, expenses, setShowServicesOffered }: Fina
     }
 
     return (
-        <div className='w-100'>
-            <FinancialChart metrics={[getMonthRevenue(), getMonthExpense(), getMonthProfit()]} />
-            <div className='d-flex justify-content-between'>
-                <FinancialList
-                    schedulings={schedulings}
-                    expenses={expenses}
-                    revenue={getMonthRevenue()}
-                    expense={getMonthExpense()}
-                    profit={getMonthProfit()}
-                    profitMargin={getMonthProfitMargin()}
-                />
-                <button onClick={() => setShowServicesOffered(true)} className='align-self-end btn btn-sm btn-primary'>Serviços</button>
-            </div>
-        </div>
+        <>
+            {
+                schedulings[0]
+                    ? <div className='w-100'>
+                            <FinancialChart metrics={[getMonthRevenue(), getMonthExpense(), getMonthProfit()]} />
+                            <div className='d-flex justify-content-between'>
+                                <FinancialList
+                                    schedulings={schedulings}
+                                    expenses={expenses}
+                                    revenue={getMonthRevenue()}
+                                    expense={getMonthExpense()}
+                                    profit={getMonthProfit()}
+                                    profitMargin={getMonthProfitMargin()}
+                                />
+                                <button onClick={() => setShowServicesOffered(true)} className='align-self-end btn btn-sm btn-primary'>Serviços</button>
+                            </div>
+                        </div>
+                    : <div className='alert alert-warning'>Este mês não possui renda registrada</div>
+            }
+        </>
     )
 }
 
