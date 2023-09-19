@@ -37,10 +37,15 @@ const FinancialIncome = ({ schedulings, expenses, setShowOfferedServices }: Fina
         return `${Math.round(((getMonthProfit() / getMonthRevenue()) * 100))} %`
     }
 
+    const isThereFinancialInfo = () => {
+        if (!schedulings[0] && !expenses[0]) return false
+        return true
+    }
+
     return (
         <>
             {
-                schedulings[0]
+                isThereFinancialInfo()
                     ? <div className='w-100'>
                             <FinancialChart metrics={[getMonthRevenue(), getMonthExpense(), getMonthProfit()]} />
                             <div className='d-flex justify-content-between'>
@@ -55,7 +60,7 @@ const FinancialIncome = ({ schedulings, expenses, setShowOfferedServices }: Fina
                                 <button onClick={() => setShowOfferedServices(true)} className='align-self-end btn btn-sm btn-primary'>Serviços</button>
                             </div>
                         </div>
-                    : <div className='alert alert-warning'>Este mês não possui renda registrada</div>
+                    : <div className='alert alert-warning'>Este mês não possui renda ou despesa registrada</div>
             }
         </>
     )
