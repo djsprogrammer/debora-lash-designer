@@ -1,4 +1,4 @@
-const SERVER_URL = 'https://debora-lash-designer-backend.vercel.app'
+const SERVER_URL = 'http://localhost:8080'
 
 export const GET_ALL_DOCS = `${SERVER_URL}/all`
 
