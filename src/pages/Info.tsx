@@ -7,7 +7,7 @@ import { Props as InfoProps } from 'types/pages'
 
 import MonthInput from 'components/forms/MonthInput'
 import FinancialIncome from 'components/info/FinancialIncome/FinancialIncome'
-import OfferedServices from 'components/info/ServicesOffered/OfferedServices'
+import OfferedServices from 'components/info/OfferedServices/OfferedServices'
 
 import { DocsContext } from 'DocsContext'
 

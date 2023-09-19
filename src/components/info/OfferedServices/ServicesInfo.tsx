@@ -3,12 +3,12 @@ import { ServiceSchedulings } from 'types/schedulings'
 import ServicesChart from './ServicesChart'
 import MoreIncomeServices from './MoreIncomeServices'
 
-interface OfferedServicesProps {
+interface ServicesInfoProps {
     schedulings: ServiceSchedulings
     setShowOfferedServices: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const OfferedServices = ({ schedulings, setShowOfferedServices }: OfferedServicesProps) => {
+const ServicesInfo = ({ schedulings, setShowOfferedServices }: ServicesInfoProps) => {
 
     const getMostOfferedServices = () => {
         const servicesArrays = schedulings.map(scheduling => {
@@ -35,13 +35,13 @@ const OfferedServices = ({ schedulings, setShowOfferedServices }: OfferedService
 
         // Array dos dados da função
         const services: [string, number][] = Array.from(new Set(servicesArrays))
-        .map(service => [service, 0])
-        
+            .map(service => [service, 0])
+
         // Criação do formato que será utilizado para incrementar os valores
         const newFormat: [string[], number[]][] = schedulings.map(scheduling => {
             return [scheduling.service.name, scheduling.service.value]
         })
-        
+
         // Incrementando os valores rendidos de cada serviço
         newFormat.forEach(current => {
             current[0].forEach((serviceName, index) => {
@@ -71,4 +71,4 @@ const OfferedServices = ({ schedulings, setShowOfferedServices }: OfferedService
 
 }
 
-export default OfferedServices
+export default ServicesInfo
