@@ -1,5 +1,4 @@
-import { useRef, useEffect, useState } from 'react'
-import anime from 'animejs'
+import { useRef, useState } from 'react'
 
 import { formContainer, confirmButtonStyle, cancelButtonStyle } from 'commonStyles'
 
@@ -9,24 +8,6 @@ interface DeleteFormProps {
 }
 
 const DeleteForm = ({ deleteTarget, setDeleteForm }: DeleteFormProps) => {
-
-	const container = useRef<HTMLDivElement>(null)
-
-	useEffect(() => {
-
-        if (container.current) {
-
-	        anime({
-	            targets: container.current,
-	            scale: [0, 1],
-	            duration: 100,
-	            easing: 'easeOutQuad',
-	            autoPlay: true
-	        })
-
-    	}
-
-    }, [])
 
 	const [possibleToCancel, setPossibleToCancel] = useState(true)
 
@@ -41,7 +22,7 @@ const DeleteForm = ({ deleteTarget, setDeleteForm }: DeleteFormProps) => {
 	}
 
 	return (
-		<div ref={container} style={{ zIndex: 1 }} className={formContainer}>
+		<div style={{ zIndex: 1 }} className={formContainer}>
 			<div className='card border-light shadow form-bg'>
 				<p className='card-header'>Tem certeza que deseja excluir?</p>
 				<div className='card-body text-center'>

@@ -11,7 +11,10 @@ const ServicesChart = ({ services }: ServicesChartProps) => {
         labels: services.map(service => service[0]),
         datasets: [{
             label: 'Serviços oferecidos',
-            data: services.map(service => service[1])
+            data: services.map(service => service[1]),
+            animation: {
+                duration: 0
+            }
         }]
     }
 
