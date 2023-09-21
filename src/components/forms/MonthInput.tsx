@@ -19,21 +19,18 @@ const MonthInput = ({ setTargetFilter }: MonthInputProps) => {
         'Dezembro'
     ]
 
-    const checkCurrentMonth = (index: number) => {
-        return index === new Date().getMonth()
-        ? true : false
-    }
-
-    const setFilter = (value: string) => {
-        const date = `${new Date().getFullYear()}-${String(Number(value) + 1).padStart(2, '0')}`
+    const setFilter = (month: string) => {
+        let monthIndex
+        months.forEach((current, index) => {
+            if (month === current) monthIndex = index
+        })
+        const date = `${new Date().getFullYear()}-${String(Number(monthIndex) + 1).padStart(2, '0')}`
         setTargetFilter(date)
     }
 
     return (
-        <select onChange={e => setFilter(e.target.value)} className='text-center form-select w-25'>
-            {months.map((month, index) => {
-                return <option key={index} value={index} selected={checkCurrentMonth(index)}>{month}</option>
-            })}
+        <select defaultValue={months[new Date().getMonth()]} onChange={e => setFilter(e.target.value)} className='text-center form-select w-25'>
+            {months.map((month) => <option key={month} value={month}>{month}</option>)}
         </select>
     )
 
