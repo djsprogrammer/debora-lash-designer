@@ -14,7 +14,7 @@ const SchedulingInfo = ({ client, date, servicesName, servicesValue }: Schedulin
 		return (
 			<ul className='mt-2'>
 				{servicesName.map(service => {
-					return <li>{service}</li>
+					return <li key={service}>{service}</li>
 				})}
 			</ul>
 		)
