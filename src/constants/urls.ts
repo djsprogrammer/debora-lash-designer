@@ -1,13 +1,13 @@
-const SERVER_URL = 'http://localhost:8080'
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL
 
-export const GET_ALL_DOCS = `${SERVER_URL}/all`
+export const GET_ALL_DOCS = `${BACKEND_URL}/all`
 
-export const CREATE_SCHEDULING = `${SERVER_URL}/create-scheduling`
-export const CREATE_SERVICE = `${SERVER_URL}/create-service`
-export const CREATE_EXPENSE = `${SERVER_URL}/create-expense`
+export const CREATE_SCHEDULING = `${BACKEND_URL}/create-scheduling`
+export const CREATE_SERVICE = `${BACKEND_URL}/create-service`
+export const CREATE_EXPENSE = `${BACKEND_URL}/create-expense`
 
-export const EDIT_SERVICE = `${SERVER_URL}/edit-service`
+export const EDIT_SERVICE = `${BACKEND_URL}/edit-service`
 
-export const DELETE_SCHEDULING = `${SERVER_URL}/delete-scheduling`
-export const DELETE_SERVICE = `${SERVER_URL}/delete-service`
-export const DELETE_EXPENSE = `${SERVER_URL}/delete-expense`
+export const DELETE_SCHEDULING = `${BACKEND_URL}/delete-scheduling`
+export const DELETE_SERVICE = `${BACKEND_URL}/delete-service`
+export const DELETE_EXPENSE = `${BACKEND_URL}/delete-expense`
