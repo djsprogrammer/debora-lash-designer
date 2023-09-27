@@ -1,7 +1,6 @@
 import React, { useContext, useState, useEffect, useCallback, useMemo } from 'react'
 import { v4 } from 'uuid'
 
-import { fetchOptions } from 'formFunctions/common'
 import { getRightValue } from 'formFunctions/scheduling/common'
 import { CREATE_SCHEDULING } from 'constants/urls'
 import { DATABASE_ERROR_TEXT, SERVER_ERROR_TEXT } from 'constants/errors'
@@ -84,7 +83,7 @@ const AddSchedulingForm = ({ setAddSchedulingForm }: AddSchedulingFormProps) => 
 	const addScheduling = () => {
 		if (!blockedActions) {
 			setBlockedActions(true)
-			const serviceScheduling: Scheduling = {
+			const scheduling: Scheduling = {
 				_id: v4(),
 				service: {
 					name: servicesName,
@@ -94,21 +93,25 @@ const AddSchedulingForm = ({ setAddSchedulingForm }: AddSchedulingFormProps) => 
 				client: client
 			}
 			// Não permitindo criar dois agendamentos para a mesma pessoa no mesmo dia
-			const alreadyExists = schedulings.filter(scheduling => {
-				return scheduling.client === serviceScheduling.client && scheduling.date === serviceScheduling.date
+			const alreadyExists = schedulings.filter(current => {
+				return current.client === scheduling.client && current.date === scheduling.date
 			})[0]
 			if (alreadyExists) {
 				alert('Já existe um agendamento para essa pessoa nessa data')
 				setBlockedActions(false)
 				setAddSchedulingForm(false)
 			} else {
-				const payload = fetchOptions('post', serviceScheduling)
+				const payload = {
+					method: 'post',
+					headers: { 'Content-Type': 'application/json' },
+					body: JSON.stringify(scheduling)
+				}
 				fetch(CREATE_SCHEDULING, payload)
 					.then(res => {
 						switch (res.status) {
 							case 201:
 								// Organizando novos agendamentos por datas
-								const newSchedulings = [...schedulings, serviceScheduling]
+								const newSchedulings = [...schedulings, scheduling]
 									.sort((a, b) => a.date.localeCompare(b.date)).reverse()
 								setSchedulings(newSchedulings)
 								break

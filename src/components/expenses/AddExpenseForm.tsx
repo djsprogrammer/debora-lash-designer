@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from 'react'
 import { v4 } from 'uuid'
 
-import { validNumber, fetchOptions } from 'formFunctions/common'
+import { validNumber } from 'formFunctions/common'
 import { CREATE_EXPENSE } from 'constants/urls'
 import { DATABASE_ERROR_TEXT, INVALID_NUMBER_TEXT } from 'constants/errors'
 
@@ -48,7 +48,11 @@ const AddExpenseForm = ({ setAddExpenseForm }: AddExpenseFormProps) => {
 					setAddExpenseForm(false)
 					setBlockedActions(false)
 				} else {
-					const options = fetchOptions('post', newExpense)
+					const options = {
+						method: 'post',
+						headers: { 'Content-Type': 'application/json' },
+						body: JSON.stringify(newExpense)
+					}
 					fetch(CREATE_EXPENSE, options)
 						.then(res => {
 							switch (res.status) {

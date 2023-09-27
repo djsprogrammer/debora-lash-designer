@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect, useCallback } from 'react'
 
 import { generateNewValue } from 'formFunctions/service/common'
-import { validNumber, fetchOptions, orderServices } from 'formFunctions/common'
+import { validNumber, orderServices } from 'formFunctions/common'
 import { CREATE_SERVICE } from 'constants/urls'
 import { DATABASE_ERROR_TEXT, SERVER_ERROR_TEXT, INVALID_NUMBER_TEXT } from 'constants/errors'
 
@@ -56,7 +56,11 @@ const AddServiceForm = ({ setAddServiceForm }: Props) => {
                         _id: name, 
                         value: [generateNewValue(value)]
                     }
-                    const options = fetchOptions('post', service)
+                    const options = {
+                        method: 'post',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(service)
+                    }
                     fetch(CREATE_SERVICE, options)
                         .then(res => {
                             switch (res.status) {

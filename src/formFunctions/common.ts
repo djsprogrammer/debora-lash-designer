@@ -1,7 +1,5 @@
 import { format, parseISO } from 'date-fns'
-import { Service, Services } from '../types/services'
-import { Scheduling } from 'types/schedulings'
-import { Expense } from 'types/expenses'
+import { Services } from '../types/services'
 
 export const validNumber = (value: string) => {
     const regex = /^[0-9.]+$/
@@ -10,16 +8,6 @@ export const validNumber = (value: string) => {
         } else {
             return false
         }
-}
-
-type Payload = Service | Scheduling | Expense
-
-export const fetchOptions = (targetMethod: string, payload: Payload) => {
-    return {
-        method: targetMethod,
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-    }
 }
 
 export const moneyFormat = (value: number) => {
