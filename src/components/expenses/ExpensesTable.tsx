@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react'
 
-import { deleteFetchOptions, getCurrentMonth } from 'formFunctions/common'
+import { getCurrentMonth } from 'formFunctions/common'
 import { DELETE_EXPENSE } from 'constants/urls'
 import { DATABASE_ERROR_TEXT, SERVER_ERROR_TEXT } from 'constants/errors'
 import { tableStyle } from 'commonStyles'
@@ -25,7 +25,11 @@ const ExpensesTable = () => {
     }
 
     const deleteExpense = () => {
-        const options = deleteFetchOptions(targetId)
+        const options = {
+            method: 'delete',
+            headers: { 'Content-Type': 'text/plain' },
+            body: targetId
+        }
         fetch(DELETE_EXPENSE, options)
             .then(res => {
                 switch (res.status) {

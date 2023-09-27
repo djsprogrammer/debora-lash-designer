@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react'
 
-import { deleteFetchOptions, orderServices } from 'formFunctions/common'
+import { orderServices } from 'formFunctions/common'
 import { DELETE_SERVICE } from 'constants/urls'
 import { DATABASE_ERROR_TEXT, SERVER_ERROR_TEXT } from 'constants/errors'
 import { tableStyle } from 'commonStyles'
@@ -26,7 +26,11 @@ const ServiceTable = () => {
 
     
     const deleteService = () => {
-        const options = deleteFetchOptions(idForDeletion)
+        const options = {
+            method: 'delete',
+            headers: { 'Content-Type': 'text/plain' },
+            body: idForDeletion
+        }
         fetch(DELETE_SERVICE, options)
             .then(res => {
                 switch (res.status) {
