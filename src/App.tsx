@@ -10,7 +10,7 @@ import { DATABASE_ERROR_TEXT, SERVER_ERROR_TEXT } from 'constants/errors'
 
 import { AllDocs } from 'types/allDocs'
 import { Services as TServices } from 'types/services'
-import { ServiceSchedulings } from 'types/schedulings'
+import { Schedulings } from 'types/schedulings'
 import { Expenses as TExpenses } from 'types/expenses'
 
 import Header from 'components/fixed/header/Header'
@@ -26,7 +26,7 @@ const App = () => {
 
     // Documentos usados na aplicação
     const [services, setServices] = useState<TServices>([])
-    const [schedulings, setSchedulings] = useState<ServiceSchedulings>([])
+    const [schedulings, setSchedulings] = useState<Schedulings>([])
     const [expenses, setExpenses] = useState<TExpenses>([])
 
     const [databaseLoaded, setDatabaseLoaded] = useState(false)

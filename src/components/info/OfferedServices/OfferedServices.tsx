@@ -1,9 +1,9 @@
-import { ServiceSchedulings } from 'types/schedulings'
+import { Schedulings } from 'types/schedulings'
 
 import ServicesInfo from './ServicesInfo'
 
 interface OfferedServicesProps {
-    schedulings: ServiceSchedulings
+    schedulings: Schedulings
     setShowOfferedServices: React.Dispatch<React.SetStateAction<boolean>>
 }
 

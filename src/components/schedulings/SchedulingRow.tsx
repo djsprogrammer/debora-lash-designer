@@ -3,12 +3,12 @@ import { memo } from 'react'
 import { sumOfServices } from 'formFunctions/scheduling/common'
 import { moneyFormat, dateFormat } from 'formFunctions/common'
 
-import { ServiceScheduling } from 'types/schedulings'
+import { Scheduling } from 'types/schedulings'
 
 import DeleteButton from 'components/pages/DeleteButton'
 
 interface Props {
-    scheduling: ServiceScheduling
+    scheduling: Scheduling
     setDeleteSchedulingForm: React.Dispatch<React.SetStateAction<boolean>>
     setTargetId: React.Dispatch<React.SetStateAction<string>>
 }

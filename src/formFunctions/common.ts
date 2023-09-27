@@ -1,6 +1,6 @@
 import { format, parseISO } from 'date-fns'
 import { Service, Services } from '../types/services'
-import { ServiceScheduling } from 'types/schedulings'
+import { Scheduling } from 'types/schedulings'
 import { Expense } from 'types/expenses'
 
 export const validNumber = (value: string) => {
@@ -12,7 +12,7 @@ export const validNumber = (value: string) => {
         }
 }
 
-type Payload = Service | ServiceScheduling | Expense
+type Payload = Service | Scheduling | Expense
 
 export const fetchOptions = (targetMethod: string, payload: Payload) => {
     return {

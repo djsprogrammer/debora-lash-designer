@@ -3,25 +3,25 @@ interface SchedulingService {
 	value: number[]
 }
 
-export interface ServiceScheduling {
+export interface Scheduling {
     _id: string
 	service: SchedulingService
 	date: string
 	client: string
 }
 
-export type ServiceSchedulings = ServiceScheduling[]
+export type Schedulings = Scheduling[]
 
-export type SetScheduling = React.Dispatch<React.SetStateAction<ServiceScheduling>>
-export type SetSchedulings = React.Dispatch<React.SetStateAction<ServiceScheduling[]>>
+export type SetScheduling = React.Dispatch<React.SetStateAction<Scheduling>>
+export type SetSchedulings = React.Dispatch<React.SetStateAction<Schedulings>>
 
-export type SchedulingsState = [ServiceSchedulings, SetSchedulings]
+export type SchedulingsState = [Schedulings, SetSchedulings]
 
 export interface Props {
     schedulingsState: SchedulingsState
 }
 
-export const DEFAULT_SCHEDULING: ServiceScheduling = {
+export const DEFAULT_SCHEDULING: Scheduling = {
 	_id: '',
 	service: {
 		name: [''],

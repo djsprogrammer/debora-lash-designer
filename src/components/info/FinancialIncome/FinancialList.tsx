@@ -1,10 +1,10 @@
 import { moneyFormat } from 'formFunctions/common'
 
-import { ServiceSchedulings } from 'types/schedulings'
+import { Schedulings } from 'types/schedulings'
 import { Expenses } from 'types/expenses'
 
 interface FinancialListProps {
-    schedulings: ServiceSchedulings
+    schedulings: Schedulings
     expenses: Expenses
     revenue: number
     expense: number

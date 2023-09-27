@@ -1,4 +1,4 @@
-import { ServiceSchedulings as Schedulings } from 'types/schedulings'
+import { Schedulings } from 'types/schedulings'
 import { Expenses } from 'types/expenses'
 
 export const filteredSchedulings = (schedulings: Schedulings, financialFilter: string) => {

@@ -6,7 +6,7 @@ import { getRightValue } from 'formFunctions/scheduling/common'
 import { CREATE_SCHEDULING } from 'constants/urls'
 import { DATABASE_ERROR_TEXT, SERVER_ERROR_TEXT } from 'constants/errors'
 
-import { ServiceScheduling } from 'types/schedulings'
+import { Scheduling } from 'types/schedulings'
 import { Service } from 'types/services'
 
 import Container from 'components/forms/Container'
@@ -84,7 +84,7 @@ const AddSchedulingForm = ({ setAddSchedulingForm }: AddSchedulingFormProps) => 
 	const addScheduling = () => {
 		if (!blockedActions) {
 			setBlockedActions(true)
-			const serviceScheduling: ServiceScheduling = {
+			const serviceScheduling: Scheduling = {
 				_id: v4(),
 				service: {
 					name: servicesName,

@@ -1,9 +1,9 @@
 import { Services } from 'types/services'
-import { ServiceSchedulings } from 'types/schedulings'
+import { Schedulings } from 'types/schedulings'
 import { Expenses } from 'types/expenses'
 
 export interface AllDocs {
 	services: Services
-	schedulings: ServiceSchedulings
+	schedulings: Schedulings
 	expenses: Expenses
 }
