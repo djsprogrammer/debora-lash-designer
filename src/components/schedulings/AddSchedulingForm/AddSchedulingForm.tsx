@@ -26,7 +26,7 @@ interface AddSchedulingFormProps {
 const AddSchedulingForm = ({ setAddSchedulingForm }: AddSchedulingFormProps) => {
 
 	const [services] = useContext(DocsContext).services
-	const [servicesScheduling, setServicesScheduling] = useContext(DocsContext).schedulings
+	const [schedulings, setSchedulings] = useContext(DocsContext).schedulings
 	
 	const [blockedActions, setBlockedActions] = useState(false)
 	const [date, setDate] = useState('')
@@ -94,7 +94,7 @@ const AddSchedulingForm = ({ setAddSchedulingForm }: AddSchedulingFormProps) => 
 				client: client
 			}
 			// Não permitindo criar dois agendamentos para a mesma pessoa no mesmo dia
-			const alreadyExists = servicesScheduling.filter(scheduling => {
+			const alreadyExists = schedulings.filter(scheduling => {
 				return scheduling.client === serviceScheduling.client && scheduling.date === serviceScheduling.date
 			})[0]
 			if (alreadyExists) {
@@ -108,9 +108,9 @@ const AddSchedulingForm = ({ setAddSchedulingForm }: AddSchedulingFormProps) => 
 						switch (res.status) {
 							case 201:
 								// Organizando novos agendamentos por datas
-								const newSchedulings = [...servicesScheduling, serviceScheduling]
+								const newSchedulings = [...schedulings, serviceScheduling]
 									.sort((a, b) => a.date.localeCompare(b.date)).reverse()
-								setServicesScheduling(newSchedulings)
+								setSchedulings(newSchedulings)
 								break
 							case 503:
 								alert(DATABASE_ERROR_TEXT)

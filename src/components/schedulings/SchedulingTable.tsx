@@ -14,14 +14,14 @@ import { DocsContext } from 'DocsContext'
 
 const SchedulingTable = () => {
 
-    const [servicesScheduling, setServicesScheduling] = useContext(DocsContext).schedulings
+    const [schedulings, setSchedulings] = useContext(DocsContext).schedulings
 
     const [schedulingFilter, setSchedulingFilter] = useState(getCurrentMonth())
     const [deleteSchedulingForm, setDeleteSchedulingForm] = useState(false)
     const [targetId, setTargetId] = useState('')
 
     const filteredShedulings = () => {
-        return servicesScheduling.filter(scheduling => {
+        return schedulings.filter(scheduling => {
             return scheduling.date.slice(0, 7) === schedulingFilter
         })
     }
@@ -32,10 +32,10 @@ const SchedulingTable = () => {
             .then(res => {
                 switch (res.status) {
                     case 204:
-                        const remainingSchedulings = servicesScheduling.filter(scheduling => {
+                        const remainingSchedulings = schedulings.filter(scheduling => {
                             return scheduling._id !== targetId
                         }).sort((a, b) => a.date.localeCompare(b.date)).reverse()
-                        setServicesScheduling(remainingSchedulings)
+                        setSchedulings(remainingSchedulings)
                         break
                     case 503:                        
                         setTimeout(() => {
