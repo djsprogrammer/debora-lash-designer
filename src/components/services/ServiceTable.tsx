@@ -1,8 +1,6 @@
 import { useContext, useState } from 'react'
 
 import { orderServices } from 'formFunctions/common'
-import { DELETE_SERVICE } from 'constants/urls'
-import { DATABASE_ERROR_TEXT, SERVER_ERROR_TEXT } from 'constants/errors'
 import { tableStyle } from 'commonStyles'
 
 import { Service } from 'types/services'
@@ -26,33 +24,11 @@ const ServiceTable = () => {
 
     
     const deleteService = () => {
-        const options = {
-            method: 'delete',
-            headers: { 'Content-Type': 'text/plain' },
-            body: idForDeletion
-        }
-        fetch(DELETE_SERVICE, options)
-            .then(res => {
-                switch (res.status) {
-                    case 204:
-                        const remainingServices = services.filter(service => {
-                            return service._id !== idForDeletion
-                        })
-                        setServices(orderServices(remainingServices))
-                        break
-                    case 503:
-                        setTimeout(() => {
-                            alert(DATABASE_ERROR_TEXT)
-                        }, 100)
-                        break
-                }
-                setDeleteServiceForm(false)
-            }).catch(() => {
-                setDeleteServiceForm(false)
-                setTimeout(() => {
-                    alert(SERVER_ERROR_TEXT)
-                }, 100)
-            })
+        const remainingServices = services.filter(service => {
+            return service._id !== idForDeletion
+        })
+        setServices(orderServices(remainingServices))
+        setDeleteServiceForm(false)
     }
 
     const filteredServices = () => {

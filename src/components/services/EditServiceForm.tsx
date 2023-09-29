@@ -3,8 +3,7 @@ import { useState, useEffect } from 'react'
 import { generateNewValue } from 'formFunctions/service/common'
 import { checkForValueInTheSameDate } from 'formFunctions/service/editService'
 import { validNumber, orderServices } from 'formFunctions/common'
-import { EDIT_SERVICE } from 'constants/urls'
-import { INVALID_NUMBER_TEXT, DATABASE_ERROR_TEXT, SERVER_ERROR_TEXT } from 'constants/errors'
+import { INVALID_NUMBER_TEXT } from 'constants/errors'
 
 import { Service, ServicesState, Value } from 'types/services'
 
@@ -23,7 +22,6 @@ interface EditServiceFormProps {
 const EditServiceForm = ({ servicesState, serviceForEdition, setEditServiceForm }: EditServiceFormProps) => {
 
 	const [services, setServices] = servicesState
-	const [blockedActions, setBlockedActions] = useState(false)
 	const [value, setValue] = useState('')
 	const [allInputsFilled, setAllInputsFilled] = useState(false)
 
@@ -32,38 +30,17 @@ const EditServiceForm = ({ servicesState, serviceForEdition, setEditServiceForm 
 	}, [value])
 
 	const editService = () => {
-		if (!blockedActions) {
-			setBlockedActions(true)
-			if (validNumber(value)) {
-		        const newValue: Value = generateNewValue(value)
-		        checkForValueInTheSameDate(serviceForEdition, newValue)
-				const options = {
-					method: 'put',
-					headers: { 'Content-Type': 'application/json' },
-					body: JSON.stringify(serviceForEdition)
-				}
-				fetch(EDIT_SERVICE, options)
-					.then(res => {
-						switch (res.status) {
-							case 204:
-								const otherServices = services.filter(service => {
-									return service._id !== serviceForEdition._id
-								})
-								setServices(orderServices([...otherServices, serviceForEdition]))
-								break
-							case 503:
-								alert(DATABASE_ERROR_TEXT)
-						}
-						setEditServiceForm(false)
-					})
-					.catch(() => {
-						alert(SERVER_ERROR_TEXT)
-						setEditServiceForm(false)
-					})
-			} else {
-				alert(INVALID_NUMBER_TEXT)
-				setEditServiceForm(false)
-			}
+		if (validNumber(value)) {
+			const newValue: Value = generateNewValue(value)
+			checkForValueInTheSameDate(serviceForEdition, newValue)
+			const otherServices = services.filter(service => {
+				return service._id !== serviceForEdition._id
+			})
+			setServices(orderServices([...otherServices, serviceForEdition]))
+			setEditServiceForm(false)
+		} else {
+			alert(INVALID_NUMBER_TEXT)
+			setEditServiceForm(false)
 		}
 	}
 
@@ -79,7 +56,6 @@ const EditServiceForm = ({ servicesState, serviceForEdition, setEditServiceForm 
 					<ValueInput margin='my-3' setValue={setValue} />
 					<ConfirmFormButtons
 						allInputsFilled={allInputsFilled}
-						blockedActions={blockedActions}
 						setForm={setEditServiceForm}
 					/>
 				</form>

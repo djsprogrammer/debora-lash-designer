@@ -1,8 +1,6 @@
 import { useContext, useState } from 'react'
 
 import { getCurrentMonth } from 'formFunctions/common'
-import { DELETE_SCHEDULING } from 'constants/urls'
-import { DATABASE_ERROR_TEXT, SERVER_ERROR_TEXT } from 'constants/errors'
 
 import { tableStyle } from 'commonStyles'
 
@@ -27,33 +25,11 @@ const SchedulingTable = () => {
     }
 
     const deleteScheduling = () => {
-        const options = {
-            method: 'delete',
-            headers: { 'Content-Type': 'text/plain' },
-            body: targetId
-        }
-        fetch(DELETE_SCHEDULING, options)
-            .then(res => {
-                switch (res.status) {
-                    case 204:
-                        const remainingSchedulings = schedulings.filter(scheduling => {
-                            return scheduling._id !== targetId
-                        }).sort((a, b) => a.date.localeCompare(b.date)).reverse()
-                        setSchedulings(remainingSchedulings)
-                        break
-                    case 503:                        
-                        setTimeout(() => {
-                            alert(DATABASE_ERROR_TEXT)
-                        }, 100)
-                        break
-                }
-                setDeleteSchedulingForm(false)
-            }).catch(() => {
-                setDeleteSchedulingForm(false)
-                setTimeout(() => {
-                    alert(SERVER_ERROR_TEXT)
-                }, 100)
-            })
+        const remainingSchedulings = schedulings.filter(scheduling => {
+            return scheduling._id !== targetId
+        }).sort((a, b) => a.date.localeCompare(b.date)).reverse()
+        setSchedulings(remainingSchedulings)
+        setDeleteSchedulingForm(false)
     }
 
     return (
@@ -75,7 +51,7 @@ const SchedulingTable = () => {
                     <tbody>
                         {filteredShedulings().map(scheduling => {
                             return (
-                                <SchedulingRow 
+                                <SchedulingRow
                                     key={scheduling._id}
                                     scheduling={scheduling}
                                     setDeleteSchedulingForm={setDeleteSchedulingForm}
@@ -88,11 +64,11 @@ const SchedulingTable = () => {
             </div>
             {
                 deleteSchedulingForm
-                ? <DeleteForm 
-                        setDeleteForm={setDeleteSchedulingForm} 
+                    ? <DeleteForm
+                        setDeleteForm={setDeleteSchedulingForm}
                         deleteTarget={deleteScheduling}
                     />
-                : null
+                    : null
             }
         </div>
     )

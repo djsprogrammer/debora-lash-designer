@@ -2,8 +2,6 @@ import React, { useContext, useState, useEffect, useCallback, useMemo } from 're
 import { v4 } from 'uuid'
 
 import { getRightValue } from 'formFunctions/scheduling/common'
-import { CREATE_SCHEDULING } from 'constants/urls'
-import { DATABASE_ERROR_TEXT, SERVER_ERROR_TEXT } from 'constants/errors'
 
 import { Scheduling } from 'types/schedulings'
 import { Service } from 'types/services'
@@ -27,7 +25,6 @@ const AddSchedulingForm = ({ setAddSchedulingForm }: AddSchedulingFormProps) => 
 	const [services] = useContext(DocsContext).services
 	const [schedulings, setSchedulings] = useContext(DocsContext).schedulings
 	
-	const [blockedActions, setBlockedActions] = useState(false)
 	const [date, setDate] = useState('')
 
 	// Começando o state com a primeira opção caso o usuário não mude
@@ -81,53 +78,28 @@ const AddSchedulingForm = ({ setAddSchedulingForm }: AddSchedulingFormProps) => 
 	}, [])
 
 	const addScheduling = () => {
-		if (!blockedActions) {
-			setBlockedActions(true)
-			const scheduling: Scheduling = {
-				_id: v4(),
-				service: {
-					name: servicesName,
-					value: servicesValue
-				},
-				date,
-				client: client
-			}
-			// Não permitindo criar dois agendamentos para a mesma pessoa no mesmo dia
-			const alreadyExists = schedulings.filter(current => {
-				return current.client === scheduling.client && current.date === scheduling.date
-			})[0]
-			if (alreadyExists) {
-				alert('Já existe um agendamento para essa pessoa nessa data')
-				setBlockedActions(false)
-				setAddSchedulingForm(false)
-			} else {
-				const payload = {
-					method: 'post',
-					headers: { 'Content-Type': 'application/json' },
-					body: JSON.stringify(scheduling)
-				}
-				fetch(CREATE_SCHEDULING, payload)
-					.then(res => {
-						switch (res.status) {
-							case 201:
-								// Organizando novos agendamentos por datas
-								const newSchedulings = [...schedulings, scheduling]
-									.sort((a, b) => a.date.localeCompare(b.date)).reverse()
-								setSchedulings(newSchedulings)
-								break
-							case 503:
-								alert(DATABASE_ERROR_TEXT)
-								break
-						}
-						setBlockedActions(false)
-						setAddSchedulingForm(false)
-					})
-					.catch(() => {
-						alert(SERVER_ERROR_TEXT)
-						setBlockedActions(false)
-						setAddSchedulingForm(false)	
-					})
-			}
+		const scheduling: Scheduling = {
+			_id: v4(),
+			service: {
+				name: servicesName,
+				value: servicesValue
+			},
+			date,
+			client: client
+		}
+		// Não permitindo criar dois agendamentos para a mesma pessoa no mesmo dia
+		const alreadyExists = schedulings.filter(current => {
+			return current.client === scheduling.client && current.date === scheduling.date
+		})[0]
+		if (alreadyExists) {
+			alert('Já existe um agendamento para essa pessoa nessa data')
+			setAddSchedulingForm(false)
+		} else {
+			// Organizando novos agendamentos por datas
+			const newSchedulings = [...schedulings, scheduling]
+				.sort((a, b) => a.date.localeCompare(b.date)).reverse()
+			setSchedulings(newSchedulings)
+			setAddSchedulingForm(false)
 		}
 	}
 
@@ -164,7 +136,6 @@ const AddSchedulingForm = ({ setAddSchedulingForm }: AddSchedulingFormProps) => 
 						}
 						<ConfirmFormButtons
 							allInputsFilled={allInputsFilled}
-							blockedActions={blockedActions}
 							setForm={setAddSchedulingForm}
 						/>
 					</form>

@@ -6,11 +6,10 @@ import { BooleanSet } from 'types/common'
 
 interface ConfirmFormButtonsProps {
 	allInputsFilled: boolean
-	blockedActions: boolean
 	setForm: BooleanSet
 }
 
-const ConfirmFormButtons = ({ allInputsFilled, blockedActions, setForm }: ConfirmFormButtonsProps) => {
+const ConfirmFormButtons = ({ allInputsFilled, setForm }: ConfirmFormButtonsProps) => {
 
 	const confirmButtonRef = useRef<HTMLButtonElement>(null)
 	const cancelButtonRef = useRef<HTMLButtonElement>(null)
@@ -29,8 +28,7 @@ const ConfirmFormButtons = ({ allInputsFilled, blockedActions, setForm }: Confir
 			}} className={`${confirmButtonStyle} mb-2`} type='submit'>Registrar</button>
 
 			<button ref={cancelButtonRef} onClick={() => {
-				// Só permitindo fechar o formulário quando não estiver ocorrendo alguma ação
-				if (!blockedActions) setForm(false)
+				setForm(false)
 			}} className={cancelButtonStyle}>Cancelar</button>
 
 		</div>

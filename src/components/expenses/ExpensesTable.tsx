@@ -1,8 +1,6 @@
 import { useContext, useState } from 'react'
 
 import { getCurrentMonth } from 'formFunctions/common'
-import { DELETE_EXPENSE } from 'constants/urls'
-import { DATABASE_ERROR_TEXT, SERVER_ERROR_TEXT } from 'constants/errors'
 import { tableStyle } from 'commonStyles'
 
 import MonthInput from 'components/forms/MonthInput'
@@ -25,33 +23,12 @@ const ExpensesTable = () => {
     }
 
     const deleteExpense = () => {
-        const options = {
-            method: 'delete',
-            headers: { 'Content-Type': 'text/plain' },
-            body: targetId
-        }
-        fetch(DELETE_EXPENSE, options)
-            .then(res => {
-                switch (res.status) {
-                    case 204:
-                        const remainingExpenses = expenses.filter(expense => {
-                            return expense._id !== targetId
-                        }).sort((a, b) => a.date.localeCompare(b.date)).reverse()
-                        setExpenses(remainingExpenses)
-                        break
-                    case 503:                        
-                        setTimeout(() => {
-                            alert(DATABASE_ERROR_TEXT)
-                        }, 100)
-                        break
-                }
-                setDeleteExpenseForm(false)
-            }).catch(() => {
-                setDeleteExpenseForm(false)
-                setTimeout(() => {
-                    alert(SERVER_ERROR_TEXT)
-                }, 100)
-            })
+        const remainingExpenses = expenses.filter(expense => {
+            return expense._id !== targetId
+        }).sort((a, b) => a.date.localeCompare(b.date)).reverse()
+        setExpenses(remainingExpenses)
+        setDeleteExpenseForm(false)
+
     }
 
     return (

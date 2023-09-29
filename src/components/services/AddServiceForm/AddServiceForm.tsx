@@ -2,8 +2,7 @@ import React, { useContext, useState, useEffect, useCallback } from 'react'
 
 import { generateNewValue } from 'formFunctions/service/common'
 import { validNumber, orderServices } from 'formFunctions/common'
-import { CREATE_SERVICE } from 'constants/urls'
-import { DATABASE_ERROR_TEXT, SERVER_ERROR_TEXT, INVALID_NUMBER_TEXT } from 'constants/errors'
+import { INVALID_NUMBER_TEXT } from 'constants/errors'
 
 import { Service } from 'types/services'
 
@@ -25,7 +24,6 @@ interface Props {
 const AddServiceForm = ({ setAddServiceForm }: Props) => {
 
     const [services, setServices] = useContext(DocsContext).services
-    const [blockedActions, setBlockedActions] = useState(false)
 
     const [category, setCategory] = useState('')
     const [name, setName] = useState('')
@@ -46,49 +44,24 @@ const AddServiceForm = ({ setAddServiceForm }: Props) => {
     }, [])
 
     const addService = () => {
-        if (!blockedActions) {
-            setBlockedActions(true)
-            const alreadyExists = services.filter(service => service._id === name)[0]
-            if (!alreadyExists) {
-                if (validNumber(value)) {
-                    const service: Service = {
-                        category,
-                        _id: name, 
-                        value: [generateNewValue(value)]
-                    }
-                    const options = {
-                        method: 'post',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(service)
-                    }
-                    fetch(CREATE_SERVICE, options)
-                        .then(res => {
-                            switch (res.status) {
-                                case 201:
-                                    const newServices = orderServices([...services, service])
-                                    setServices(newServices)
-                                    break
-                                case 503:
-                                    alert(DATABASE_ERROR_TEXT)
-                                    break
-                            }
-                            setBlockedActions(false)
-                            setAddServiceForm(false)
-                        }).catch(() => {
-                            alert(SERVER_ERROR_TEXT)
-                            setBlockedActions(false)
-                            setAddServiceForm(false)
-                        })
-                } else {
-                    alert(INVALID_NUMBER_TEXT)
-                    setBlockedActions(false)
-                    setAddServiceForm(false)
+        const alreadyExists = services.filter(service => service._id === name)[0]
+        if (!alreadyExists) {
+            if (validNumber(value)) {
+                const service: Service = {
+                    category,
+                    _id: name,
+                    value: [generateNewValue(value)]
                 }
+                const newServices = orderServices([...services, service])
+                setServices(newServices)
+                setAddServiceForm(false)
             } else {
-                alert(ALREADY_EXISTS_TEXT)
-                setBlockedActions(false)
+                alert(INVALID_NUMBER_TEXT)
                 setAddServiceForm(false)
             }
+        } else {
+            alert(ALREADY_EXISTS_TEXT)
+            setAddServiceForm(false)
         }
     }
 
@@ -108,7 +81,6 @@ const AddServiceForm = ({ setAddServiceForm }: Props) => {
                     <ValueInput margin='my-3' setValue={setValue} />
                     <ConfirmFormButtons
                         allInputsFilled={allInputsFilled}
-                        blockedActions={blockedActions}
                         setForm={setAddServiceForm}
                     />
                 </form>
